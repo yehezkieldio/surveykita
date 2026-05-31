@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-05-31 23:14 Asia/Makassar
+- Last updated: 2026-05-31 23:17 Asia/Makassar
 
 ## Decisions
 
@@ -25,7 +25,7 @@ remaining work. Keep this file current after each coherent slice.
 | --- | --- | --- | --- | --- |
 | `#1` | T001 `chore(project): align allowed dependencies` | Closed | `c8d92f3` | `composer validate`; `composer show --locked laravel/socialite`; `composer show --locked akaunting/laravel-apexcharts`; `composer show --locked barryvdh/laravel-dompdf`; `composer show --locked maatwebsite/excel`; `composer show --locked pestphp/pest`; `composer show --locked pestphp/pest-plugin-laravel`; banned dependency scan |
 | `#2` | T002 `chore(project): register route files and middleware aliases` | Closed | `518ec7e` | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor` |
-| `#3` | T003 `chore(dev): configure MariaDB local services` | Ready to commit | pending | `docker compose config`; `php artisan config:show database.default` |
+| `#3` | T003 `chore(dev): configure MariaDB local services` | Closed | `2335819` | `docker compose config`; `php artisan config:show database.default` |
 
 ## Verification Log
 
@@ -82,6 +82,9 @@ remaining work. Keep this file current after each coherent slice.
   healthcheck, and named volume.
 - Ran `php artisan config:show database.default`; passed and reported
   `mariadb`.
+- Committed and pushed `2335819` with Conventional Commit message
+  `chore(dev): configure MariaDB local development` and closed GitHub Issue
+  `#3` as completed.
 
 ## Remaining Gates
 
