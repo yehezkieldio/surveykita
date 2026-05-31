@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-06-01 02:24 Asia/Makassar
+- Last updated: 2026-06-01 00:07 Asia/Makassar
 
 ## Decisions
 
@@ -48,6 +48,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#23` | T023 `feat(student): implement profile completion controller, request, middleware, and views` | Closed | `9d4b086` | `php artisan test --compact --filter=ProfileCompletionTest`; `php artisan route:list --except-vendor --path=student`; `php artisan test --compact --filter=GoogleOAuthTest`; `php artisan test --compact --filter=RoleAccessTest`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 | `#24` | T024 `test(student): cover evaluation submission rules` | Closed | `5c284d4` | `php artisan test --compact --filter=EvaluationSubmissionTest` |
 | `#25` | T025 `feat(student): implement dashboard, active forms, fill, submit, success, and history flow` | Closed | `5c284d4` | `php artisan test --compact --filter=EvaluationSubmissionTest`; `ProfileCompletionTest`; `RoleAccessTest`; `php artisan route:list --except-vendor --path=student`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
+| `#26` | T026 `test(admin): cover result dashboard filters and empty states` | Closed | `dd6b5e4` | `php artisan test --compact --filter=ResultDashboardTest` |
+| `#27` | T027 `feat(admin): implement result index and form detail pages` | Closed | `dd6b5e4` | `php artisan test --compact --filter=ResultDashboardTest`; `php artisan test --compact --filter=EvaluationResultServiceTest`; `php artisan route:list --except-vendor --path=admin/results`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 
 ## Verification Log
 
@@ -420,8 +422,33 @@ remaining work. Keep this file current after each coherent slice.
   `feat(student): implement evaluation submission flow` and closed GitHub
   Issues `#24` and `#25` as completed.
 
+### 2026-06-01 00:07 Asia/Makassar
+
+- Wrote `ResultDashboardTest` covering admin result filters, summary values,
+  detail recaps, suggestions, empty result states, and mahasiswa access
+  blocking.
+- Implemented admin result index and detail pages backed by
+  `EvaluationResultService`, with period/form/category filters, summary cards,
+  per-category recap, per-question recap, Likert distribution, suggestions,
+  and zero-safe empty states.
+- Fixed category-filtered result calculation by targeting the `Question`
+  model's `category` relationship in `whereBelongsTo`.
+- Ran `php artisan test --compact --filter=ResultDashboardTest`; passed with 4
+  tests and 20 assertions.
+- Ran `php artisan test --compact --filter=EvaluationResultServiceTest`;
+  passed with 14 tests and 41 assertions.
+- Ran `php artisan test --compact --filter=RoleAccessTest`; passed with 9
+  tests and 14 assertions.
+- Ran `php artisan route:list --except-vendor --path=admin/results`; passed and
+  showed result detail and export route boundaries.
+- Ran `vendor/bin/pint --dirty --format agent`; passed.
+- Ran `bun run build`; passed.
+- Committed `dd6b5e4` with Conventional Commit message
+  `feat(admin): implement result dashboard pages`; push and issue closure are
+  scheduled immediately after this report update.
+
 ## Remaining Gates
 
-- Continue T002 through T041 in dependency order.
+- Continue T028 through T041 in dependency order.
 - Keep this report updated with commits, issue closures, verification evidence,
   browser E2E results, and final completion decision.
