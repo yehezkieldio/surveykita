@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\StudentProfileFormatter;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,7 @@ class GoogleAuthController extends Controller
             ->redirect();
     }
 
-    public function callback(): RedirectResponse
+    public function callback(StudentProfileFormatter $formatter): RedirectResponse
     {
         try {
             /** @var SocialiteUser $googleUser */
@@ -34,6 +35,7 @@ class GoogleAuthController extends Controller
         }
 
         $email = Str::of((string) $googleUser->getEmail())->lower()->trim()->toString();
+        $name = $formatter->googleName((string) $googleUser->getName(), $email);
 
         if (! str_ends_with($email, self::STUDENT_DOMAIN)) {
             return $this->reject('Gunakan email mahasiswa Universitas Mulia.');
@@ -47,7 +49,7 @@ class GoogleAuthController extends Controller
 
         if (! $user) {
             $user = User::query()->create([
-                'name' => $googleUser->getName() ?: $email,
+                'name' => $name,
                 'email' => $email,
                 'role' => 'mahasiswa',
                 'password' => null,
@@ -55,7 +57,7 @@ class GoogleAuthController extends Controller
         }
 
         $user->forceFill([
-            'name' => $user->name ?: ($googleUser->getName() ?: $email),
+            'name' => $name,
             'google_id' => (string) $googleUser->getId(),
         ])->save();
 

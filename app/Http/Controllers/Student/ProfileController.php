@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Student\UpdateProfileRequest;
 use App\Models\Student;
 use App\Services\NimParser;
+use App\Services\StudentProfileFormatter;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -18,7 +19,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function update(UpdateProfileRequest $request, NimParser $parser): RedirectResponse
+    public function update(UpdateProfileRequest $request, NimParser $parser, StudentProfileFormatter $formatter): RedirectResponse
     {
         $parsed = $parser->parse($request->validated('nim'));
         $user = $request->user();
@@ -32,7 +33,7 @@ class ProfileController extends Controller
             'study_program' => $parsed['study_program'],
             'enrollment_year' => $parsed['enrollment_year'],
             'sequence_number' => $parsed['sequence_number'],
-            'class_name' => $request->validated('class_name'),
+            'class_name' => $formatter->className($request->validated('class_name'), $parsed),
         ])->save();
 
         $user->update(['name' => $request->validated('name')]);

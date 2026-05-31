@@ -1,19 +1,19 @@
 <x-layouts.admin title="Hasil Evaluasi - SurveyKita" heading="Hasil Evaluasi" eyebrow="Rekap Akademik">
     <x-card class="mb-6" heading="Filter Laporan" subheading="Saring hasil evaluasi berdasarkan periode, form, dan kategori pertanyaan.">
         <form method="GET" action="{{ route('admin.results.index') }}" class="grid gap-4 sm:grid-cols-4 mt-2">
-            <select name="period_id" class="rounded-none border border-zinc-200 bg-white px-3 py-2 text-xs text-zinc-950 focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 focus:outline-none">
+            <select name="period_id" class="block w-full text-xs">
                 <option value="">Semua periode</option>
                 @foreach ($periods as $period)
                     <option value="{{ $period->id }}" @selected($selectedPeriodId === $period->id)>{{ $period->name }}</option>
                 @endforeach
             </select>
-            <select name="form_id" class="rounded-none border border-zinc-200 bg-white px-3 py-2 text-xs text-zinc-950 focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 focus:outline-none">
+            <select name="form_id" class="block w-full text-xs">
                 <option value="">Semua form</option>
                 @foreach ($allForms as $form)
                     <option value="{{ $form->id }}" @selected($selectedFormId === $form->id)>{{ $form->title }}</option>
                 @endforeach
             </select>
-            <select name="category_id" class="rounded-none border border-zinc-200 bg-white px-3 py-2 text-xs text-zinc-950 focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 focus:outline-none">
+            <select name="category_id" class="block w-full text-xs">
                 <option value="">Semua kategori</option>
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}" @selected($selectedCategoryId === $category->id)>{{ $category->name }}</option>

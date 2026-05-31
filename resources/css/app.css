@@ -5,42 +5,46 @@
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 
-    /* Global border radius override: strict 0px for flat, crisp minimalist editorial feel */
-    --radius-xs: 0px;
-    --radius-sm: 0px;
-    --radius-md: 0px;
-    --radius-lg: 0px;
-    --radius-xl: 0px;
-    --radius-2xl: 0px;
-    --radius-3xl: 0px;
-    --radius-4xl: 0px;
-    --radius-full: 0px;
+    /* shadcn/ui default border radius scales */
+    --radius-xs: 0.125rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
+    --radius-4xl: 2rem;
 
-    /* Custom color overrides for warm bone and charcoal editorial palette */
-    --color-zinc-50: #FBFBFA;
-    --color-zinc-100: #F7F6F3;
-    --color-zinc-200: #EAEAEA;
-    --color-zinc-300: #DCDCDA;
-    --color-zinc-800: #2F3437;
-    --color-zinc-950: #111111;
+    /* Exact Zinc color overrides from shadcn/ui specifications */
+    --color-zinc-50: #fafafa;
+    --color-zinc-100: #f4f4f5;
+    --color-zinc-200: #e4e4e7;
+    --color-zinc-300: #d4d4d8;
+    --color-zinc-400: #a1a1aa;
+    --color-zinc-500: #71717a;
+    --color-zinc-600: #52525b;
+    --color-zinc-700: #3f3f46;
+    --color-zinc-800: #27272a;
+    --color-zinc-900: #18181b;
+    --color-zinc-950: #09090b;
 
-    /* Override teal palette to match the minimalist monochrome theme with high contrast */
-    --color-teal-50: #F7F6F3;
-    --color-teal-100: #EAEAEA;
-    --color-teal-700: #111111;
-    --color-teal-800: #2F3437;
+    /* Override teal palette for clean high-contrast monochrome shadcn look */
+    --color-teal-50: #f4f4f5;
+    --color-teal-100: #e4e4e7;
+    --color-teal-700: #18181b;
+    --color-teal-800: #27272a;
 
     /* Custom springy and elegant transition timings */
-    --transition-timing-function-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --transition-timing-function-spring: cubic-bezier(0.16, 1, 0.3, 1);
     --transition-timing-function-editorial: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @layer base {
     body {
-        @apply bg-[#FBFBFA] text-[#111111] antialiased selection:bg-[#EAEAEA];
+        @apply bg-[#fafafa] text-[#09090b] antialiased selection:bg-zinc-200;
         font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     }
 
@@ -49,34 +53,35 @@
     input,
     select,
     textarea {
-        @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-950;
+        @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900;
     }
 
-    /* Beautiful subtle inputs */
-    input[type="text"],
-    input[type="email"],
-    input[type="password"],
+    /* Beautiful subtle inputs matching shadcn/ui */
+    input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="hidden"]),
     select,
     textarea {
-        @apply rounded-none border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-none transition-all duration-200 focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 focus:outline-none;
+        @apply rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm transition-all duration-200 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 focus:outline-none;
     }
 
-    input[type="checkbox"],
+    input[type="checkbox"] {
+        @apply rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900 focus:ring-offset-0;
+    }
+
     input[type="radio"] {
-        @apply rounded-none border-zinc-300 text-zinc-950 focus:ring-zinc-950 focus:ring-offset-0;
+        @apply border-zinc-300 text-zinc-900 focus:ring-zinc-900 focus:ring-offset-0;
     }
 }
 
 @layer utilities {
     /* Entrance animation for editorial fade-in stagger */
     .animate-reveal {
-        animation: reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+        animation: reveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
     @keyframes reveal {
         from {
             opacity: 0;
-            transform: translateY(12px);
+            transform: translateY(8px);
         }
         to {
             opacity: 1;

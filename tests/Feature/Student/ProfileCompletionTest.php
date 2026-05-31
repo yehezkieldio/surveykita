@@ -5,6 +5,7 @@ use App\Models\EvaluationPeriod;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 
 uses(RefreshDatabase::class);
 
@@ -54,6 +55,8 @@ test('profile completion validates required fields and NIM program code', functi
 });
 
 test('google-created mahasiswa without student profile can complete profile', function () {
+    Carbon::setTestNow('2026-06-01');
+
     $user = User::factory()->mahasiswa()->create([
         'name' => 'Google Student',
         'email' => '2311032@students.universitasmulia.ac.id',
@@ -64,7 +67,7 @@ test('google-created mahasiswa without student profile can complete profile', fu
     $this->actingAs($user)->put(route('student.profile.update'), [
         'nim' => '2311032',
         'name' => 'Google Student',
-        'class_name' => 'IF-23A',
+        'class_name' => 'IFB-23-A',
     ])->assertRedirect(route('student.dashboard'));
 
     $student = $user->refresh()->student;
@@ -75,8 +78,10 @@ test('google-created mahasiswa without student profile can complete profile', fu
         ->and($student->study_program)->toBe('S1 Informatika')
         ->and($student->enrollment_year)->toBe(2023)
         ->and($student->sequence_number)->toBe('032')
-        ->and($student->class_name)->toBe('IF-23A')
+        ->and($student->class_name)->toBe('IFB6A')
         ->and($user->hasCompleteStudentProfile())->toBeTrue();
+
+    Carbon::setTestNow();
 });
 
 test('completed profile can access evaluation fill page', function () {

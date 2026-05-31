@@ -2,14 +2,14 @@
 
 @php
     $variants = [
-        'success' => 'bg-[#EDF3EC] text-[#346538] border-[#346538]/10',
-        'warning' => 'bg-[#FBF3DB] text-[#956400] border-[#956400]/10',
-        'danger' => 'bg-[#FDEBEC] text-[#9F2F2D] border-[#9F2F2D]/10',
-        'info' => 'bg-[#E1F3FE] text-[#1F6C9F] border-[#1F6C9F]/10',
-        'neutral' => 'bg-[#F7F6F3] text-[#787774] border-[#787774]/10',
+        'success' => 'bg-emerald-50 text-emerald-700 border-emerald-200',
+        'warning' => 'bg-amber-50 text-amber-700 border-amber-200',
+        'danger' => 'bg-red-50 text-red-700 border-red-200',
+        'info' => 'bg-blue-50 text-blue-700 border-blue-200',
+        'neutral' => 'bg-zinc-100 text-zinc-800 border-zinc-200',
     ];
 @endphp
 
-<span {{ $attributes->merge(['class' => 'inline-flex items-center rounded-none px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider border '.$variants[$variant]]) }}>
+<span {{ $attributes->merge(['class' => 'inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium transition-all duration-200 '.$variants[$variant]]) }}>
     {{ $slot }}
 </span>

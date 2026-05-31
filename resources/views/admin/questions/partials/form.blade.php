@@ -5,7 +5,7 @@
             <select 
                 id="evaluation_form_id" 
                 name="evaluation_form_id" 
-                class="mt-1 block w-full rounded-none border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 focus:outline-none" 
+                class="mt-1 block w-full" 
                 required
             >
                 @foreach ($forms as $form)
@@ -20,7 +20,7 @@
             <select 
                 id="question_category_id" 
                 name="question_category_id" 
-                class="mt-1 block w-full rounded-none border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 focus:outline-none" 
+                class="mt-1 block w-full" 
                 required
             >
                 @foreach ($categories as $category)
@@ -37,7 +37,7 @@
             id="question_text" 
             name="question_text" 
             rows="3" 
-            class="mt-1 block w-full rounded-none border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 focus:outline-none"
+            class="mt-1 block w-full"
             required
         >{{ old('question_text', $question?->question_text) }}</textarea>
         <x-form-error name="question_text" />
@@ -47,12 +47,12 @@
         <div class="grid gap-1">
             <label for="sort_order" class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 font-bold">Urutan Tampil (Sort Order)</label>
             <input 
+                type="number"
                 id="sort_order" 
                 name="sort_order" 
-                type="number" 
                 min="0" 
                 value="{{ old('sort_order', $question?->sort_order ?? 0) }}" 
-                class="mt-1 block w-full rounded-none border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 focus:outline-none" 
+                class="mt-1 block w-full" 
                 required
             >
             <x-form-error name="sort_order" />
@@ -66,7 +66,7 @@
                 type="checkbox" 
                 value="1" 
                 @checked(old('is_required', $question?->is_required ?? true)) 
-                class="rounded-none border-zinc-300 text-zinc-950 focus:ring-zinc-950 focus:ring-offset-0"
+                class="rounded border-zinc-300 text-zinc-950 focus:ring-zinc-950 focus:ring-offset-0"
             >
             <label for="is_required" class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 font-bold">Wajib Dijawab Responden</label>
         </div>

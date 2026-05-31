@@ -22,7 +22,7 @@ test('guest is redirected to Google provider', function () {
 test('allowed student email creates mahasiswa user and redirects to profile completion', function () {
     fakeGoogleUser([
         'id' => 'google-2311032',
-        'name' => 'Mahasiswa Mulia',
+        'name' => '2311032 MAHASISWA MULIA',
         'email' => '2311032@students.universitasmulia.ac.id',
     ]);
 
@@ -32,6 +32,7 @@ test('allowed student email creates mahasiswa user and redirects to profile comp
     $user = User::query()->where('email', '2311032@students.universitasmulia.ac.id')->firstOrFail();
 
     expect($user->role)->toBe('mahasiswa')
+        ->and($user->name)->toBe('Mahasiswa Mulia')
         ->and($user->google_id)->toBe('google-2311032')
         ->and($user->password)->toBeNull();
 

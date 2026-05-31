@@ -7,20 +7,25 @@
 
         <title>{{ $title ?? 'Admin SurveyKita' }}</title>
 
+        <!-- Inter Font (International Swiss Style) -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="min-h-screen bg-[#FBFBFA] text-[#111111]">
+    <body class="min-h-screen bg-zinc-50/50 text-zinc-950 font-sans">
         <div class="min-h-screen lg:flex">
             <aside class="border-b border-zinc-200 bg-white lg:w-64 lg:border-b-0 lg:border-r">
-                <div class="flex items-center justify-between px-6 py-6 lg:block lg:border-b lg:border-zinc-100">
+                <div class="flex items-center justify-between px-6 py-5 lg:block lg:border-b lg:border-zinc-200/50">
                     <div>
-                        <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-400">System Portal</p>
-                        <p class="mt-1 text-lg font-bold uppercase tracking-tight text-zinc-900">SurveyKita</p>
+                        <p class="text-[10px] font-semibold uppercase tracking-wider text-zinc-400">System Portal</p>
+                        <p class="mt-0.5 text-lg font-bold tracking-tight text-zinc-950">SurveyKita</p>
                     </div>
                 </div>
 
-                <nav class="grid gap-1 py-6 text-sm text-zinc-600">
-                    <p class="px-6 mb-2 font-mono text-[10px] uppercase tracking-wider text-zinc-400">Navigasi Utama</p>
+                <nav class="grid gap-1 px-4 py-6 text-sm">
+                    <p class="px-2 mb-2 text-[10px] font-semibold uppercase tracking-wider text-zinc-400">Navigasi Utama</p>
                     @foreach ([
                         'admin.dashboard' => 'Dashboard',
                         'admin.students.index' => 'Mahasiswa',
@@ -32,9 +37,9 @@
                     ] as $routeName => $label)
                         @if (Route::has($routeName))
                             <a href="{{ route($routeName) }}" @class([
-                                'px-6 py-2.5 transition-all duration-200 border-l-2 text-sm',
-                                'border-transparent text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900' => !request()->routeIs($routeName) && !request()->routeIs(str_replace('.index', '', $routeName) . '.*'),
-                                'border-zinc-900 bg-[#FBFBFA] text-zinc-950 font-semibold' => request()->routeIs($routeName) || request()->routeIs(str_replace('.index', '', $routeName) . '.*'),
+                                'flex items-center rounded-md px-3 py-2 transition-all duration-200 text-sm font-medium',
+                                'text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900' => !request()->routeIs($routeName) && !request()->routeIs(str_replace('.index', '', $routeName) . '.*'),
+                                'bg-zinc-100 text-zinc-900 font-semibold' => request()->routeIs($routeName) || request()->routeIs(str_replace('.index', '', $routeName) . '.*'),
                             ])>{{ $label }}</a>
                         @endif
                     @endforeach
@@ -42,17 +47,17 @@
             </aside>
 
             <div class="min-w-0 flex-1 flex flex-col">
-                <header class="border-b border-zinc-200 bg-white px-8 py-5">
+                <header class="border-b border-zinc-200 bg-white px-8 py-4.5">
                     <div class="flex items-center justify-between gap-4">
                         <div>
-                            <p class="font-mono text-[10px] uppercase tracking-[0.15em] text-zinc-400">{{ $eyebrow ?? 'Administrator' }}</p>
-                            <h1 class="mt-0.5 text-xl font-bold tracking-tight text-zinc-900 uppercase">{{ $heading ?? 'Dashboard' }}</h1>
+                            <p class="text-[10px] font-semibold uppercase tracking-wider text-zinc-400">{{ $eyebrow ?? 'Administrator' }}</p>
+                            <h1 class="mt-0.5 text-xl font-bold tracking-tight text-zinc-950">{{ $heading ?? 'Dashboard' }}</h1>
                         </div>
 
                         @auth
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <x-button type="submit" variant="secondary" class="!min-h-9 !py-1 text-xs">Keluar</x-button>
+                                <x-button type="submit" variant="secondary" class="h-8 text-xs">Keluar</x-button>
                             </form>
                         @endauth
                     </div>

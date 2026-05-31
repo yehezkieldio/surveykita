@@ -21,8 +21,8 @@
             <h3 class="font-mono text-[10px] uppercase tracking-wider text-zinc-400 font-bold px-2">Daftar Pertanyaan ({{ $form->questions->count() }})</h3>
             
             @forelse ($form->questions as $question)
-                <div class="rounded-none border border-zinc-200 p-5 bg-white shadow-none transition-all duration-300 hover:border-zinc-300 flex items-start gap-4">
-                    <span class="font-mono text-xs font-bold text-zinc-400 bg-zinc-50 w-6 h-6 flex items-center justify-center border border-zinc-200">{{ $question->sort_order }}</span>
+                <div class="rounded-xl border border-zinc-200 p-5 bg-white shadow-sm transition-all duration-300 hover:border-zinc-300 flex items-start gap-4 animate-reveal">
+                    <span class="font-mono text-xs font-bold text-zinc-500 bg-zinc-100 w-6 h-6 flex items-center justify-center rounded-md">{{ $question->sort_order }}</span>
                     <div class="flex-1">
                         <p class="text-sm font-semibold text-zinc-900 leading-relaxed">{{ $question->question_text }}</p>
                         <div class="mt-2 flex items-center gap-3 text-[9px] font-mono uppercase tracking-wider text-zinc-400">

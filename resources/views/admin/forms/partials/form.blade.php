@@ -4,7 +4,7 @@
         <select 
             id="evaluation_period_id" 
             name="evaluation_period_id" 
-            class="mt-1 block w-full rounded-none border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 focus:outline-none" 
+            class="mt-1 block w-full" 
             required
         >
             @foreach ($periods as $period)
@@ -17,10 +17,11 @@
     <div class="grid gap-1">
         <label for="title" class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 font-bold">Judul Formulir</label>
         <input 
+            type="text"
             id="title" 
             name="title" 
             value="{{ old('title', $form?->title) }}" 
-            class="mt-1 block w-full rounded-none border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 focus:outline-none" 
+            class="mt-1 block w-full" 
             required
         >
         <x-form-error name="title" />
@@ -32,7 +33,7 @@
             id="description" 
             name="description" 
             rows="3" 
-            class="mt-1 block w-full rounded-none border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 focus:outline-none"
+            class="mt-1 block w-full"
         >{{ old('description', $form?->description) }}</textarea>
         <x-form-error name="description" />
     </div>
@@ -42,7 +43,7 @@
         <select 
             id="target_type" 
             name="target_type" 
-            class="mt-1 block w-full rounded-none border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 focus:outline-none" 
+            class="mt-1 block w-full" 
             required
         >
             @foreach (['layanan_akademik','pembelajaran','fasilitas','administrasi','kepuasan_umum'] as $target)
@@ -60,7 +61,7 @@
             type="checkbox" 
             value="1" 
             @checked(old('is_active', $form?->is_active ?? true)) 
-            class="rounded-none border-zinc-300 text-zinc-950 focus:ring-zinc-950 focus:ring-offset-0"
+            class="rounded border-zinc-300 text-zinc-950 focus:ring-zinc-950 focus:ring-offset-0"
         >
         <label for="is_active" class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 font-bold">Aktifkan formulir ini</label>
     </div>

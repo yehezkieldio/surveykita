@@ -7,21 +7,25 @@
 
         <title>{{ $title ?? config('app.name', 'SurveyKita') }}</title>
 
+        <!-- Inter Font (International Swiss Style) -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="min-h-screen bg-[#FBFBFA]">
+    <body class="min-h-screen bg-zinc-50/50">
         <main class="flex min-h-screen items-center justify-center px-4 py-16 animate-reveal">
             <div class="w-full max-w-md">
-                <div class="mb-10 text-center">
-                    <p class="font-mono text-xs uppercase tracking-[0.2em] text-zinc-500">Universitas Mulia</p>
-                    <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-zinc-950 uppercase">SurveyKita</h1>
-                    <div class="mx-auto mt-4 h-[1px] w-12 bg-zinc-200"></div>
-                    <p class="mt-4 text-xs font-medium uppercase tracking-wider text-zinc-600 leading-relaxed">
-                        Evaluasi Kepuasan Mahasiswa<br>terhadap Layanan Akademik
+                <div class="mb-8 text-center">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-zinc-400">Universitas Mulia</p>
+                    <h1 class="mt-2 text-3xl font-extrabold tracking-tight text-zinc-950">SurveyKita</h1>
+                    <p class="mt-2 text-sm text-zinc-500 leading-relaxed">
+                        Evaluasi Kepuasan Mahasiswa terhadap Layanan Akademik
                     </p>
                 </div>
 
-                <div class="border border-zinc-200 bg-white p-8 shadow-none transition-all duration-300 hover:border-zinc-300">
+                <div class="rounded-xl border border-zinc-200 bg-white p-8 shadow-sm">
                     {{ $slot }}
                 </div>
             </div>

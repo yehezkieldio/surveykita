@@ -6,6 +6,15 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 
 Ignore any changes outside of your immediate task. Whether they’re from other agents or humans, they aren't your concern—just stick to your scope and keep moving forward. If you encounter a change that directly impacts your work, adapt as needed, but don't let it derail your progress.
 
+## Frontend Design System
+
+All UI work must strictly adhere to the project's **International Swiss Style** and **shadcn/ui** baseline. Refer to [DESIGN.md](file:///home/yehezkieldio/Documents/Workspace/surveykita/DESIGN.md) for full principles.
+Key rules:
+- **Font**: Always use `Inter` and ensure the Google/Bunny fonts loading tags are maintained in layout `<head>` files.
+- **Card Nesting**: Do not nest bordered boxes/cards inside other cards. Use flat backgrounds (e.g., `bg-zinc-50`) instead of nested border lines.
+- **Form Inputs**: Let fields inherit `rounded-md` styles globally. Avoid `rounded-none` inline styling.
+- **Data Tables**: Style table headers cleanly (`text-zinc-500 font-medium text-xs border-b`) without bold uppercase monospace headers or colored gray heads.
+
 <laravel-boost-guidelines>
 === foundation rules ===
 

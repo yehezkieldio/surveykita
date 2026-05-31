@@ -5,14 +5,14 @@
     $flashMessage = $message ?? session('success') ?? session('error') ?? session('status');
 
     $classes = [
-        'success' => 'border-[#346538]/20 bg-[#EDF3EC] text-[#346538]',
-        'error' => 'border-[#9F2F2D]/20 bg-[#FDEBEC] text-[#9F2F2D]',
-        'status' => 'border-[#1F6C9F]/20 bg-[#E1F3FE] text-[#1F6C9F]',
+        'success' => 'border-emerald-200 bg-emerald-50/50 text-emerald-800',
+        'error' => 'border-red-200 bg-red-50/50 text-red-800',
+        'status' => 'border-zinc-200 bg-zinc-50 text-zinc-800',
     ];
 @endphp
 
 @if ($flashMessage)
-    <div {{ $attributes->merge(['class' => 'mb-6 rounded-none border px-4 py-3 text-xs font-mono uppercase tracking-wider '.$classes[$flashType]]) }} role="status">
+    <div {{ $attributes->merge(['class' => 'mb-6 rounded-lg border px-4 py-3.5 text-sm font-medium '.$classes[$flashType]]) }} role="status">
         {{ $flashMessage }}
     </div>
 @endif
