@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-05-31 23:26 Asia/Makassar
+- Last updated: 2026-05-31 23:39 Asia/Makassar
 
 ## Decisions
 
@@ -28,6 +28,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#3` | T003 `chore(dev): configure MariaDB local services` | Closed | `2335819` | `docker compose config`; `php artisan config:show database.default` |
 | `#4` | T004 `chore(frontend): configure Bun, Vite, Tailwind, and assets` | Closed | `1c8f62c` | `bun install --frozen-lockfile`; `bun run build` |
 | `#5` | T005 `style(ui): create shared Blade layouts and components` | Closed | `1c8f62c` | `bun run build` |
+| `#6` | T006 `test(auth): cover custom login and logout behavior` | Ready to commit | pending | Red: `php artisan test --compact --filter=SessionAuthTest`; Green: `php artisan test --compact --filter=SessionAuthTest` |
+| `#7` | T007 `feat(auth): implement custom session login and logout` | Ready to commit | pending | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor`; `php artisan test --compact --filter=SessionAuthTest` |
 
 ## Verification Log
 
@@ -107,6 +109,29 @@ remaining work. Keep this file current after each coherent slice.
 - Committed and pushed `1c8f62c` with Conventional Commit message
   `style(ui): establish SurveyKita Blade foundation` and closed GitHub Issues
   `#4` and `#5` as completed.
+
+### 2026-05-31 23:39 Asia/Makassar
+
+- Wrote `tests/Feature/Auth/SessionAuthTest.php` covering login page rendering,
+  admin login redirect, mahasiswa login redirect, invalid credential feedback,
+  and logout session invalidation.
+- Ran `php artisan test --compact --filter=SessionAuthTest` before
+  implementation; it failed with five 404 failures because `/login` and
+  `/logout` were not wired yet.
+- Added the minimal user auth fields required by the auth track:
+  `role`, nullable `google_id`, nullable `password`, model role helpers, and
+  factory role states. The full domain schema remains scheduled for T012.
+- Implemented `LoginController`, `LogoutController`, `LoginRequest`, auth
+  routes, login view, and unauthorized feedback view using Laravel session auth
+  primitives.
+- Added layout component wrappers under `resources/views/components/layouts`
+  so `<x-layouts.*>` resolves while the canonical layout files remain under
+  `resources/views/layouts`.
+- Ran `vendor/bin/pint --dirty --format agent`; passed.
+- Ran `php artisan route:list --except-vendor`; passed and showed login and
+  logout routes.
+- Ran `php artisan test --compact --filter=SessionAuthTest`; passed with 5
+  tests and 21 assertions.
 
 ## Remaining Gates
 

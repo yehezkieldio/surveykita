@@ -69,7 +69,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 4: Custom Authentication
 
-- [ ] T006 test(auth): cover custom login and logout behavior in `tests/Feature/Auth/SessionAuthTest.php`
+- [X] T006 test(auth): cover custom login and logout behavior in `tests/Feature/Auth/SessionAuthTest.php`
   - Phase: Custom authentication
   - Dependencies: T002, T005
   - Files: `tests/Feature/Auth/SessionAuthTest.php`
@@ -77,7 +77,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: Tests assert role-based post-login redirects, session authentication state, validation feedback, and logout state.
   - Verification: `php artisan test --compact --filter=SessionAuthTest`
 
-- [ ] T007 feat(auth): implement custom session login and logout in `app/Http/Controllers/Auth/`, `app/Http/Requests/Auth/`, `routes/auth.php`, and `resources/views/auth/`
+- [X] T007 feat(auth): implement custom session login and logout in `app/Http/Controllers/Auth/`, `app/Http/Requests/Auth/`, `routes/auth.php`, and `resources/views/auth/`
   - Phase: Custom authentication
   - Dependencies: T006
   - Files: `app/Http/Controllers/Auth/LoginController.php`, `app/Http/Controllers/Auth/LogoutController.php`, `app/Http/Requests/Auth/LoginRequest.php`, `routes/auth.php`, `resources/views/auth/login.blade.php`, `resources/views/auth/unauthorized.blade.php`
