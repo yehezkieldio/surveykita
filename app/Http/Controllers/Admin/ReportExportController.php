@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\EvaluationReportExport;
 use App\Http\Controllers\Controller;
 use App\Models\EvaluationForm;
 use App\Services\EvaluationResultService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\Response;
 
 class ReportExportController extends Controller
@@ -23,8 +25,12 @@ class ReportExportController extends Controller
         ])->setPaper('a4')->download($filename);
     }
 
-    public function excel(string $form): Response
+    public function excel(EvaluationForm $form, EvaluationResultService $results): Response
     {
-        return response('Excel report export endpoint for form '.$form, 200);
+        $form->load('evaluationPeriod');
+        $result = $results->forForm($form);
+        $filename = 'surveykita-'.Str::slug($form->title).'.xlsx';
+
+        return Excel::download(new EvaluationReportExport($form, $result), $filename);
     }
 }

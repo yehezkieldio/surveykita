@@ -303,7 +303,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 17: Excel Export
 
-- [ ] T032 test(report): cover protected Excel export behavior in `tests/Feature/Exports/ExcelExportTest.php`
+- [X] T032 test(report): cover protected Excel export behavior in `tests/Feature/Exports/ExcelExportTest.php`
   - Phase: Excel export
   - Dependencies: T027
   - Files: `tests/Feature/Exports/ExcelExportTest.php`
@@ -311,7 +311,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: Tests cover admin download, guest redirect, mahasiswa blocked, report filename, and expected sheets for summary, category recap, question recap, Likert distribution, suggestions, and raw responses.
   - Verification: `php artisan test --compact --filter=ExcelExportTest`
 
-- [ ] T033 feat(report): implement Maatwebsite Excel export classes in `app/Exports/`
+- [X] T033 feat(report): implement Maatwebsite Excel export classes in `app/Exports/`
   - Phase: Excel export
   - Dependencies: T032
   - Files: `app/Exports/EvaluationReportExport.php`, `app/Exports/Sheets/SummarySheet.php`, `app/Exports/Sheets/CategoryRecapSheet.php`, `app/Exports/Sheets/QuestionRecapSheet.php`, `app/Exports/Sheets/LikertDistributionSheet.php`, `app/Exports/Sheets/SuggestionsSheet.php`, `app/Exports/Sheets/RawResponsesSheet.php`, `app/Http/Controllers/Admin/ReportExportController.php`, `routes/web.php`

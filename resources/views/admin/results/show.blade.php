@@ -11,7 +11,10 @@
                 <x-button type="submit">Filter</x-button>
             </form>
 
-            <x-button :href="route('admin.results.export.pdf', $form)" variant="secondary">Unduh PDF</x-button>
+            <div class="flex flex-wrap gap-2">
+                <x-button :href="route('admin.results.export.pdf', $form)" variant="secondary">Unduh PDF</x-button>
+                <x-button :href="route('admin.results.export.excel', $form)" variant="secondary">Unduh Excel</x-button>
+            </div>
         </div>
     </x-card>
 
