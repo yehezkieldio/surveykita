@@ -53,3 +53,42 @@ installed version.
 ## Observability Dashboard
 
 The dashboard runs independently of browser sessions on port 4848 and can also be opened through a proxied or forwarded URL such as `https://dashboard.agent-browser.localhost`. Agents should stay on the dashboard origin: session tabs, status, and stream traffic are proxied internally, so session ports do not need to be exposed.
+
+## Cleanup
+
+Agents must clean up browser automation state after completing a task. This prevents dangling Chrome/Chromium processes, temporary profiles, ports, recordings, and background sessions from accumulating across repeated automation runs. Cleanup improves long-running stability and prevents avoidable CPU, memory, disk, and port exhaustion.
+
+Before cleanup, load the installed-version workflow if it has not already been loaded:
+
+```bash
+agent-browser skills get core
+```
+
+Use the cleanup, close, stop, or session-management commands documented by the installed `agent-browser` version. Do not assume stale command names from memory.
+
+Recommended cleanup workflow:
+
+1. Close any pages, tabs, sessions, or recordings created for the task.
+2. Stop any `agent-browser` session that was started only for this task.
+3. Verify no task-owned browser process is still running.
+4. Remove temporary files only if they were created for this task.
+5. Avoid killing unrelated user browser sessions.
+
+Inspection commands:
+
+```bash
+pgrep -af "agent-browser|chrome|chromium" || true
+lsof -iTCP -sTCP:LISTEN -P | grep -E "agent-browser|chrome|chromium|4848" || true
+```
+
+If the task is running inside an isolated sandbox, CI job, disposable container, or dedicated automation VM, it is acceptable to clean more aggressively:
+
+```bash
+pkill -f "agent-browser" || true
+pkill -f "chrome.*remote-debugging" || true
+pkill -f "chromium.*remote-debugging" || true
+```
+
+Do not run broad `pkill chrome` or `pkill chromium` on a normal user machine, because that may close the user’s real browser.
+
+For long-running QA, dogfooding, Slack, Electron, Vercel Sandbox, or AgentCore workflows, cleanup should be explicit at the end of the run unless the user asked to keep the session open for inspection.
