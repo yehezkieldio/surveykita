@@ -41,9 +41,9 @@ remaining work. Keep this file current after each coherent slice.
 | `#16` | T016 `chore(seed): implement factories and seeders` | Closed | `50a3bd2` | `php artisan migrate:fresh --seed --no-interaction`; `php artisan test --compact --filter=SeedDataTest`; `vendor/bin/pint --dirty --format agent` |
 | `#17` | T017 `test(evaluation): cover Likert calculation rules` | Closed | `287f142` | `php artisan test --compact --filter=EvaluationResultServiceTest` |
 | `#18` | T018 `feat(evaluation): implement centralized result math` | Closed | `287f142` | `php artisan test --compact --filter=EvaluationResultServiceTest`; `vendor/bin/pint --dirty --format agent`; seed/model/NIM regression tests |
-| `#19` | T019 `test(admin): cover admin CRUD and cross-role blocks` | Ready to close | Pending | `php artisan test --compact --filter=AdminCrudTest` |
-| `#20` | T020 `feat(admin): implement student and period management` | Ready to close | Pending | `php artisan test --compact --filter=AdminCrudTest`; `php artisan route:list --except-vendor --path=admin`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
-| `#21` | T021 `feat(admin): implement form, category, and question management` | Ready to close | Pending | `php artisan test --compact --filter=AdminCrudTest`; `php artisan route:list --except-vendor --path=admin`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
+| `#19` | T019 `test(admin): cover admin CRUD and cross-role blocks` | Closed | `90429ab` | `php artisan test --compact --filter=AdminCrudTest` |
+| `#20` | T020 `feat(admin): implement student and period management` | Closed | `90429ab` | `php artisan test --compact --filter=AdminCrudTest`; `php artisan route:list --except-vendor --path=admin`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
+| `#21` | T021 `feat(admin): implement form, category, and question management` | Closed | `90429ab` | `php artisan test --compact --filter=AdminCrudTest`; `php artisan route:list --except-vendor --path=admin`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 
 ## Verification Log
 
@@ -355,6 +355,9 @@ remaining work. Keep this file current after each coherent slice.
   38 admin routes.
 - Ran `bun run build`; passed.
 - Ran `php artisan test --compact --filter=RoleAccessTest`; passed.
+- Committed and pushed `90429ab` with Conventional Commit message
+  `feat(admin): implement CRUD management modules` and closed GitHub Issues
+  `#19`, `#20`, and `#21` as completed.
 
 ## Remaining Gates
 
