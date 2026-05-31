@@ -31,7 +31,7 @@ class StudentController extends Controller
                 ->select('students.*')
         )
             ->addColumn('email', fn (Student $student): string => $student->user?->email ?? '-')
-            ->addColumn('responses_count_display', fn (Student $student): int => $student->responses_count)
+            ->addColumn('responses_count_display', fn (Student $student): int => (int) ($student->responses_count ?? 0))
             ->addColumn('actions', fn (Student $student): string => view('admin.students.partials.actions', ['student' => $student])->render())
             ->rawColumns(['actions'])
             ->toJson();
