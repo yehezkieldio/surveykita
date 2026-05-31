@@ -9,16 +9,21 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="min-h-screen bg-zinc-50">
-        <main class="flex min-h-screen items-center justify-center px-4 py-10">
+    <body class="min-h-screen bg-[#FBFBFA]">
+        <main class="flex min-h-screen items-center justify-center px-4 py-16 animate-reveal">
             <div class="w-full max-w-md">
-                <div class="mb-8 text-center">
-                    <p class="text-sm font-semibold text-teal-700">Universitas Mulia</p>
-                    <h1 class="mt-2 text-3xl font-bold text-zinc-950">SurveyKita</h1>
-                    <p class="mt-2 text-sm text-zinc-600">Evaluasi Kepuasan Mahasiswa terhadap Layanan Akademik</p>
+                <div class="mb-10 text-center">
+                    <p class="font-mono text-xs uppercase tracking-[0.2em] text-zinc-500">Universitas Mulia</p>
+                    <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-zinc-950 uppercase">SurveyKita</h1>
+                    <div class="mx-auto mt-4 h-[1px] w-12 bg-zinc-200"></div>
+                    <p class="mt-4 text-xs font-medium uppercase tracking-wider text-zinc-600 leading-relaxed">
+                        Evaluasi Kepuasan Mahasiswa<br>terhadap Layanan Akademik
+                    </p>
                 </div>
 
-                {{ $slot }}
+                <div class="border border-zinc-200 bg-white p-8 shadow-none transition-all duration-300 hover:border-zinc-300">
+                    {{ $slot }}
+                </div>
             </div>
         </main>
     </body>

@@ -9,43 +9,44 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="min-h-screen bg-zinc-50">
+    <body class="min-h-screen bg-[#FBFBFA] text-[#111111]">
         <header class="border-b border-zinc-200 bg-white">
-            <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-4">
+            <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-5">
                 <div>
-                    <p class="text-xs font-semibold uppercase text-teal-700">SurveyKita</p>
-                    <p class="mt-1 text-lg font-bold text-zinc-950">Portal Mahasiswa</p>
+                    <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-400">Student Portal</p>
+                    <p class="mt-0.5 text-lg font-bold uppercase tracking-tight text-zinc-900">SurveyKita</p>
                 </div>
 
-                <nav class="flex flex-wrap items-center gap-2 text-sm font-medium text-zinc-700">
+                <nav class="flex flex-wrap items-center gap-1 text-sm">
                     @foreach ([
                         'student.dashboard' => 'Dashboard',
-                        'student.profile.complete' => 'Profil',
-                        'student.evaluations.index' => 'Evaluasi',
+                        'student.profile.complete' => 'Profil Saya',
+                        'student.evaluations.index' => 'Evaluasi Aktif',
                         'student.submissions.index' => 'Riwayat',
                     ] as $routeName => $label)
                         @if (Route::has($routeName))
                             <a href="{{ route($routeName) }}" @class([
-                                'rounded-md px-3 py-2 hover:bg-teal-50 hover:text-teal-800',
-                                'bg-teal-50 text-teal-800' => request()->routeIs($routeName),
+                                'px-3 py-1.5 transition-all duration-200 text-xs uppercase tracking-wider font-semibold border-b-2',
+                                'border-transparent text-zinc-500 hover:text-zinc-900' => !request()->routeIs($routeName),
+                                'border-zinc-950 text-zinc-950' => request()->routeIs($routeName),
                             ])>{{ $label }}</a>
                         @endif
                     @endforeach
 
                     @auth
-                        <form method="POST" action="{{ route('logout') }}">
+                        <form method="POST" action="{{ route('logout') }}" class="ml-2">
                             @csrf
-                            <x-button type="submit" variant="secondary">Keluar</x-button>
+                            <x-button type="submit" variant="secondary" class="!min-h-8 !py-1 !px-3 text-xs">Keluar</x-button>
                         </form>
                     @endauth
                 </nav>
             </div>
         </header>
 
-        <main class="mx-auto max-w-6xl px-4 py-6">
-            <div class="mb-6">
-                <p class="text-sm text-zinc-500">{{ $eyebrow ?? 'Portal Mahasiswa' }}</p>
-                <h1 class="text-2xl font-semibold text-zinc-950">{{ $heading ?? 'Dashboard' }}</h1>
+        <main class="mx-auto max-w-5xl px-6 py-10 animate-reveal">
+            <div class="mb-8 border-b border-zinc-200 pb-6">
+                <p class="font-mono text-[10px] uppercase tracking-[0.15em] text-zinc-400">{{ $eyebrow ?? 'Portal Mahasiswa' }}</p>
+                <h1 class="mt-1 text-2xl font-bold tracking-tight text-zinc-900 uppercase">{{ $heading ?? 'Dashboard' }}</h1>
             </div>
 
             <x-alert />

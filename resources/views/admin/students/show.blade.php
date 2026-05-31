@@ -1,14 +1,34 @@
 <x-layouts.admin title="Detail Mahasiswa - SurveyKita" heading="Detail Mahasiswa">
-    <x-card heading="{{ $student->name }}" subheading="{{ $student->nim }} - {{ $student->study_program }}">
-        <dl class="grid gap-3 text-sm md:grid-cols-2">
-            <div><dt class="text-zinc-500">Email</dt><dd class="font-medium">{{ $student->user->email }}</dd></div>
-            <div><dt class="text-zinc-500">Kelas</dt><dd class="font-medium">{{ $student->class_name }}</dd></div>
-            <div><dt class="text-zinc-500">Angkatan</dt><dd class="font-medium">{{ $student->enrollment_year }}</dd></div>
-            <div><dt class="text-zinc-500">Respons</dt><dd class="font-medium">{{ $student->responses->count() }}</dd></div>
-        </dl>
-        <div class="mt-4 flex gap-2">
-            <x-button :href="route('admin.students.edit', $student)">Edit</x-button>
-            <x-button variant="secondary" :href="route('admin.students.index')">Kembali</x-button>
+    <div class="space-y-6">
+        <div class="flex justify-between items-center border-b border-zinc-200 pb-5">
+            <div>
+                <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-400">Rincian Profil Akademik Mahasiswa</p>
+            </div>
+            <div class="flex gap-3">
+                <x-button variant="secondary" :href="route('admin.students.index')" class="!min-h-9 !py-1 text-xs">Kembali</x-button>
+                <x-button :href="route('admin.students.edit', $student)" class="!min-h-9 !py-1 text-xs">Edit</x-button>
+            </div>
         </div>
-    </x-card>
+
+        <x-card heading="{{ $student->name }}" subheading="NIM: {{ $student->nim }} &bull; Program Studi {{ $student->study_program }}">
+            <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-4 mt-2">
+                <div>
+                    <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-400">Akun Email</p>
+                    <p class="mt-1.5 text-sm font-bold text-zinc-900 font-mono">{{ $student->user->email }}</p>
+                </div>
+                <div>
+                    <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-400">Kelas</p>
+                    <p class="mt-1.5 text-sm font-bold text-zinc-900 font-mono">{{ $student->class_name }}</p>
+                </div>
+                <div>
+                    <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-400">Angkatan</p>
+                    <p class="mt-1.5 text-sm font-bold text-zinc-900 font-mono">{{ $student->enrollment_year }}</p>
+                </div>
+                <div>
+                    <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-400">Evaluasi Tersubmit</p>
+                    <p class="mt-1.5 text-sm font-bold text-zinc-900 font-mono">{{ $student->responses->count() }} respons</p>
+                </div>
+            </div>
+        </x-card>
+    </div>
 </x-layouts.admin>

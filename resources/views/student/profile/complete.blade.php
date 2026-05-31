@@ -1,28 +1,47 @@
 <x-layouts.student title="Lengkapi Profil - SurveyKita" heading="Lengkapi Profil">
-    <x-card heading="Profil Mahasiswa" subheading="NIM akan digunakan untuk mengisi program studi, tahun masuk, dan nomor urut secara otomatis.">
-        <form method="POST" action="{{ route('student.profile.update') }}" class="grid gap-4">
+    <x-card heading="Profil Mahasiswa" subheading="NIM akan digunakan untuk menentukan program studi, angkatan, dan data identitas Anda secara otomatis dalam sistem.">
+        <form method="POST" action="{{ route('student.profile.update') }}" class="grid gap-5">
             @csrf
             @method('PUT')
 
-            <label class="grid gap-1 text-sm">
-                <span class="font-medium">NIM</span>
-                <input name="nim" value="{{ old('nim', $student?->nim) }}" class="rounded-md border-zinc-300" required>
+            <div class="grid gap-1">
+                <label for="nim" class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 font-bold">NIM (Nomor Induk Mahasiswa)</label>
+                <input 
+                    id="nim" 
+                    name="nim" 
+                    value="{{ old('nim', $student?->nim) }}" 
+                    class="mt-1 block w-full rounded-none border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 focus:outline-none" 
+                    required
+                >
                 <x-form-error name="nim" />
-            </label>
+            </div>
 
-            <label class="grid gap-1 text-sm">
-                <span class="font-medium">Nama Lengkap</span>
-                <input name="name" value="{{ old('name', $student?->name ?? auth()->user()?->name) }}" class="rounded-md border-zinc-300" required>
+            <div class="grid gap-1">
+                <label for="name" class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 font-bold">Nama Lengkap</label>
+                <input 
+                    id="name" 
+                    name="name" 
+                    value="{{ old('name', $student?->name ?? auth()->user()?->name) }}" 
+                    class="mt-1 block w-full rounded-none border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 focus:outline-none" 
+                    required
+                >
                 <x-form-error name="name" />
-            </label>
+            </div>
 
-            <label class="grid gap-1 text-sm">
-                <span class="font-medium">Kelas</span>
-                <input name="class_name" value="{{ old('class_name', $student?->class_name) }}" class="rounded-md border-zinc-300" required>
+            <div class="grid gap-1">
+                <label for="class_name" class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 font-bold">Kelas</label>
+                <input 
+                    id="class_name" 
+                    name="class_name" 
+                    value="{{ old('class_name', $student?->class_name) }}" 
+                    class="mt-1 block w-full rounded-none border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 focus:outline-none" 
+                    placeholder="Contoh: 1A, 2B"
+                    required
+                >
                 <x-form-error name="class_name" />
-            </label>
+            </div>
 
-            <x-button type="submit">Simpan Profil</x-button>
+            <x-button type="submit" class="w-full mt-2">Simpan Profil</x-button>
         </form>
     </x-card>
 </x-layouts.student>

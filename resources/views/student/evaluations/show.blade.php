@@ -1,17 +1,40 @@
-<x-layouts.student title="{{ $form->title }} - SurveyKita" heading="{{ $form->title }}">
-    <x-card heading="Form Evaluasi" subheading="{{ $form->evaluationPeriod->name }}">
-        <p class="text-sm text-zinc-700">{{ $form->description }}</p>
-        <div class="mt-4"><x-button :href="route('student.evaluations.fill', $form)">Isi Evaluasi</x-button></div>
+<x-layouts.student title="{{ $form->title }} - SurveyKita" heading="Pratinjau Kuesioner" eyebrow="{{ $form->evaluationPeriod->name }}">
+    <div class="space-y-6">
+        <x-card heading="{{ $form->title }}" subheading="Target Responden: {{ ucwords(str_replace('_', ' ', $form->target_type)) }}">
+            @if ($form->description)
+                <p class="text-xs text-zinc-500 leading-relaxed border-b border-zinc-100 pb-4 mb-4">{{ $form->description }}</p>
+            @endif
 
-        <div class="mt-4 space-y-3">
+            <div class="flex items-center justify-between">
+                <div class="flex gap-2">
+                    <x-button variant="secondary" :href="route('student.evaluations.index')" class="!min-h-9 !py-1 text-xs">Kembali</x-button>
+                    @if (!$form->submitted)
+                        <x-button :href="route('student.evaluations.fill', $form)" class="!min-h-9 !py-1 text-xs">Mulai Isi Evaluasi</x-button>
+                    @else
+                        <x-badge variant="success">Sudah Mengirim Respons</x-badge>
+                    @endif
+                </div>
+            </div>
+        </x-card>
+
+        <div class="space-y-4">
+            <h3 class="font-mono text-[10px] uppercase tracking-wider text-zinc-400 font-bold px-2">Daftar Pertanyaan ({{ $form->questions->count() }})</h3>
+            
             @forelse ($form->questions as $question)
-                <div class="rounded-md border border-zinc-200 p-3 text-sm">
-                    <p class="font-medium text-zinc-950">{{ $question->sort_order }}. {{ $question->question_text }}</p>
-                    <p class="mt-1 text-zinc-500">{{ $question->category->name }} · {{ $question->is_required ? 'Wajib' : 'Opsional' }}</p>
+                <div class="rounded-none border border-zinc-200 p-5 bg-white shadow-none transition-all duration-300 hover:border-zinc-300 flex items-start gap-4">
+                    <span class="font-mono text-xs font-bold text-zinc-400 bg-zinc-50 w-6 h-6 flex items-center justify-center border border-zinc-200">{{ $question->sort_order }}</span>
+                    <div class="flex-1">
+                        <p class="text-sm font-semibold text-zinc-900 leading-relaxed">{{ $question->question_text }}</p>
+                        <div class="mt-2 flex items-center gap-3 text-[9px] font-mono uppercase tracking-wider text-zinc-400">
+                            <span>Kategori: {{ $question->category->name }}</span>
+                            <span>&bull;</span>
+                            <span class="{{ $question->is_required ? 'text-[#9F2F2D]' : 'text-zinc-400' }}">{{ $question->is_required ? 'Wajib' : 'Opsional' }}</span>
+                        </div>
+                    </div>
                 </div>
             @empty
-                <x-empty-state title="Pertanyaan belum tersedia" description="Admin belum menambahkan pertanyaan pada form ini." />
+                <x-empty-state title="Pertanyaan belum tersedia" description="Admin belum menambahkan butir pertanyaan pada form kuesioner ini." />
             @endforelse
         </div>
-    </x-card>
+    </div>
 </x-layouts.student>

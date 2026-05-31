@@ -7,11 +7,41 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Global border radius override: strict 0px for flat, crisp minimalist editorial feel */
+    --radius-xs: 0px;
+    --radius-sm: 0px;
+    --radius-md: 0px;
+    --radius-lg: 0px;
+    --radius-xl: 0px;
+    --radius-2xl: 0px;
+    --radius-3xl: 0px;
+    --radius-4xl: 0px;
+    --radius-full: 0px;
+
+    /* Custom color overrides for warm bone and charcoal editorial palette */
+    --color-zinc-50: #FBFBFA;
+    --color-zinc-100: #F7F6F3;
+    --color-zinc-200: #EAEAEA;
+    --color-zinc-300: #DCDCDA;
+    --color-zinc-800: #2F3437;
+    --color-zinc-950: #111111;
+
+    /* Override teal palette to match the minimalist monochrome theme with high contrast */
+    --color-teal-50: #F7F6F3;
+    --color-teal-100: #EAEAEA;
+    --color-teal-700: #111111;
+    --color-teal-800: #2F3437;
+
+    /* Custom springy and elegant transition timings */
+    --transition-timing-function-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --transition-timing-function-editorial: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @layer base {
     body {
-        @apply bg-zinc-50 text-zinc-950 antialiased;
+        @apply bg-[#FBFBFA] text-[#111111] antialiased selection:bg-[#EAEAEA];
+        font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     }
 
     a,
@@ -19,6 +49,38 @@
     input,
     select,
     textarea {
-        @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600;
+        @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-950;
+    }
+
+    /* Beautiful subtle inputs */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select,
+    textarea {
+        @apply rounded-none border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-none transition-all duration-200 focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 focus:outline-none;
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+        @apply rounded-none border-zinc-300 text-zinc-950 focus:ring-zinc-950 focus:ring-offset-0;
+    }
+}
+
+@layer utilities {
+    /* Entrance animation for editorial fade-in stagger */
+    .animate-reveal {
+        animation: reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes reveal {
+        from {
+            opacity: 0;
+            transform: translateY(12px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 }
