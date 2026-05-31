@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-06-01 00:32 Asia/Makassar
+- Last updated: 2026-06-01 00:35 Asia/Makassar
 
 ## Decisions
 
@@ -58,6 +58,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#33` | T033 `feat(report): implement Maatwebsite Excel export classes` | Closed | `be69045` | `php artisan test --compact --filter=ExcelExportTest`; `php artisan test --compact --filter=PdfExportTest`; `php artisan test --compact --filter=ResultDashboardTest`; `php artisan route:list --except-vendor --path=admin/results`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 | `#34` | T034 `style(ui): complete responsive Indonesian UI states` | Closed | `84c07fe` | `bun run build`; `php artisan route:list --except-vendor`; dead-action scan |
 | `#35` | T035 `test(ui): cover route, controller, and view wiring` | Closed | `84c07fe` | `php artisan test --compact --filter=UiRouteWiringTest`; `AdminCrudTest`; `EvaluationSubmissionTest`; `vendor/bin/pint --dirty --format agent` |
+| `#36` | T036 `test(app): complete required behavior regression suite` | Closed | `fe62238` | `php artisan test --compact` |
+| `#37` | T037 `chore(quality): run Laravel formatting and full backend/frontend verification` | Closed | `fe62238` | `vendor/bin/pint --dirty --format agent`; `php artisan test --compact`; `bun run build`; `php artisan route:list --except-vendor` |
 
 ## Verification Log
 
@@ -551,8 +553,27 @@ remaining work. Keep this file current after each coherent slice.
   `style(ui): tighten Blade route wiring`; push and issue closure are scheduled
   immediately after this report update.
 
+### 2026-06-01 00:35 Asia/Makassar
+
+- Ran the full Pest suite; first pass exposed export-route 404s for mahasiswa
+  due to implicit model binding before role denial, plus the default example
+  test expecting `/` to return 200.
+- Changed PDF/Excel export controller parameters back to string IDs and moved
+  `EvaluationForm::findOrFail` inside controller methods so role middleware
+  returns 403 before missing-form lookup for non-admin users.
+- Replaced the default example test with a SurveyKita root redirect assertion.
+- Ran targeted regressions for `RoleAccessTest`, `ExampleTest`,
+  `PdfExportTest`, and `ExcelExportTest`; all passed.
+- Ran `vendor/bin/pint --dirty --format agent`; passed.
+- Ran `php artisan test --compact`; passed with 103 tests and 660 assertions.
+- Ran `bun run build`; passed.
+- Ran `php artisan route:list --except-vendor`; passed and showed 54 routes.
+- Committed `fe62238` with Conventional Commit message
+  `test(app): pass full regression suite`; push and issue closure are scheduled
+  immediately after this report update.
+
 ## Remaining Gates
 
-- Continue T036 through T041 in dependency order.
+- Continue T038 through T041 in dependency order.
 - Keep this report updated with commits, issue closures, verification evidence,
   browser E2E results, and final completion decision.
