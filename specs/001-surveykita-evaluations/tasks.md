@@ -381,7 +381,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: `agent-browser` verifies login, admin dashboard, student/period/form/category/question navigation, result dashboard, chart rendering, PDF export, Excel export, logout, mahasiswa login, profile completion when needed, active evaluation submission, duplicate submission feedback, submission history, wrong-role blocking, and at least one empty-state result path; snapshots or screenshots are captured as evidence; task-owned browser sessions are closed after verification.
   - Verification: `agent-browser skills get core && php artisan serve --host=127.0.0.1 --port=8000` in one terminal, then use `agent-browser open http://127.0.0.1:8000/login`, `agent-browser snapshot -i`, workflow clicks/fills, screenshots as needed, and `agent-browser close --all`
 
-- [ ] T041 chore(ops): document unattended autonomous execution protocol in `README.md` and `specs/001-surveykita-evaluations/quickstart.md`
+- [X] T041 chore(ops): document unattended autonomous execution protocol in `README.md` and `specs/001-surveykita-evaluations/quickstart.md`
   - Phase: README and verification
   - Dependencies: T040
   - Files: `README.md`, `specs/001-surveykita-evaluations/quickstart.md`

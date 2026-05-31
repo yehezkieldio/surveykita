@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-06-01 00:50 Asia/Makassar
+- Last updated: 2026-06-01 00:55 Asia/Makassar
 
 ## Decisions
 
@@ -62,7 +62,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#37` | T037 `chore(quality): run Laravel formatting and full backend/frontend verification` | Closed | `fe62238` | `vendor/bin/pint --dirty --format agent`; `php artisan test --compact`; `bun run build`; `php artisan route:list --except-vendor` |
 | `#38` | T038 `docs(readme): document fresh-clone setup, demo accounts, and verification commands` | Closed | `c6bdc0d` | `sed -n '1,240p' README.md` |
 | `#39` | T039 `chore(verify): perform final whole-app verification against quickstart` | Closed | `ed65e28` | `docker compose up -d`; `.env.example` setup with temporary `.env` backup/restore`; `php artisan key:generate --no-interaction`; `php artisan migrate:fresh --seed --no-interaction`; `bun run build`; `php artisan test --compact`; `php artisan route:list --except-vendor` |
-| `#40` | T040 `test(e2e): verify seeded browser workflows with agent-browser` | Closed | Pending | `php artisan serve --host=127.0.0.1 --port=8000`; `agent-browser` admin login, CRUD navigation, charts, export triggers, mahasiswa submission, duplicate feedback, wrong-role 403, empty result state; screenshots in `.spec/goal/evidence/`; `agent-browser close --all`; port cleanup |
+| `#40` | T040 `test(e2e): verify seeded browser workflows with agent-browser` | Closed | `98631f3` | `php artisan serve --host=127.0.0.1 --port=8000`; `agent-browser` admin login, CRUD navigation, charts, export triggers, mahasiswa submission, duplicate feedback, wrong-role 403, empty result state; screenshots in `.spec/goal/evidence/`; `agent-browser close --all`; port cleanup |
+| `#41` | T041 `chore(ops): document unattended autonomous execution protocol` | Closed | Pending | `rg -n "unattended|autonomous|agent-browser|cleanup|Google OAuth" README.md specs/001-surveykita-evaluations/quickstart.md` |
 
 ## Verification Log
 
@@ -621,8 +622,14 @@ remaining work. Keep this file current after each coherent slice.
 - Stopped the task-owned Laravel server and verified no listener remained on
   port `8000`.
 
+### 2026-06-01 00:55 Asia/Makassar
+
+- Verified unattended autonomous execution documentation in `README.md` and
+  `specs/001-surveykita-evaluations/quickstart.md`.
+- Ran `rg -n "unattended|autonomous|agent-browser|cleanup|Google OAuth" README.md specs/001-surveykita-evaluations/quickstart.md`; passed and found the required browser verification, cleanup, Google OAuth, and unattended execution guidance.
+
 ## Remaining Gates
 
-- Continue T041 after committing and pushing T040 evidence.
-- Keep this report updated with commits, issue closures, verification evidence,
-  and final completion decision.
+- Commit and push T041 documentation status, then run the final completion
+  verification gates.
+- Record the final completion decision after all gates pass.
