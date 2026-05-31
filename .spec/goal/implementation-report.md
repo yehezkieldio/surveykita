@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-06-01 00:07 Asia/Makassar
+- Last updated: 2026-06-01 00:13 Asia/Makassar
 
 ## Decisions
 
@@ -50,6 +50,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#25` | T025 `feat(student): implement dashboard, active forms, fill, submit, success, and history flow` | Closed | `5c284d4` | `php artisan test --compact --filter=EvaluationSubmissionTest`; `ProfileCompletionTest`; `RoleAccessTest`; `php artisan route:list --except-vendor --path=student`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 | `#26` | T026 `test(admin): cover result dashboard filters and empty states` | Closed | `dd6b5e4` | `php artisan test --compact --filter=ResultDashboardTest` |
 | `#27` | T027 `feat(admin): implement result index and form detail pages` | Closed | `dd6b5e4` | `php artisan test --compact --filter=ResultDashboardTest`; `php artisan test --compact --filter=EvaluationResultServiceTest`; `php artisan route:list --except-vendor --path=admin/results`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
+| `#28` | T028 `test(admin): cover chart data wiring` | Closed | `b24c51d` | `php artisan test --compact --filter=ResultChartsTest` |
+| `#29` | T029 `feat(chart): create ApexCharts objects from result data` | Closed | `b24c51d` | `php artisan test --compact --filter=ResultChartsTest`; `php artisan test --compact --filter=ResultDashboardTest`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 
 ## Verification Log
 
@@ -447,8 +449,27 @@ remaining work. Keep this file current after each coherent slice.
   `feat(admin): implement result dashboard pages`; push and issue closure are
   scheduled immediately after this report update.
 
+### 2026-06-01 00:13 Asia/Makassar
+
+- Wrote `ResultChartsTest` covering chart containers and serialized chart data
+  for overall satisfaction per form, respondent count per form, average score
+  per category, and Likert score distribution.
+- Implemented `ResultChartService` using `akaunting/laravel-apexcharts` chart
+  objects with stable container IDs and real `EvaluationResultService` data.
+- Added `chart-panel` Blade component, result-page chart sections, and an
+  admin layout script stack so chart scripts render after chart containers.
+- Ran `php artisan test --compact --filter=ResultChartsTest`; passed with 2
+  tests and 18 assertions.
+- Ran `php artisan test --compact --filter=ResultDashboardTest`; passed with 4
+  tests and 20 assertions.
+- Ran `vendor/bin/pint --dirty --format agent`; passed.
+- Ran `bun run build`; passed.
+- Committed `b24c51d` with Conventional Commit message
+  `feat(chart): render result dashboard charts`; push and issue closure are
+  scheduled immediately after this report update.
+
 ## Remaining Gates
 
-- Continue T028 through T041 in dependency order.
+- Continue T030 through T041 in dependency order.
 - Keep this report updated with commits, issue closures, verification evidence,
   browser E2E results, and final completion decision.
