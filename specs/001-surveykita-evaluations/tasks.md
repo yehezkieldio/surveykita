@@ -151,7 +151,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 9: Factories and Seeders
 
-- [ ] T015 test(seed): cover seeded demonstration completeness in `tests/Feature/SeedDataTest.php`
+- [X] T015 test(seed): cover seeded demonstration completeness in `tests/Feature/SeedDataTest.php`
   - Phase: Factories and seeders
   - Dependencies: T012, T013, T014
   - Files: `tests/Feature/SeedDataTest.php`
@@ -159,7 +159,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: Tests assert at least one admin, several mahasiswa profiles with valid parsed NIM details, two periods, multiple forms, categories, 15-25 questions, and meaningful responses after `DatabaseSeeder`.
   - Verification: `php artisan test --compact --filter=SeedDataTest`
 
-- [ ] T016 chore(seed): implement factories and seeders in `database/factories/` and `database/seeders/`
+- [X] T016 chore(seed): implement factories and seeders in `database/factories/` and `database/seeders/`
   - Phase: Factories and seeders
   - Dependencies: T015
   - Files: `database/factories/UserFactory.php`, `database/factories/StudentFactory.php`, `database/factories/EvaluationPeriodFactory.php`, `database/factories/EvaluationFormFactory.php`, `database/factories/QuestionCategoryFactory.php`, `database/factories/QuestionFactory.php`, `database/factories/ResponseFactory.php`, `database/factories/ResponseAnswerFactory.php`, `database/seeders/DatabaseSeeder.php`, `database/seeders/SurveyKitaSeeder.php`

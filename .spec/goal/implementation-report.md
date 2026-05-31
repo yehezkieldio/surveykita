@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-06-01 00:42 Asia/Makassar
+- Last updated: 2026-06-01 01:01 Asia/Makassar
 
 ## Decisions
 
@@ -37,6 +37,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#12` | T012 `chore(db): create SurveyKita migrations with constraints and indexes` | Closed | `6dc1462` | `vendor/bin/pint --dirty --format agent`; `php artisan migrate:fresh --no-interaction`; `php artisan schema:dump --prune --database=mariadb --no-interaction` with migration backup/restore; auth regression tests; Laravel Boost schema inspection |
 | `#13` | T013 `feat(model): implement Eloquent relationships, casts, helpers, and scopes` | Closed | `76c975f` | `vendor/bin/pint --dirty --format agent`; `php artisan test --compact --filter=ModelAndRelationshipTest`; `php artisan test --compact --filter=SessionAuthTest`; `php artisan test --compact --filter=GoogleOAuthTest` |
 | `#14` | T014 `test(student): cover NIM parsing and program-code mapping` | Closed | `76c975f` | `php artisan test --compact --filter=NimParserTest`; `vendor/bin/pint --dirty --format agent` |
+| `#15` | T015 `test(seed): cover seeded demonstration completeness` | Ready to close | Pending | `php artisan test --compact --filter=SeedDataTest` |
+| `#16` | T016 `chore(seed): implement factories and seeders` | Ready to close | Pending | `php artisan migrate:fresh --seed --no-interaction`; `php artisan test --compact --filter=SeedDataTest`; `vendor/bin/pint --dirty --format agent` |
 
 ## Verification Log
 
@@ -265,6 +267,30 @@ remaining work. Keep this file current after each coherent slice.
 - Committed and pushed `76c975f` with Conventional Commit message
   `feat(model): add SurveyKita domain relationships` and closed GitHub Issues
   `#13` and `#14` as completed.
+
+### 2026-06-01 01:01 Asia/Makassar
+
+- Wrote `SeedDataTest` to prove seeded demo completeness: admin account,
+  several mahasiswa accounts and complete parsed profiles, two periods,
+  multiple forms, five categories, 15-25 questions, completed responses,
+  response answers, active-current forms, and meaningful suggestions.
+- Added factories for all SurveyKita domain models so later tests can build
+  related students, periods, forms, categories, questions, responses, and
+  answers through Laravel conventions.
+- Replaced the default `DatabaseSeeder` demo user with `SurveyKitaSeeder`.
+- Implemented deterministic Universitas Mulia seed data:
+  `admin@universitasmulia.ac.id`, eight mahasiswa demo accounts, NIMs covering
+  multiple program codes, two evaluation periods, four forms, five categories,
+  20 realistic questions, 18 completed responses, and complete Likert answers
+  with suggestions.
+- Ran `php artisan test --compact --filter=SeedDataTest`; passed with 3 tests
+  and 71 assertions.
+- Ran `php artisan migrate:fresh --seed --no-interaction`; passed and seeded
+  `Database\Seeders\SurveyKitaSeeder`.
+- Ran `vendor/bin/pint --dirty --format agent`; passed after formatting factory
+  imports.
+- Ran `php artisan test --compact --filter=ModelAndRelationshipTest`; passed.
+- Ran `php artisan test --compact --filter=NimParserTest`; passed.
 
 ## Remaining Gates
 
