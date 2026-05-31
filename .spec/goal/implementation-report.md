@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-05-31 23:55 Asia/Makassar
+- Last updated: 2026-05-31 23:58 Asia/Makassar
 
 ## Decisions
 
@@ -30,8 +30,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#5` | T005 `style(ui): create shared Blade layouts and components` | Closed | `1c8f62c` | `bun run build` |
 | `#6` | T006 `test(auth): cover custom login and logout behavior` | Closed | `520d9bf` | Red: `php artisan test --compact --filter=SessionAuthTest`; Green: `php artisan test --compact --filter=SessionAuthTest` |
 | `#7` | T007 `feat(auth): implement custom session login and logout` | Closed | `520d9bf` | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor`; `php artisan test --compact --filter=SessionAuthTest` |
-| `#8` | T008 `test(auth): cover admin and mahasiswa route boundaries` | Ready to commit | pending | Red: `php artisan test --compact --filter=RoleAccessTest`; Green: `php artisan test --compact --filter=RoleAccessTest` |
-| `#9` | T009 `feat(auth): implement role middleware and protected route groups` | Ready to commit | pending | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor`; `php artisan test --compact --filter=RoleAccessTest`; `bun run build` |
+| `#8` | T008 `test(auth): cover admin and mahasiswa route boundaries` | Closed | `204052a` | Red: `php artisan test --compact --filter=RoleAccessTest`; Green: `php artisan test --compact --filter=RoleAccessTest` |
+| `#9` | T009 `feat(auth): implement role middleware and protected route groups` | Closed | `204052a` | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor`; `php artisan test --compact --filter=RoleAccessTest`; `bun run build` |
 
 ## Verification Log
 
@@ -160,6 +160,9 @@ remaining work. Keep this file current after each coherent slice.
 - Ran `php artisan test --compact --filter=RoleAccessTest`; passed with 9
   tests and 14 assertions.
 - Ran `bun run build`; passed.
+- Committed and pushed `204052a` with Conventional Commit message
+  `feat(auth): enforce role route boundaries` and closed GitHub Issues `#8`
+  and `#9` as completed.
 
 ## Remaining Gates
 
