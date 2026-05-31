@@ -133,7 +133,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 8: Models and Relationships
 
-- [ ] T013 feat(model): implement Eloquent relationships, casts, helpers, and scopes in `app/Models/`
+- [X] T013 feat(model): implement Eloquent relationships, casts, helpers, and scopes in `app/Models/`
   - Phase: Models and relationships
   - Dependencies: T012
   - Files: `app/Models/User.php`, `app/Models/Student.php`, `app/Models/EvaluationPeriod.php`, `app/Models/EvaluationForm.php`, `app/Models/QuestionCategory.php`, `app/Models/Question.php`, `app/Models/Response.php`, `app/Models/ResponseAnswer.php`, `app/Services/NimParser.php`
@@ -141,7 +141,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: `User::student`, `Student::responses`, `EvaluationPeriod::evaluationForms`, `EvaluationForm::questions/responses`, `Question::evaluationForm/category`, `Response::answers/student/evaluationForm`, and `ResponseAnswer::response/question` are implemented; helpers `isAdmin`, `isMahasiswa`, `hasCompleteStudentProfile`, `scopeActive`, `isCurrentlyOpen`, and `isFillable` exist; `NimParser` parses `TTAABBB`, maps known Universitas Mulia program codes, preserves sequence leading zeroes, and rejects malformed or unknown-code NIM values.
   - Verification: `php artisan test --compact --filter=ModelAndRelationshipTest`
 
-- [ ] T014 test(student): cover NIM parsing and program-code mapping in `tests/Unit/Services/NimParserTest.php`
+- [X] T014 test(student): cover NIM parsing and program-code mapping in `tests/Unit/Services/NimParserTest.php`
   - Phase: Models and relationships
   - Dependencies: T013
   - Files: `tests/Unit/Services/NimParserTest.php`

@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-06-01 00:27 Asia/Makassar
+- Last updated: 2026-06-01 00:42 Asia/Makassar
 
 ## Decisions
 
@@ -35,6 +35,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#10` | T010 `test(auth): cover Google OAuth student-domain behavior` | Closed | `5544cfb` | Red: `php artisan test --compact --filter=GoogleOAuthTest`; Green: `php artisan test --compact --filter=GoogleOAuthTest` |
 | `#11` | T011 `feat(auth): implement student-only Google OAuth` | Closed | `5544cfb` | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor --path=auth/google`; `php artisan test --compact --filter=GoogleOAuthTest`; `php artisan test --compact --filter=SessionAuthTest`; `bun run build` |
 | `#12` | T012 `chore(db): create SurveyKita migrations with constraints and indexes` | Closed | `6dc1462` | `vendor/bin/pint --dirty --format agent`; `php artisan migrate:fresh --no-interaction`; `php artisan schema:dump --prune --database=mariadb --no-interaction` with migration backup/restore; auth regression tests; Laravel Boost schema inspection |
+| `#13` | T013 `feat(model): implement Eloquent relationships, casts, helpers, and scopes` | Ready to close | Pending | `vendor/bin/pint --dirty --format agent`; `php artisan test --compact --filter=ModelAndRelationshipTest`; `php artisan test --compact --filter=SessionAuthTest`; `php artisan test --compact --filter=GoogleOAuthTest` |
+| `#14` | T014 `test(student): cover NIM parsing and program-code mapping` | Ready to close | Pending | `php artisan test --compact --filter=NimParserTest`; `vendor/bin/pint --dirty --format agent` |
 
 ## Verification Log
 
@@ -232,6 +234,34 @@ remaining work. Keep this file current after each coherent slice.
 - Committed and pushed `6dc1462` with Conventional Commit message
   `chore(db): add SurveyKita domain schema` and closed GitHub Issue `#12` as
   completed.
+
+### 2026-06-01 00:42 Asia/Makassar
+
+- Added SurveyKita domain models for `Student`, `EvaluationPeriod`,
+  `EvaluationForm`, `QuestionCategory`, `Question`, `Response`, and
+  `ResponseAnswer`.
+- Extended `User` with the `student` relationship and
+  `hasCompleteStudentProfile()` helper.
+- Implemented relationships, casts, active period scope, inclusive
+  `isCurrentlyOpen()` period helper, and form fillability helper. The
+  `EvaluationForm::isFillable()` helper is signature-compatible with
+  Eloquent's existing mass-assignment method and delegates string keys to the
+  parent implementation.
+- Added centralized `NimParser` support for `TTAABBB`, all configured
+  Universitas Mulia program codes, four-digit enrollment year derivation, and
+  preserved three-digit sequence numbers.
+- Wrote `ModelAndRelationshipTest` for required relationships, role/profile
+  helpers, active/open/fillable behavior, and response graph navigation.
+- Wrote `NimParserTest` for valid NIM `2311032`, all program-code mappings,
+  malformed NIM rejection, and unknown program-code rejection.
+- Ran `php artisan test --compact --filter=ModelAndRelationshipTest`; passed
+  with 4 tests and 25 assertions.
+- Ran `php artisan test --compact --filter=NimParserTest`; passed with 20
+  tests and 68 assertions.
+- Ran `vendor/bin/pint --dirty --format agent`; passed.
+- Ran auth regressions:
+  `php artisan test --compact --filter=SessionAuthTest` and
+  `php artisan test --compact --filter=GoogleOAuthTest`; both passed.
 
 ## Remaining Gates
 
