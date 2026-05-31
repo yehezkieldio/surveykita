@@ -1,0 +1,22 @@
+services:
+  mariadb:
+    image: mariadb:11.4
+    container_name: surveykita-mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: surveykita
+      MARIADB_USER: surveykita
+      MARIADB_PASSWORD: surveykita
+      MARIADB_ROOT_PASSWORD: surveykita_root
+    ports:
+      - "3306:3306"
+    volumes:
+      - surveykita_mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  surveykita_mariadb_data:

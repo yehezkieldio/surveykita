@@ -7,10 +7,11 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'role', 'google_id'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -28,5 +29,36 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isMahasiswa(): bool
+    {
+        return $this->role === 'mahasiswa';
+    }
+
+    public function hasCompleteStudentProfile(): bool
+    {
+        if (! $this->isMahasiswa()) {
+            return false;
+        }
+
+        $student = $this->relationLoaded('student')
+            ? $this->student
+            : $this->student()->first();
+
+        return $student instanceof Student && $student->isComplete();
+    }
+
+    /**
+     * @return HasOne<Student, $this>
+     */
+    public function student(): HasOne
+    {
+        return $this->hasOne(Student::class);
     }
 }

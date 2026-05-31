@@ -7,6 +7,7 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 Ignore any changes outside of your immediate task. Whether they’re from other agents or humans, they aren't your concern—just stick to your scope and keep moving forward. If you encounter a change that directly impacts your work, adapt as needed, but don't let it derail your progress.
 
 <laravel-boost-guidelines>
+=== foundation rules ===
 
 # Laravel Boost Guidelines
 
@@ -164,7 +165,7 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 
 <!-- SPECKIT START -->
 For governance that overrides generated specs, plans, tasks, and implementation
-decisions, read `.specify/memory/constitution.md` first. For additional
-feature-specific context about technologies, project structure, shell commands,
-and other important information, read the current plan.
+decisions, read `.specify/memory/constitution.md` first. For the active
+SurveyKita feature plan, read
+`specs/001-surveykita-evaluations/plan.md`.
 <!-- SPECKIT END -->

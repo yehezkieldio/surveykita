@@ -2,25 +2,25 @@
 Sync Impact Report
 Version change: unratified template -> 1.0.0
 Modified principles:
-- Placeholder principles -> Complete Whole-App Delivery
-- Placeholder principles -> Laravel 13, Blade, and Tailwind Only
-- Placeholder principles -> Custom Auth Must Be Clear and Secure
-- Placeholder principles -> Google OAuth Is Strictly Student-Only
-- Placeholder principles -> Domain Logic Must Be Real, Centralized, and Testable
-- Placeholder principles -> Database Integrity First
-- Placeholder principles -> Authorization Is Non-Negotiable
-- Placeholder principles -> Test-Governed Development
-- Placeholder principles -> No Dead Code, Fake UI, or Placeholder Completion
-- Placeholder principles -> Report-Friendly Structure
-- Placeholder principles -> Local Reproducibility
-- Placeholder principles -> Maintainability and Practical Performance
+- Template principles -> Complete Whole-App Delivery
+- Template principles -> Laravel 13, Blade, and Tailwind Only
+- Template principles -> Custom Auth Must Be Clear and Secure
+- Template principles -> Google OAuth Is Strictly Student-Only
+- Template principles -> Domain Logic Must Be Real, Centralized, and Testable
+- Template principles -> Database Integrity First
+- Template principles -> Authorization Is Non-Negotiable
+- Template principles -> Test-Governed Development
+- Template principles -> No Dead Code, Fake UI, or Placeholder Completion
+- Template principles -> Report-Friendly Structure
+- Template principles -> Local Reproducibility
+- Template principles -> Maintainability and Practical Performance
 Added sections:
 - Required Technology Stack
 - Academic Evaluation Domain Rules
 - Delivery Workflow and Quality Gates
 Removed sections:
-- Generic placeholder Section 2
-- Generic placeholder Section 3
+- Generic template Section 2
+- Generic template Section 3
 Templates requiring updates:
 - [updated] .specify/templates/plan-template.md
 - [updated] .specify/templates/spec-template.md
@@ -28,7 +28,7 @@ Templates requiring updates:
 - [updated] .specify/templates/checklist-template.md
 - [not present] .specify/templates/commands/*.md
 - [updated] AGENTS.md
-Follow-up TODOs:
+Follow-up Items:
 - README.md still contains the default Laravel starter content. Implementation work MUST replace it
   with SurveyKita setup instructions, demo accounts, and local verification commands.
 -->
