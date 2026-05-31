@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-05-31 23:23 Asia/Makassar
+- Last updated: 2026-05-31 23:26 Asia/Makassar
 
 ## Decisions
 
@@ -26,8 +26,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#1` | T001 `chore(project): align allowed dependencies` | Closed | `c8d92f3` | `composer validate`; `composer show --locked laravel/socialite`; `composer show --locked akaunting/laravel-apexcharts`; `composer show --locked barryvdh/laravel-dompdf`; `composer show --locked maatwebsite/excel`; `composer show --locked pestphp/pest`; `composer show --locked pestphp/pest-plugin-laravel`; banned dependency scan |
 | `#2` | T002 `chore(project): register route files and middleware aliases` | Closed | `518ec7e` | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor` |
 | `#3` | T003 `chore(dev): configure MariaDB local services` | Closed | `2335819` | `docker compose config`; `php artisan config:show database.default` |
-| `#4` | T004 `chore(frontend): configure Bun, Vite, Tailwind, and assets` | Ready to commit | pending | `bun install --frozen-lockfile`; `bun run build` |
-| `#5` | T005 `style(ui): create shared Blade layouts and components` | Ready to commit | pending | `bun run build` |
+| `#4` | T004 `chore(frontend): configure Bun, Vite, Tailwind, and assets` | Closed | `1c8f62c` | `bun install --frozen-lockfile`; `bun run build` |
+| `#5` | T005 `style(ui): create shared Blade layouts and components` | Closed | `1c8f62c` | `bun run build` |
 
 ## Verification Log
 
@@ -104,6 +104,9 @@ remaining work. Keep this file current after each coherent slice.
 - Ran `bun install --frozen-lockfile`; passed with no lockfile changes.
 - Ran `vendor/bin/pint --dirty --format agent`; passed.
 - Ran `bun run build`; passed and produced `public/build/manifest.json`.
+- Committed and pushed `1c8f62c` with Conventional Commit message
+  `style(ui): establish SurveyKita Blade foundation` and closed GitHub Issues
+  `#4` and `#5` as completed.
 
 ## Remaining Gates
 
