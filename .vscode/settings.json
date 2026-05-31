@@ -1,0 +1,18 @@
+{
+    "[php]": {
+        "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
+        "editor.formatOnSave": true
+    },
+    "laravel-pint.enable": true,
+    "intelephense.diagnostics.undefinedSymbols": true,
+    "intelephense.diagnostics.undefinedTypes": true,
+    "intelephense.completion.insertUseDeclaration": true,
+    "intelephense.files.exclude": [
+        "**/.git/**",
+        "**/node_modules/**",
+        "**/storage/framework/views/**",
+        "**/storage/logs/**",
+        "**/bootstrap/cache/**",
+        "**/vendor/**/{Tests,tests}/**"
+    ],
+}
