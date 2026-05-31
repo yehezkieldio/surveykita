@@ -187,7 +187,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 11: Admin CRUD Modules
 
-- [ ] T019 test(admin): cover admin CRUD and cross-role blocks in `tests/Feature/Admin/AdminCrudTest.php`
+- [X] T019 test(admin): cover admin CRUD and cross-role blocks in `tests/Feature/Admin/AdminCrudTest.php`
   - Phase: Admin CRUD modules
   - Dependencies: T009, T013, T016
   - Files: `tests/Feature/Admin/AdminCrudTest.php`
@@ -195,7 +195,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: Tests cover create/edit/detail/delete or safe delete for students, periods, forms, categories, and questions, including validation errors and role protection.
   - Verification: `php artisan test --compact --filter=AdminCrudTest`
 
-- [ ] T020 feat(admin): implement student and period management in `app/Http/Controllers/Admin/`, `app/Http/Requests/Admin/`, `routes/web.php`, and `resources/views/admin/`
+- [X] T020 feat(admin): implement student and period management in `app/Http/Controllers/Admin/`, `app/Http/Requests/Admin/`, `routes/web.php`, and `resources/views/admin/`
   - Phase: Admin CRUD modules
   - Dependencies: T019
   - Files: `app/Http/Controllers/Admin/DashboardController.php`, `app/Http/Controllers/Admin/StudentController.php`, `app/Http/Controllers/Admin/EvaluationPeriodController.php`, `app/Http/Requests/Admin/StoreStudentRequest.php`, `app/Http/Requests/Admin/UpdateStudentRequest.php`, `app/Http/Requests/Admin/StoreEvaluationPeriodRequest.php`, `app/Http/Requests/Admin/UpdateEvaluationPeriodRequest.php`, `routes/web.php`, `resources/views/admin/dashboard.blade.php`, `resources/views/admin/students/index.blade.php`, `resources/views/admin/students/create.blade.php`, `resources/views/admin/students/edit.blade.php`, `resources/views/admin/students/show.blade.php`, `resources/views/admin/periods/index.blade.php`, `resources/views/admin/periods/create.blade.php`, `resources/views/admin/periods/edit.blade.php`, `resources/views/admin/periods/show.blade.php`
@@ -203,7 +203,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: Admin can create mahasiswa users/profiles manually; periods can be activated/deactivated; deleting records with dependent responses/forms is safely blocked with feedback.
   - Verification: `php artisan test --compact --filter=AdminCrudTest`
 
-- [ ] T021 feat(admin): implement form, category, and question management in `app/Http/Controllers/Admin/`, `app/Http/Requests/Admin/`, `routes/web.php`, and `resources/views/admin/`
+- [X] T021 feat(admin): implement form, category, and question management in `app/Http/Controllers/Admin/`, `app/Http/Requests/Admin/`, `routes/web.php`, and `resources/views/admin/`
   - Phase: Admin CRUD modules
   - Dependencies: T019, T020
   - Files: `app/Http/Controllers/Admin/EvaluationFormController.php`, `app/Http/Controllers/Admin/QuestionCategoryController.php`, `app/Http/Controllers/Admin/QuestionController.php`, `app/Http/Requests/Admin/StoreEvaluationFormRequest.php`, `app/Http/Requests/Admin/UpdateEvaluationFormRequest.php`, `app/Http/Requests/Admin/StoreQuestionCategoryRequest.php`, `app/Http/Requests/Admin/UpdateQuestionCategoryRequest.php`, `app/Http/Requests/Admin/StoreQuestionRequest.php`, `app/Http/Requests/Admin/UpdateQuestionRequest.php`, `routes/web.php`, `resources/views/admin/forms/index.blade.php`, `resources/views/admin/forms/create.blade.php`, `resources/views/admin/forms/edit.blade.php`, `resources/views/admin/forms/show.blade.php`, `resources/views/admin/categories/index.blade.php`, `resources/views/admin/categories/create.blade.php`, `resources/views/admin/categories/edit.blade.php`, `resources/views/admin/questions/index.blade.php`, `resources/views/admin/questions/create.blade.php`, `resources/views/admin/questions/edit.blade.php`

@@ -21,11 +21,11 @@ Route::middleware(['auth', 'role:admin'])
     ->name('admin.')
     ->group(function (): void {
         Route::get('/dashboard', AdminDashboardController::class)->name('dashboard');
-        Route::get('/students', [StudentController::class, 'index'])->name('students.index');
-        Route::get('/periods', [EvaluationPeriodController::class, 'index'])->name('periods.index');
-        Route::get('/forms', [EvaluationFormController::class, 'index'])->name('forms.index');
-        Route::get('/categories', [QuestionCategoryController::class, 'index'])->name('categories.index');
-        Route::get('/questions', [QuestionController::class, 'index'])->name('questions.index');
+        Route::resource('students', StudentController::class);
+        Route::resource('periods', EvaluationPeriodController::class);
+        Route::resource('forms', EvaluationFormController::class);
+        Route::resource('categories', QuestionCategoryController::class)->except('show');
+        Route::resource('questions', QuestionController::class)->except('show');
 
         Route::get('/results', [ResultController::class, 'index'])->name('results.index');
         Route::get('/results/{form}', [ResultController::class, 'show'])->name('results.show');

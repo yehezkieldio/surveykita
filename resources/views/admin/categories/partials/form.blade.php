@@ -1,0 +1,2 @@
+<label class="grid gap-1 text-sm"><span>Nama</span><input name="name" value="{{ old('name', $category?->name) }}" class="rounded-md border-zinc-300" required><x-form-error name="name" /></label>
+<label class="grid gap-1 text-sm"><span>Deskripsi</span><textarea name="description" class="rounded-md border-zinc-300">{{ old('description', $category?->description) }}</textarea><x-form-error name="description" /></label>

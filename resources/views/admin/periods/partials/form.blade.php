@@ -1,0 +1,6 @@
+<label class="grid gap-1 text-sm"><span>Nama</span><input name="name" value="{{ old('name', $period?->name) }}" class="rounded-md border-zinc-300" required><x-form-error name="name" /></label>
+<label class="grid gap-1 text-sm"><span>Semester</span><input name="semester" value="{{ old('semester', $period?->semester) }}" class="rounded-md border-zinc-300" required><x-form-error name="semester" /></label>
+<label class="grid gap-1 text-sm"><span>Tahun Akademik</span><input name="academic_year" value="{{ old('academic_year', $period?->academic_year) }}" class="rounded-md border-zinc-300" required><x-form-error name="academic_year" /></label>
+<label class="grid gap-1 text-sm"><span>Tanggal Mulai</span><input name="start_date" type="date" value="{{ old('start_date', $period?->start_date?->toDateString()) }}" class="rounded-md border-zinc-300" required><x-form-error name="start_date" /></label>
+<label class="grid gap-1 text-sm"><span>Tanggal Selesai</span><input name="end_date" type="date" value="{{ old('end_date', $period?->end_date?->toDateString()) }}" class="rounded-md border-zinc-300" required><x-form-error name="end_date" /></label>
+<input type="hidden" name="is_active" value="0"><label class="flex gap-2 text-sm"><input name="is_active" type="checkbox" value="1" @checked(old('is_active', $period?->is_active ?? true))> Aktif</label>

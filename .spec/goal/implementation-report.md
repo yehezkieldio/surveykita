@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-06-01 01:19 Asia/Makassar
+- Last updated: 2026-06-01 01:49 Asia/Makassar
 
 ## Decisions
 
@@ -41,6 +41,9 @@ remaining work. Keep this file current after each coherent slice.
 | `#16` | T016 `chore(seed): implement factories and seeders` | Closed | `50a3bd2` | `php artisan migrate:fresh --seed --no-interaction`; `php artisan test --compact --filter=SeedDataTest`; `vendor/bin/pint --dirty --format agent` |
 | `#17` | T017 `test(evaluation): cover Likert calculation rules` | Closed | `287f142` | `php artisan test --compact --filter=EvaluationResultServiceTest` |
 | `#18` | T018 `feat(evaluation): implement centralized result math` | Closed | `287f142` | `php artisan test --compact --filter=EvaluationResultServiceTest`; `vendor/bin/pint --dirty --format agent`; seed/model/NIM regression tests |
+| `#19` | T019 `test(admin): cover admin CRUD and cross-role blocks` | Ready to close | Pending | `php artisan test --compact --filter=AdminCrudTest` |
+| `#20` | T020 `feat(admin): implement student and period management` | Ready to close | Pending | `php artisan test --compact --filter=AdminCrudTest`; `php artisan route:list --except-vendor --path=admin`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
+| `#21` | T021 `feat(admin): implement form, category, and question management` | Ready to close | Pending | `php artisan test --compact --filter=AdminCrudTest`; `php artisan route:list --except-vendor --path=admin`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 
 ## Verification Log
 
@@ -322,6 +325,36 @@ remaining work. Keep this file current after each coherent slice.
 - Committed and pushed `287f142` with Conventional Commit message
   `feat(evaluation): centralize Likert result calculations` and closed GitHub
   Issues `#17` and `#18` as completed.
+
+### 2026-06-01 01:49 Asia/Makassar
+
+- Wrote `AdminCrudTest` covering mahasiswa cross-role blocks, student create,
+  edit, detail, delete, invalid NIM rejection, period create/edit/detail/delete
+  and safe delete, category/form/question create/edit/delete, validation
+  errors, and safe delete for dependent categories, forms, and questions.
+- Replaced placeholder admin module routes with resource routes for students,
+  periods, forms, categories, and questions.
+- Implemented admin Form Request validation for students, periods, forms,
+  categories, and questions. Student requests validate unique email/NIM and use
+  `NimParser` to reject unknown program codes.
+- Implemented student management with manual mahasiswa user/profile creation,
+  password hashing, parsed NIM profile fields, update, detail, pagination, and
+  delete guarded against existing evaluation responses.
+- Implemented period management with active/inactive updates, date validation,
+  detail pages, pagination, and delete guarded against existing forms.
+- Implemented form, category, and question management with required
+  relationships, active/required flags, sort-order validation, pagination, and
+  safe delete behavior.
+- Added compact Blade/Tailwind admin CRUD views with real route-backed links
+  and form actions for all visible buttons.
+- Ran `php artisan test --compact --filter=AdminCrudTest`; passed with 10
+  tests and 80 assertions.
+- Ran `vendor/bin/pint --dirty --format agent`; passed after formatting
+  controllers and request classes.
+- Ran `php artisan route:list --except-vendor --path=admin`; passed and showed
+  38 admin routes.
+- Ran `bun run build`; passed.
+- Ran `php artisan test --compact --filter=RoleAccessTest`; passed.
 
 ## Remaining Gates
 
