@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-05-31 23:00 Asia/Makassar
+- Last updated: 2026-05-31 23:03 Asia/Makassar
 
 ## Decisions
 
@@ -23,7 +23,7 @@ remaining work. Keep this file current after each coherent slice.
 
 | Issue | Task | Status | Commit | Verification |
 | --- | --- | --- | --- | --- |
-| `#1` | T001 `chore(project): align allowed dependencies` | Ready to commit | pending | `composer validate`; `composer show --locked laravel/socialite`; `composer show --locked akaunting/laravel-apexcharts`; `composer show --locked barryvdh/laravel-dompdf`; `composer show --locked maatwebsite/excel`; `composer show --locked pestphp/pest`; `composer show --locked pestphp/pest-plugin-laravel`; banned dependency scan |
+| `#1` | T001 `chore(project): align allowed dependencies` | Closed | `c8d92f3` | `composer validate`; `composer show --locked laravel/socialite`; `composer show --locked akaunting/laravel-apexcharts`; `composer show --locked barryvdh/laravel-dompdf`; `composer show --locked maatwebsite/excel`; `composer show --locked pestphp/pest`; `composer show --locked pestphp/pest-plugin-laravel`; banned dependency scan |
 
 ## Verification Log
 
@@ -45,6 +45,9 @@ remaining work. Keep this file current after each coherent slice.
   `bun.lock`, `composer.lock`, and `.npmrc`. Matches were only incidental words
   such as Composer autoload `bootstrap.php` and `tslib` in the Bun lockfile, not
   banned project dependencies.
+- Committed `c8d92f3` with Conventional Commit message
+  `chore(project): align SurveyKita dependencies` and closed GitHub Issue `#1`
+  as completed.
 
 ## Remaining Gates
 
