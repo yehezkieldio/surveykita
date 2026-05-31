@@ -10,14 +10,14 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="sk-page font-sans">
-        <div class="min-h-[100dvh] lg:grid lg:grid-cols-[17rem_minmax(0,1fr)]">
-            <aside class="border-b border-zinc-200 bg-white lg:border-b-0 lg:border-r">
-                <div class="border-b border-zinc-200 px-6 py-6">
-                    <p class="font-display text-2xl font-semibold tracking-[-0.05em] text-zinc-950">SurveyKita</p>
-                    <p class="mt-2 text-sm leading-6 text-zinc-600">Panel administrasi evaluasi akademik.</p>
+        <div class="min-h-[100dvh] lg:grid lg:grid-cols-[16rem_minmax(0,1fr)]">
+            <aside class="border-b border-zinc-200 bg-white lg:sticky lg:top-0 lg:h-[100dvh] lg:border-b-0 lg:border-r">
+                <div class="border-b border-zinc-200 px-5 py-5">
+                    <p class="font-display text-2xl font-semibold tracking-[-0.06em] text-zinc-950">SurveyKita</p>
+                    <p class="mt-2 text-xs leading-5 text-zinc-500">Admin console</p>
                 </div>
 
-                <nav class="grid gap-px p-3 text-sm">
+                <nav class="grid gap-px p-2 text-sm">
                     @foreach ([
                         'admin.dashboard' => 'Dashboard',
                         'admin.students.index' => 'Mahasiswa',
@@ -29,9 +29,9 @@
                     ] as $routeName => $label)
                         @if (Route::has($routeName))
                             <a href="{{ route($routeName) }}" @class([
-                                'border px-3 py-2.5 font-medium transition-colors',
-                                'border-transparent text-zinc-600 hover:border-zinc-200 hover:bg-zinc-50 hover:text-zinc-950' => !request()->routeIs($routeName) && !request()->routeIs(str_replace('.index', '', $routeName) . '.*'),
-                                'border-zinc-950 bg-zinc-950 text-white' => request()->routeIs($routeName) || request()->routeIs(str_replace('.index', '', $routeName) . '.*'),
+                                'px-3 py-2.5 font-medium transition-colors',
+                                'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950' => !request()->routeIs($routeName) && !request()->routeIs(str_replace('.index', '', $routeName) . '.*'),
+                                'bg-zinc-950 text-white' => request()->routeIs($routeName) || request()->routeIs(str_replace('.index', '', $routeName) . '.*'),
                             ])>{{ $label }}</a>
                         @endif
                     @endforeach
@@ -40,14 +40,13 @@
 
             <div class="min-w-0">
                 <header class="border-b border-zinc-200 bg-white">
-                    <div class="flex flex-col gap-4 px-4 py-6 sm:px-6 lg:flex-row lg:items-end lg:justify-between lg:px-8">
-                        <div class="max-w-4xl">
+                    <div class="flex flex-col gap-4 px-4 py-5 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+                        <div>
                             @if ($eyebrow ?? null)
                                 <p class="mb-2 text-sm font-medium text-zinc-500">{{ $eyebrow }}</p>
                             @endif
                             <h1 class="font-display text-4xl font-semibold leading-none tracking-[-0.06em] text-zinc-950 md:text-5xl">{{ $heading ?? 'Dashboard' }}</h1>
                         </div>
-
                         @auth
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
@@ -57,7 +56,7 @@
                     </div>
                 </header>
 
-                <main class="px-4 py-8 sm:px-6 lg:px-8 animate-reveal">
+                <main class="px-4 py-6 sm:px-6 lg:px-8 animate-reveal">
                     <x-alert />
                     {{ $slot }}
                 </main>
