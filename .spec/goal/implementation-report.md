@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-06-01 00:27 Asia/Makassar
+- Last updated: 2026-06-01 00:32 Asia/Makassar
 
 ## Decisions
 
@@ -56,6 +56,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#31` | T031 `feat(report): implement DomPDF report export` | Closed | `09e0d0a` | `php artisan test --compact --filter=PdfExportTest`; `php artisan test --compact --filter=ResultDashboardTest`; `php artisan route:list --except-vendor --path=admin/results`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 | `#32` | T032 `test(report): cover protected Excel export behavior` | Closed | `be69045` | `php artisan test --compact --filter=ExcelExportTest` |
 | `#33` | T033 `feat(report): implement Maatwebsite Excel export classes` | Closed | `be69045` | `php artisan test --compact --filter=ExcelExportTest`; `php artisan test --compact --filter=PdfExportTest`; `php artisan test --compact --filter=ResultDashboardTest`; `php artisan route:list --except-vendor --path=admin/results`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
+| `#34` | T034 `style(ui): complete responsive Indonesian UI states` | Closed | `84c07fe` | `bun run build`; `php artisan route:list --except-vendor`; dead-action scan |
+| `#35` | T035 `test(ui): cover route, controller, and view wiring` | Closed | `84c07fe` | `php artisan test --compact --filter=UiRouteWiringTest`; `AdminCrudTest`; `EvaluationSubmissionTest`; `vendor/bin/pint --dirty --format agent` |
 
 ## Verification Log
 
@@ -522,8 +524,35 @@ remaining work. Keep this file current after each coherent slice.
   `feat(report): implement Excel result export`; push and issue closure are
   scheduled immediately after this report update.
 
+### 2026-06-01 00:32 Asia/Makassar
+
+- Wrote `UiRouteWiringTest` covering required route registration, admin pages,
+  mahasiswa pages, guest auth pages, Google rejection feedback, profile
+  completion, and absence of `href="#"` / `action="#"` dead actions.
+- Removed route-existence fallbacks from required logout forms so visible
+  actions always target the real logout route.
+- Removed an unused placeholder-style admin module view.
+- Reformatted category and question admin tables with overflow wrappers,
+  readable action groups, badges, and Indonesian empty states.
+- Fixed the missing `Illuminate\Database\Eloquent\Builder` import in the
+  student evaluation index query.
+- Ran `php artisan test --compact --filter=UiRouteWiringTest`; passed with 4
+  tests and 155 assertions.
+- Ran `php artisan test --compact --filter=AdminCrudTest`; passed with 10
+  tests and 80 assertions.
+- Ran `php artisan test --compact --filter=EvaluationSubmissionTest`; passed
+  with 7 tests and 43 assertions.
+- Ran `php artisan route:list --except-vendor`; passed and showed 54 routes.
+- Ran a dead-action scan; remaining matches are the `UiRouteWiringTest`
+  assertions themselves.
+- Ran `vendor/bin/pint --dirty --format agent`; passed.
+- Ran `bun run build`; passed.
+- Committed `84c07fe` with Conventional Commit message
+  `style(ui): tighten Blade route wiring`; push and issue closure are scheduled
+  immediately after this report update.
+
 ## Remaining Gates
 
-- Continue T034 through T041 in dependency order.
+- Continue T036 through T041 in dependency order.
 - Keep this report updated with commits, issue closures, verification evidence,
   browser E2E results, and final completion decision.
