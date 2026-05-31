@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-06-01 01:49 Asia/Makassar
+- Last updated: 2026-06-01 02:05 Asia/Makassar
 
 ## Decisions
 
@@ -44,6 +44,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#19` | T019 `test(admin): cover admin CRUD and cross-role blocks` | Closed | `90429ab` | `php artisan test --compact --filter=AdminCrudTest` |
 | `#20` | T020 `feat(admin): implement student and period management` | Closed | `90429ab` | `php artisan test --compact --filter=AdminCrudTest`; `php artisan route:list --except-vendor --path=admin`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 | `#21` | T021 `feat(admin): implement form, category, and question management` | Closed | `90429ab` | `php artisan test --compact --filter=AdminCrudTest`; `php artisan route:list --except-vendor --path=admin`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
+| `#22` | T022 `test(student): cover profile completion requirement` | Ready to close | Pending | `php artisan test --compact --filter=ProfileCompletionTest` |
+| `#23` | T023 `feat(student): implement profile completion controller, request, middleware, and views` | Ready to close | Pending | `php artisan test --compact --filter=ProfileCompletionTest`; `php artisan route:list --except-vendor --path=student`; `php artisan test --compact --filter=GoogleOAuthTest`; `php artisan test --compact --filter=RoleAccessTest`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 
 ## Verification Log
 
@@ -358,6 +360,34 @@ remaining work. Keep this file current after each coherent slice.
 - Committed and pushed `90429ab` with Conventional Commit message
   `feat(admin): implement CRUD management modules` and closed GitHub Issues
   `#19`, `#20`, and `#21` as completed.
+
+### 2026-06-01 02:05 Asia/Makassar
+
+- Wrote `ProfileCompletionTest` covering incomplete mahasiswa dashboard/profile
+  access, redirect before evaluation fill/submit, missing profile field
+  validation, unknown NIM program-code rejection, Google-created users without
+  a student profile, parsed program/year/sequence persistence, and completed
+  profile access to an evaluation form page.
+- Implemented `UpdateProfileRequest` with unique NIM validation and
+  `NimParser` after-validation.
+- Implemented `ProfileController::update()` so Google-created mahasiswa users
+  without a student row can create a complete student profile.
+- Implemented `EnsureStudentProfileIsComplete` to redirect incomplete
+  mahasiswa users to `student.profile.complete` before evaluation fill/submit.
+- Added `PUT /student/profile/complete`, `GET /student/evaluations/{form}`,
+  and protected evaluation fill/submit routes with
+  `student.profile.complete` middleware.
+- Added a real profile completion Blade form and minimal evaluation detail page
+  used by the profile-completion gate.
+- Adjusted student evaluation form resolution to happen in the controller so
+  role middleware returns 403 for admin access before missing form resolution.
+- Ran `php artisan test --compact --filter=ProfileCompletionTest`; passed with
+  5 tests and 29 assertions.
+- Ran `php artisan route:list --except-vendor --path=student`; passed and
+  showed student profile/evaluation routes.
+- Ran regressions: `GoogleOAuthTest` and `RoleAccessTest`; both passed.
+- Ran `vendor/bin/pint --dirty --format agent`; passed.
+- Ran `bun run build`; passed.
 
 ## Remaining Gates
 

@@ -213,7 +213,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 12: Student Profile Completion
 
-- [ ] T022 test(student): cover profile completion requirement in `tests/Feature/Student/ProfileCompletionTest.php`
+- [X] T022 test(student): cover profile completion requirement in `tests/Feature/Student/ProfileCompletionTest.php`
   - Phase: Student profile completion
   - Dependencies: T009, T011, T013, T014
   - Files: `tests/Feature/Student/ProfileCompletionTest.php`
@@ -221,7 +221,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: Tests cover missing NIM, unknown program code, parsed study program/year/sequence details, class name, successful profile update, Google-created user with no student profile, and completed profile allowing evaluation fill access.
   - Verification: `php artisan test --compact --filter=ProfileCompletionTest`
 
-- [ ] T023 feat(student): implement profile completion controller, request, middleware, and views in `app/Http/Controllers/Student/`, `app/Http/Requests/Student/`, `app/Http/Middleware/`, and `resources/views/student/profile/`
+- [X] T023 feat(student): implement profile completion controller, request, middleware, and views in `app/Http/Controllers/Student/`, `app/Http/Requests/Student/`, `app/Http/Middleware/`, and `resources/views/student/profile/`
   - Phase: Student profile completion
   - Dependencies: T022
   - Files: `app/Http/Controllers/Student/ProfileController.php`, `app/Http/Requests/Student/UpdateProfileRequest.php`, `app/Http/Middleware/EnsureStudentProfileIsComplete.php`, `bootstrap/app.php`, `routes/web.php`, `resources/views/student/profile/complete.blade.php`

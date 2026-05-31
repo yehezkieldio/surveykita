@@ -39,7 +39,11 @@ Route::middleware(['auth', 'role:mahasiswa'])
     ->group(function (): void {
         Route::get('/dashboard', StudentDashboardController::class)->name('dashboard');
         Route::get('/profile/complete', [ProfileController::class, 'edit'])->name('profile.complete');
+        Route::put('/profile/complete', [ProfileController::class, 'update'])->name('profile.update');
         Route::get('/evaluations', [EvaluationController::class, 'index'])->name('evaluations.index');
-        Route::post('/evaluations/{form}/submit', [EvaluationController::class, 'submit'])->name('evaluations.submit');
+        Route::middleware('student.profile.complete')->group(function (): void {
+            Route::get('/evaluations/{form}', [EvaluationController::class, 'show'])->name('evaluations.show');
+            Route::post('/evaluations/{form}/submit', [EvaluationController::class, 'submit'])->name('evaluations.submit');
+        });
         Route::get('/submissions', [SubmissionController::class, 'index'])->name('submissions.index');
     });

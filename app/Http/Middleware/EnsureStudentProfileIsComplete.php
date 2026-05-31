@@ -15,6 +15,11 @@ class EnsureStudentProfileIsComplete
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (! $request->user()?->hasCompleteStudentProfile()) {
+            return redirect()->route('student.profile.complete')
+                ->with('error', 'Lengkapi profil mahasiswa sebelum mengisi evaluasi.');
+        }
+
         return $next($request);
     }
 }
