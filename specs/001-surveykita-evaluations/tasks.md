@@ -321,7 +321,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 18: Blade/Tailwind UI Polish
 
-- [ ] T034 style(ui): complete responsive Indonesian UI states across `resources/views/auth/`, `resources/views/admin/`, `resources/views/student/`, and `resources/views/components/`
+- [X] T034 style(ui): complete responsive Indonesian UI states across `resources/views/auth/`, `resources/views/admin/`, `resources/views/student/`, and `resources/views/components/`
   - Phase: Blade/Tailwind UI polish
   - Dependencies: T005, T007, T020, T021, T025, T027, T029, T031, T033
   - Files: `resources/views/auth/*.blade.php`, `resources/views/admin/**/*.blade.php`, `resources/views/student/**/*.blade.php`, `resources/views/components/*.blade.php`, `resources/css/app.css`
@@ -329,7 +329,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: Indonesian labels are used; tables paginate; buttons and links point to existing named routes; empty, success, validation, and unauthorized states are visible; no card-in-card admin-panel-generator aesthetic is introduced.
   - Verification: `bun run build && php artisan route:list --except-vendor`
 
-- [ ] T035 test(ui): cover route, controller, and view wiring in `tests/Feature/UiRouteWiringTest.php`
+- [X] T035 test(ui): cover route, controller, and view wiring in `tests/Feature/UiRouteWiringTest.php`
   - Phase: Blade/Tailwind UI polish
   - Dependencies: T034
   - Files: `tests/Feature/UiRouteWiringTest.php`
