@@ -46,8 +46,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#21` | T021 `feat(admin): implement form, category, and question management` | Closed | `90429ab` | `php artisan test --compact --filter=AdminCrudTest`; `php artisan route:list --except-vendor --path=admin`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 | `#22` | T022 `test(student): cover profile completion requirement` | Closed | `9d4b086` | `php artisan test --compact --filter=ProfileCompletionTest` |
 | `#23` | T023 `feat(student): implement profile completion controller, request, middleware, and views` | Closed | `9d4b086` | `php artisan test --compact --filter=ProfileCompletionTest`; `php artisan route:list --except-vendor --path=student`; `php artisan test --compact --filter=GoogleOAuthTest`; `php artisan test --compact --filter=RoleAccessTest`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
-| `#24` | T024 `test(student): cover evaluation submission rules` | Ready to close | Pending | `php artisan test --compact --filter=EvaluationSubmissionTest` |
-| `#25` | T025 `feat(student): implement dashboard, active forms, fill, submit, success, and history flow` | Ready to close | Pending | `php artisan test --compact --filter=EvaluationSubmissionTest`; `ProfileCompletionTest`; `RoleAccessTest`; `php artisan route:list --except-vendor --path=student`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
+| `#24` | T024 `test(student): cover evaluation submission rules` | Closed | `5c284d4` | `php artisan test --compact --filter=EvaluationSubmissionTest` |
+| `#25` | T025 `feat(student): implement dashboard, active forms, fill, submit, success, and history flow` | Closed | `5c284d4` | `php artisan test --compact --filter=EvaluationSubmissionTest`; `ProfileCompletionTest`; `RoleAccessTest`; `php artisan route:list --except-vendor --path=student`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 
 ## Verification Log
 
@@ -416,6 +416,9 @@ remaining work. Keep this file current after each coherent slice.
 - Ran `php artisan route:list --except-vendor --path=student`; passed and
   showed 16 student/admin-student routes.
 - Ran `bun run build`; passed.
+- Committed and pushed `5c284d4` with Conventional Commit message
+  `feat(student): implement evaluation submission flow` and closed GitHub
+  Issues `#24` and `#25` as completed.
 
 ## Remaining Gates
 
