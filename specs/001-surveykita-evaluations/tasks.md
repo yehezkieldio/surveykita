@@ -51,7 +51,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 3: Tailwind and Bun Frontend Setup
 
-- [ ] T004 chore(frontend): configure Bun, Vite, Tailwind, and Laravel asset entrypoints in `package.json`, `vite.config.js`, `resources/css/app.css`, and `resources/js/app.js`
+- [X] T004 chore(frontend): configure Bun, Vite, Tailwind, and Laravel asset entrypoints in `package.json`, `vite.config.js`, `resources/css/app.css`, and `resources/js/app.js`
   - Phase: Tailwind and Bun frontend setup
   - Dependencies: T001
   - Files: `package.json`, `bun.lock`, `vite.config.js`, `resources/css/app.css`, `resources/js/app.js`
@@ -59,7 +59,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: `bun run build` produces a Vite manifest; Tailwind scans Blade views; no Bootstrap, React, Vue, Inertia, or Livewire frontend dependency is added.
   - Verification: `bun install --frozen-lockfile && bun run build`
 
-- [ ] T005 style(ui): create shared Blade layouts and components in `resources/views/layouts/` and `resources/views/components/`
+- [X] T005 style(ui): create shared Blade layouts and components in `resources/views/layouts/` and `resources/views/components/`
   - Phase: Tailwind and Bun frontend setup
   - Dependencies: T004
   - Files: `resources/views/layouts/guest.blade.php`, `resources/views/layouts/admin.blade.php`, `resources/views/layouts/student.blade.php`, `resources/views/components/alert.blade.php`, `resources/views/components/badge.blade.php`, `resources/views/components/button.blade.php`, `resources/views/components/card.blade.php`, `resources/views/components/empty-state.blade.php`, `resources/views/components/form-error.blade.php`, `resources/views/components/pagination.blade.php`, `resources/views/components/table.blade.php`
