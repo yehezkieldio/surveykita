@@ -357,7 +357,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 20: README and Verification
 
-- [ ] T038 docs(readme): document fresh-clone setup, demo accounts, and verification commands in `README.md`
+- [X] T038 docs(readme): document fresh-clone setup, demo accounts, and verification commands in `README.md`
   - Phase: README and verification
   - Dependencies: T003, T004, T016, T037
   - Files: `README.md`

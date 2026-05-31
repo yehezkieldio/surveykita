@@ -1,58 +1,224 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SurveyKita
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+SurveyKita adalah Sistem Informasi Evaluasi Kepuasan Mahasiswa terhadap
+Layanan Akademik Berbasis Web Menggunakan Laravel untuk konteks Universitas
+Mulia. Aplikasi ini menyediakan autentikasi kustom, role admin dan mahasiswa,
+login Google khusus email mahasiswa, manajemen data evaluasi, alur pengisian
+Likert 1-5, dashboard hasil, grafik, ekspor PDF, ekspor Excel, seed data, dan
+Pest tests.
 
-## About Laravel
+## Stack
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- PHP 8.3 atau lebih baru
+- Laravel 13
+- Laravel Blade dan Tailwind CSS
+- Bun, Vite
+- MariaDB via Docker Compose
+- Laravel Socialite
+- akaunting/laravel-apexcharts
+- barryvdh/laravel-dompdf
+- maatwebsite/excel
+- Pest
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Larangan Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Project ini tidak menggunakan Breeze, Jetstream, Laravel UI, Filament, Nova,
+Backpack, Bootstrap, React, Vue, Inertia, Livewire, SQLite sebagai database
+local utama, npm, yarn, atau pnpm.
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Setup Fresh Clone
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+composer install
+bun install
+docker compose up -d
+cp .env.example .env
+php artisan key:generate
+php artisan migrate:fresh --seed
+bun run build
+php artisan test
+php artisan route:list --except-vendor
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Jalankan server lokal:
 
-## Contributing
+```bash
+php artisan serve --host=127.0.0.1 --port=8000
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Buka:
 
-## Code of Conduct
+```text
+http://127.0.0.1:8000/login
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Konfigurasi Environment
 
-## Security Vulnerabilities
+Nilai default local development memakai MariaDB dari `docker-compose.yml`:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```dotenv
+APP_URL=http://localhost:8000
 
-## License
+DB_CONNECTION=mariadb
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=surveykita
+DB_USERNAME=surveykita
+DB_PASSWORD=surveykita
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GOOGLE_REDIRECT_URI="${APP_URL}/auth/google/callback"
+```
+
+Google OAuth harus memakai callback route yang diimplementasikan:
+
+```text
+http://localhost:8000/auth/google/callback
+```
+
+Jika browser verification tidak dapat menyelesaikan login Google karena consent
+screen, MFA, CAPTCHA, atau akun mahasiswa Universitas Mulia tidak tersedia,
+gunakan akun password mahasiswa hasil seeder. Perilaku domain Google tetap
+ditutup oleh Pest test dengan Socialite fake.
+
+## Demo Accounts
+
+Password semua akun seed berikut adalah:
+
+```text
+password
+```
+
+Admin:
+
+```text
+admin@universitasmulia.ac.id
+```
+
+Mahasiswa seeded:
+
+```text
+2311032@students.universitasmulia.ac.id
+2312045@students.universitasmulia.ac.id
+2313056@students.universitasmulia.ac.id
+2321078@students.universitasmulia.ac.id
+2322091@students.universitasmulia.ac.id
+2333014@students.universitasmulia.ac.id
+2351025@students.universitasmulia.ac.id
+2353036@students.universitasmulia.ac.id
+```
+
+Contoh parsing NIM `2311032`:
+
+- `23`: tahun masuk 2023
+- `11`: S1 Informatika
+- `032`: nomor urut mahasiswa
+
+## Fitur Utama
+
+Admin dapat:
+
+- login dan logout
+- mengelola mahasiswa, periode evaluasi, form evaluasi, kategori, dan
+  pertanyaan
+- mengaktifkan dan menonaktifkan periode dan form
+- melihat dashboard hasil evaluasi
+- memfilter hasil berdasarkan periode, form, dan kategori
+- melihat grafik persentase kepuasan, jumlah responden, rata-rata kategori, dan
+  distribusi Likert
+- mengunduh laporan PDF dan Excel
+- melihat saran mahasiswa
+
+Mahasiswa dapat:
+
+- login dengan email/password dari admin
+- login dengan Google khusus domain `@students.universitasmulia.ac.id`
+- melengkapi profil mahasiswa
+- melihat form evaluasi aktif
+- mengisi evaluasi Likert 1-5
+- mengirim saran opsional
+- melihat status form yang sudah dikirim
+- melihat riwayat pengisian
+
+## Aturan Evaluasi
+
+- Form hanya dapat diisi jika form aktif, periode aktif, dan tanggal hari ini
+  berada di antara `start_date` dan `end_date` secara inklusif.
+- Mahasiswa hanya dapat mengirim satu respons per `evaluation_form_id`.
+- Skor wajib bernilai integer 1 sampai 5.
+- Pertanyaan wajib harus dijawab.
+- Mahasiswa dengan profil belum lengkap tidak dapat mengirim evaluasi.
+- Dashboard tanpa respons harus menampilkan ringkasan nol dan empty state,
+  bukan error.
+
+## Verification Commands
+
+Gunakan perintah ini sebelum menganggap perubahan selesai:
+
+```bash
+vendor/bin/pint --dirty --format agent
+php artisan test --compact
+bun run build
+php artisan route:list --except-vendor
+```
+
+Verifikasi fresh database:
+
+```bash
+docker compose up -d
+php artisan migrate:fresh --seed
+php artisan test --compact
+```
+
+## Agent Browser E2E
+
+Setelah migrasi, seeding, build, dan Pest test pass, jalankan browser E2E dengan
+`agent-browser`.
+
+```bash
+agent-browser skills get core
+php artisan serve --host=127.0.0.1 --port=8000
+agent-browser open http://127.0.0.1:8000/login
+agent-browser snapshot -i
+```
+
+Browser workflow yang harus diverifikasi:
+
+- admin login, dashboard admin, navigasi CRUD, hasil, grafik, ekspor PDF,
+  ekspor Excel, dan logout
+- mahasiswa login, profil, daftar evaluasi aktif, detail form, submit evaluasi,
+  success page, duplicate submission feedback, riwayat, dan logout
+- wrong-role access menampilkan feedback aman
+- satu empty state hasil evaluasi tampil tanpa error
+
+Ambil screenshot atau snapshot untuk dashboard admin, grafik hasil, halaman isi
+evaluasi, success page, duplicate feedback, dan wrong-role feedback. Setelah
+selesai, bersihkan proses browser milik task:
+
+```bash
+agent-browser close --all
+pgrep -af "agent-browser|chrome|chromium" || true
+```
+
+## Unattended Autonomous Execution
+
+Untuk sesi implementasi long-horizon tanpa human-in-the-loop, Codex boleh
+melakukan hal berikut secara non-interaktif:
+
+- install dependency Composer dan Bun yang sudah disetujui
+- menjalankan Docker Compose, Laravel server, Vite build, Pest, route list, dan
+  `agent-browser`
+- reset dan seed database local MariaDB
+- mengambil screenshot atau snapshot sebagai bukti verifikasi
+- memperbaiki kegagalan gate secara terarah
+- menjalankan ulang gate paling kecil yang gagal, lalu full verification
+- commit setiap slice kerja dengan Conventional Commit yang mereferensikan atau
+  menutup GitHub Issue terkait
+- push commit agar issue tracker merefleksikan progres
+- membersihkan proses server/browser yang dimiliki task sebelum selesai
+
+Stop hanya jika dependency yang wajib tidak dapat dipasang, kredensial external
+yang benar-benar human-only diperlukan, database local tidak dapat dijalankan
+setelah perbaikan wajar, atau acceptance criteria tidak dapat dipenuhi tanpa
+mengubah konstitusi/spec.
