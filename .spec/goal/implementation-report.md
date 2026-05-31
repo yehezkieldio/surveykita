@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-05-31 23:10 Asia/Makassar
+- Last updated: 2026-05-31 23:14 Asia/Makassar
 
 ## Decisions
 
@@ -25,6 +25,7 @@ remaining work. Keep this file current after each coherent slice.
 | --- | --- | --- | --- | --- |
 | `#1` | T001 `chore(project): align allowed dependencies` | Closed | `c8d92f3` | `composer validate`; `composer show --locked laravel/socialite`; `composer show --locked akaunting/laravel-apexcharts`; `composer show --locked barryvdh/laravel-dompdf`; `composer show --locked maatwebsite/excel`; `composer show --locked pestphp/pest`; `composer show --locked pestphp/pest-plugin-laravel`; banned dependency scan |
 | `#2` | T002 `chore(project): register route files and middleware aliases` | Closed | `518ec7e` | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor` |
+| `#3` | T003 `chore(dev): configure MariaDB local services` | Ready to commit | pending | `docker compose config`; `php artisan config:show database.default` |
 
 ## Verification Log
 
@@ -65,6 +66,22 @@ remaining work. Keep this file current after each coherent slice.
 - Committed and pushed `518ec7e` with Conventional Commit message
   `chore(project): register SurveyKita route foundation` and closed GitHub
   Issue `#2` as completed.
+
+### 2026-05-31 23:14 Asia/Makassar
+
+- Added a root `docker-compose.yml` MariaDB 11.4 service named
+  `surveykita-mariadb`, exposing host port `3306` and creating the
+  `surveykita` database/user/password from the quickstart.
+- Updated `.env.example` to use `APP_URL=http://localhost:8000`, MariaDB
+  credentials `surveykita` / `surveykita`, and Google OAuth placeholder
+  variables with callback `/auth/google/callback`.
+- Changed Laravel's database default fallback from SQLite to MariaDB so fresh
+  local configuration does not drift to the banned main development database.
+- Ran `vendor/bin/pint --dirty --format agent`; passed.
+- Ran `docker compose config`; passed and showed the MariaDB service, port,
+  healthcheck, and named volume.
+- Ran `php artisan config:show database.default`; passed and reported
+  `mariadb`.
 
 ## Remaining Gates
 

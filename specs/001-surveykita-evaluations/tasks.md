@@ -41,7 +41,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 2: Environment and Docker Compose
 
-- [ ] T003 chore(dev): configure MariaDB local services in `docker-compose.yml` and `.env.example`
+- [X] T003 chore(dev): configure MariaDB local services in `docker-compose.yml` and `.env.example`
   - Phase: Environment and Docker Compose
   - Dependencies: T001
   - Files: `docker-compose.yml`, `.env.example`
