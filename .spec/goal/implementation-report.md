@@ -44,8 +44,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#19` | T019 `test(admin): cover admin CRUD and cross-role blocks` | Closed | `90429ab` | `php artisan test --compact --filter=AdminCrudTest` |
 | `#20` | T020 `feat(admin): implement student and period management` | Closed | `90429ab` | `php artisan test --compact --filter=AdminCrudTest`; `php artisan route:list --except-vendor --path=admin`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 | `#21` | T021 `feat(admin): implement form, category, and question management` | Closed | `90429ab` | `php artisan test --compact --filter=AdminCrudTest`; `php artisan route:list --except-vendor --path=admin`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
-| `#22` | T022 `test(student): cover profile completion requirement` | Ready to close | Pending | `php artisan test --compact --filter=ProfileCompletionTest` |
-| `#23` | T023 `feat(student): implement profile completion controller, request, middleware, and views` | Ready to close | Pending | `php artisan test --compact --filter=ProfileCompletionTest`; `php artisan route:list --except-vendor --path=student`; `php artisan test --compact --filter=GoogleOAuthTest`; `php artisan test --compact --filter=RoleAccessTest`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
+| `#22` | T022 `test(student): cover profile completion requirement` | Closed | `9d4b086` | `php artisan test --compact --filter=ProfileCompletionTest` |
+| `#23` | T023 `feat(student): implement profile completion controller, request, middleware, and views` | Closed | `9d4b086` | `php artisan test --compact --filter=ProfileCompletionTest`; `php artisan route:list --except-vendor --path=student`; `php artisan test --compact --filter=GoogleOAuthTest`; `php artisan test --compact --filter=RoleAccessTest`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 
 ## Verification Log
 
@@ -388,6 +388,9 @@ remaining work. Keep this file current after each coherent slice.
 - Ran regressions: `GoogleOAuthTest` and `RoleAccessTest`; both passed.
 - Ran `vendor/bin/pint --dirty --format agent`; passed.
 - Ran `bun run build`; passed.
+- Committed and pushed `9d4b086` with Conventional Commit message
+  `feat(student): enforce profile completion` and closed GitHub Issues `#22`
+  and `#23` as completed.
 
 ## Remaining Gates
 
