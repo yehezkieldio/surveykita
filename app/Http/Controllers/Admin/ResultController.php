@@ -7,12 +7,13 @@ use App\Models\EvaluationForm;
 use App\Models\EvaluationPeriod;
 use App\Models\QuestionCategory;
 use App\Services\EvaluationResultService;
+use App\Services\ResultChartService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class ResultController extends Controller
 {
-    public function index(Request $request, EvaluationResultService $results): View
+    public function index(Request $request, EvaluationResultService $results, ResultChartService $charts): View
     {
         $periodId = $request->integer('period_id') ?: null;
         $formId = $request->integer('form_id') ?: null;
@@ -27,6 +28,11 @@ class ResultController extends Controller
             ->latest()
             ->get();
 
+        $rows = $forms->map(fn (EvaluationForm $form): array => [
+            'form' => $form,
+            'result' => $results->forForm($form, $category),
+        ]);
+
         return view('admin.results.index', [
             'periods' => EvaluationPeriod::query()->latest()->get(),
             'allForms' => EvaluationForm::query()->latest()->get(),
@@ -34,14 +40,12 @@ class ResultController extends Controller
             'selectedPeriodId' => $periodId,
             'selectedFormId' => $formId,
             'selectedCategoryId' => $categoryId,
-            'rows' => $forms->map(fn (EvaluationForm $form): array => [
-                'form' => $form,
-                'result' => $results->forForm($form, $category),
-            ]),
+            'rows' => $rows,
+            'charts' => $charts->indexCharts($rows),
         ]);
     }
 
-    public function show(Request $request, string $form, EvaluationResultService $results): View
+    public function show(Request $request, string $form, EvaluationResultService $results, ResultChartService $charts): View
     {
         $form = EvaluationForm::query()
             ->with('evaluationPeriod')
@@ -50,11 +54,14 @@ class ResultController extends Controller
             ? QuestionCategory::query()->find($request->integer('category_id'))
             : null;
 
+        $result = $results->forForm($form, $category);
+
         return view('admin.results.show', [
             'form' => $form,
             'categories' => QuestionCategory::query()->orderBy('name')->get(),
             'selectedCategoryId' => $category?->id,
-            'result' => $results->forForm($form, $category),
+            'result' => $result,
+            'charts' => $charts->detailCharts($result),
         ]);
     }
 }

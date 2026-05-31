@@ -23,6 +23,11 @@
     @endif
 
     <div class="mt-4 grid gap-4 xl:grid-cols-2">
+        <x-chart-panel heading="Rata-rata Skor per Kategori" :chart="$charts['category_average']" />
+        <x-chart-panel heading="Distribusi Skor Likert" :chart="$charts['likert_distribution']" />
+    </div>
+
+    <div class="mt-4 grid gap-4 xl:grid-cols-2">
         <x-card heading="Rekap Kategori">
             <table class="w-full text-left text-sm">
                 <thead class="border-b text-zinc-600"><tr><th class="py-2">Kategori</th><th>Jawaban</th><th>Rata-rata</th><th>Kepuasan</th></tr></thead>
@@ -56,4 +61,11 @@
             <p class="text-sm text-zinc-500">Belum ada saran mahasiswa.</p>
         @endforelse
     </x-card>
+
+    @push('scripts')
+        @apexchartsScripts
+        @foreach ($charts as $chart)
+            {!! $chart->script() !!}
+        @endforeach
+    @endpush
 </x-layouts.admin>

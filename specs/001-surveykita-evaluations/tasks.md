@@ -267,7 +267,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 15: akaunting/laravel-apexcharts Integration
 
-- [ ] T028 test(admin): cover chart data wiring in `tests/Feature/Admin/ResultChartsTest.php`
+- [X] T028 test(admin): cover chart data wiring in `tests/Feature/Admin/ResultChartsTest.php`
   - Phase: akaunting/laravel-apexcharts integration
   - Dependencies: T027
   - Files: `tests/Feature/Admin/ResultChartsTest.php`
@@ -275,7 +275,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: Tests assert chart containers render for overall satisfaction per form, average score per category, respondent count per form, and Likert distribution.
   - Verification: `php artisan test --compact --filter=ResultChartsTest`
 
-- [ ] T029 feat(chart): create ApexCharts objects from result data in `app/Http/Controllers/Admin/ResultController.php` and `resources/views/admin/results/`
+- [X] T029 feat(chart): create ApexCharts objects from result data in `app/Http/Controllers/Admin/ResultController.php` and `resources/views/admin/results/`
   - Phase: akaunting/laravel-apexcharts integration
   - Dependencies: T028
   - Files: `app/Http/Controllers/Admin/ResultController.php`, `resources/views/admin/results/index.blade.php`, `resources/views/admin/results/show.blade.php`, `resources/views/components/chart-panel.blade.php`

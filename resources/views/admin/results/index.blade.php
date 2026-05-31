@@ -23,6 +23,13 @@
         </form>
     </x-card>
 
+    @if ($rows->isNotEmpty())
+        <div class="mb-4 grid gap-4 xl:grid-cols-2">
+            <x-chart-panel heading="Persentase Kepuasan per Form" :chart="$charts['overall_satisfaction']" />
+            <x-chart-panel heading="Jumlah Responden per Form" :chart="$charts['respondent_count']" />
+        </div>
+    @endif
+
     <div class="grid gap-4">
         @forelse ($rows as $row)
             <x-card heading="{{ $row['form']->title }}" subheading="{{ $row['form']->evaluationPeriod->name }}">
@@ -43,4 +50,13 @@
             />
         @endforelse
     </div>
+
+    @if ($rows->isNotEmpty())
+        @push('scripts')
+            @apexchartsScripts
+            @foreach ($charts as $chart)
+                {!! $chart->script() !!}
+            @endforeach
+        @endpush
+    @endif
 </x-layouts.admin>
