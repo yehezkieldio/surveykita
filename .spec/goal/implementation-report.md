@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-05-31 23:42 Asia/Makassar
+- Last updated: 2026-05-31 23:55 Asia/Makassar
 
 ## Decisions
 
@@ -30,6 +30,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#5` | T005 `style(ui): create shared Blade layouts and components` | Closed | `1c8f62c` | `bun run build` |
 | `#6` | T006 `test(auth): cover custom login and logout behavior` | Closed | `520d9bf` | Red: `php artisan test --compact --filter=SessionAuthTest`; Green: `php artisan test --compact --filter=SessionAuthTest` |
 | `#7` | T007 `feat(auth): implement custom session login and logout` | Closed | `520d9bf` | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor`; `php artisan test --compact --filter=SessionAuthTest` |
+| `#8` | T008 `test(auth): cover admin and mahasiswa route boundaries` | Ready to commit | pending | Red: `php artisan test --compact --filter=RoleAccessTest`; Green: `php artisan test --compact --filter=RoleAccessTest` |
+| `#9` | T009 `feat(auth): implement role middleware and protected route groups` | Ready to commit | pending | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor`; `php artisan test --compact --filter=RoleAccessTest`; `bun run build` |
 
 ## Verification Log
 
@@ -135,6 +137,29 @@ remaining work. Keep this file current after each coherent slice.
 - Committed and pushed `520d9bf` with Conventional Commit message
   `feat(auth): implement custom session authentication` and closed GitHub
   Issues `#6` and `#7` as completed.
+
+### 2026-05-31 23:55 Asia/Makassar
+
+- Wrote `tests/Feature/Auth/RoleAccessTest.php` for unauthenticated redirects,
+  admin dashboard access, mahasiswa dashboard access, cross-role dashboard
+  blocking, admin evaluation-submission blocking, and mahasiswa result/export
+  route blocking.
+- Ran `php artisan test --compact --filter=RoleAccessTest` before
+  implementation; it failed on missing protected routes.
+- Implemented `EnsureUserHasRole` with variadic role checks and 403 feedback.
+- Added controller-backed admin route boundaries for dashboard, students,
+  periods, forms, categories, questions, results, PDF export, and Excel export.
+- Added controller-backed mahasiswa route boundaries for dashboard, profile
+  completion, active evaluations, evaluation submission, and submission history.
+- Added minimal real Blade views for the protected dashboard/module boundaries;
+  CRUD, calculation, chart, and export behavior remains tracked by later
+  dedicated issues.
+- Ran `vendor/bin/pint --dirty --format agent`; passed.
+- Ran `php artisan route:list --except-vendor`; passed and showed 19
+  controller-backed routes.
+- Ran `php artisan test --compact --filter=RoleAccessTest`; passed with 9
+  tests and 14 assertions.
+- Ran `bun run build`; passed.
 
 ## Remaining Gates
 

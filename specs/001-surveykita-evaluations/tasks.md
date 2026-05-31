@@ -87,7 +87,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 5: Role and Authorization System
 
-- [ ] T008 test(auth): cover admin and mahasiswa route boundaries in `tests/Feature/Auth/RoleAccessTest.php`
+- [X] T008 test(auth): cover admin and mahasiswa route boundaries in `tests/Feature/Auth/RoleAccessTest.php`
   - Phase: Role and authorization system
   - Dependencies: T007
   - Files: `tests/Feature/Auth/RoleAccessTest.php`
@@ -95,7 +95,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: Tests cover unauthenticated redirects, mahasiswa blocked from admin dashboard, admin blocked from evaluation submission, and export/result routes blocked for mahasiswa.
   - Verification: `php artisan test --compact --filter=RoleAccessTest`
 
-- [ ] T009 feat(auth): implement role middleware and protected route groups in `app/Http/Middleware/EnsureUserHasRole.php`, `bootstrap/app.php`, `routes/web.php`, and `routes/auth.php`
+- [X] T009 feat(auth): implement role middleware and protected route groups in `app/Http/Middleware/EnsureUserHasRole.php`, `bootstrap/app.php`, `routes/web.php`, and `routes/auth.php`
   - Phase: Role and authorization system
   - Dependencies: T008
   - Files: `app/Http/Middleware/EnsureUserHasRole.php`, `bootstrap/app.php`, `routes/web.php`, `routes/auth.php`, `resources/views/auth/unauthorized.blade.php`
