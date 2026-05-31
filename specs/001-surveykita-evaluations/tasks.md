@@ -105,7 +105,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 6: Google OAuth Login
 
-- [ ] T010 test(auth): cover Google OAuth student-domain behavior in `tests/Feature/Auth/GoogleOAuthTest.php`
+- [X] T010 test(auth): cover Google OAuth student-domain behavior in `tests/Feature/Auth/GoogleOAuthTest.php`
   - Phase: Google OAuth login
   - Dependencies: T007, T009
   - Files: `tests/Feature/Auth/GoogleOAuthTest.php`
@@ -113,7 +113,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: Tests fake Socialite callbacks for allowed email, disallowed email, existing mahasiswa email, existing admin email, and incomplete profile redirect.
   - Verification: `php artisan test --compact --filter=GoogleOAuthTest`
 
-- [ ] T011 feat(auth): implement student-only Google OAuth in `app/Http/Controllers/Auth/GoogleAuthController.php`, `config/services.php`, `routes/auth.php`, and `resources/views/auth/login.blade.php`
+- [X] T011 feat(auth): implement student-only Google OAuth in `app/Http/Controllers/Auth/GoogleAuthController.php`, `config/services.php`, `routes/auth.php`, and `resources/views/auth/login.blade.php`
   - Phase: Google OAuth login
   - Dependencies: T010
   - Files: `app/Http/Controllers/Auth/GoogleAuthController.php`, `config/services.php`, `routes/auth.php`, `resources/views/auth/login.blade.php`, `resources/views/auth/google-rejected.blade.php`

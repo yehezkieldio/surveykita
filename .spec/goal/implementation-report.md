@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-05-31 23:58 Asia/Makassar
+- Last updated: 2026-06-01 00:08 Asia/Makassar
 
 ## Decisions
 
@@ -32,6 +32,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#7` | T007 `feat(auth): implement custom session login and logout` | Closed | `520d9bf` | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor`; `php artisan test --compact --filter=SessionAuthTest` |
 | `#8` | T008 `test(auth): cover admin and mahasiswa route boundaries` | Closed | `204052a` | Red: `php artisan test --compact --filter=RoleAccessTest`; Green: `php artisan test --compact --filter=RoleAccessTest` |
 | `#9` | T009 `feat(auth): implement role middleware and protected route groups` | Closed | `204052a` | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor`; `php artisan test --compact --filter=RoleAccessTest`; `bun run build` |
+| `#10` | T010 `test(auth): cover Google OAuth student-domain behavior` | Ready to commit | pending | Red: `php artisan test --compact --filter=GoogleOAuthTest`; Green: `php artisan test --compact --filter=GoogleOAuthTest` |
+| `#11` | T011 `feat(auth): implement student-only Google OAuth` | Ready to commit | pending | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor --path=auth/google`; `php artisan test --compact --filter=GoogleOAuthTest`; `php artisan test --compact --filter=SessionAuthTest`; `bun run build` |
 
 ## Verification Log
 
@@ -163,6 +165,32 @@ remaining work. Keep this file current after each coherent slice.
 - Committed and pushed `204052a` with Conventional Commit message
   `feat(auth): enforce role route boundaries` and closed GitHub Issues `#8`
   and `#9` as completed.
+
+### 2026-06-01 00:08 Asia/Makassar
+
+- Wrote `tests/Feature/Auth/GoogleOAuthTest.php` using `Socialite::fake` for
+  provider redirect, allowed student email creation, lowercase normalization,
+  non-student rejection, existing mahasiswa linking, existing admin rejection,
+  and incomplete-profile redirect.
+- Ran `php artisan test --compact --filter=GoogleOAuthTest` before
+  implementation; it failed with six 404 failures because Google OAuth routes
+  were absent.
+- Implemented `GoogleAuthController` with Google redirect, callback, strict
+  lowercase `@students.universitasmulia.ac.id` filtering, mahasiswa-only
+  create/link behavior, admin rejection, session login, and profile-completion
+  redirect.
+- Added Google service configuration from `GOOGLE_CLIENT_ID`,
+  `GOOGLE_CLIENT_SECRET`, and `GOOGLE_REDIRECT_URI`.
+- Added Google OAuth routes and rejection feedback page; the login page now
+  shows a real Google login action because the route exists.
+- Ran `vendor/bin/pint --dirty --format agent`; passed.
+- Ran `php artisan route:list --except-vendor --path=auth/google`; passed and
+  showed redirect, callback, and rejection routes.
+- Ran `php artisan test --compact --filter=GoogleOAuthTest`; passed with 6
+  tests and 28 assertions.
+- Ran `php artisan test --compact --filter=SessionAuthTest`; passed with 5
+  tests and 21 assertions.
+- Ran `bun run build`; passed.
 
 ## Remaining Gates
 
