@@ -373,7 +373,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: Migration and seeding pass; admin can manage master data and reports; mahasiswa can complete profile and submit one active evaluation; duplicate, inactive, expired, and invalid score submissions fail; charts and exports work; no fake links, placeholder pages, dead routes, or unwired modules remain.
   - Verification: `docker compose up -d && cp .env.example .env && php artisan key:generate && php artisan migrate:fresh --seed && bun run build && php artisan test --compact && php artisan route:list --except-vendor`
 
-- [ ] T040 test(e2e): verify seeded browser workflows with `agent-browser` using `specs/001-surveykita-evaluations/quickstart.md`
+- [X] T040 test(e2e): verify seeded browser workflows with `agent-browser` using `specs/001-surveykita-evaluations/quickstart.md`
   - Phase: README and verification
   - Dependencies: T039
   - Files: `specs/001-surveykita-evaluations/quickstart.md`, `README.md`
