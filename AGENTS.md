@@ -171,10 +171,3 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 - Do NOT delete tests without approval.
 
 </laravel-boost-guidelines>
-
-<!-- SPECKIT START -->
-For governance that overrides generated specs, plans, tasks, and implementation
-decisions, read `.specify/memory/constitution.md` first. For the active
-SurveyKita feature plan, read
-`specs/001-surveykita-evaluations/plan.md`.
-<!-- SPECKIT END -->
