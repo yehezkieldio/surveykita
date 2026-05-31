@@ -26,27 +26,20 @@ class SurveyKitaSeeder extends Seeder
         $admin = User::query()->updateOrCreate(
             ['email' => 'admin@universitasmulia.ac.id'],
             [
-                'name' => 'Administrator SurveyKita',
+                'name' => 'Administrator',
                 'role' => 'admin',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('admin'),
                 'email_verified_at' => now(),
             ],
         );
 
         $students = collect([
-            ['nim' => '2311032', 'name' => 'Aulia Rahmawati', 'class_name' => 'IF-23A'],
-            ['nim' => '2312045', 'name' => 'Bagas Pratama', 'class_name' => 'TI-23A'],
-            ['nim' => '2313056', 'name' => 'Citra Maharani', 'class_name' => 'SI-23A'],
-            ['nim' => '2321078', 'name' => 'Dimas Saputra', 'class_name' => 'AK-23A'],
-            ['nim' => '2322091', 'name' => 'Eka Lestari', 'class_name' => 'MN-23A'],
-            ['nim' => '2333014', 'name' => 'Fajar Nugroho', 'class_name' => 'FA-23A'],
-            ['nim' => '2351025', 'name' => 'Gita Permatasari', 'class_name' => 'TI-23B'],
-            ['nim' => '2353036', 'name' => 'Hendra Wijaya', 'class_name' => 'TP-23A'],
+            ['nim' => '2011032', 'name' => 'Aulia Rahmawati', 'class_name' => 'IFB5A'],
         ])->map(function (array $data) use ($parser): Student {
             $parsed = $parser->parse($data['nim']);
 
             $user = User::query()->updateOrCreate(
-                ['email' => $data['nim'].'@students.universitasmulia.ac.id'],
+                ['email' => $data['nim'] . '@students.universitasmulia.ac.id'],
                 [
                     'name' => $data['name'],
                     'role' => 'mahasiswa',
@@ -97,7 +90,7 @@ class SurveyKitaSeeder extends Seeder
             'fasilitas' => ['name' => 'Fasilitas', 'description' => 'Evaluasi fasilitas pendukung kegiatan akademik.'],
             'administrasi' => ['name' => 'Administrasi', 'description' => 'Evaluasi layanan administrasi akademik.'],
             'kepuasan_umum' => ['name' => 'Kepuasan Umum', 'description' => 'Evaluasi kepuasan umum mahasiswa.'],
-        ])->mapWithKeys(fn (array $category, string $key): array => [
+        ])->mapWithKeys(fn(array $category, string $key): array => [
             $key => QuestionCategory::query()->updateOrCreate(
                 ['name' => $category['name']],
                 ['description' => $category['description']],
