@@ -31,7 +31,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: `laravel/socialite`, `akaunting/laravel-apexcharts`, `barryvdh/laravel-dompdf`, `maatwebsite/excel`, `pestphp/pest`, and `pestphp/pest-plugin-laravel` are installed or explicitly retained; package scripts use Bun.
   - Verification: `composer validate && composer show laravel/socialite akaunting/laravel-apexcharts barryvdh/laravel-dompdf maatwebsite/excel pestphp/pest pestphp/pest-plugin-laravel`
 
-- [ ] T002 chore(project): register route files, middleware aliases, and app providers in `bootstrap/app.php`, `routes/web.php`, and `routes/auth.php`
+- [X] T002 chore(project): register route files, middleware aliases, and app providers in `bootstrap/app.php`, `routes/web.php`, and `routes/auth.php`
   - Phase: Project foundation
   - Dependencies: T001
   - Files: `bootstrap/app.php`, `routes/web.php`, `routes/auth.php`, `app/Providers/AppServiceProvider.php`

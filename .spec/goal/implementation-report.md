@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-05-31 23:03 Asia/Makassar
+- Last updated: 2026-05-31 23:08 Asia/Makassar
 
 ## Decisions
 
@@ -24,6 +24,7 @@ remaining work. Keep this file current after each coherent slice.
 | Issue | Task | Status | Commit | Verification |
 | --- | --- | --- | --- | --- |
 | `#1` | T001 `chore(project): align allowed dependencies` | Closed | `c8d92f3` | `composer validate`; `composer show --locked laravel/socialite`; `composer show --locked akaunting/laravel-apexcharts`; `composer show --locked barryvdh/laravel-dompdf`; `composer show --locked maatwebsite/excel`; `composer show --locked pestphp/pest`; `composer show --locked pestphp/pest-plugin-laravel`; banned dependency scan |
+| `#2` | T002 `chore(project): register route files and middleware aliases` | Ready to commit | pending | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor` |
 
 ## Verification Log
 
@@ -48,6 +49,19 @@ remaining work. Keep this file current after each coherent slice.
 - Committed `c8d92f3` with Conventional Commit message
   `chore(project): align SurveyKita dependencies` and closed GitHub Issue `#1`
   as completed.
+
+### 2026-05-31 23:08 Asia/Makassar
+
+- Registered `routes/auth.php` through `bootstrap/app.php` using Laravel 13
+  `withRouting(... then:)` routing customization.
+- Registered middleware aliases `role` and `student.profile.complete` for the
+  project middleware classes.
+- Replaced the default welcome closure route with a root redirect named `home`.
+- Created empty auth route groups without business logic so later auth tasks can
+  attach controller routes without route-file drift.
+- Ran `vendor/bin/pint --dirty --format agent`; passed.
+- Ran `php artisan route:list --except-vendor`; passed and showed the root
+  redirect route.
 
 ## Remaining Gates
 
