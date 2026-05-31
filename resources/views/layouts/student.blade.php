@@ -11,42 +11,48 @@
     </head>
     <body class="sk-page font-sans">
         <header class="border-b border-zinc-200 bg-white">
-            <div class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-5 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
+            <div class="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-5 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
                 <a href="{{ route('student.dashboard') }}" class="font-display text-2xl font-semibold tracking-[-0.05em] text-zinc-950">SurveyKita</a>
 
-                <nav class="flex flex-wrap items-center gap-2 text-sm">
+                <nav class="grid grid-cols-2 gap-px border border-zinc-200 bg-zinc-200 text-sm sm:flex sm:items-center">
                     @foreach ([
-                        'student.dashboard' => 'Dashboard',
-                        'student.profile.complete' => 'Profil Saya',
-                        'student.evaluations.index' => 'Evaluasi Aktif',
+                        'student.dashboard' => 'Beranda',
+                        'student.profile.complete' => 'Profil',
+                        'student.evaluations.index' => 'Evaluasi',
                         'student.submissions.index' => 'Riwayat',
                     ] as $routeName => $label)
                         @if (Route::has($routeName))
                             <a href="{{ route($routeName) }}" @class([
-                                'border px-3 py-2 font-medium transition-colors',
-                                'border-transparent text-zinc-600 hover:border-zinc-200 hover:bg-zinc-50 hover:text-zinc-950' => !request()->routeIs($routeName),
-                                'border-zinc-950 bg-zinc-950 text-white' => request()->routeIs($routeName),
+                                'bg-white px-4 py-2.5 text-center font-medium transition-colors',
+                                'text-zinc-600 hover:text-zinc-950' => !request()->routeIs($routeName),
+                                'bg-zinc-950 text-white' => request()->routeIs($routeName),
                             ])>{{ $label }}</a>
                         @endif
                     @endforeach
 
                     @auth
-                        <form method="POST" action="{{ route('logout') }}">
+                        <form method="POST" action="{{ route('logout') }}" class="contents">
                             @csrf
-                            <x-button type="submit" variant="secondary">Keluar</x-button>
+                            <button type="submit" class="bg-white px-4 py-2.5 text-center font-medium text-zinc-600 transition-colors hover:text-zinc-950">Keluar</button>
                         </form>
                     @endauth
                 </nav>
             </div>
         </header>
 
-        <main class="mx-auto max-w-6xl px-4 py-8 sm:px-6 animate-reveal">
-            <div class="mb-8 border-b border-zinc-200 pb-6">
-                @if ($eyebrow ?? null)
-                    <p class="mb-2 text-sm font-medium text-zinc-500">{{ $eyebrow }}</p>
-                @endif
-                <h1 class="font-display text-4xl font-semibold leading-none tracking-[-0.06em] text-zinc-950 md:text-5xl">{{ $heading ?? 'Dashboard' }}</h1>
-            </div>
+        <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 animate-reveal">
+            <section class="mb-8 grid gap-6 border-b border-zinc-200 pb-8 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
+                <div>
+                    @if ($eyebrow ?? null)
+                        <p class="mb-3 text-sm font-medium text-zinc-500">{{ $eyebrow }}</p>
+                    @endif
+                    <h1 class="max-w-5xl font-display text-5xl font-semibold leading-[0.92] tracking-[-0.07em] text-zinc-950 md:text-6xl">{{ $heading ?? 'Dashboard' }}</h1>
+                </div>
+                <div class="border border-zinc-200 bg-white p-4">
+                    <p class="text-xs font-medium text-zinc-500">Portal Mahasiswa</p>
+                    <p class="mt-2 text-sm leading-6 text-zinc-700">Isi evaluasi aktif, pantau riwayat, dan lengkapi identitas akademik dari satu alur.</p>
+                </div>
+            </section>
 
             <x-alert />
             {{ $slot }}

@@ -85,7 +85,7 @@ class GoogleAuthController extends Controller
                         'study_program' => $parsed['study_program'],
                         'enrollment_year' => $parsed['enrollment_year'],
                         'sequence_number' => $parsed['sequence_number'],
-                        'class_name' => $student->class_name ?: $formatter->className('', $parsed),
+                        'class_name' => $student->class_name ?: $formatter->className('B', $parsed),
                     ])->save();
 
                     $user->setRelation('student', $student);
