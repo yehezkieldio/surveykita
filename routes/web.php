@@ -43,7 +43,9 @@ Route::middleware(['auth', 'role:mahasiswa'])
         Route::get('/evaluations', [EvaluationController::class, 'index'])->name('evaluations.index');
         Route::middleware('student.profile.complete')->group(function (): void {
             Route::get('/evaluations/{form}', [EvaluationController::class, 'show'])->name('evaluations.show');
+            Route::get('/evaluations/{form}/fill', [EvaluationController::class, 'fill'])->name('evaluations.fill');
             Route::post('/evaluations/{form}/submit', [EvaluationController::class, 'submit'])->name('evaluations.submit');
         });
         Route::get('/submissions', [SubmissionController::class, 'index'])->name('submissions.index');
+        Route::get('/submissions/success/{response}', [SubmissionController::class, 'success'])->name('submissions.success');
     });

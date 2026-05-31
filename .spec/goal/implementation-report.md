@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-06-01 02:05 Asia/Makassar
+- Last updated: 2026-06-01 02:24 Asia/Makassar
 
 ## Decisions
 
@@ -46,6 +46,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#21` | T021 `feat(admin): implement form, category, and question management` | Closed | `90429ab` | `php artisan test --compact --filter=AdminCrudTest`; `php artisan route:list --except-vendor --path=admin`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 | `#22` | T022 `test(student): cover profile completion requirement` | Closed | `9d4b086` | `php artisan test --compact --filter=ProfileCompletionTest` |
 | `#23` | T023 `feat(student): implement profile completion controller, request, middleware, and views` | Closed | `9d4b086` | `php artisan test --compact --filter=ProfileCompletionTest`; `php artisan route:list --except-vendor --path=student`; `php artisan test --compact --filter=GoogleOAuthTest`; `php artisan test --compact --filter=RoleAccessTest`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
+| `#24` | T024 `test(student): cover evaluation submission rules` | Ready to close | Pending | `php artisan test --compact --filter=EvaluationSubmissionTest` |
+| `#25` | T025 `feat(student): implement dashboard, active forms, fill, submit, success, and history flow` | Ready to close | Pending | `php artisan test --compact --filter=EvaluationSubmissionTest`; `ProfileCompletionTest`; `RoleAccessTest`; `php artisan route:list --except-vendor --path=student`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 
 ## Verification Log
 
@@ -391,6 +393,29 @@ remaining work. Keep this file current after each coherent slice.
 - Committed and pushed `9d4b086` with Conventional Commit message
   `feat(student): enforce profile completion` and closed GitHub Issues `#22`
   and `#23` as completed.
+
+### 2026-06-01 02:24 Asia/Makassar
+
+- Wrote `EvaluationSubmissionTest` covering active submission, optional
+  suggestion, duplicate prevention, inactive form, inactive period, expired
+  period, missing required question, invalid scores below/above range, and
+  admin blocked from mahasiswa submission.
+- Implemented `SubmitEvaluationRequest` with nested answer validation,
+  required-question checks, active/open period checks, duplicate response
+  checks, and 1-5 score validation.
+- Implemented student dashboard counts, active-form list with submitted
+  status, form detail, fill form, transaction-backed submission, duplicate
+  query-exception handling, success page, and paginated submission history.
+- Added `GET /student/evaluations/{form}/fill` and
+  `GET /student/submissions/success/{response}` routes.
+- Ran `php artisan test --compact --filter=EvaluationSubmissionTest`; passed
+  with 7 tests and 43 assertions.
+- Ran `vendor/bin/pint --dirty --format agent`; passed after formatting the
+  submission request.
+- Ran regressions: `ProfileCompletionTest` and `RoleAccessTest`; both passed.
+- Ran `php artisan route:list --except-vendor --path=student`; passed and
+  showed 16 student/admin-student routes.
+- Ran `bun run build`; passed.
 
 ## Remaining Gates
 

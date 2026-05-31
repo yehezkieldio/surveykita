@@ -231,7 +231,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 13: Student Evaluation Flow
 
-- [ ] T024 test(student): cover evaluation submission rules in `tests/Feature/Student/EvaluationSubmissionTest.php`
+- [X] T024 test(student): cover evaluation submission rules in `tests/Feature/Student/EvaluationSubmissionTest.php`
   - Phase: Student evaluation flow
   - Dependencies: T018, T023
   - Files: `tests/Feature/Student/EvaluationSubmissionTest.php`
@@ -239,7 +239,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: Tests cover active submission, duplicate prevention, inactive form, inactive period, expired period, missing required question, invalid score below 1 or above 5, optional suggestion, and admin blocked from submitting.
   - Verification: `php artisan test --compact --filter=EvaluationSubmissionTest`
 
-- [ ] T025 feat(student): implement dashboard, active forms, fill, submit, success, and history flow in `app/Http/Controllers/Student/`, `app/Http/Requests/Student/`, `routes/web.php`, and `resources/views/student/`
+- [X] T025 feat(student): implement dashboard, active forms, fill, submit, success, and history flow in `app/Http/Controllers/Student/`, `app/Http/Requests/Student/`, `routes/web.php`, and `resources/views/student/`
   - Phase: Student evaluation flow
   - Dependencies: T024
   - Files: `app/Http/Controllers/Student/DashboardController.php`, `app/Http/Controllers/Student/EvaluationController.php`, `app/Http/Controllers/Student/SubmissionController.php`, `app/Http/Requests/Student/SubmitEvaluationRequest.php`, `routes/web.php`, `resources/views/student/dashboard.blade.php`, `resources/views/student/evaluations/index.blade.php`, `resources/views/student/evaluations/show.blade.php`, `resources/views/student/evaluations/fill.blade.php`, `resources/views/student/submissions/success.blade.php`, `resources/views/student/submissions/index.blade.php`

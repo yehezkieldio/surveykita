@@ -1,6 +1,7 @@
 <x-layouts.student title="{{ $form->title }} - SurveyKita" heading="{{ $form->title }}">
     <x-card heading="Form Evaluasi" subheading="{{ $form->evaluationPeriod->name }}">
         <p class="text-sm text-zinc-700">{{ $form->description }}</p>
+        <div class="mt-4"><x-button :href="route('student.evaluations.fill', $form)">Isi Evaluasi</x-button></div>
 
         <div class="mt-4 space-y-3">
             @forelse ($form->questions as $question)
