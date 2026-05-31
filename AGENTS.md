@@ -163,6 +163,8 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 </laravel-boost-guidelines>
 
 <!-- SPECKIT START -->
-For additional context about technologies to be used, project structure,
-shell commands, and other important information, read the current plan
+For governance that overrides generated specs, plans, tasks, and implementation
+decisions, read `.specify/memory/constitution.md` first. For additional
+feature-specific context about technologies, project structure, shell commands,
+and other important information, read the current plan.
 <!-- SPECKIT END -->

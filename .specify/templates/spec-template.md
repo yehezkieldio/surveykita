@@ -8,28 +8,41 @@
 
 **Input**: User description: "$ARGUMENTS"
 
+## Constitution Alignment *(mandatory)*
+
+<!--
+  Every generated feature MUST comply with the SurveyKita Constitution.
+  Do not weaken whole-app delivery into an MVP, starter-kit demo, admin-panel
+  shortcut, generic CRUD-only module, or unwired scaffold.
+-->
+
+- **Whole-app scope**: [Explain how this feature connects to real SurveyKita
+  workflows, routes, controllers, Blade views, buttons, authorization, tests,
+  seed data, and local demonstration.]
+- **Stack compliance**: [Confirm Laravel 13, Blade, Tailwind, Bun, Vite,
+  MariaDB, Pest, and allowed packages. List any dependency needing approval.]
+- **Role boundaries**: [Identify admin-only, mahasiswa-only, and shared access.]
+- **Domain rules**: [Identify relevant academic evaluation rules and database
+  invariants.]
+- **No placeholders**: [State how fake UI, TODO-only behavior, orphan routes,
+  and empty tests will be avoided.]
+
 ## User Scenarios & Testing *(mandatory)*
 
 <!--
-  IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
-  Each user story/journey must be INDEPENDENTLY TESTABLE - meaning if you implement just ONE of them,
-  you should still have a viable MVP (Minimum Viable Product) that delivers value.
-
-  Assign priorities (P1, P2, P3, etc.) to each story, where P1 is the most critical.
-  Think of each story as a standalone slice of functionality that can be:
-  - Developed independently
-  - Tested independently
-  - Deployed independently
-  - Demonstrated to users independently
+  User stories MUST describe complete, demonstrable SurveyKita workflows.
+  They may be prioritized for planning order, but generated work must preserve
+  complete whole-app delivery rather than stopping at a narrow MVP.
 -->
 
 ### User Story 1 - [Brief Title] (Priority: P1)
 
-[Describe this user journey in plain language]
+[Describe this SurveyKita user journey in plain language.]
 
-**Why this priority**: [Explain the value and why it has this priority level]
+**Why this priority**: [Explain the academic or administrative value.]
 
-**Independent Test**: [Describe how this can be tested independently - e.g., "Can be fully tested by [specific action] and delivers [specific value]"]
+**Independent Test**: [Describe the Pest or manual flow that proves this story
+works with real routes, controllers, views, validation, authorization, and data.]
 
 **Acceptance Scenarios**:
 
@@ -40,11 +53,11 @@
 
 ### User Story 2 - [Brief Title] (Priority: P2)
 
-[Describe this user journey in plain language]
+[Describe this SurveyKita user journey in plain language.]
 
-**Why this priority**: [Explain the value and why it has this priority level]
+**Why this priority**: [Explain the academic or administrative value.]
 
-**Independent Test**: [Describe how this can be tested independently]
+**Independent Test**: [Describe how this can be tested independently.]
 
 **Acceptance Scenarios**:
 
@@ -54,11 +67,11 @@
 
 ### User Story 3 - [Brief Title] (Priority: P3)
 
-[Describe this user journey in plain language]
+[Describe this SurveyKita user journey in plain language.]
 
-**Why this priority**: [Explain the value and why it has this priority level]
+**Why this priority**: [Explain the academic or administrative value.]
 
-**Independent Test**: [Describe how this can be tested independently]
+**Independent Test**: [Describe how this can be tested independently.]
 
 **Acceptance Scenarios**:
 
@@ -66,66 +79,66 @@
 
 ---
 
-[Add more user stories as needed, each with an assigned priority]
+[Add more user stories as needed, each with an assigned priority.]
 
 ### Edge Cases
 
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right edge cases.
--->
-
-- What happens when [boundary condition]?
-- How does system handle [error scenario]?
+- What happens when a mahasiswa tries to submit the same evaluation form twice?
+- What happens when a form is inactive?
+- What happens when an evaluation period is inactive or expired?
+- What happens when required questions are missing answers?
+- What happens when scores are outside 1-5?
+- What happens when a mahasiswa profile is incomplete?
+- What happens when a Google OAuth email is outside the allowed student domain?
+- What happens when admin and mahasiswa attempt cross-role access?
 
 ## Requirements *(mandatory)*
 
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right functional requirements.
--->
-
 ### Functional Requirements
 
-- **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
-- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]
-- **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
-- **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
-- **FR-005**: System MUST [behavior, e.g., "log all security events"]
-
-*Example of marking unclear requirements:*
-
-- **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
-- **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
+- **FR-001**: System MUST [specific SurveyKita capability].
+- **FR-002**: System MUST validate input through Form Request classes where
+  request validation is needed.
+- **FR-003**: System MUST protect routes with auth and role middleware.
+- **FR-004**: System MUST return real Blade views or redirects for every planned
+  controller action.
+- **FR-005**: System MUST persist data through migrations, models, relationships,
+  validation, and database constraints.
+- **FR-006**: System MUST include Pest coverage for real behavior affected by
+  this feature.
+- **FR-007**: System MUST avoid fake buttons, placeholder dashboards, dead
+  routes, orphan controllers, and TODO-only core behavior.
 
 ### Key Entities *(include if feature involves data)*
 
-- **[Entity 1]**: [What it represents, key attributes without implementation]
-- **[Entity 2]**: [What it represents, relationships to other entities]
+- **User**: Authentication identity with unique email and role.
+- **Student**: Mahasiswa profile linked one-to-one with a user and uniquely
+  identified by NIM.
+- **EvaluationPeriod**: Time window that controls whether forms can be submitted.
+- **EvaluationForm**: Admin-managed form that students answer during an active
+  period.
+- **QuestionCategory**: Grouping for academic service evaluation questions.
+- **Question**: Required or optional Likert question within a form/category.
+- **Response**: One student submission for one evaluation form.
+- **ResponseAnswer**: Score and optional answer data for one question.
 
 ## Success Criteria *(mandatory)*
 
-<!--
-  ACTION REQUIRED: Define measurable success criteria.
-  These must be technology-agnostic and measurable.
--->
-
 ### Measurable Outcomes
 
-- **SC-001**: [Measurable metric, e.g., "Users can complete account creation in under 2 minutes"]
-- **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
-- **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
-- **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
+- **SC-001**: [Users can complete the intended workflow locally using seeded or
+  documented data.]
+- **SC-002**: [Relevant Pest tests pass and cover the behavior, not only status
+  codes.]
+- **SC-003**: [Admin and mahasiswa role boundaries are enforced for the feature.]
+- **SC-004**: [The feature can be explained using SurveyKita domain entities and
+  does not depend on banned starter kits or admin generators.]
 
 ## Assumptions
 
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right assumptions based on reasonable defaults
-  chosen when the feature description did not specify certain details.
--->
-
-- [Assumption about target users, e.g., "Users have stable internet connectivity"]
-- [Assumption about scope boundaries, e.g., "Mobile support is out of scope for v1"]
-- [Assumption about data/environment, e.g., "Existing authentication system will be reused"]
-- [Dependency on existing system/service, e.g., "Requires access to the existing user profile API"]
+- SurveyKita remains a Laravel 13 Blade/Tailwind application.
+- Bun remains the only JavaScript package manager.
+- MariaDB through Docker Compose remains the local development database.
+- Google OAuth is student-only and restricted to
+  `@students.universitasmulia.ac.id`.
+- Admin accounts are manually provisioned or seeded, not created by Google OAuth.
