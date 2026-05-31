@@ -83,6 +83,16 @@
   specification decisions and documented defaults instead of pausing for new
   preferences; only unavailable external secrets or accounts may be recorded as
   environment prerequisites.
+- Q: Are any human-only blockers left after Google OAuth credentials were added
+  to `.env`? → A: No human-only blocker remains for local unattended
+  implementation. `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` are available in
+  `.env`, and `GOOGLE_REDIRECT_URI` must match the planned callback route
+  `/auth/google/callback`; the agent may wire `config/services.php` and
+  continue. Live Google browser login may still require a real Universitas Mulia
+  student Google account and may be skipped in unattended browser verification
+  if Google account challenge, MFA, consent, or CAPTCHA blocks automation;
+  Socialite fake tests and seeded mahasiswa password login remain the required
+  unattended verification path.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -498,9 +508,13 @@ real seeded data.
   specification, including dependency installation, database reset, seeded data
   generation, local server management, test execution, `agent-browser`
   verification, and cleanup of task-owned processes.
-- Live Google OAuth credentials are environment prerequisites for real provider
-  login. Automated tests and unattended local verification must use fakes or
-  seeded accounts where live credentials are unavailable.
+- Google OAuth client ID, client secret, and redirect URI are present in local
+  `.env`. The redirect URI must match `/auth/google/callback`, and Socialite
+  service configuration is an agent-actionable setup item. Live Google browser
+  login only requires human input if Google account challenge, MFA, consent,
+  CAPTCHA, or missing student-account access blocks automation; otherwise tests
+  use Socialite fakes and browser verification uses seeded mahasiswa password
+  accounts when needed.
 - Today's date is evaluated in the application's configured local timezone for
   inclusive period start and end date checks.
 - Empty report exports are allowed for admin users and must contain headers,

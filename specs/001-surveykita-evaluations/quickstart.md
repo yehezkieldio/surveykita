@@ -140,10 +140,14 @@ The agent may:
   sequence.
 - Clean up task-owned browser and local server processes before completion.
 
-Live Google OAuth credentials are external prerequisites for real provider
-login. If they are unavailable during unattended execution, use Socialite fakes
-in automated tests and seeded mahasiswa password accounts for browser
-verification.
+Google OAuth client ID, client secret, and redirect URI are expected in local
+`.env`. For local browser verification, `GOOGLE_REDIRECT_URI` must match the
+implemented callback route, such as
+`http://localhost:8000/auth/google/callback`, and the implementation must wire
+the matching Socialite service configuration. If a live Google account
+challenge, MFA, consent screen, CAPTCHA, or missing Universitas Mulia student
+account blocks browser automation, use Socialite fakes in automated tests and
+seeded mahasiswa password accounts for unattended browser verification.
 
 ## Required Test Command
 
