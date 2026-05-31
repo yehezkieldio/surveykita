@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-06-01 00:10 Asia/Makassar
+- Last updated: 2026-06-01 00:24 Asia/Makassar
 
 ## Decisions
 
@@ -34,6 +34,7 @@ remaining work. Keep this file current after each coherent slice.
 | `#9` | T009 `feat(auth): implement role middleware and protected route groups` | Closed | `204052a` | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor`; `php artisan test --compact --filter=RoleAccessTest`; `bun run build` |
 | `#10` | T010 `test(auth): cover Google OAuth student-domain behavior` | Closed | `5544cfb` | Red: `php artisan test --compact --filter=GoogleOAuthTest`; Green: `php artisan test --compact --filter=GoogleOAuthTest` |
 | `#11` | T011 `feat(auth): implement student-only Google OAuth` | Closed | `5544cfb` | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor --path=auth/google`; `php artisan test --compact --filter=GoogleOAuthTest`; `php artisan test --compact --filter=SessionAuthTest`; `bun run build` |
+| `#12` | T012 `chore(db): create SurveyKita migrations with constraints and indexes` | Ready to commit | pending | `vendor/bin/pint --dirty --format agent`; `php artisan migrate:fresh --no-interaction`; `php artisan schema:dump --prune --database=mariadb --no-interaction` with migration backup/restore; auth regression tests; Laravel Boost schema inspection |
 
 ## Verification Log
 
@@ -194,6 +195,40 @@ remaining work. Keep this file current after each coherent slice.
 - Committed and pushed `5544cfb` with Conventional Commit message
   `feat(auth): add student-only Google OAuth` and closed GitHub Issues `#10`
   and `#11` as completed.
+
+### 2026-06-01 00:24 Asia/Makassar
+
+- Completed SurveyKita database migrations for `students`,
+  `evaluation_periods`, `evaluation_forms`, `question_categories`,
+  `questions`, `responses`, and `response_answers`.
+- Extended the base `users` migration with `role`, `google_id`, nullable
+  `password`, `users.email` uniqueness, `users.google_id` index, and a
+  MariaDB role check constraint.
+- Added required student profile columns and indexes:
+  nullable unique `nim`, unique `user_id`, `program_code`, `study_program`,
+  `enrollment_year`, `sequence_number`, and `class_name`.
+- Added foreign keys, unique constraints, and reporting indexes for forms,
+  questions, responses, and response answers.
+- Added MariaDB check constraints for evaluation period date ordering and
+  response answer scores between 1 and 5.
+- Initial `php artisan migrate:fresh --no-interaction` failed because local
+  `.env` still used `root` without a password while the compose service uses
+  the `surveykita` user. Corrected only local non-secret DB credentials in
+  `.env`, then cleared config.
+- Ran `vendor/bin/pint --dirty --format agent`; passed.
+- Ran `php artisan migrate:fresh --no-interaction`; passed all migrations.
+- Ran `php artisan schema:dump --prune --database=mariadb --no-interaction`
+  with a temporary migration backup and immediate restore, because `--prune`
+  deletes migration source files by design; command passed.
+- Removed the generated schema dump file after verification so migrations
+  remain the source of truth during this active implementation.
+- Ran auth regression tests:
+  `SessionAuthTest`, `GoogleOAuthTest`, and `RoleAccessTest`; all passed.
+- Inspected the live MariaDB schema with Laravel Boost. Confirmed SurveyKita
+  tables exist and `response_answers_score_check`,
+  `responses_evaluation_form_id_student_id_unique`,
+  `response_answers_response_id_question_id_unique`, student unique indexes,
+  and foreign keys are present.
 
 ## Remaining Gates
 

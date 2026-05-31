@@ -123,7 +123,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 7: Database Schema
 
-- [ ] T012 chore(db): create SurveyKita migrations with constraints and indexes in `database/migrations/`
+- [X] T012 chore(db): create SurveyKita migrations with constraints and indexes in `database/migrations/`
   - Phase: Database schema
   - Dependencies: T003
   - Files: `database/migrations/0001_01_01_000000_create_users_table.php`, `database/migrations/*_create_students_table.php`, `database/migrations/*_create_evaluation_periods_table.php`, `database/migrations/*_create_evaluation_forms_table.php`, `database/migrations/*_create_question_categories_table.php`, `database/migrations/*_create_questions_table.php`, `database/migrations/*_create_responses_table.php`, `database/migrations/*_create_response_answers_table.php`
