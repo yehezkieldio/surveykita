@@ -1,0 +1,53 @@
+# SurveyKita Implementation Report
+
+This report is the running evidence log for the unattended `/goal` execution.
+It records implementation decisions, issue progress, verification commands, and
+remaining work. Keep this file current after each coherent slice.
+
+## Current State
+
+- Branch: `001-surveykita-evaluations`
+- Remote: `https://github.com/yehezkieldio/surveykita.git`
+- Active task range: GitHub Issues `#1` through `#41`
+- Last updated: 2026-05-31 23:00 Asia/Makassar
+
+## Decisions
+
+- `maatwebsite/excel` stable `3.1.x` does not install on PHP 8.5 / Laravel 13.
+  Composer reports Laravel 13 and PHP 8.5 compatibility only on the upstream
+  `4.x-dev` branch, so the implementation uses `maatwebsite/excel:4.x-dev`.
+  This preserves the required package while avoiding insecure or incompatible
+  older spreadsheet dependencies.
+
+## Issue Progress
+
+| Issue | Task | Status | Commit | Verification |
+| --- | --- | --- | --- | --- |
+| `#1` | T001 `chore(project): align allowed dependencies` | Ready to commit | pending | `composer validate`; `composer show --locked laravel/socialite`; `composer show --locked akaunting/laravel-apexcharts`; `composer show --locked barryvdh/laravel-dompdf`; `composer show --locked maatwebsite/excel`; `composer show --locked pestphp/pest`; `composer show --locked pestphp/pest-plugin-laravel`; banned dependency scan |
+
+## Verification Log
+
+### 2026-05-31 23:00 Asia/Makassar
+
+- Ran `composer require akaunting/laravel-apexcharts:^4.0 barryvdh/laravel-dompdf:^3.1 maatwebsite/excel:4.x-dev --with-all-dependencies --no-interaction`.
+- Composer installed:
+  - `akaunting/laravel-apexcharts` `4.0.0`
+  - `barryvdh/laravel-dompdf` `v3.1.2`
+  - `maatwebsite/excel` `4.x-dev 86cce13`
+  - already-present `laravel/socialite`, `pestphp/pest`, and
+    `pestphp/pest-plugin-laravel`
+- Ran `composer validate`; it passed with a warning about the exact `4.x-dev`
+  version constraint, which is intentional due to the current compatibility
+  state.
+- Ran individual `composer show --locked ...` checks for every T001 required
+  Composer package.
+- Ran a banned dependency scan against `composer.json`, `package.json`,
+  `bun.lock`, `composer.lock`, and `.npmrc`. Matches were only incidental words
+  such as Composer autoload `bootstrap.php` and `tslib` in the Bun lockfile, not
+  banned project dependencies.
+
+## Remaining Gates
+
+- Continue T002 through T041 in dependency order.
+- Keep this report updated with commits, issue closures, verification evidence,
+  browser E2E results, and final completion decision.

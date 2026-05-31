@@ -23,7 +23,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 1: Project Foundation
 
-- [ ] T001 chore(project): align allowed dependencies in `composer.json`, `composer.lock`, `package.json`, and `bun.lock`
+- [X] T001 chore(project): align allowed dependencies in `composer.json`, `composer.lock`, `package.json`, and `bun.lock`
   - Phase: Project foundation
   - Dependencies: None
   - Files: `composer.json`, `composer.lock`, `package.json`, `bun.lock`
