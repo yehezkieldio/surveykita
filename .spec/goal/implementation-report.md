@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-06-01 01:01 Asia/Makassar
+- Last updated: 2026-06-01 01:19 Asia/Makassar
 
 ## Decisions
 
@@ -39,6 +39,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#14` | T014 `test(student): cover NIM parsing and program-code mapping` | Closed | `76c975f` | `php artisan test --compact --filter=NimParserTest`; `vendor/bin/pint --dirty --format agent` |
 | `#15` | T015 `test(seed): cover seeded demonstration completeness` | Closed | `50a3bd2` | `php artisan test --compact --filter=SeedDataTest` |
 | `#16` | T016 `chore(seed): implement factories and seeders` | Closed | `50a3bd2` | `php artisan migrate:fresh --seed --no-interaction`; `php artisan test --compact --filter=SeedDataTest`; `vendor/bin/pint --dirty --format agent` |
+| `#17` | T017 `test(evaluation): cover Likert calculation rules` | Ready to close | Pending | `php artisan test --compact --filter=EvaluationResultServiceTest` |
+| `#18` | T018 `feat(evaluation): implement centralized result math` | Ready to close | Pending | `php artisan test --compact --filter=EvaluationResultServiceTest`; `vendor/bin/pint --dirty --format agent`; seed/model/NIM regression tests |
 
 ## Verification Log
 
@@ -294,6 +296,29 @@ remaining work. Keep this file current after each coherent slice.
 - Committed and pushed `50a3bd2` with Conventional Commit message
   `chore(seed): add SurveyKita demonstration dataset` and closed GitHub Issues
   `#15` and `#16` as completed.
+
+### 2026-06-01 01:19 Asia/Makassar
+
+- Wrote `EvaluationResultServiceTest` for total respondents, total answers,
+  average score, satisfaction percentage, satisfaction category mapping,
+  per-category averages, per-question averages, Likert score distribution,
+  suggestion extraction, and no-response empty state.
+- Implemented `EvaluationResultService::forForm()` as the centralized
+  calculation source for controllers, charts, PDF export, and Excel export.
+- The service returns DTO-style arrays with form context, optional category
+  filter context, zero-safe summary fields, per-category rows, per-question
+  rows, Likert distribution keys `1` through `5`, suggestion rows with student
+  context, and `is_empty` metadata.
+- Added public `satisfactionCategory()` boundary mapping:
+  `0-20`, `21-40`, `41-60`, `61-80`, and `81-100`.
+- Empty forms return zero totals, zero averages, zero distributions, and
+  `Belum Ada Respon` for display-safe empty state handling.
+- Ran `php artisan test --compact --filter=EvaluationResultServiceTest`;
+  passed with 14 tests and 41 assertions.
+- Ran `vendor/bin/pint --dirty --format agent`; passed after formatting the
+  service and test.
+- Ran regressions:
+  `SeedDataTest`, `ModelAndRelationshipTest`, and `NimParserTest`; all passed.
 
 ## Remaining Gates
 

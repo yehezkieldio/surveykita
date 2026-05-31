@@ -169,7 +169,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 10: Evaluation Calculation Service
 
-- [ ] T017 test(evaluation): cover Likert calculation rules in `tests/Unit/Services/EvaluationResultServiceTest.php`
+- [X] T017 test(evaluation): cover Likert calculation rules in `tests/Unit/Services/EvaluationResultServiceTest.php`
   - Phase: Evaluation calculation service
   - Dependencies: T013
   - Files: `tests/Unit/Services/EvaluationResultServiceTest.php`
@@ -177,7 +177,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: Tests cover total respondents, total answers, average score, satisfaction percentage, category mapping, per-category average, per-question average, Likert distribution, suggestions, and no-response empty state.
   - Verification: `php artisan test --compact --filter=EvaluationResultServiceTest`
 
-- [ ] T018 feat(evaluation): implement centralized result math in `app/Services/EvaluationResultService.php`
+- [X] T018 feat(evaluation): implement centralized result math in `app/Services/EvaluationResultService.php`
   - Phase: Evaluation calculation service
   - Dependencies: T017
   - Files: `app/Services/EvaluationResultService.php`
