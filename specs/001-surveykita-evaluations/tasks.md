@@ -365,7 +365,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: README includes project title, stack, prerequisites, `composer install`, `bun install`, `docker compose up -d`, `cp .env.example .env`, `php artisan key:generate`, `php artisan migrate:fresh --seed`, `bun run build`, `php artisan test`, `php artisan route:list`, `agent-browser` E2E verification notes, Google OAuth env notes, and demo login accounts.
   - Verification: `sed -n '1,240p' README.md`
 
-- [ ] T039 chore(verify): perform final whole-app verification against `specs/001-surveykita-evaluations/quickstart.md`
+- [X] T039 chore(verify): perform final whole-app verification against `specs/001-surveykita-evaluations/quickstart.md`
   - Phase: README and verification
   - Dependencies: T037, T038
   - Files: `specs/001-surveykita-evaluations/quickstart.md`, `README.md`
