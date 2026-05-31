@@ -249,7 +249,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 14: Results Dashboard
 
-- [ ] T026 test(admin): cover result dashboard filters and empty states in `tests/Feature/Admin/ResultDashboardTest.php`
+- [X] T026 test(admin): cover result dashboard filters and empty states in `tests/Feature/Admin/ResultDashboardTest.php`
   - Phase: Results dashboard
   - Dependencies: T018, T021, T025
   - Files: `tests/Feature/Admin/ResultDashboardTest.php`
@@ -257,7 +257,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: Tests cover period/form/category filters, total respondents, average score, satisfaction percentage, satisfaction category, per-category recap, per-question recap, suggestions, and admin-only access.
   - Verification: `php artisan test --compact --filter=ResultDashboardTest`
 
-- [ ] T027 feat(admin): implement result index and form detail pages in `app/Http/Controllers/Admin/ResultController.php` and `resources/views/admin/results/`
+- [X] T027 feat(admin): implement result index and form detail pages in `app/Http/Controllers/Admin/ResultController.php` and `resources/views/admin/results/`
   - Phase: Results dashboard
   - Dependencies: T026
   - Files: `app/Http/Controllers/Admin/ResultController.php`, `routes/web.php`, `resources/views/admin/results/index.blade.php`, `resources/views/admin/results/show.blade.php`, `resources/views/components/summary-card.blade.php`

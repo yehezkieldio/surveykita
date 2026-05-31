@@ -31,7 +31,7 @@ class EvaluationResultService
     {
         $questions = $form->questions()
             ->with('category')
-            ->when($category, fn ($query): mixed => $query->whereBelongsTo($category))
+            ->when($category, fn ($query): mixed => $query->whereBelongsTo($category, 'category'))
             ->get();
 
         $responses = $form->responses()
