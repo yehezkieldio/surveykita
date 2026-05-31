@@ -339,7 +339,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 19: Pest Tests
 
-- [ ] T036 test(app): complete required behavior regression suite across `tests/Feature/` and `tests/Unit/`
+- [X] T036 test(app): complete required behavior regression suite across `tests/Feature/` and `tests/Unit/`
   - Phase: Pest tests
   - Dependencies: T006, T008, T010, T014, T015, T017, T019, T022, T024, T026, T028, T030, T032, T035
   - Files: `tests/Feature/Auth/SessionAuthTest.php`, `tests/Feature/Auth/RoleAccessTest.php`, `tests/Feature/Auth/GoogleOAuthTest.php`, `tests/Feature/Admin/AdminCrudTest.php`, `tests/Feature/Admin/ResultDashboardTest.php`, `tests/Feature/Admin/ResultChartsTest.php`, `tests/Feature/Student/ProfileCompletionTest.php`, `tests/Feature/Student/EvaluationSubmissionTest.php`, `tests/Feature/Exports/PdfExportTest.php`, `tests/Feature/Exports/ExcelExportTest.php`, `tests/Feature/SeedDataTest.php`, `tests/Feature/UiRouteWiringTest.php`, `tests/Feature/ModelAndRelationshipTest.php`, `tests/Unit/Services/NimParserTest.php`, `tests/Unit/Services/EvaluationResultServiceTest.php`
@@ -347,7 +347,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: Required coverage includes admin access, mahasiswa access, cross-role blocks, login, logout, Google student-domain filtering, NIM parsing, profile completion, admin CRUD, active submission, duplicate prevention, inactive/expired prevention, invalid score rejection, calculation correctness, category mapping, protected PDF export, protected Excel export, seed data, route wiring, and empty result states.
   - Verification: `php artisan test --compact`
 
-- [ ] T037 chore(quality): run Laravel formatting and full backend/frontend verification in `vendor/bin/pint`, `php artisan test`, `bun run build`, and `php artisan route:list`
+- [X] T037 chore(quality): run Laravel formatting and full backend/frontend verification in `vendor/bin/pint`, `php artisan test`, `bun run build`, and `php artisan route:list`
   - Phase: Pest tests
   - Dependencies: T036
   - Files: `app/**/*.php`, `routes/*.php`, `database/**/*.php`, `tests/**/*.php`, `resources/views/**/*.blade.php`

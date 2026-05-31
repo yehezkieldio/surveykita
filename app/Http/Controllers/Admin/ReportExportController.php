@@ -13,9 +13,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ReportExportController extends Controller
 {
-    public function pdf(EvaluationForm $form, EvaluationResultService $results): Response
+    public function pdf(string $form, EvaluationResultService $results): Response
     {
-        $form->load('evaluationPeriod');
+        $form = EvaluationForm::query()
+            ->with('evaluationPeriod')
+            ->findOrFail($form);
         $result = $results->forForm($form);
         $filename = 'surveykita-'.Str::slug($form->title).'.pdf';
 
@@ -25,9 +27,11 @@ class ReportExportController extends Controller
         ])->setPaper('a4')->download($filename);
     }
 
-    public function excel(EvaluationForm $form, EvaluationResultService $results): Response
+    public function excel(string $form, EvaluationResultService $results): Response
     {
-        $form->load('evaluationPeriod');
+        $form = EvaluationForm::query()
+            ->with('evaluationPeriod')
+            ->findOrFail($form);
         $result = $results->forForm($form);
         $filename = 'surveykita-'.Str::slug($form->title).'.xlsx';
 
