@@ -36,6 +36,11 @@ Pest, pest-plugin-laravel.
 **Testing**: Pest feature and unit tests through `php artisan test`, followed by
 `agent-browser` end-to-end browser verification against the seeded local app.
 
+**Execution Mode**: Unattended autonomous long-horizon implementation. The
+agent may use non-interactive commands, install approved dependencies, reset the
+local database, run seeders, start and stop local services, execute tests, use
+`agent-browser`, fix failures, and continue until verification gates pass.
+
 **Target Platform**: Local web application served by Laravel for university
 project demonstration and grading.
 
@@ -55,7 +60,7 @@ yarn, pnpm, or admin panel generators.
 **Scale/Scope**: Complete SurveyKita application covering authentication,
 student-only Google OAuth, admin CRUD, evaluation submission, Likert
 calculation, dashboards, charts, PDF export, Excel export, seed data, tests,
-local MariaDB setup, and README instructions.
+local MariaDB setup, README instructions, and unattended browser verification.
 
 ## Constitution Check
 
@@ -313,3 +318,7 @@ Before implementation is considered complete:
     mahasiswa workflows, capture snapshots or screenshots for the dashboard,
     evaluation submission, charts, PDF export, Excel export, role boundaries,
     and empty states, then close task-owned browser sessions.
+12. If a gate fails, apply a targeted fix and rerun the smallest failing gate
+    before returning to the full verification sequence. Do not wait for human
+    preference decisions during unattended execution; use the specification,
+    plan, tasks, and README defaults.

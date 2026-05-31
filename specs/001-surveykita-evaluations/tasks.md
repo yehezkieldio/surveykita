@@ -7,6 +7,10 @@
 **Tests**: Pest tests are required for real behavior. Tests must cover happy paths, role boundaries, validation failures, calculation correctness, exports, and seeded demonstration data.
 `agent-browser` is also required for browser-level end-to-end verification after
 the app is running locally; it does not replace Pest coverage.
+Implementation is expected to run unattended for a long-horizon autonomous
+session. Tasks must be written and executed with documented defaults,
+non-interactive commands, local cleanup, and targeted retry loops rather than
+waiting for human choices.
 
 **Organization**: Tasks are grouped in the dependency order required for whole-app delivery. User-story labels map to the specification:
 
@@ -369,6 +373,14 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: `agent-browser` verifies login, admin dashboard, student/period/form/category/question navigation, result dashboard, chart rendering, PDF export, Excel export, logout, mahasiswa login, profile completion when needed, active evaluation submission, duplicate submission feedback, submission history, wrong-role blocking, and at least one empty-state result path; snapshots or screenshots are captured as evidence; task-owned browser sessions are closed after verification.
   - Verification: `agent-browser skills get core && php artisan serve --host=127.0.0.1 --port=8000` in one terminal, then use `agent-browser open http://127.0.0.1:8000/login`, `agent-browser snapshot -i`, workflow clicks/fills, screenshots as needed, and `agent-browser close --all`
 
+- [ ] T040 chore(ops): document unattended autonomous execution protocol in `README.md` and `specs/001-surveykita-evaluations/quickstart.md`
+  - Phase: README and verification
+  - Dependencies: T039
+  - Files: `README.md`, `specs/001-surveykita-evaluations/quickstart.md`
+  - Expected behavior: The implementation can be run as a long-horizon unattended agent task with no human prompts after start.
+  - Acceptance criteria: Documentation states that the agent may install approved dependencies, run non-interactive setup commands, reset and seed the local database, start and stop local services, run Pest, run `agent-browser`, capture verification evidence, clean up task-owned processes, apply targeted fixes, rerun failing gates, and proceed using documented defaults; live Google OAuth credentials are documented as external prerequisites when unavailable.
+  - Verification: `rg -n "unattended|autonomous|agent-browser|cleanup|Google OAuth" README.md specs/001-surveykita-evaluations/quickstart.md`
+
 ## Dependencies & Execution Order
 
 ### Phase Dependencies
@@ -392,14 +404,14 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 17. Excel export: T031-T032 depend on result pages
 18. Blade/Tailwind UI polish: T033-T034 depend on implemented views and routes
 19. Pest tests: T035-T036 depend on all behavior tests and implementation
-20. README and verification: T037-T039 depend on working setup, test suite, and browser-level verification
+20. README and verification: T037-T040 depend on working setup, test suite, browser-level verification, and unattended execution documentation
 
 ### User Story Completion Order
 
 - **US1 Admin manages evaluation program**: T018, T019, T020, plus foundation T001-T017.
 - **US2 Mahasiswa completes and submits evaluation**: T021, T022, T023, T024, plus foundation T001-T017.
 - **US3 Admin reviews results, charts, and reports**: T025, T026, T027, T028, T029, T030, T031, T032, plus US1 and submitted/seeded data.
-- **US4 Seeded local demonstration**: T014, T015, T037, T038, T039, plus all feature behavior.
+- **US4 Seeded local demonstration**: T014, T015, T037, T038, T039, T040, plus all feature behavior.
 
 ### Parallel Opportunities
 
@@ -409,13 +421,14 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 - T030 and T032 can run in parallel after T026 because PDF and Excel exports use separate files.
 - T033 can be split by `auth`, `admin`, `student`, and `components` view folders after feature pages exist.
 - T039 runs after the final setup and test verification because it depends on a seeded database, built assets, and a running local server.
+- T040 follows T039 so the final README and quickstart reflect the real unattended verification protocol.
 
 ### Independent Test Criteria
 
 - **US1**: `php artisan test --compact --filter=AdminCrudTest` proves admin can manage students, periods, forms, categories, and questions while mahasiswa is blocked.
 - **US2**: `php artisan test --compact --filter=ProfileCompletionTest` and `php artisan test --compact --filter=EvaluationSubmissionTest` prove profile gating and submission rules.
 - **US3**: `php artisan test --compact --filter=ResultDashboardTest`, `ResultChartsTest`, `PdfExportTest`, and `ExcelExportTest` prove result summaries, charts, and admin-only reports.
-- **US4**: `php artisan migrate:fresh --seed`, `php artisan test --compact --filter=SeedDataTest`, and an `agent-browser` seeded workflow run prove local demo data is complete and browser-demonstrable.
+- **US4**: `php artisan migrate:fresh --seed`, `php artisan test --compact --filter=SeedDataTest`, an `agent-browser` seeded workflow run, and unattended execution documentation prove local demo data is complete and browser-demonstrable without human decisions.
 
 ## Implementation Strategy
 

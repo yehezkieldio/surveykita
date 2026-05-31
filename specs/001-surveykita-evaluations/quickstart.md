@@ -121,6 +121,30 @@ agent-browser close --all
 pgrep -af "agent-browser|chrome|chromium" || true
 ```
 
+## Unattended Autonomous Execution
+
+SurveyKita is expected to support long-horizon unattended implementation and
+verification. After the run starts, the agent should use this specification,
+plan, task list, quickstart, README, and local defaults instead of waiting for
+human preference decisions.
+
+The agent may:
+
+- Install approved Composer and Bun dependencies.
+- Start and stop Docker Compose, Laravel, Vite, and task-owned browser sessions.
+- Reset and seed the local MariaDB database.
+- Run build, format, route, Pest, and `agent-browser` verification commands.
+- Capture snapshots or screenshots as browser verification evidence.
+- Apply targeted fixes when a verification gate fails.
+- Rerun the smallest failing gate first, then rerun the full verification
+  sequence.
+- Clean up task-owned browser and local server processes before completion.
+
+Live Google OAuth credentials are external prerequisites for real provider
+login. If they are unavailable during unattended execution, use Socialite fakes
+in automated tests and seeded mahasiswa password accounts for browser
+verification.
+
 ## Required Test Command
 
 ```bash

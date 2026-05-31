@@ -74,6 +74,15 @@
   verification must not replace Pest tests; it confirms the real Blade UI,
   navigation, forms, charts, exports, role boundaries, and empty states work in
   a browser and must clean up any browser sessions created for the task.
+- Q: How should implementation proceed when no human is available during a
+  multi-hour run? → A: Treat SurveyKita implementation as unattended autonomous
+  work. The coding agent has approval to make required repo changes, install
+  approved dependencies, run migrations, seed data, start and stop local
+  services, execute tests, run browser verification, fix failures, and continue
+  until the documented completion gates pass. The agent must use existing
+  specification decisions and documented defaults instead of pausing for new
+  preferences; only unavailable external secrets or accounts may be recorded as
+  environment prerequisites.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -363,6 +372,12 @@ real seeded data.
   navigation, CRUD forms, evaluation submission, charts, PDF export, Excel
   export, role boundaries, and empty result states. This verification is
   required in addition to Pest tests.
+- **FR-047**: Implementation and verification MUST support unattended
+  autonomous execution. All required commands, setup steps, test runs, browser
+  verification, cleanup, and failure-retry expectations MUST be documented or
+  encoded so the coding agent can complete the work without human prompts during
+  a long-running session, except for external secrets or live third-party
+  accounts that cannot be generated locally.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -451,6 +466,10 @@ real seeded data.
   mahasiswa workflows, capture evidence through browser snapshots or
   screenshots, and close task-owned browser sessions without leaving stale
   browser automation processes.
+- **SC-013**: An unattended agent run can execute setup, migration, seeding,
+  build, tests, route inspection, browser verification, cleanup, and targeted
+  failure fixes using documented commands and local defaults, without requiring
+  human decisions after the run starts.
 
 ## Assumptions
 
@@ -474,6 +493,14 @@ real seeded data.
 - When Google login creates a mahasiswa user before a student profile exists,
   the account is treated as authenticated but profile-incomplete and cannot
   submit evaluations.
+- Implementation is expected to run unattended for multiple hours. The agent may
+  take all repo-local and local-development actions needed to satisfy this
+  specification, including dependency installation, database reset, seeded data
+  generation, local server management, test execution, `agent-browser`
+  verification, and cleanup of task-owned processes.
+- Live Google OAuth credentials are environment prerequisites for real provider
+  login. Automated tests and unattended local verification must use fakes or
+  seeded accounts where live credentials are unavailable.
 - Today's date is evaluated in the application's configured local timezone for
   inclusive period start and end date checks.
 - Empty report exports are allowed for admin users and must contain headers,
