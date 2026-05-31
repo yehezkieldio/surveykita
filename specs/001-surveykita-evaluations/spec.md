@@ -359,22 +359,22 @@ real seeded data.
   name, unique lowercase email, role, and password for password-based accounts.
   Optional fields: Google provider identifier, email verification timestamp,
   remember/session metadata, and password when the account is Google-only.
-- **Student**: Mahasiswa profile linked to one user. Required fields: unique
-  user reference, unique NIM, full name, study program or academic department,
-  cohort or class year, and profile completion status. Optional fields: class,
-  phone number, address, and additional academic context useful for reporting.
+- **Student**: Mahasiswa profile linked to one user. Required persisted fields:
+  unique user reference, name, nullable unique NIM until profile completion,
+  nullable study program until profile completion, and nullable class name until
+  profile completion. Profile completeness is derived from populated NIM, name,
+  study program, and class name.
 - **Evaluation Period**: Academic evaluation time window. Required fields:
-  title, start date, end date, active status. Optional fields: description.
+  name, semester, academic year, start date, end date, and active status.
 - **Evaluation Form**: Evaluation instrument attached to one period. Required
   fields: evaluation period reference, title, target area, active status.
   Optional fields: description.
 - **Question Category**: Academic service grouping such as `layanan_akademik`,
   `pembelajaran`, `fasilitas`, `administrasi`, or `kepuasan_umum`. Required
-  fields: name, label, display order, active status. Optional fields:
-  description.
+  fields: name. Optional fields: description.
 - **Question**: Prompt answered by mahasiswa using a 1-5 Likert score. Required
   fields: evaluation form reference, question category reference, question text,
-  required flag, display order, active status. Optional fields: help text.
+  required flag, and sort order.
 - **Response**: One mahasiswa submission for one evaluation form. Required
   fields: student reference, evaluation form reference, submitted timestamp.
   Optional fields: suggestions/comments.

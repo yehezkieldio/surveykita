@@ -72,6 +72,7 @@ Base middleware: `auth`, `role:mahasiswa`. Submission routes also use
 | GET | `/student/evaluations/{form}` | `student.evaluations.show` | `Student\EvaluationController@show` | Form detail |
 | GET | `/student/evaluations/{form}/submit` | `student.evaluations.fill` | `Student\EvaluationController@fill` | Fill form |
 | POST | `/student/evaluations/{form}/submit` | `student.evaluations.submit` | `Student\EvaluationController@submit` | Save response or validation feedback |
+| GET | `/student/submissions/{response}/success` | `student.submissions.success` | `Student\SubmissionController@success` | Submission success page |
 | GET | `/student/submissions` | `student.submissions.index` | `Student\SubmissionController@index` | Submission history/status |
 
 ## Authorization Outcomes

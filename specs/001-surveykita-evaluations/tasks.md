@@ -133,7 +133,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Files: `app/Models/User.php`, `app/Models/Student.php`, `app/Models/EvaluationPeriod.php`, `app/Models/EvaluationForm.php`, `app/Models/QuestionCategory.php`, `app/Models/Question.php`, `app/Models/Response.php`, `app/Models/ResponseAnswer.php`
   - Expected behavior: Models expose required relationships and helpers for role checks, profile completion, active periods, currently open periods, and fillable forms.
   - Acceptance criteria: `User::student`, `Student::responses`, `EvaluationPeriod::evaluationForms`, `EvaluationForm::questions/responses`, `Question::evaluationForm/category`, `Response::answers/student/evaluationForm`, and `ResponseAnswer::response/question` are implemented; helpers `isAdmin`, `isMahasiswa`, `hasCompleteStudentProfile`, `scopeActive`, `isCurrentlyOpen`, and `isFillable` exist.
-  - Verification: `php artisan test --compact --filter=ModelRelationshipTest`
+  - Verification: `php artisan test --compact --filter=ModelAndRelationshipTest`
 
 ## Phase 9: Factories and Seeders
 
@@ -228,9 +228,9 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 - [ ] T024 feat(student): implement dashboard, active forms, fill, submit, success, and history flow in `app/Http/Controllers/Student/`, `app/Http/Requests/Student/`, `routes/web.php`, and `resources/views/student/`
   - Phase: Student evaluation flow
   - Dependencies: T023
-  - Files: `app/Http/Controllers/Student/DashboardController.php`, `app/Http/Controllers/Student/EvaluationController.php`, `app/Http/Controllers/Student/SubmissionController.php`, `app/Http/Requests/Student/SubmitEvaluationRequest.php`, `routes/web.php`, `resources/views/student/dashboard.blade.php`, `resources/views/student/evaluations/index.blade.php`, `resources/views/student/evaluations/show.blade.php`, `resources/views/student/evaluations/fill.blade.php`, `resources/views/student/evaluations/success.blade.php`, `resources/views/student/submissions/index.blade.php`
+  - Files: `app/Http/Controllers/Student/DashboardController.php`, `app/Http/Controllers/Student/EvaluationController.php`, `app/Http/Controllers/Student/SubmissionController.php`, `app/Http/Requests/Student/SubmitEvaluationRequest.php`, `routes/web.php`, `resources/views/student/dashboard.blade.php`, `resources/views/student/evaluations/index.blade.php`, `resources/views/student/evaluations/show.blade.php`, `resources/views/student/evaluations/fill.blade.php`, `resources/views/student/submissions/success.blade.php`, `resources/views/student/submissions/index.blade.php`
   - Expected behavior: Mahasiswa sees active forms, submission status, one fillable form at a time, Likert 1-5 options, optional suggestion, success page, and submission history.
-  - Acceptance criteria: Submission runs in a transaction; duplicate response uniqueness is handled gracefully; inactive and out-of-period forms cannot be reached or submitted; required questions are enforced.
+  - Acceptance criteria: Submission runs in a transaction; duplicate response uniqueness is handled gracefully; inactive and out-of-period forms cannot be reached or submitted; required questions are enforced; successful submissions redirect to `student.submissions.success`.
   - Verification: `php artisan test --compact --filter=EvaluationSubmissionTest`
 
 ## Phase 14: Results Dashboard
@@ -328,7 +328,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 - [ ] T035 test(app): complete required behavior regression suite across `tests/Feature/` and `tests/Unit/`
   - Phase: Pest tests
   - Dependencies: T006, T008, T010, T014, T016, T018, T021, T023, T025, T027, T029, T031, T034
-  - Files: `tests/Feature/Auth/SessionAuthTest.php`, `tests/Feature/Auth/RoleAccessTest.php`, `tests/Feature/Auth/GoogleOAuthTest.php`, `tests/Feature/Admin/AdminCrudTest.php`, `tests/Feature/Admin/ResultDashboardTest.php`, `tests/Feature/Admin/ResultChartsTest.php`, `tests/Feature/Student/ProfileCompletionTest.php`, `tests/Feature/Student/EvaluationSubmissionTest.php`, `tests/Feature/Exports/PdfExportTest.php`, `tests/Feature/Exports/ExcelExportTest.php`, `tests/Feature/SeedDataTest.php`, `tests/Feature/UiRouteWiringTest.php`, `tests/Unit/Services/EvaluationResultServiceTest.php`
+  - Files: `tests/Feature/Auth/SessionAuthTest.php`, `tests/Feature/Auth/RoleAccessTest.php`, `tests/Feature/Auth/GoogleOAuthTest.php`, `tests/Feature/Admin/AdminCrudTest.php`, `tests/Feature/Admin/ResultDashboardTest.php`, `tests/Feature/Admin/ResultChartsTest.php`, `tests/Feature/Student/ProfileCompletionTest.php`, `tests/Feature/Student/EvaluationSubmissionTest.php`, `tests/Feature/Exports/PdfExportTest.php`, `tests/Feature/Exports/ExcelExportTest.php`, `tests/Feature/SeedDataTest.php`, `tests/Feature/UiRouteWiringTest.php`, `tests/Feature/ModelAndRelationshipTest.php`, `tests/Unit/Services/EvaluationResultServiceTest.php`
   - Expected behavior: Test suite covers every constitution-required behavior and no test is superficial or empty.
   - Acceptance criteria: Required coverage includes admin access, mahasiswa access, cross-role blocks, login, logout, Google student-domain filtering, profile completion, admin CRUD, active submission, duplicate prevention, inactive/expired prevention, invalid score rejection, calculation correctness, category mapping, protected PDF export, protected Excel export, seed data, route wiring, and empty result states.
   - Verification: `php artisan test --compact`

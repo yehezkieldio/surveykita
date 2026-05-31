@@ -237,7 +237,7 @@ Tailwind components.
 - `Student\ProfileController`: create/update required profile fields.
 - `Student\EvaluationController`: active form list, form detail, fill view, and
   transactional submit.
-- `Student\SubmissionController`: submission status/history.
+- `Student\SubmissionController`: submission success page and status/history.
 
 ### Domain Service
 
