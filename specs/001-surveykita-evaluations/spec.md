@@ -21,8 +21,8 @@
   constitution: Laravel 13, Blade, Tailwind, Bun, Vite, MariaDB, Pest, Google
   OAuth through the approved student-domain rule, chart rendering, PDF export,
   and Excel export. No banned starter kits, admin panel generators, frontend
-  frameworks, alternate JavaScript package managers, Bootstrap, or SQLite main
-  local database are permitted. Chart rendering uses
+  frameworks, alternate JavaScript package managers, Bootstrap, Laravel Breeze,
+  or SQLite main local database are permitted. Chart rendering uses
   akaunting/laravel-apexcharts as the primary package;
   arielmejiadev/larapex-charts is allowed only if a real dependency conflict
   blocks the primary package and the plan is updated consistently.
@@ -238,8 +238,7 @@ real seeded data.
   based on role: admin to admin dashboard and mahasiswa to mahasiswa dashboard,
   except that mahasiswa users with incomplete profile data MUST be routed to
   profile completion before evaluation submission.
-- **FR-003**: System MUST disable public registration unless a future approved
-  feature implements safe student-domain restrictions.
+- **FR-003**: System MUST disable public registration.
 - **FR-004**: System MUST allow admin users to manually create, list, view,
   edit, and delete mahasiswa user accounts and student profiles where deletion
   does not violate existing evaluation records.
