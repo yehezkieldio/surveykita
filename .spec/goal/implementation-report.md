@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-06-01 00:08 Asia/Makassar
+- Last updated: 2026-06-01 00:10 Asia/Makassar
 
 ## Decisions
 
@@ -32,8 +32,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#7` | T007 `feat(auth): implement custom session login and logout` | Closed | `520d9bf` | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor`; `php artisan test --compact --filter=SessionAuthTest` |
 | `#8` | T008 `test(auth): cover admin and mahasiswa route boundaries` | Closed | `204052a` | Red: `php artisan test --compact --filter=RoleAccessTest`; Green: `php artisan test --compact --filter=RoleAccessTest` |
 | `#9` | T009 `feat(auth): implement role middleware and protected route groups` | Closed | `204052a` | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor`; `php artisan test --compact --filter=RoleAccessTest`; `bun run build` |
-| `#10` | T010 `test(auth): cover Google OAuth student-domain behavior` | Ready to commit | pending | Red: `php artisan test --compact --filter=GoogleOAuthTest`; Green: `php artisan test --compact --filter=GoogleOAuthTest` |
-| `#11` | T011 `feat(auth): implement student-only Google OAuth` | Ready to commit | pending | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor --path=auth/google`; `php artisan test --compact --filter=GoogleOAuthTest`; `php artisan test --compact --filter=SessionAuthTest`; `bun run build` |
+| `#10` | T010 `test(auth): cover Google OAuth student-domain behavior` | Closed | `5544cfb` | Red: `php artisan test --compact --filter=GoogleOAuthTest`; Green: `php artisan test --compact --filter=GoogleOAuthTest` |
+| `#11` | T011 `feat(auth): implement student-only Google OAuth` | Closed | `5544cfb` | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor --path=auth/google`; `php artisan test --compact --filter=GoogleOAuthTest`; `php artisan test --compact --filter=SessionAuthTest`; `bun run build` |
 
 ## Verification Log
 
@@ -191,6 +191,9 @@ remaining work. Keep this file current after each coherent slice.
 - Ran `php artisan test --compact --filter=SessionAuthTest`; passed with 5
   tests and 21 assertions.
 - Ran `bun run build`; passed.
+- Committed and pushed `5544cfb` with Conventional Commit message
+  `feat(auth): add student-only Google OAuth` and closed GitHub Issues `#10`
+  and `#11` as completed.
 
 ## Remaining Gates
 
