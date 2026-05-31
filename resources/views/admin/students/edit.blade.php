@@ -1,1 +1,1 @@
-<x-layouts.admin title="Edit Mahasiswa - SurveyKita" heading="Edit Mahasiswa"><x-card><form method="POST" action="{{ route('admin.students.update', $student) }}" class="grid gap-6">@csrf @method('PUT') @include('admin.students.partials.form', ['student' => $student])<div class="sk-actions"><x-button type="submit">Perbarui Mahasiswa</x-button><x-button variant="secondary" :href="route('admin.students.show', $student)">Batal</x-button></div></form></x-card></x-layouts.admin>
+@include('hello')
