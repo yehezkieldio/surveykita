@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-06-01 00:13 Asia/Makassar
+- Last updated: 2026-06-01 00:19 Asia/Makassar
 
 ## Decisions
 
@@ -52,6 +52,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#27` | T027 `feat(admin): implement result index and form detail pages` | Closed | `dd6b5e4` | `php artisan test --compact --filter=ResultDashboardTest`; `php artisan test --compact --filter=EvaluationResultServiceTest`; `php artisan route:list --except-vendor --path=admin/results`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 | `#28` | T028 `test(admin): cover chart data wiring` | Closed | `b24c51d` | `php artisan test --compact --filter=ResultChartsTest` |
 | `#29` | T029 `feat(chart): create ApexCharts objects from result data` | Closed | `b24c51d` | `php artisan test --compact --filter=ResultChartsTest`; `php artisan test --compact --filter=ResultDashboardTest`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
+| `#30` | T030 `test(report): cover protected PDF export behavior` | Closed | `09e0d0a` | `php artisan test --compact --filter=PdfExportTest` |
+| `#31` | T031 `feat(report): implement DomPDF report export` | Closed | `09e0d0a` | `php artisan test --compact --filter=PdfExportTest`; `php artisan test --compact --filter=ResultDashboardTest`; `php artisan route:list --except-vendor --path=admin/results`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 
 ## Verification Log
 
@@ -468,8 +470,32 @@ remaining work. Keep this file current after each coherent slice.
   `feat(chart): render result dashboard charts`; push and issue closure are
   scheduled immediately after this report update.
 
+### 2026-06-01 00:19 Asia/Makassar
+
+- Wrote `PdfExportTest` covering admin PDF download, guest redirect,
+  mahasiswa blocking, PDF filename/content-type, report template sections, and
+  empty-result PDF export.
+- Published `config/dompdf.php` from `barryvdh/laravel-dompdf`.
+- Implemented admin PDF export with `Pdf::loadView(...)` and
+  `EvaluationResultService` data.
+- Added `resources/views/pdf/evaluation-report.blade.php` with evaluation
+  title, period, respondent summary, category recap, question recap, and
+  suggestion/comment sections.
+- Added a working `Unduh PDF` action to the result detail page.
+- Ran `php artisan test --compact --filter=PdfExportTest`; passed with 4 tests
+  and 21 assertions.
+- Ran `php artisan test --compact --filter=ResultDashboardTest`; passed with 4
+  tests and 20 assertions.
+- Ran `php artisan route:list --except-vendor --path=admin/results`; passed and
+  showed result detail plus PDF/Excel export boundaries.
+- Ran `vendor/bin/pint --dirty --format agent`; passed.
+- Ran `bun run build`; passed.
+- Committed `09e0d0a` with Conventional Commit message
+  `feat(report): implement PDF result export`; push and issue closure are
+  scheduled immediately after this report update.
+
 ## Remaining Gates
 
-- Continue T030 through T041 in dependency order.
+- Continue T032 through T041 in dependency order.
 - Keep this report updated with commits, issue closures, verification evidence,
   browser E2E results, and final completion decision.
