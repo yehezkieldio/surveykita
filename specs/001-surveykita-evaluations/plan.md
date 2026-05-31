@@ -33,7 +33,8 @@ Pest, pest-plugin-laravel.
 
 **Storage**: MariaDB through Docker Compose for local development.
 
-**Testing**: Pest feature and unit tests through `php artisan test`.
+**Testing**: Pest feature and unit tests through `php artisan test`, followed by
+`agent-browser` end-to-end browser verification against the seeded local app.
 
 **Target Platform**: Local web application served by Laravel for university
 project demonstration and grading.
@@ -79,7 +80,8 @@ local MariaDB setup, and README instructions.
   indexes.
 - Testing: PASS. Plan includes Pest coverage for auth, roles, Google OAuth,
   profile completion, CRUD, submissions, calculations, protected exports, seed
-  data, and route/UI wiring.
+  data, and route/UI wiring, followed by `agent-browser` browser verification
+  of seeded end-to-end admin and mahasiswa workflows.
 - No placeholders: PASS. Plan requires all visible actions and pages to be wired
   and treats fake UI/dead routes/empty tests as defects.
 - Reproducibility: PASS. Plan includes Docker Compose MariaDB, `.env.example`,
@@ -306,5 +308,8 @@ Before implementation is considered complete:
 7. `bun run build`
 8. `php artisan test`
 9. `php artisan route:list`
-10. Manual browser walkthrough of seeded admin and mahasiswa accounts confirms
-    no fake links, dead routes, placeholder dashboards, or unwired modules.
+10. `agent-browser skills get core`
+11. Start the local server and use `agent-browser` to complete seeded admin and
+    mahasiswa workflows, capture snapshots or screenshots for the dashboard,
+    evaluation submission, charts, PDF export, Excel export, role boundaries,
+    and empty states, then close task-owned browser sessions.

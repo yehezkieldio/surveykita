@@ -33,4 +33,5 @@
 
 - Validation pass 1 completed on 2026-05-31.
 - The SurveyKita constitution requires stack alignment inside generated specs, so explicit stack references in the Constitution Alignment and Assumptions sections are treated as governance constraints rather than implementation design leakage.
+- The user explicitly requires `agent-browser` as a verification constraint. Its mention in the specification is treated as a required acceptance and verification tool, not as ordinary implementation design leakage.
 - Items marked incomplete require spec updates before `/speckit-clarify` or `/speckit-plan`.

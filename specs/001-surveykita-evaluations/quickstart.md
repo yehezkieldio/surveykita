@@ -62,7 +62,7 @@ fakes and must not require live Google requests.
 
 ## Manual Verification Flow
 
-1. Start the app with `php artisan serve`.
+1. Start the app with `php artisan serve --host=127.0.0.1 --port=8000`.
 2. Log in as admin.
 3. Open admin dashboard.
 4. Manage students, periods, forms, categories, and questions.
@@ -76,6 +76,50 @@ fakes and must not require live Google requests.
 12. Confirm duplicate submission is blocked.
 13. Open submission history.
 14. Confirm route boundaries by trying cross-role pages.
+
+## Agent Browser End-to-End Verification
+
+Use `agent-browser` after migrations, seeders, build, and Pest tests pass. This
+browser verification is required in addition to Pest tests.
+
+Load the installed workflow before browser commands:
+
+```bash
+agent-browser skills get core
+```
+
+Run the app in one terminal:
+
+```bash
+php artisan serve --host=127.0.0.1 --port=8000
+```
+
+Then use `agent-browser` to verify the seeded UI workflows:
+
+```bash
+agent-browser open http://127.0.0.1:8000/login
+agent-browser snapshot -i
+```
+
+Required browser checks:
+
+- Admin login, admin dashboard, and logout.
+- Student, period, form, category, and question navigation and forms.
+- Result dashboard, result detail page, charts, PDF export, and Excel export.
+- Mahasiswa login, profile completion when needed, active form list, form detail,
+  evaluation submission, success page, duplicate submission feedback, and
+  submission history.
+- Wrong-role access attempts show safe feedback.
+- At least one empty result state renders without errors.
+
+Capture snapshots or screenshots for the main dashboard, evaluation submission,
+result charts, PDF export trigger, Excel export trigger, duplicate submission
+feedback, and wrong-role feedback. Close task-owned browser sessions when done:
+
+```bash
+agent-browser close --all
+pgrep -af "agent-browser|chrome|chromium" || true
+```
 
 ## Required Test Command
 

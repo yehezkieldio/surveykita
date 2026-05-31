@@ -68,6 +68,12 @@
   behavior; charts use akaunting/laravel-apexcharts first, with
   arielmejiadev/larapex-charts allowed only for real dependency conflicts and a
   consistently updated plan.
+- Q: How should complete UI workflows be verified beyond automated Pest tests?
+  → A: Use `agent-browser` for end-to-end browser verification of the seeded
+  admin and mahasiswa workflows after the Laravel server is running. Browser
+  verification must not replace Pest tests; it confirms the real Blade UI,
+  navigation, forms, charts, exports, role boundaries, and empty states work in
+  a browser and must clean up any browser sessions created for the task.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -352,6 +358,11 @@ real seeded data.
   rendering package. If installation is blocked by a real dependency conflict,
   the plan MAY use arielmejiadev/larapex-charts instead and MUST update all
   chart-related planning decisions consistently.
+- **FR-046**: System MUST include `agent-browser` end-to-end verification for
+  the seeded admin and mahasiswa browser workflows, including login,
+  navigation, CRUD forms, evaluation submission, charts, PDF export, Excel
+  export, role boundaries, and empty result states. This verification is
+  required in addition to Pest tests.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -436,6 +447,10 @@ real seeded data.
 - **SC-011**: Seeded data produces at least one demonstrable admin dashboard,
   one result detail page, one PDF report, and one Excel report without manual
   data entry.
+- **SC-012**: A browser-level verification run can complete the seeded admin and
+  mahasiswa workflows, capture evidence through browser snapshots or
+  screenshots, and close task-owned browser sessions without leaving stale
+  browser automation processes.
 
 ## Assumptions
 

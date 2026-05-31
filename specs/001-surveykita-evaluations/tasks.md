@@ -5,6 +5,8 @@
 **Prerequisites**: `plan.md`, `spec.md`, `research.md`, `data-model.md`, `quickstart.md`, and `contracts/`
 
 **Tests**: Pest tests are required for real behavior. Tests must cover happy paths, role boundaries, validation failures, calculation correctness, exports, and seeded demonstration data.
+`agent-browser` is also required for browser-level end-to-end verification after
+the app is running locally; it does not replace Pest coverage.
 
 **Organization**: Tasks are grouped in the dependency order required for whole-app delivery. User-story labels map to the specification:
 
@@ -347,8 +349,8 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Phase: README and verification
   - Dependencies: T003, T004, T015, T036
   - Files: `README.md`
-  - Expected behavior: A new developer can run SurveyKita locally with Docker Compose MariaDB, Bun assets, migrations, seeders, and Pest tests.
-  - Acceptance criteria: README includes project title, stack, prerequisites, `composer install`, `bun install`, `docker compose up -d`, `cp .env.example .env`, `php artisan key:generate`, `php artisan migrate:fresh --seed`, `bun run build`, `php artisan test`, `php artisan route:list`, Google OAuth env notes, and demo login accounts.
+  - Expected behavior: A new developer can run SurveyKita locally with Docker Compose MariaDB, Bun assets, migrations, seeders, Pest tests, and `agent-browser` E2E verification.
+  - Acceptance criteria: README includes project title, stack, prerequisites, `composer install`, `bun install`, `docker compose up -d`, `cp .env.example .env`, `php artisan key:generate`, `php artisan migrate:fresh --seed`, `bun run build`, `php artisan test`, `php artisan route:list`, `agent-browser` E2E verification notes, Google OAuth env notes, and demo login accounts.
   - Verification: `sed -n '1,240p' README.md`
 
 - [ ] T038 chore(verify): perform final whole-app verification against `specs/001-surveykita-evaluations/quickstart.md`
@@ -358,6 +360,14 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Expected behavior: The documented setup path and complete application flows work from a fresh database.
   - Acceptance criteria: Migration and seeding pass; admin can manage master data and reports; mahasiswa can complete profile and submit one active evaluation; duplicate, inactive, expired, and invalid score submissions fail; charts and exports work; no fake links, placeholder pages, dead routes, or unwired modules remain.
   - Verification: `docker compose up -d && cp .env.example .env && php artisan key:generate && php artisan migrate:fresh --seed && bun run build && php artisan test --compact && php artisan route:list --except-vendor`
+
+- [ ] T039 test(e2e): verify seeded browser workflows with `agent-browser` using `specs/001-surveykita-evaluations/quickstart.md`
+  - Phase: README and verification
+  - Dependencies: T038
+  - Files: `specs/001-surveykita-evaluations/quickstart.md`, `README.md`
+  - Expected behavior: A real browser can complete seeded admin and mahasiswa workflows after the Laravel server is running.
+  - Acceptance criteria: `agent-browser` verifies login, admin dashboard, student/period/form/category/question navigation, result dashboard, chart rendering, PDF export, Excel export, logout, mahasiswa login, profile completion when needed, active evaluation submission, duplicate submission feedback, submission history, wrong-role blocking, and at least one empty-state result path; snapshots or screenshots are captured as evidence; task-owned browser sessions are closed after verification.
+  - Verification: `agent-browser skills get core && php artisan serve --host=127.0.0.1 --port=8000` in one terminal, then use `agent-browser open http://127.0.0.1:8000/login`, `agent-browser snapshot -i`, workflow clicks/fills, screenshots as needed, and `agent-browser close --all`
 
 ## Dependencies & Execution Order
 
@@ -382,14 +392,14 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 17. Excel export: T031-T032 depend on result pages
 18. Blade/Tailwind UI polish: T033-T034 depend on implemented views and routes
 19. Pest tests: T035-T036 depend on all behavior tests and implementation
-20. README and verification: T037-T038 depend on working setup and test suite
+20. README and verification: T037-T039 depend on working setup, test suite, and browser-level verification
 
 ### User Story Completion Order
 
 - **US1 Admin manages evaluation program**: T018, T019, T020, plus foundation T001-T017.
 - **US2 Mahasiswa completes and submits evaluation**: T021, T022, T023, T024, plus foundation T001-T017.
 - **US3 Admin reviews results, charts, and reports**: T025, T026, T027, T028, T029, T030, T031, T032, plus US1 and submitted/seeded data.
-- **US4 Seeded local demonstration**: T014, T015, T037, T038, plus all feature behavior.
+- **US4 Seeded local demonstration**: T014, T015, T037, T038, T039, plus all feature behavior.
 
 ### Parallel Opportunities
 
@@ -398,13 +408,14 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 - T019 and T020 can be split between student/period CRUD and form/category/question CRUD once T018 exists.
 - T030 and T032 can run in parallel after T026 because PDF and Excel exports use separate files.
 - T033 can be split by `auth`, `admin`, `student`, and `components` view folders after feature pages exist.
+- T039 runs after the final setup and test verification because it depends on a seeded database, built assets, and a running local server.
 
 ### Independent Test Criteria
 
 - **US1**: `php artisan test --compact --filter=AdminCrudTest` proves admin can manage students, periods, forms, categories, and questions while mahasiswa is blocked.
 - **US2**: `php artisan test --compact --filter=ProfileCompletionTest` and `php artisan test --compact --filter=EvaluationSubmissionTest` prove profile gating and submission rules.
 - **US3**: `php artisan test --compact --filter=ResultDashboardTest`, `ResultChartsTest`, `PdfExportTest`, and `ExcelExportTest` prove result summaries, charts, and admin-only reports.
-- **US4**: `php artisan migrate:fresh --seed` and `php artisan test --compact --filter=SeedDataTest` prove local demo data is complete.
+- **US4**: `php artisan migrate:fresh --seed`, `php artisan test --compact --filter=SeedDataTest`, and an `agent-browser` seeded workflow run prove local demo data is complete and browser-demonstrable.
 
 ## Implementation Strategy
 
@@ -413,7 +424,7 @@ Build only the complete SurveyKita application defined by the constitution and s
 1. Complete foundation, environment, frontend, auth, role, OAuth, database, models, seeders, and service tasks first.
 2. Implement admin CRUD and mahasiswa submission as complete, independently testable role workflows.
 3. Implement result dashboards, ApexCharts charts, PDF export, and Excel export from the centralized result service.
-4. Finish UI wiring, the full Pest suite, README instructions, and final verification commands before considering the application complete.
+4. Finish UI wiring, the full Pest suite, README instructions, `agent-browser` E2E verification, and final verification commands before considering the application complete.
 
 ## Guardrails
 
