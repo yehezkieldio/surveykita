@@ -1,14 +1,18 @@
 <x-layouts.admin title="Detail Hasil Evaluasi - SurveyKita" heading="{{ $form->title }}" eyebrow="{{ $form->evaluationPeriod->name }}">
     <x-card class="mb-4">
-        <form method="GET" action="{{ route('admin.results.show', $form) }}" class="flex flex-wrap gap-3">
-            <select name="category_id" class="rounded-md border-zinc-300">
-                <option value="">Semua kategori</option>
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" @selected($selectedCategoryId === $category->id)>{{ $category->name }}</option>
-                @endforeach
-            </select>
-            <x-button type="submit">Filter</x-button>
-        </form>
+        <div class="flex flex-wrap items-center justify-between gap-3">
+            <form method="GET" action="{{ route('admin.results.show', $form) }}" class="flex flex-wrap gap-3">
+                <select name="category_id" class="rounded-md border-zinc-300">
+                    <option value="">Semua kategori</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" @selected($selectedCategoryId === $category->id)>{{ $category->name }}</option>
+                    @endforeach
+                </select>
+                <x-button type="submit">Filter</x-button>
+            </form>
+
+            <x-button :href="route('admin.results.export.pdf', $form)" variant="secondary">Unduh PDF</x-button>
+        </div>
     </x-card>
 
     <div class="grid gap-3 md:grid-cols-4">

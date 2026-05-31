@@ -285,7 +285,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
 
 ## Phase 16: PDF Export
 
-- [ ] T030 test(report): cover protected PDF export behavior in `tests/Feature/Exports/PdfExportTest.php`
+- [X] T030 test(report): cover protected PDF export behavior in `tests/Feature/Exports/PdfExportTest.php`
   - Phase: PDF export
   - Dependencies: T027
   - Files: `tests/Feature/Exports/PdfExportTest.php`
@@ -293,7 +293,7 @@ Every task includes exact files likely to change, expected behavior, acceptance 
   - Acceptance criteria: Tests cover admin download, guest redirect, mahasiswa blocked, report filename, and presence of title, period, total respondents, score summary, category recap, question recap, and suggestions.
   - Verification: `php artisan test --compact --filter=PdfExportTest`
 
-- [ ] T031 feat(report): implement DomPDF report export in `app/Http/Controllers/Admin/ReportExportController.php` and `resources/views/pdf/evaluation-report.blade.php`
+- [X] T031 feat(report): implement DomPDF report export in `app/Http/Controllers/Admin/ReportExportController.php` and `resources/views/pdf/evaluation-report.blade.php`
   - Phase: PDF export
   - Dependencies: T030
   - Files: `app/Http/Controllers/Admin/ReportExportController.php`, `routes/web.php`, `resources/views/pdf/evaluation-report.blade.php`, `config/dompdf.php`
