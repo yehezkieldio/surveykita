@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-06-01 00:19 Asia/Makassar
+- Last updated: 2026-06-01 00:27 Asia/Makassar
 
 ## Decisions
 
@@ -54,6 +54,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#29` | T029 `feat(chart): create ApexCharts objects from result data` | Closed | `b24c51d` | `php artisan test --compact --filter=ResultChartsTest`; `php artisan test --compact --filter=ResultDashboardTest`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 | `#30` | T030 `test(report): cover protected PDF export behavior` | Closed | `09e0d0a` | `php artisan test --compact --filter=PdfExportTest` |
 | `#31` | T031 `feat(report): implement DomPDF report export` | Closed | `09e0d0a` | `php artisan test --compact --filter=PdfExportTest`; `php artisan test --compact --filter=ResultDashboardTest`; `php artisan route:list --except-vendor --path=admin/results`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
+| `#32` | T032 `test(report): cover protected Excel export behavior` | Closed | `be69045` | `php artisan test --compact --filter=ExcelExportTest` |
+| `#33` | T033 `feat(report): implement Maatwebsite Excel export classes` | Closed | `be69045` | `php artisan test --compact --filter=ExcelExportTest`; `php artisan test --compact --filter=PdfExportTest`; `php artisan test --compact --filter=ResultDashboardTest`; `php artisan route:list --except-vendor --path=admin/results`; `bun run build`; `vendor/bin/pint --dirty --format agent` |
 
 ## Verification Log
 
@@ -494,8 +496,34 @@ remaining work. Keep this file current after each coherent slice.
   `feat(report): implement PDF result export`; push and issue closure are
   scheduled immediately after this report update.
 
+### 2026-06-01 00:27 Asia/Makassar
+
+- Wrote `ExcelExportTest` covering admin Excel download, guest redirect,
+  mahasiswa blocking, expected filename, required workbook sheets, workbook
+  data, raw responses, and zero-safe empty-result sheets.
+- Implemented `EvaluationReportExport` with `Ringkasan`, `Rekap Kategori`,
+  `Rekap Pertanyaan`, `Distribusi Likert`, `Saran`, and `Respons Mentah`
+  sheet classes.
+- Implemented Excel export download through `Maatwebsite\Excel\Facades\Excel`
+  using `EvaluationResultService` data and raw response relationships.
+- Added a working `Unduh Excel` action to the result detail page.
+- Ran `php artisan test --compact --filter=ExcelExportTest`; passed with 4
+  tests and 23 assertions.
+- Ran `php artisan test --compact --filter=PdfExportTest`; passed with 4 tests
+  and 21 assertions.
+- Ran `php artisan test --compact --filter=ResultDashboardTest`; passed with 4
+  tests and 20 assertions.
+- Ran `php artisan route:list --except-vendor --path=admin/results`; passed and
+  showed result detail plus PDF/Excel export boundaries.
+- Ran `vendor/bin/pint --dirty --format agent`; passed after formatting the
+  Excel test.
+- Ran `bun run build`; passed.
+- Committed `be69045` with Conventional Commit message
+  `feat(report): implement Excel result export`; push and issue closure are
+  scheduled immediately after this report update.
+
 ## Remaining Gates
 
-- Continue T032 through T041 in dependency order.
+- Continue T034 through T041 in dependency order.
 - Keep this report updated with commits, issue closures, verification evidence,
   browser E2E results, and final completion decision.
