@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-06-01 00:35 Asia/Makassar
+- Last updated: 2026-06-01 00:37 Asia/Makassar
 
 ## Decisions
 
@@ -60,6 +60,7 @@ remaining work. Keep this file current after each coherent slice.
 | `#35` | T035 `test(ui): cover route, controller, and view wiring` | Closed | `84c07fe` | `php artisan test --compact --filter=UiRouteWiringTest`; `AdminCrudTest`; `EvaluationSubmissionTest`; `vendor/bin/pint --dirty --format agent` |
 | `#36` | T036 `test(app): complete required behavior regression suite` | Closed | `fe62238` | `php artisan test --compact` |
 | `#37` | T037 `chore(quality): run Laravel formatting and full backend/frontend verification` | Closed | `fe62238` | `vendor/bin/pint --dirty --format agent`; `php artisan test --compact`; `bun run build`; `php artisan route:list --except-vendor` |
+| `#38` | T038 `docs(readme): document fresh-clone setup, demo accounts, and verification commands` | Closed | `c6bdc0d` | `sed -n '1,240p' README.md` |
 
 ## Verification Log
 
@@ -572,8 +573,20 @@ remaining work. Keep this file current after each coherent slice.
   `test(app): pass full regression suite`; push and issue closure are scheduled
   immediately after this report update.
 
+### 2026-06-01 00:37 Asia/Makassar
+
+- Replaced the Laravel starter README with SurveyKita-specific documentation.
+- Documented stack constraints, fresh-clone setup, MariaDB Docker Compose
+  defaults, Google OAuth callback, seeded demo accounts, NIM parsing example,
+  feature summary, evaluation rules, verification commands, `agent-browser`
+  workflow, cleanup commands, and unattended autonomous execution protocol.
+- Ran `sed -n '1,240p' README.md`; passed manual inspection.
+- Committed `c6bdc0d` with Conventional Commit message
+  `docs(readme): document SurveyKita setup`; push and issue closure are
+  scheduled immediately after this report update.
+
 ## Remaining Gates
 
-- Continue T038 through T041 in dependency order.
+- Continue T039 through T041 in dependency order.
 - Keep this report updated with commits, issue closures, verification evidence,
   browser E2E results, and final completion decision.
