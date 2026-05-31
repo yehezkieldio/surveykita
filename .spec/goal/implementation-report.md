@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-05-31 23:39 Asia/Makassar
+- Last updated: 2026-05-31 23:42 Asia/Makassar
 
 ## Decisions
 
@@ -28,8 +28,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#3` | T003 `chore(dev): configure MariaDB local services` | Closed | `2335819` | `docker compose config`; `php artisan config:show database.default` |
 | `#4` | T004 `chore(frontend): configure Bun, Vite, Tailwind, and assets` | Closed | `1c8f62c` | `bun install --frozen-lockfile`; `bun run build` |
 | `#5` | T005 `style(ui): create shared Blade layouts and components` | Closed | `1c8f62c` | `bun run build` |
-| `#6` | T006 `test(auth): cover custom login and logout behavior` | Ready to commit | pending | Red: `php artisan test --compact --filter=SessionAuthTest`; Green: `php artisan test --compact --filter=SessionAuthTest` |
-| `#7` | T007 `feat(auth): implement custom session login and logout` | Ready to commit | pending | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor`; `php artisan test --compact --filter=SessionAuthTest` |
+| `#6` | T006 `test(auth): cover custom login and logout behavior` | Closed | `520d9bf` | Red: `php artisan test --compact --filter=SessionAuthTest`; Green: `php artisan test --compact --filter=SessionAuthTest` |
+| `#7` | T007 `feat(auth): implement custom session login and logout` | Closed | `520d9bf` | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor`; `php artisan test --compact --filter=SessionAuthTest` |
 
 ## Verification Log
 
@@ -132,6 +132,9 @@ remaining work. Keep this file current after each coherent slice.
   logout routes.
 - Ran `php artisan test --compact --filter=SessionAuthTest`; passed with 5
   tests and 21 assertions.
+- Committed and pushed `520d9bf` with Conventional Commit message
+  `feat(auth): implement custom session authentication` and closed GitHub
+  Issues `#6` and `#7` as completed.
 
 ## Remaining Gates
 
