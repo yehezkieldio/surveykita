@@ -1,0 +1,197 @@
+{
+  "version": 1,
+  "skills": {
+    "design-taste-frontend": {
+      "source": "Leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/taste-skill/SKILL.md",
+      "computedHash": "6d838b246d0e35d0b53f4f23f98ba7a1dd561937e64f7d0c7553b0928e376c3e"
+    },
+    "full-output-enforcement": {
+      "source": "Leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/output-skill/SKILL.md",
+      "computedHash": "26bd29ce4c5e02c7666b2d503609bf466bd32290822e91f0e984147048dbb924"
+    },
+    "laravel-patterns": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "skillPath": "skills/laravel-patterns/SKILL.md",
+      "computedHash": "c56253bf241431910bd23fa1e04f72eae90af8ae744843b57c21f5f8fd9152c2"
+    },
+    "laravel-specialist": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "skillPath": "skills/laravel-specialist/SKILL.md",
+      "computedHash": "d58e2ed3488398cb94a039f25b9d270e55dc434e16102abff9035608bec3db90"
+    },
+    "laravel:api-resources-and-pagination": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/api-resources-and-pagination/SKILL.md",
+      "computedHash": "6b77b75fcbfdaf53955981549ead14b63a776d88440fde42d17a3b5a76bdfcf5"
+    },
+    "laravel:blade-components-and-layouts": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/blade-components-and-layouts/SKILL.md",
+      "computedHash": "dc94f49434f700143160faceba0ab25f9aaeb57f955119c756ff9cccccd072d7"
+    },
+    "laravel:bootstrap-check": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/bootstrap-check/SKILL.md",
+      "computedHash": "98c13bac092d23829503153c8f16a66e976d72f1767259a186e0f9d1342a47cb"
+    },
+    "laravel:constants-and-configuration": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/constants-and-configuration/SKILL.md",
+      "computedHash": "9419a6b62795ae7c376ffa9491e8cfba6f03ae2d89ee54e0271d4fdcf1e31d7d"
+    },
+    "laravel:controller-cleanup": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/controller-cleanup/SKILL.md",
+      "computedHash": "0792748e0a92f5fc9a959be1e7b3a042f170bc0cfc70e5533760b31f5d47a8f9"
+    },
+    "laravel:controller-tests": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/controller-tests/SKILL.md",
+      "computedHash": "49f00808eded0cc0bb16afd6827ef7e3530799e785ff5d281d3360e3dbce258d"
+    },
+    "laravel:custom-helpers": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/custom-helpers/SKILL.md",
+      "computedHash": "46c7eaad311d6c9f70875cd7b1e8e77c3f277312da86e6b5824c3eb9b5477406"
+    },
+    "laravel:data-chunking-large-datasets": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/data-chunking-large-datasets/SKILL.md",
+      "computedHash": "699eada7b8eda8c12bb3abae5dd3fa1adcab453db6ed9f752b4559be52e9def1"
+    },
+    "laravel:documentation-best-practices": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/documentation-best-practices/SKILL.md",
+      "computedHash": "c99dd58915b50c81b970beb8554c05e472241c0f0831e2164593d3d2befb4566"
+    },
+    "laravel:eloquent-relationships": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/eloquent-relationships-and-loading/SKILL.md",
+      "computedHash": "881c7413c9f23567606cf9c1fe1d05d7a134fb768f522ba70edb200dcd6f7133"
+    },
+    "laravel:exception-handling-and-logging": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/exception-handling-and-logging/SKILL.md",
+      "computedHash": "73d18b31dd08158f56d13de512c1dcd9a9760ad069f1283a2a14dfe410642133"
+    },
+    "laravel:form-requests": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/form-requests-and-validation/SKILL.md",
+      "computedHash": "d1a9ce7e15137a3c24aff26f6705e60f188f808cf05bc5afe4d32c05e93e1ba1"
+    },
+    "laravel:http-client-resilience": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/http-client-resilience/SKILL.md",
+      "computedHash": "d7b26aa7b808a6d0eda352907bc730639b165e680453f541c0daaaf1d2c58868"
+    },
+    "laravel:interfaces-and-di": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/interfaces-and-di/SKILL.md",
+      "computedHash": "2bba0e838b12634a504c5b2b91eaff7fd539a934d4f2e0e8d762d33042a5d34e"
+    },
+    "laravel:migrations-and-factories": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/migrations-and-factories/SKILL.md",
+      "computedHash": "54a2dcd29a96f0f2d02ff4f3770b3ab7e652606900793881593c4eb13b85aa13"
+    },
+    "laravel:performance-caching": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/performance-caching/SKILL.md",
+      "computedHash": "338de6066955b0ff023db62369ee0d5b44fd6e1a2e2e8b764c3273c827be70f2"
+    },
+    "laravel:performance-eager-loading": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/performance-eager-loading/SKILL.md",
+      "computedHash": "7af4ba494dd8d6934d1dbcdb3c521f947e2e4cdb65ea46514082497cc735ba65"
+    },
+    "laravel:performance-select-columns": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/performance-select-columns/SKILL.md",
+      "computedHash": "c2caf78d8ca70daf77d65583ea4bc12c4746d263501ec11ed1ff04f81a5726fa"
+    },
+    "laravel:policies-and-authorization": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/policies-and-authorization/SKILL.md",
+      "computedHash": "6394260dafa86eca55b80705cd6547856ba28aed9cb4885d973b1f788f10422c"
+    },
+    "laravel:ports-and-adapters": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/ports-and-adapters/SKILL.md",
+      "computedHash": "718e2dd45f751e0780ce8415df3dd9e897c6c5d90d85099c73ec00e503227fe3"
+    },
+    "laravel:quality-checks": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/quality-checks/SKILL.md",
+      "computedHash": "0d0b0a0a7acad9c16e5ab45c0d5a18087a85367392c145f1689aa529d3695727"
+    },
+    "laravel:routes-best-practices": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/routes-best-practices/SKILL.md",
+      "computedHash": "3ba8961bd4d134fca3f3c469ca9d1a1610c921479d1e542edc68e174d46db06f"
+    },
+    "laravel:runner-selection": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/runner-selection/SKILL.md",
+      "computedHash": "8fbf8c14338e0a375fc2fc184a860ed52ac055cbd09595d160bcdbb64cb53830"
+    },
+    "laravel:strategy-pattern": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/strategy-pattern/SKILL.md",
+      "computedHash": "3ad0bb2335ec57cb1ac64c2e0f9d526251f3182079eeea97142e4f05a673f1c1"
+    },
+    "laravel:tdd-with-pest": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/tdd-with-pest/SKILL.md",
+      "computedHash": "d589707ed73e08d3b364b64383572349a392fe890074c9d2e228b85304e36cb6"
+    },
+    "laravel:template-method-and-plugins": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/template-method-and-plugins/SKILL.md",
+      "computedHash": "f426d28a3d8cada226c461f031ab31b7783508f747cfab845288cf83fca01752"
+    },
+    "laravel:transactions-and-consistency": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/transactions-and-consistency/SKILL.md",
+      "computedHash": "f91808235b57547502c696b0f6f651c3b41e41e752cbb812d0536ecf54a2cd5b"
+    },
+    "php-pro": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "skillPath": "skills/php-pro/SKILL.md",
+      "computedHash": "c163f6d5d26ddbf4a4d79e8dc95d3b41e447f1659486cf0aae8c070d950a9d86"
+    }
+  }
+}
