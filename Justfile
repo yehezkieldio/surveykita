@@ -78,7 +78,15 @@ db-shell:
     docker compose exec mariadb mariadb -usurveykita -psurveykita surveykita
 
 db-wait:
-    docker compose exec mariadb healthcheck.sh --connect --innodb_initialized
+    @for attempt in $(seq 1 30); do \
+        if docker compose exec mariadb healthcheck.sh --connect --innodb_initialized >/dev/null 2>&1; then \
+            echo "MariaDB is ready"; \
+            exit 0; \
+        fi; \
+        sleep 2; \
+    done; \
+    echo "MariaDB did not become ready in time" >&2; \
+    exit 1
 
 docker-up:
     docker compose up -d
