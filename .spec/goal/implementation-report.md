@@ -35,8 +35,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#10` | T010 `test(auth): cover Google OAuth student-domain behavior` | Closed | `5544cfb` | Red: `php artisan test --compact --filter=GoogleOAuthTest`; Green: `php artisan test --compact --filter=GoogleOAuthTest` |
 | `#11` | T011 `feat(auth): implement student-only Google OAuth` | Closed | `5544cfb` | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor --path=auth/google`; `php artisan test --compact --filter=GoogleOAuthTest`; `php artisan test --compact --filter=SessionAuthTest`; `bun run build` |
 | `#12` | T012 `chore(db): create SurveyKita migrations with constraints and indexes` | Closed | `6dc1462` | `vendor/bin/pint --dirty --format agent`; `php artisan migrate:fresh --no-interaction`; `php artisan schema:dump --prune --database=mariadb --no-interaction` with migration backup/restore; auth regression tests; Laravel Boost schema inspection |
-| `#13` | T013 `feat(model): implement Eloquent relationships, casts, helpers, and scopes` | Ready to close | Pending | `vendor/bin/pint --dirty --format agent`; `php artisan test --compact --filter=ModelAndRelationshipTest`; `php artisan test --compact --filter=SessionAuthTest`; `php artisan test --compact --filter=GoogleOAuthTest` |
-| `#14` | T014 `test(student): cover NIM parsing and program-code mapping` | Ready to close | Pending | `php artisan test --compact --filter=NimParserTest`; `vendor/bin/pint --dirty --format agent` |
+| `#13` | T013 `feat(model): implement Eloquent relationships, casts, helpers, and scopes` | Closed | `76c975f` | `vendor/bin/pint --dirty --format agent`; `php artisan test --compact --filter=ModelAndRelationshipTest`; `php artisan test --compact --filter=SessionAuthTest`; `php artisan test --compact --filter=GoogleOAuthTest` |
+| `#14` | T014 `test(student): cover NIM parsing and program-code mapping` | Closed | `76c975f` | `php artisan test --compact --filter=NimParserTest`; `vendor/bin/pint --dirty --format agent` |
 
 ## Verification Log
 
@@ -262,6 +262,9 @@ remaining work. Keep this file current after each coherent slice.
 - Ran auth regressions:
   `php artisan test --compact --filter=SessionAuthTest` and
   `php artisan test --compact --filter=GoogleOAuthTest`; both passed.
+- Committed and pushed `76c975f` with Conventional Commit message
+  `feat(model): add SurveyKita domain relationships` and closed GitHub Issues
+  `#13` and `#14` as completed.
 
 ## Remaining Gates
 
