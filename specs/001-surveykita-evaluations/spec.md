@@ -93,6 +93,13 @@
   if Google account challenge, MFA, consent, or CAPTCHA blocks automation;
   Socialite fake tests and seeded mahasiswa password login remain the required
   unattended verification path.
+- Q: How should student NIM be parsed for profile data? → A: A valid Universitas
+  Mulia NIM is seven digits in `TTAABBB` format: `TT` is two-digit enrollment
+  year, `AA` is two-digit program-study code, and `BBB` is three-digit sequence
+  number. For example, `2311032` means enrollment year `2023`, program code
+  `11` (`S1 Informatika`), and sequence `032`. The system must parse this into
+  stored student profile details and reject unknown program codes during profile
+  completion or admin student management.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -388,6 +395,12 @@ real seeded data.
   encoded so the coding agent can complete the work without human prompts during
   a long-running session, except for external secrets or live third-party
   accounts that cannot be generated locally.
+- **FR-048**: System MUST parse mahasiswa NIM values using the `TTAABBB` format,
+  where `TT` derives full enrollment year, `AA` maps to a known Universitas
+  Mulia program-study code, and `BBB` is the student sequence number. Parsed
+  program code, study program, enrollment year, and sequence number MUST be
+  stored or exposed on the student profile and used by admin/student views,
+  seeders, validation, and tests.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -397,9 +410,12 @@ real seeded data.
   remember/session metadata, and password when the account is Google-only.
 - **Student**: Mahasiswa profile linked to one user. Required persisted fields:
   unique user reference, name, nullable unique NIM until profile completion,
-  nullable study program until profile completion, and nullable class name until
-  profile completion. Profile completeness is derived from populated NIM, name,
-  study program, and class name.
+  nullable program code until profile completion, nullable study program until
+  profile completion, nullable enrollment year until profile completion,
+  nullable sequence number until profile completion, and nullable class name
+  until profile completion. Profile completeness is derived from populated NIM,
+  name, program code, study program, enrollment year, sequence number, and class
+  name.
 - **Evaluation Period**: Academic evaluation time window. Required fields:
   name, semester, academic year, start date, end date, and active status.
 - **Evaluation Form**: Evaluation instrument attached to one period. Required
@@ -490,6 +506,20 @@ real seeded data.
 - Required student profile data includes at least NIM, full name, study program
   or academic department, and cohort or class information sufficient for
   academic reporting.
+- NIM parsing uses this Universitas Mulia program-code mapping:
+  - `11`: S1 Informatika
+  - `12`: S1 Teknologi Informasi
+  - `13`: S1 Sistem Informasi
+  - `15`: S1 Desain Komunikasi Visual
+  - `21`: S1 Akuntansi
+  - `22`: S1 Manajemen
+  - `31`: S1 Hukum
+  - `32`: S1 Pendidikan Guru Anak Usia Dini / PG PAUD
+  - `33`: S1 Farmasi
+  - `41`: S1 Sistem Informasi, Kampus Kota Samarinda / PSDKU
+  - `51`: S1 Teknik Industri
+  - `52`: S1 Teknik Sipil
+  - `53`: S1 Teknologi Pangan dan Hasil Pertanian
 - Admin accounts are seeded or manually created by existing administrators;
   public self-registration remains disabled.
 - Deleting master data that already has dependent responses is either blocked

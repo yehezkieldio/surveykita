@@ -54,7 +54,8 @@ GOOGLE_REDIRECT_URI="${APP_URL}/auth/google/callback"
 Seeders must document real demo credentials in README, including:
 
 - Admin account
-- At least one mahasiswa account with complete profile
+- At least one mahasiswa account with complete profile and valid parsed NIM,
+  such as `2311032` (`2023`, `11`, S1 Informatika, sequence `032`)
 - At least one mahasiswa account with incomplete profile
 
 Google OAuth demo depends on valid Google credentials. Tests must use Socialite

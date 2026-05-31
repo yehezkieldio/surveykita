@@ -163,7 +163,8 @@ app/
 │   ├── Student.php
 │   └── User.php
 └── Services/
-    └── EvaluationResultService.php
+    ├── EvaluationResultService.php
+    └── NimParser.php
 
 database/
 ├── factories/
@@ -245,6 +246,18 @@ Tailwind components.
 - `Student\EvaluationController`: active form list, form detail, fill view, and
   transactional submit.
 - `Student\SubmissionController`: submission success page and status/history.
+
+### Student NIM Parsing
+
+- `NimParser` parses seven-digit Universitas Mulia NIM values in `TTAABBB`
+  format.
+- `TT` becomes full enrollment year `20TT`.
+- `AA` maps to the known program-study code table from the specification.
+- `BBB` remains a three-digit sequence number with leading zeroes preserved.
+- Admin student requests, student profile completion requests, Google-created
+  NIM defaults, factories, seeders, and tests must use the same parser.
+- Unknown program codes or malformed NIM values fail validation with Indonesian
+  feedback.
 
 ### Domain Service
 

@@ -35,4 +35,5 @@
 - The SurveyKita constitution requires stack alignment inside generated specs, so explicit stack references in the Constitution Alignment and Assumptions sections are treated as governance constraints rather than implementation design leakage.
 - The user explicitly requires `agent-browser` as a verification constraint. Its mention in the specification is treated as a required acceptance and verification tool, not as ordinary implementation design leakage.
 - The user explicitly requires unattended long-horizon autonomous execution. Its mention in the specification is treated as an execution and verification constraint for future implementation, not as ordinary implementation design leakage.
+- The user explicitly requires Universitas Mulia NIM parsing. The parser and program-code table are treated as domain requirements for student profile data, validation, seed data, and tests.
 - Items marked incomplete require spec updates before `/speckit-clarify` or `/speckit-plan`.

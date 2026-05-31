@@ -46,7 +46,10 @@
 - `user_id` foreign key to `users.id`, unique
 - `nim` string nullable until profile completion, unique when not null
 - `name` string, required
+- `program_code` string nullable until profile completion
 - `study_program` string nullable until profile completion
+- `enrollment_year` unsigned small integer nullable until profile completion
+- `sequence_number` string nullable until profile completion
 - `class_name` string nullable until profile completion
 - `created_at`, `updated_at` timestamps
 
@@ -57,12 +60,43 @@
 
 **Profile completion rule**:
 
-Complete when `nim`, `name`, `study_program`, and `class_name` are all present.
+Complete when `nim`, `name`, `program_code`, `study_program`,
+`enrollment_year`, `sequence_number`, and `class_name` are all present.
+
+**NIM parsing rule**:
+
+NIM must use seven digits in `TTAABBB` format:
+
+- `TT`: two-digit enrollment year, stored as full year `20TT`
+- `AA`: two-digit program-study code
+- `BBB`: three-digit sequence number, stored with leading zeroes
+
+Program-study code mapping:
+
+| Code | Study program |
+|------|---------------|
+| `11` | S1 Informatika |
+| `12` | S1 Teknologi Informasi |
+| `13` | S1 Sistem Informasi |
+| `15` | S1 Desain Komunikasi Visual |
+| `21` | S1 Akuntansi |
+| `22` | S1 Manajemen |
+| `31` | S1 Hukum |
+| `32` | S1 Pendidikan Guru Anak Usia Dini / PG PAUD |
+| `33` | S1 Farmasi |
+| `41` | S1 Sistem Informasi, Kampus Kota Samarinda / PSDKU |
+| `51` | S1 Teknik Industri |
+| `52` | S1 Teknik Sipil |
+| `53` | S1 Teknologi Pangan dan Hasil Pertanian |
 
 **Validation and integrity**:
 
 - `user_id` unique and foreign-key constrained
 - `nim` unique when not null
+- `nim` must be exactly seven digits when present
+- `program_code`, `study_program`, `enrollment_year`, and `sequence_number`
+  must be derived from `nim` and kept consistent during create/update flows
+- `program_code` must exist in the known Universitas Mulia mapping
 - Student profile must belong to a `mahasiswa` user
 
 ## Entity: EvaluationPeriod

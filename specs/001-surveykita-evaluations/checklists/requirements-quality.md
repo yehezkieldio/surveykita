@@ -43,6 +43,7 @@
 - [x] CHK023 Are requirements clear enough to identify failures before planning, including fake links, placeholder pages, dead routes, unwired modules, and empty tests? [Measurability, Spec §No placeholders, FR-043-FR-044, SC-010]
 - [x] CHK027 Are browser-level end-to-end verification expectations explicit enough to validate seeded admin and mahasiswa UI workflows with `agent-browser` after Pest tests pass? [Measurability, Spec §Clarifications, FR-046, SC-012]
 - [x] CHK028 Are unattended autonomous execution expectations explicit enough to prevent implementation from pausing for non-critical human preferences during long-running work? [Measurability, Spec §Clarifications, FR-047, SC-013]
+- [x] CHK029 Are NIM parsing requirements explicit enough to derive enrollment year, program code, study program, and sequence number from Universitas Mulia NIM values? [Measurability, Spec §Clarifications, FR-048, Key Entities, Assumptions]
 
 ## Ambiguities & Conflicts
 
