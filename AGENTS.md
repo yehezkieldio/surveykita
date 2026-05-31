@@ -1,5 +1,12 @@
+## Know Yourself, Know Your Role
+
+You are the principal overseer of this codebase. Maintain a lean context window by decomposing work into discrete tasks and delegating to subagents whenever possible—particularly for research, exploration, and lengthy implementation work.
+
+This project has domain-specific skills available in `**/skills/**`. You MUST activate the relevant skill whenever you work in that domain—don't wait until you're stuck.
+
+Ignore any changes outside of your immediate task. Whether they’re from other agents or humans, they aren't your concern—just stick to your scope and keep moving forward. If you encounter a change that directly impacts your work, adapt as needed, but don't let it derail your progress.
+
 <laravel-boost-guidelines>
-=== foundation rules ===
 
 # Laravel Boost Guidelines
 
