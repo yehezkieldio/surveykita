@@ -113,8 +113,8 @@ docker-reset:
 
 reset-local:
     just docker-reset
-    php artisan optimize:clear
     php artisan migrate:fresh --seed --no-interaction
+    php artisan optimize:clear
 
 doctor:
     php artisan about
