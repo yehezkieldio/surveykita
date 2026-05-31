@@ -9,7 +9,7 @@ remaining work. Keep this file current after each coherent slice.
 - Branch: `001-surveykita-evaluations`
 - Remote: `https://github.com/yehezkieldio/surveykita.git`
 - Active task range: GitHub Issues `#1` through `#41`
-- Last updated: 2026-06-01 00:24 Asia/Makassar
+- Last updated: 2026-06-01 00:27 Asia/Makassar
 
 ## Decisions
 
@@ -34,7 +34,7 @@ remaining work. Keep this file current after each coherent slice.
 | `#9` | T009 `feat(auth): implement role middleware and protected route groups` | Closed | `204052a` | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor`; `php artisan test --compact --filter=RoleAccessTest`; `bun run build` |
 | `#10` | T010 `test(auth): cover Google OAuth student-domain behavior` | Closed | `5544cfb` | Red: `php artisan test --compact --filter=GoogleOAuthTest`; Green: `php artisan test --compact --filter=GoogleOAuthTest` |
 | `#11` | T011 `feat(auth): implement student-only Google OAuth` | Closed | `5544cfb` | `vendor/bin/pint --dirty --format agent`; `php artisan route:list --except-vendor --path=auth/google`; `php artisan test --compact --filter=GoogleOAuthTest`; `php artisan test --compact --filter=SessionAuthTest`; `bun run build` |
-| `#12` | T012 `chore(db): create SurveyKita migrations with constraints and indexes` | Ready to commit | pending | `vendor/bin/pint --dirty --format agent`; `php artisan migrate:fresh --no-interaction`; `php artisan schema:dump --prune --database=mariadb --no-interaction` with migration backup/restore; auth regression tests; Laravel Boost schema inspection |
+| `#12` | T012 `chore(db): create SurveyKita migrations with constraints and indexes` | Closed | `6dc1462` | `vendor/bin/pint --dirty --format agent`; `php artisan migrate:fresh --no-interaction`; `php artisan schema:dump --prune --database=mariadb --no-interaction` with migration backup/restore; auth regression tests; Laravel Boost schema inspection |
 
 ## Verification Log
 
@@ -229,6 +229,9 @@ remaining work. Keep this file current after each coherent slice.
   `responses_evaluation_form_id_student_id_unique`,
   `response_answers_response_id_question_id_unique`, student unique indexes,
   and foreign keys are present.
+- Committed and pushed `6dc1462` with Conventional Commit message
+  `chore(db): add SurveyKita domain schema` and closed GitHub Issue `#12` as
+  completed.
 
 ## Remaining Gates
 
