@@ -28,7 +28,7 @@ class SurveyKitaSeeder extends Seeder
             [
                 'name' => 'Administrator',
                 'role' => 'admin',
-                'password' => Hash::make('admin'),
+                'password' => Hash::make('password'),
                 'email_verified_at' => now(),
             ],
         );

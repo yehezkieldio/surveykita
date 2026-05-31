@@ -10,10 +10,11 @@ Ignore any changes outside of your immediate task. Whether they’re from other 
 
 All UI work must strictly adhere to the project's **International Swiss Style** and **shadcn/ui** baseline. Refer to [DESIGN.md](file:///home/yehezkieldio/Documents/Workspace/surveykita/DESIGN.md) for full principles.
 Key rules:
-- **Font**: Always use `Inter` and ensure the Google/Bunny fonts loading tags are maintained in layout `<head>` files.
-- **Card Nesting**: Do not nest bordered boxes/cards inside other cards. Use flat backgrounds (e.g., `bg-zinc-50`) instead of nested border lines.
-- **Form Inputs**: Let fields inherit `rounded-md` styles globally. Avoid `rounded-none` inline styling.
-- **Data Tables**: Style table headers cleanly (`text-zinc-500 font-medium text-xs border-b`) without bold uppercase monospace headers or colored gray heads.
+- **Font**: Always use `Stack Sans Text` for UI/body and `Stack Sans Headline` for display headings. Keep the Bunny font loading tags in layout `<head>` files. Do not reintroduce Inter.
+- **Geometry**: The visual system is square. Do not add rounded cards, rounded buttons, rounded inputs, or shadow-based hierarchy.
+- **Card Nesting**: Do not nest bordered boxes/cards inside other cards. Use flat internal grids (`gap-px bg-zinc-200` with white cells) or open spacing instead.
+- **Form Inputs**: Let fields inherit global square styles. Avoid inline radius utilities. Labels must sit above inputs.
+- **Data Tables**: Use line-based tables with clean headers (`text-zinc-500 font-medium text-xs border-b`). Avoid colored header blocks, uppercase mono headers, shadows, and nested card cells.
 
 <laravel-boost-guidelines>
 === foundation rules ===

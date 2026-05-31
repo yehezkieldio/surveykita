@@ -37,6 +37,21 @@ class StudentProfileFormatter
         return Str::title(Str::lower($normalized));
     }
 
+    public function googleNim(string $name, string $email): ?string
+    {
+        if (preg_match('/\b(\d{7})\b/', $name, $matches) === 1) {
+            return $matches[1];
+        }
+
+        $localPart = Str::before($email, '@');
+
+        if (preg_match('/\b(\d{7})\b/', $localPart, $matches) === 1) {
+            return $matches[1];
+        }
+
+        return null;
+    }
+
     /**
      * @param  array{nim: string, enrollment_year: int, program_code: string, study_program: string, sequence_number: string}  $parsedNim
      */

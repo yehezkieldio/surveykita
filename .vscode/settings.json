@@ -7,6 +7,9 @@
     "intelephense.diagnostics.undefinedSymbols": true,
     "intelephense.diagnostics.undefinedTypes": true,
     "intelephense.completion.insertUseDeclaration": true,
+    "intelephense.environment.includePaths": [
+        "vendor/_laravel_ide"
+    ],
     "intelephense.files.exclude": [
         "**/.git/**",
         "**/node_modules/**",

@@ -9,13 +9,14 @@ use App\Services\NimParser;
 use App\Services\StudentProfileFormatter;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
     public function edit(): View
     {
         return view('student.profile.complete', [
-            'student' => auth()->user()?->student,
+            'student' => Auth::user()?->student,
         ]);
     }
 

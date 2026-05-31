@@ -1,54 +1,49 @@
-# Design System & Guidelines (International Swiss Style & shadcn/ui)
+# SurveyKita Design System
 
-This project adopts a modern, premium frontend aesthetic inspired by the **International Swiss Style** and **shadcn/ui** design system baselines.
+SurveyKita now uses a strict International Swiss Style interface with a shadcn/ui baseline adapted for flat academic product screens.
 
----
+## Typography
 
-## 1. Core Typography
+- Use `Stack Sans Text` for body, labels, controls, and table text.
+- Use `Stack Sans Headline` for page titles, section titles, and metric numbers.
+- Layout files must keep the Bunny font link for both Stack Sans families.
+- Avoid decorative uppercase mono labels. Prefer plain sentence-case labels in `text-sm` or `text-xs`.
 
-- **Primary Font**: `Inter` (weights: 400, 500, 600, 700).
-- **Font Features**: We use advanced font-feature settings (`"cv02"`, `"cv03"`, `"cv04"`, `"cv11"`) for high legibility, clean sans-serif spacing, and precise numeral alignment.
-- **Eyebrows & Headings**: Eyebrows use `font-semibold uppercase tracking-wider text-zinc-400` with smaller sizes (e.g. `text-[10px]`), while main headings use high-contrast sans-serif sizes (e.g. `text-2xl font-bold tracking-tight text-zinc-950`).
+## Geometry
 
----
+- The interface is square by default. Radius tokens are set to `0` in Tailwind theme variables.
+- Do not add rounded cards, rounded buttons, rounded inputs, or pill containers unless a semantic badge requires compact labeling.
+- No shadows. Hierarchy comes from spacing, borders, grid position, and typographic scale.
 
-## 2. Color System & Contrast
+## Surfaces
 
-We use a high-contrast, clean monochrome color palette based on Tailwind's **Zinc** color spectrum:
-- **Background**: `#fafafa` (Zinc 50/50).
-- **Text Primary**: `#09090b` (Zinc 950).
-- **Text Secondary**: `#71717a` (Zinc 500) or `#52525b` (Zinc 600).
-- **Borders**: `#e4e4e7` (Zinc 200) or `#f4f4f5` (Zinc 100).
-- **Accents**: Subtle HSL pastel colors for badges (e.g., light emerald, amber, red).
+- Use `bg-zinc-50` for page canvas and `bg-white` for primary surfaces.
+- Use `border-zinc-200` as the main structural line.
+- Do not nest bordered cards inside bordered cards. Use flat internal grids with `gap-px`, `bg-zinc-200`, and white cells when detail grouping is needed.
 
----
+## Components
 
-## 3. UI Component Baselines
+### Buttons
 
-### Cards (`<x-card>`)
-- Cards are styled as: `rounded-xl border border-zinc-200 bg-white p-6 shadow-sm`.
-- **Nested Card Rule**: **Never nest a card (or card-like bordered container) inside another card.** If grouping details inside a card, use a borderless container with a flat background (e.g., `bg-zinc-50 rounded-lg p-4`) instead of drawing double borders/lines.
+- Primary: black background, white text, black border.
+- Secondary: white background, black text, zinc border.
+- Danger: red background, white text.
+- Button text must stay on one line at desktop sizes.
 
-### Buttons (`<x-button>`)
-Our buttons directly draw inspiration from the premium baseline of shadcn/ui:
-- **Primary**: `bg-zinc-900 text-zinc-50 hover:bg-zinc-900/90 shadow rounded-md h-9 text-sm font-medium transition-colors`
-- **Secondary**: `border-zinc-200 bg-white text-zinc-900 hover:bg-zinc-50 shadow-sm rounded-md h-9 text-sm font-medium transition-colors`
-- **Danger**: `bg-red-600 text-white hover:bg-red-600/90 shadow-sm rounded-md h-9 text-sm font-medium transition-colors`
+### Forms
 
-### Inputs, Selects, & Textareas
-All form fields are styled uniformly using a global CSS apply rule in `resources/css/app.css` to keep HTML clean:
-- **Base Style**: `rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-950 shadow-sm transition-all focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 focus:outline-none`.
-- **Guideline**: Do **not** override input corners inline with `rounded-none`. Let them inherit `rounded-md` naturally. Ensure all text inputs specify the correct `type` attribute (e.g. `type="text"`, `type="email"`) so they are targeted correctly.
+- Labels sit above fields.
+- Inputs, selects, and textareas inherit global square border styling.
+- Do not use placeholders as labels.
 
-### Data Tables (`<x-table>`)
-Tabular data must be clean and functional:
-- **Outer Wrapper**: Subtle border and light shadow: `rounded-lg border border-zinc-200 bg-white shadow-sm`.
-- **Headers (`<thead>`)**: Clean sans-serif style: `text-zinc-500 font-medium text-xs border-b border-zinc-200`. Do not use gray background blocks (`bg-gray-100`) or bold monospace tags.
-- **Rows (`<tr>`)**: Smooth subtle hover states: `hover:bg-zinc-50/50 transition-colors`.
+### Tables
 
----
+- Tables are line-based: one outer border, a header bottom border, and row dividers.
+- Headers use `text-zinc-500 font-medium text-xs`.
+- Do not use colored table heads, nested cards in cells, shadows, or heavy uppercase mono headers.
 
-## 4. Maintenance Guidelines
-- Ensure that any new views or modifications respect this typography and radius system.
-- Always use the predefined `@theme` radius tokens (`rounded-md`, `rounded-xl`) and Zinc colors rather than custom values.
-- Re-run `bun run build` after styling changes to check asset compilation and keep the build bundle optimized.
+## Maintenance Rules
+
+- Preserve route names, field names, and Blade component contracts unless the backend is changed deliberately.
+- New UI should start from shared components in `resources/views/components`.
+- Rebuild assets with `bun run build` when you want to verify compiled CSS locally.

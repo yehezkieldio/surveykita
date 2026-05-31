@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Student;
 use App\Models\User;
+use App\Services\NimParser;
 use App\Services\StudentProfileFormatter;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use InvalidArgumentException;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\User as SocialiteUser;
 use Symfony\Component\HttpFoundation\RedirectResponse as SymfonyRedirectResponse;
@@ -25,7 +29,7 @@ class GoogleAuthController extends Controller
             ->redirect();
     }
 
-    public function callback(StudentProfileFormatter $formatter): RedirectResponse
+    public function callback(StudentProfileFormatter $formatter, NimParser $parser): RedirectResponse
     {
         try {
             /** @var SocialiteUser $googleUser */
@@ -47,24 +51,56 @@ class GoogleAuthController extends Controller
             return $this->reject('Google login hanya tersedia untuk mahasiswa.');
         }
 
-        if (! $user) {
-            $user = User::query()->create([
-                'name' => $name,
-                'email' => $email,
-                'role' => 'mahasiswa',
-                'password' => null,
-            ]);
-        }
+        $user = DB::transaction(function () use ($email, $formatter, $googleUser, $name, $parser, $user): User {
+            if (! $user) {
+                $user = User::query()->create([
+                    'name' => $name,
+                    'email' => $email,
+                    'role' => 'mahasiswa',
+                    'password' => null,
+                ]);
+            }
 
-        $user->forceFill([
-            'name' => $name,
-            'google_id' => (string) $googleUser->getId(),
-        ])->save();
+            $user->forceFill([
+                'name' => $name,
+                'google_id' => (string) $googleUser->getId(),
+            ])->save();
+
+            $nim = $formatter->googleNim((string) $googleUser->getName(), $email);
+
+            if ($nim) {
+                try {
+                    $parsed = $parser->parse($nim);
+                } catch (InvalidArgumentException) {
+                    $parsed = null;
+                }
+
+                if ($parsed) {
+                    $student = $user->student ?: new Student(['user_id' => $user->id]);
+
+                    $student->fill([
+                        'nim' => $parsed['nim'],
+                        'name' => $name,
+                        'program_code' => $parsed['program_code'],
+                        'study_program' => $parsed['study_program'],
+                        'enrollment_year' => $parsed['enrollment_year'],
+                        'sequence_number' => $parsed['sequence_number'],
+                        'class_name' => $student->class_name ?: $formatter->className('', $parsed),
+                    ])->save();
+
+                    $user->setRelation('student', $student);
+                }
+            }
+
+            return $user;
+        });
 
         Auth::login($user);
         request()->session()->regenerate();
 
-        return redirect('/student/profile/complete');
+        return redirect()->route(
+            $user->hasCompleteStudentProfile() ? 'student.dashboard' : 'student.profile.complete'
+        );
     }
 
     public function rejected(): View

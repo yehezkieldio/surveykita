@@ -1,22 +1,18 @@
 <x-layouts.admin title="Dashboard Admin - SurveyKita" heading="Dashboard Admin">
-    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-        <x-summary-card label="Mahasiswa Terdaftar" value="{{ $studentCount }}" description="Total profil mahasiswa dalam sistem." />
-        <x-summary-card label="Periode Aktif" value="{{ $activePeriodCount }}" description="Jumlah periode evaluasi berjalan." />
-        <x-summary-card label="Form Evaluasi Aktif" value="{{ $activeFormCount }}" description="Formulir evaluasi yang dapat diisi." />
-        <x-summary-card label="Total Respons" value="{{ $responseCount }}" description="Form evaluasi yang telah disubmit." />
+    <div class="grid gap-px border border-zinc-200 bg-zinc-200 md:grid-cols-2 xl:grid-cols-4">
+        <x-summary-card label="Mahasiswa Terdaftar" value="{{ $studentCount }}" description="Total profil mahasiswa dalam sistem." class="border-0" />
+        <x-summary-card label="Periode Aktif" value="{{ $activePeriodCount }}" description="Periode evaluasi yang sedang berjalan." class="border-0" />
+        <x-summary-card label="Form Aktif" value="{{ $activeFormCount }}" description="Formulir yang dapat diisi mahasiswa." class="border-0" />
+        <x-summary-card label="Total Respons" value="{{ $responseCount }}" description="Form evaluasi yang sudah dikirim." class="border-0" />
     </div>
 
-    <div class="mt-6">
-        <x-card heading="Instrumen Pertanyaan" subheading="Jumlah instrumen pertanyaan evaluasi berdasarkan kategori.">
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div>
-                    <p class="text-4xl font-extrabold tracking-tight text-zinc-900 leading-none">{{ $questionCount }}</p>
-                    <p class="mt-2 text-xs font-mono uppercase tracking-wider text-zinc-400">Pertanyaan Likert Terdaftar</p>
-                </div>
-                <div>
-                    <x-button href="{{ route('admin.questions.index') }}" variant="secondary" class="!py-1.5 !px-3 text-xs">Keluar Kelola Pertanyaan</x-button>
-                </div>
+    <x-card class="mt-8" heading="Instrumen Pertanyaan" subheading="Jumlah butir pertanyaan evaluasi berdasarkan kategori.">
+        <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+                <p class="font-display text-6xl font-semibold leading-none tracking-[-0.07em] text-zinc-950">{{ $questionCount }}</p>
+                <p class="mt-3 text-sm leading-6 text-zinc-600">Pertanyaan Likert terdaftar.</p>
             </div>
-        </x-card>
-    </div>
+            <x-button href="{{ route('admin.questions.index') }}" variant="secondary">Kelola Pertanyaan</x-button>
+        </div>
+    </x-card>
 </x-layouts.admin>
