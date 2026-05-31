@@ -37,8 +37,8 @@ remaining work. Keep this file current after each coherent slice.
 | `#12` | T012 `chore(db): create SurveyKita migrations with constraints and indexes` | Closed | `6dc1462` | `vendor/bin/pint --dirty --format agent`; `php artisan migrate:fresh --no-interaction`; `php artisan schema:dump --prune --database=mariadb --no-interaction` with migration backup/restore; auth regression tests; Laravel Boost schema inspection |
 | `#13` | T013 `feat(model): implement Eloquent relationships, casts, helpers, and scopes` | Closed | `76c975f` | `vendor/bin/pint --dirty --format agent`; `php artisan test --compact --filter=ModelAndRelationshipTest`; `php artisan test --compact --filter=SessionAuthTest`; `php artisan test --compact --filter=GoogleOAuthTest` |
 | `#14` | T014 `test(student): cover NIM parsing and program-code mapping` | Closed | `76c975f` | `php artisan test --compact --filter=NimParserTest`; `vendor/bin/pint --dirty --format agent` |
-| `#15` | T015 `test(seed): cover seeded demonstration completeness` | Ready to close | Pending | `php artisan test --compact --filter=SeedDataTest` |
-| `#16` | T016 `chore(seed): implement factories and seeders` | Ready to close | Pending | `php artisan migrate:fresh --seed --no-interaction`; `php artisan test --compact --filter=SeedDataTest`; `vendor/bin/pint --dirty --format agent` |
+| `#15` | T015 `test(seed): cover seeded demonstration completeness` | Closed | `50a3bd2` | `php artisan test --compact --filter=SeedDataTest` |
+| `#16` | T016 `chore(seed): implement factories and seeders` | Closed | `50a3bd2` | `php artisan migrate:fresh --seed --no-interaction`; `php artisan test --compact --filter=SeedDataTest`; `vendor/bin/pint --dirty --format agent` |
 
 ## Verification Log
 
@@ -291,6 +291,9 @@ remaining work. Keep this file current after each coherent slice.
   imports.
 - Ran `php artisan test --compact --filter=ModelAndRelationshipTest`; passed.
 - Ran `php artisan test --compact --filter=NimParserTest`; passed.
+- Committed and pushed `50a3bd2` with Conventional Commit message
+  `chore(seed): add SurveyKita demonstration dataset` and closed GitHub Issues
+  `#15` and `#16` as completed.
 
 ## Remaining Gates
 
