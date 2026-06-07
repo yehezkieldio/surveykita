@@ -38,6 +38,7 @@
     </div>
 
     <div class="flex items-center">
+        <input type="hidden" name="is_active" value="0">
         <input id="is_active" name="is_active" type="checkbox" value="1" {{ old('is_active', ($period ?? null)?->is_active) ? 'checked' : '' }}>
         <label for="is_active" class="ml-3 text-sm font-medium text-zinc-950 text-xs font-bold uppercase tracking-wider">Aktifkan Periode Ini</label>
     </div>

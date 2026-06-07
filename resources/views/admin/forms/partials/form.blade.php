@@ -27,14 +27,17 @@
     <div class="space-y-1.5">
         <label for="target_type" class="text-xs font-bold uppercase tracking-wider text-zinc-500">Target Responden</label>
         <select id="target_type" name="target_type" required>
-            <option value="Mahasiswa" {{ old('target_type', ($form ?? null)?->target_type) === 'Mahasiswa' ? 'selected' : '' }}>Mahasiswa</option>
-            <option value="Dosen" {{ old('target_type', ($form ?? null)?->target_type) === 'Dosen' ? 'selected' : '' }}>Dosen</option>
-            <option value="Alumni" {{ old('target_type', ($form ?? null)?->target_type) === 'Alumni' ? 'selected' : '' }}>Alumni</option>
+            <option value="layanan_akademik" {{ old('target_type', ($form ?? null)?->target_type) === 'layanan_akademik' ? 'selected' : '' }}>Layanan Akademik</option>
+            <option value="pembelajaran" {{ old('target_type', ($form ?? null)?->target_type) === 'pembelajaran' ? 'selected' : '' }}>Pembelajaran</option>
+            <option value="fasilitas" {{ old('target_type', ($form ?? null)?->target_type) === 'fasilitas' ? 'selected' : '' }}>Fasilitas</option>
+            <option value="administrasi" {{ old('target_type', ($form ?? null)?->target_type) === 'administrasi' ? 'selected' : '' }}>Administrasi</option>
+            <option value="kepuasan_umum" {{ old('target_type', ($form ?? null)?->target_type) === 'kepuasan_umum' ? 'selected' : '' }}>Kepuasan Umum</option>
         </select>
         <x-ui.error name="target_type" />
     </div>
 
     <div class="flex items-center">
+        <input type="hidden" name="is_active" value="0">
         <input id="is_active" name="is_active" type="checkbox" value="1" {{ old('is_active', ($form ?? null)?->is_active ?? true) ? 'checked' : '' }}>
         <label for="is_active" class="ml-3 text-sm font-medium text-zinc-950 text-xs font-bold uppercase tracking-wider">Aktifkan Formulir Ini</label>
     </div>

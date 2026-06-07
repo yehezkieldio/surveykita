@@ -11,6 +11,7 @@
     <link href="https://fonts.bunny.net/css?family=stack-sans-text:400,500,600,700|stack-sans-headline:500,600,700" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @stack('scripts')
 </head>
 <body class="h-full font-sans antialiased text-zinc-950 bg-zinc-50 selection:bg-zinc-950 selection:text-white">
     {{ $slot }}

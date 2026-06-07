@@ -1,5 +1,9 @@
 @props(['title' => null, 'heading' => null, 'eyebrow' => null])
 
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+@endpush
+
 <x-layouts.app :title="$title ?? $heading">
     <div class="flex min-h-full">
         {{-- Sidebar --}}
@@ -79,7 +83,7 @@
                                     href="{{ route('admin.results.index') }}" 
                                     :active="request()->routeIs('admin.results.*')" 
                                     icon="presentation-chart-bar"
-                                    class="{{ request()->routeIs('admin.results.*') ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:bg-zinc-800 hover:text-white' }} opacity-40 pointer-events-none"
+                                    class="{{ request()->routeIs('admin.results.*') ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:bg-zinc-800 hover:text-white' }}"
                                 >
                                     Hasil Evaluasi
                                 </x-ui.nav-link>
