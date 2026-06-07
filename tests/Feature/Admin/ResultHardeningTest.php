@@ -52,6 +52,25 @@ test('admin can open dashboard and CRUD index pages', function () {
     }
 });
 
+test('admin index pages include shared table and chart assets', function () {
+    $response = Response::factory()->for($this->form, 'evaluationForm')->for($this->student)->create();
+    ResponseAnswer::factory()->for($response)->for($this->question)->create(['score' => 4]);
+
+    $this->actingAs($this->admin);
+
+    $this->get(route('admin.students.index'))
+        ->assertSuccessful()
+        ->assertSee('https://code.jquery.com/jquery-3.7.1.min.js', false)
+        ->assertSee('https://cdn.datatables.net/2.1.8/js/dataTables.min.js', false)
+        ->assertSee('window.adminTables = {', false);
+
+    $this->get(route('admin.results.index'))
+        ->assertSuccessful()
+        ->assertSee('https://cdn.jsdelivr.net/npm/apexcharts', false)
+        ->assertSee('surveykita_overall_satisfaction', false)
+        ->assertSee('surveykita_respondent_count', false);
+});
+
 test('admin can open CRUD create pages', function () {
     $this->actingAs($this->admin);
 
