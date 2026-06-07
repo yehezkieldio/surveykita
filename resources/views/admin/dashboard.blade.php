@@ -79,7 +79,7 @@
                         <div class="flex flex-col justify-between p-6 border border-zinc-200 bg-white group hover:border-zinc-300 transition-all shadow-sm">
                             <div class="mb-4">
                                 <x-ui.badge variant="teal" class="mb-2">AKTIF</x-ui.badge>
-                                <p class="text-[10px] font-mono text-zinc-400 uppercase tracking-tighter mb-2">{{ $form->evaluationPeriod->name }}</p>
+                                <p class="text-[10px] font-mono text-zinc-400 uppercase tracking-tighter mb-2 mt-1">{{ $form->evaluationPeriod->name }}</p>
                                 <h4 class="text-base font-bold text-zinc-950">{{ $form->title }}</h4>
                             </div>
                             <div class="flex items-center justify-between pt-4 border-t border-zinc-50">

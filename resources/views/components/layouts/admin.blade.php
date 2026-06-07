@@ -14,7 +14,6 @@
             <div class="flex grow flex-col gap-y-8 overflow-y-auto px-6 py-8">
                 <div class="flex h-8 shrink-0 items-center">
                     <a href="{{ route('admin.dashboard') }}" class="font-display text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                        <div class="h-6 w-6 bg-teal-500"></div>
                         SurveyKita
                     </a>
                 </div>
@@ -25,9 +24,9 @@
                     <nav class="flex flex-1 flex-col">
                         <ul role="list" class="flex flex-1 flex-col gap-y-1">
                             <li>
-                                <x-ui.nav-link 
-                                    href="{{ route('admin.dashboard') }}" 
-                                    :active="request()->routeIs('admin.dashboard')" 
+                                <x-ui.nav-link
+                                    href="{{ route('admin.dashboard') }}"
+                                    :active="request()->routeIs('admin.dashboard')"
                                     icon="house"
                                     class="{{ request()->routeIs('admin.dashboard') ? 'bg-zinc-900 text-teal-400 border-l-2 border-teal-500' : 'text-zinc-400 hover:bg-white/5 hover:text-white border-l-2 border-transparent' }} rounded-none pl-3"
                                 >
@@ -35,9 +34,9 @@
                                 </x-ui.nav-link>
                             </li>
                             <li>
-                                <x-ui.nav-link 
-                                    href="{{ route('admin.students.index') }}" 
-                                    :active="request()->routeIs('admin.students.*')" 
+                                <x-ui.nav-link
+                                    href="{{ route('admin.students.index') }}"
+                                    :active="request()->routeIs('admin.students.*')"
                                     icon="users"
                                     class="{{ request()->routeIs('admin.students.*') ? 'bg-zinc-900 text-teal-400 border-l-2 border-teal-500' : 'text-zinc-400 hover:bg-white/5 hover:text-white border-l-2 border-transparent' }} rounded-none pl-3"
                                 >
@@ -45,9 +44,9 @@
                                 </x-ui.nav-link>
                             </li>
                             <li>
-                                <x-ui.nav-link 
-                                    href="{{ route('admin.periods.index') }}" 
-                                    :active="request()->routeIs('admin.periods.*')" 
+                                <x-ui.nav-link
+                                    href="{{ route('admin.periods.index') }}"
+                                    :active="request()->routeIs('admin.periods.*')"
                                     icon="calendar"
                                     class="{{ request()->routeIs('admin.periods.*') ? 'bg-zinc-900 text-teal-400 border-l-2 border-teal-500' : 'text-zinc-400 hover:bg-white/5 hover:text-white border-l-2 border-transparent' }} rounded-none pl-3"
                                 >
@@ -55,9 +54,9 @@
                                 </x-ui.nav-link>
                             </li>
                             <li>
-                                <x-ui.nav-link 
-                                    href="{{ route('admin.forms.index') }}" 
-                                    :active="request()->routeIs('admin.forms.*')" 
+                                <x-ui.nav-link
+                                    href="{{ route('admin.forms.index') }}"
+                                    :active="request()->routeIs('admin.forms.*')"
                                     icon="rectangle-stack"
                                     class="{{ request()->routeIs('admin.forms.*') ? 'bg-zinc-900 text-teal-400 border-l-2 border-teal-500' : 'text-zinc-400 hover:bg-white/5 hover:text-white border-l-2 border-transparent' }} rounded-none pl-3"
                                 >
@@ -65,9 +64,9 @@
                                 </x-ui.nav-link>
                             </li>
                             <li>
-                                <x-ui.nav-link 
-                                    href="{{ route('admin.categories.index') }}" 
-                                    :active="request()->routeIs('admin.categories.*')" 
+                                <x-ui.nav-link
+                                    href="{{ route('admin.categories.index') }}"
+                                    :active="request()->routeIs('admin.categories.*')"
                                     icon="tag"
                                     class="{{ request()->routeIs('admin.categories.*') ? 'bg-zinc-900 text-teal-400 border-l-2 border-teal-500' : 'text-zinc-400 hover:bg-white/5 hover:text-white border-l-2 border-transparent' }} rounded-none pl-3"
                                 >
@@ -75,9 +74,9 @@
                                 </x-ui.nav-link>
                             </li>
                             <li>
-                                <x-ui.nav-link 
-                                    href="{{ route('admin.questions.index') }}" 
-                                    :active="request()->routeIs('admin.questions.*')" 
+                                <x-ui.nav-link
+                                    href="{{ route('admin.questions.index') }}"
+                                    :active="request()->routeIs('admin.questions.*')"
                                     icon="question-mark-circle"
                                     class="{{ request()->routeIs('admin.questions.*') ? 'bg-zinc-900 text-teal-400 border-l-2 border-teal-500' : 'text-zinc-400 hover:bg-white/5 hover:text-white border-l-2 border-transparent' }} rounded-none pl-3"
                                 >
@@ -85,9 +84,9 @@
                                 </x-ui.nav-link>
                             </li>
                             <li>
-                                <x-ui.nav-link 
-                                    href="{{ route('admin.results.index') }}" 
-                                    :active="request()->routeIs('admin.results.*')" 
+                                <x-ui.nav-link
+                                    href="{{ route('admin.results.index') }}"
+                                    :active="request()->routeIs('admin.results.*')"
                                     icon="presentation-chart-bar"
                                     class="{{ request()->routeIs('admin.results.*') ? 'bg-zinc-900 text-teal-400 border-l-2 border-teal-500' : 'text-zinc-400 hover:bg-white/5 hover:text-white border-l-2 border-transparent' }} rounded-none pl-3"
                                 >
