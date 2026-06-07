@@ -14,9 +14,7 @@
 </head>
 <body class="h-full font-sans antialiased text-zinc-950 bg-zinc-50 selection:bg-zinc-950 selection:text-white">
     {{ $slot }}
-</body>
-</html>
-ot }}
+
     @stack('scripts')
 </body>
 </html>
