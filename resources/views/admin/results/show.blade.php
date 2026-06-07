@@ -96,9 +96,9 @@
                     @foreach ($result['average_score_per_category'] as $cat)
                         <tr>
                             <td class="px-6 py-4 text-sm font-semibold text-zinc-950">{{ $cat['category'] }}</td>
-                            <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-600">{{ number_format($cat['total_answers']) }}</td>
-                            <td class="whitespace-nowrap px-6 py-4 text-sm font-bold text-zinc-900">{{ number_format($cat['average_score'], 2) }}</td>
-                            <td class="whitespace-nowrap px-6 py-4 text-sm font-bold text-teal-600">{{ number_format($cat['satisfaction_percentage'], 1) }}%</td>
+                            <td class="whitespace-nowrap px-6 py-4 text-right text-sm text-zinc-600">{{ number_format($cat['total_answers']) }}</td>
+                            <td class="whitespace-nowrap px-6 py-4 text-right text-sm font-bold text-zinc-900">{{ number_format($cat['average_score'], 2) }}</td>
+                            <td class="whitespace-nowrap px-6 py-4 text-right text-sm font-bold text-teal-600">{{ number_format($cat['satisfaction_percentage'], 1) }}%</td>
                             <td class="whitespace-nowrap px-6 py-4">
                                 <x-ui.badge>{{ $cat['satisfaction_category'] }}</x-ui.badge>
                             </td>
@@ -115,8 +115,8 @@
                         <tr>
                             <td class="px-6 py-4 text-sm text-zinc-950 max-w-md">{{ $q['question_text'] }}</td>
                             <td class="whitespace-nowrap px-6 py-4 text-xs font-medium text-zinc-500">{{ $q['category'] }}</td>
-                            <td class="whitespace-nowrap px-6 py-4 text-sm font-bold text-zinc-900">{{ number_format($q['average_score'], 2) }}</td>
-                            <td class="whitespace-nowrap px-6 py-4 text-sm font-bold text-teal-600">{{ number_format($q['satisfaction_percentage'], 1) }}%</td>
+                            <td class="whitespace-nowrap px-6 py-4 text-right text-sm font-bold text-zinc-900">{{ number_format($q['average_score'], 2) }}</td>
+                            <td class="whitespace-nowrap px-6 py-4 text-right text-sm font-bold text-teal-600">{{ number_format($q['satisfaction_percentage'], 1) }}%</td>
                         </tr>
                     @endforeach
                 </x-ui.table>

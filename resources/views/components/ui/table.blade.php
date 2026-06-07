@@ -14,9 +14,15 @@
                                 $isNumeric = str_contains($lowerHeader, 'aksi') || 
                                              str_contains($lowerHeader, 'respons') || 
                                              str_contains($lowerHeader, 'soal') || 
-                                             str_contains($lowerHeader, 'form') ||
                                              str_contains($lowerHeader, 'jumlah') ||
-                                             $lowerHeader === 'no';
+                                             str_contains($lowerHeader, 'skor') ||
+                                             str_contains($lowerHeader, 'rata-rata') ||
+                                             str_contains($lowerHeader, 'rerata') ||
+                                             str_contains($lowerHeader, 'persentase') ||
+                                             str_contains($lowerHeader, 'waktu') ||
+                                             str_contains($lowerHeader, 'tanggal') ||
+                                             $lowerHeader === 'no' ||
+                                             $lowerHeader === 'form';
                             @endphp
                             <th scope="col" @class([
                                 'px-4 py-3 text-xs font-bold uppercase tracking-widest text-zinc-500 whitespace-nowrap',

@@ -80,14 +80,14 @@
                             <div class="text-sm font-bold text-zinc-950">{{ $form->title }}</div>
                             <div class="text-[10px] text-zinc-400 uppercase tracking-tighter">{{ $form->evaluationPeriod->name }}</div>
                         </td>
-                        <td class="whitespace-nowrap px-4 py-4 text-sm font-semibold text-zinc-950">
+                        <td class="whitespace-nowrap px-4 py-4 text-right text-sm font-semibold text-zinc-950">
                             {{ number_format($result['total_respondents']) }}
                             <span class="text-[10px] font-normal text-zinc-400">mhs</span>
                         </td>
-                        <td class="whitespace-nowrap px-4 py-4 text-sm font-bold text-zinc-950">
+                        <td class="whitespace-nowrap px-4 py-4 text-right text-sm font-bold text-zinc-950">
                             {{ number_format($result['average_score'], 2) }}
                         </td>
-                        <td class="whitespace-nowrap px-4 py-4 text-sm font-bold text-teal-600">
+                        <td class="whitespace-nowrap px-4 py-4 text-right text-sm font-bold text-teal-600">
                             {{ number_format($result['satisfaction_percentage'], 1) }}%
                         </td>
                         <td class="whitespace-nowrap px-4 py-4">
