@@ -15,14 +15,14 @@
                     <label for="name" class="block text-sm font-medium text-zinc-700">Nama</label>
                     <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" 
                         class="mt-1 block w-full border border-zinc-300 px-3 py-2 text-sm focus:border-zinc-950 focus:outline-none transition-colors" required>
-                    <x-ui.error field="name" />
+                    <x-ui.error name="name" />
                 </div>
 
                 <div>
                     <label for="email" class="block text-sm font-medium text-zinc-700">Email</label>
                     <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}" 
                         class="mt-1 block w-full border border-zinc-300 px-3 py-2 text-sm focus:border-zinc-950 focus:outline-none transition-colors" required>
-                    <x-ui.error field="email" />
+                    <x-ui.error name="email" />
                 </div>
 
                 <div class="pt-6 border-t border-zinc-100">
@@ -34,7 +34,7 @@
                     <label for="password" class="block text-sm font-medium text-zinc-700">Kata Sandi Baru</label>
                     <input type="password" name="password" id="password" 
                         class="mt-1 block w-full border border-zinc-300 px-3 py-2 text-sm focus:border-zinc-950 focus:outline-none transition-colors">
-                    <x-ui.error field="password" />
+                    <x-ui.error name="password" />
                 </div>
 
                 <div>
