@@ -82,30 +82,37 @@ class ResultChartService
         array $data,
         string $color,
     ): Chart {
+        $wrappedLabels = array_map(
+            fn (string $label): array|string => $this->wrapLabel($label),
+            $labels,
+        );
+
         $chart = new Chart;
         $chart->setType('bar')
-            ->setHeight(320)
+            ->setHeight(360)
             ->setTitle($title)
             ->setSubtitle(' ')
             ->setColors([$color])
             ->setDataset($seriesName, 'bar', $data)
-            ->setXaxis([
-                'categories' => $labels,
-                'labels' => [
-                    'rotate' => -45,
-                    'trim' => true,
-                    'maxHeight' => 100,
-                    'style' => ['fontSize' => '10px', 'fontWeight' => 600, 'colors' => '#71717a'],
-                ],
-            ])
-            ->setYaxis([
-                'min' => 0,
-                'labels' => [
-                    'style' => ['fontSize' => '10px', 'fontWeight' => 500, 'colors' => '#71717a'],
-                    'maxWidth' => 100,
-                ],
-            ])
             ->setOption([
+                'xaxis' => [
+                    'categories' => $wrappedLabels,
+                    'labels' => [
+                        'rotate' => -35,
+                        'rotateAlways' => false,
+                        'hideOverlappingLabels' => false,
+                        'trim' => false,
+                        'maxHeight' => 160,
+                        'style' => ['fontSize' => '10px', 'fontWeight' => 600, 'colors' => '#71717a'],
+                    ],
+                ],
+                'yaxis' => [
+                    'min' => 0,
+                    'labels' => [
+                        'style' => ['fontSize' => '10px', 'fontWeight' => 500, 'colors' => '#71717a'],
+                        'maxWidth' => 100,
+                    ],
+                ],
                 'dataLabels' => ['enabled' => false],
                 'grid' => ['borderColor' => '#e4e4e7', 'strokeDashArray' => 4],
                 'noData' => ['text' => 'Belum ada data'],
@@ -123,5 +130,45 @@ class ResultChartService
             ]);
 
         return $chart;
+    }
+
+    /**
+     * @return array<int, string>|string
+     */
+    private function wrapLabel(string $label, int $maxLineLength = 16): array|string
+    {
+        $words = preg_split('/\s+/', trim($label)) ?: [];
+
+        if (count($words) <= 1 && mb_strlen($label) <= $maxLineLength) {
+            return $label;
+        }
+
+        $lines = [];
+        $currentLine = '';
+
+        foreach ($words as $word) {
+            if ($currentLine === '') {
+                $currentLine = $word;
+
+                continue;
+            }
+
+            $candidate = $currentLine.' '.$word;
+
+            if (mb_strlen($candidate) <= $maxLineLength) {
+                $currentLine = $candidate;
+
+                continue;
+            }
+
+            $lines[] = $currentLine;
+            $currentLine = $word;
+        }
+
+        if ($currentLine !== '') {
+            $lines[] = $currentLine;
+        }
+
+        return count($lines) > 1 ? $lines : $label;
     }
 }

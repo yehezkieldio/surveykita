@@ -1,4 +1,4 @@
-<x-layouts.admin heading="Dashboard Admin" eyebrow="Ringkasan Sistem">
+<x-layouts.admin heading="{{ auth()->user()->name }}" eyebrow="Selamat datang kembali">
     <x-slot:actions>
         <div class="flex items-center gap-3">
             <x-ui.button href="{{ route('admin.results.index') }}" variant="teal" size="sm">
