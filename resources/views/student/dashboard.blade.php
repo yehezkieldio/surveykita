@@ -1,4 +1,4 @@
-<x-layouts.student heading="Beranda" eyebrow="Halo, {{ Auth::user()->name }}">
+<x-layouts.student heading="Dashboard Mahasiswa" eyebrow="Halo, {{ Auth::user()->name }}">
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <x-ui.card class="relative overflow-hidden group">
             <div class="absolute right-0 top-0 -mr-4 -mt-4 h-24 w-24 rounded-full bg-zinc-50 transition-transform group-hover:scale-110"></div>
@@ -56,8 +56,8 @@
                 <x-ui.card class="border-teal-100 bg-teal-50/30">
                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                         <div>
-                            <h4 class="font-semibold text-zinc-950">Evaluasi baru tersedia</h4>
-                            <p class="mt-1 text-sm text-zinc-600">Ada {{ $activeFormCount }} formulir evaluasi yang menunggu masukan Anda.</p>
+                            <h4 class="font-semibold text-zinc-950">Evaluasi aktif tersedia</h4>
+                            <p class="mt-1 text-sm text-zinc-600">Ada {{ $activeFormCount }} formulir evaluasi aktif yang bisa Anda akses saat ini.</p>
                         </div>
                         <x-ui.button href="{{ route('student.evaluations.index') }}" variant="teal">
                             Lihat Evaluasi

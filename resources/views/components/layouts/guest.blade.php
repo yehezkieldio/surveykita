@@ -5,21 +5,21 @@
             <div class="max-w-md mx-auto">
                 <a href="/" class="font-display text-3xl font-bold tracking-tight">SurveyKita</a>
                 <p class="mt-8 text-lg text-zinc-400">
-                    Portal Evaluasi Mahasiswa. Suara Anda membantu kami membangun pengalaman akademik yang lebih baik.
+                    Portal Evaluasi & Penjaminan Mutu. Suara Anda membantu kami membangun pengalaman akademik yang lebih baik.
                 </p>
                 <div class="mt-12 space-y-6">
                     <div class="flex items-start gap-4">
                         <div class="flex-shrink-0 w-6 h-6 rounded-full border border-zinc-700 flex items-center justify-center text-xs font-mono text-zinc-500">01</div>
                         <div>
                             <h3 class="text-sm font-semibold">Mudah & Cepat</h3>
-                            <p class="mt-1 text-sm text-zinc-500">Proses pengisian evaluasi dirancang untuk kenyamanan mahasiswa.</p>
+                            <p class="mt-1 text-sm text-zinc-500">Proses pengisian dan pengelolaan evaluasi dirancang untuk kenyamanan pengguna.</p>
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
                         <div class="flex-shrink-0 w-6 h-6 rounded-full border border-zinc-700 flex items-center justify-center text-xs font-mono text-zinc-500">02</div>
                         <div>
-                            <h3 class="text-sm font-semibold">Anonim & Aman</h3>
-                            <p class="mt-1 text-sm text-zinc-500">Data Anda dikelola secara profesional sesuai kebijakan privasi.</p>
+                            <h3 class="text-sm font-semibold">Tercatat & Aman</h3>
+                            <p class="mt-1 text-sm text-zinc-500">Identitas Anda tercatat untuk validitas data dan dikelola secara profesional.</p>
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
 
                 <div>
                     <h2 class="text-2xl font-semibold tracking-tight text-zinc-950">Selamat Datang Kembali</h2>
-                    <p class="mt-2 text-sm text-zinc-500">Gunakan akun Anda untuk masuk ke portal mahasiswa.</p>
+                    <p class="mt-2 text-sm text-zinc-500">Gunakan akun Anda untuk masuk ke dashboard.</p>
                 </div>
 
                 <div class="mt-10">

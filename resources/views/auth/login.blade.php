@@ -4,7 +4,7 @@
 
         <div class="space-y-1.5">
             <label for="email" class="text-xs font-bold uppercase tracking-wider text-zinc-500">Email</label>
-            <input id="email" name="email" type="email" value="{{ old('email') }}" required autofocus placeholder="nama@mahasiswa.ac.id">
+            <input id="email" name="email" type="email" value="{{ old('email') }}" required autofocus placeholder="nama@institusi.ac.id">
             <x-ui.error name="email" />
         </div>
 
