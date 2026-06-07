@@ -1,10 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
-Route::view('/', 'hello')->name('home');
-
-/*
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\EvaluationFormController;
 use App\Http\Controllers\Admin\EvaluationPeriodController;
@@ -17,6 +12,7 @@ use App\Http\Controllers\Student\DashboardController as StudentDashboardControll
 use App\Http\Controllers\Student\EvaluationController;
 use App\Http\Controllers\Student\ProfileController;
 use App\Http\Controllers\Student\SubmissionController;
+use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/login')->name('home');
 
@@ -54,4 +50,3 @@ Route::middleware(['auth', 'role:mahasiswa'])
         Route::get('/submissions', [SubmissionController::class, 'index'])->name('submissions.index');
         Route::get('/submissions/success/{response}', [SubmissionController::class, 'success'])->name('submissions.success');
     });
-*/

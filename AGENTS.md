@@ -6,16 +6,6 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 
 Ignore any changes outside of your immediate task. Whether they’re from other agents or humans, they aren't your concern—just stick to your scope and keep moving forward. If you encounter a change that directly impacts your work, adapt as needed, but don't let it derail your progress.
 
-## Frontend Design System
-
-All UI work must strictly adhere to the project's **International Swiss Style** and **shadcn/ui** baseline. Refer to [DESIGN.md](file:///home/yehezkieldio/Documents/Workspace/surveykita/DESIGN.md) for full principles.
-Key rules:
-- **Font**: Always use `Stack Sans Text` for UI/body and `Stack Sans Headline` for display headings. Keep the Bunny font loading tags in layout `<head>` files. Do not reintroduce Inter.
-- **Geometry**: The visual system is square. Do not add rounded cards, rounded buttons, rounded inputs, or shadow-based hierarchy.
-- **Card Nesting**: Do not nest bordered boxes/cards inside other cards. Use flat internal grids (`gap-px bg-zinc-200` with white cells) or open spacing instead.
-- **Form Inputs**: Let fields inherit global square styles. Avoid inline radius utilities. Labels must sit above inputs.
-- **Data Tables**: Use line-based tables with clean headers (`text-zinc-500 font-medium text-xs border-b`). Avoid colored header blocks, uppercase mono headers, shadows, and nested card cells.
-
 <laravel-boost-guidelines>
 === foundation rules ===
 
