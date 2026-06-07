@@ -19,12 +19,9 @@ class EvaluationController extends Controller
 
         return view('student.evaluations.index', [
             'forms' => EvaluationForm::query()
+                ->activeForStudent()
                 ->with('evaluationPeriod')
                 ->withExists(['responses as submitted' => fn (Builder $query) => $query->where('student_id', $student?->id)])
-                ->where('is_active', true)
-                ->whereHas('evaluationPeriod', fn ($query) => $query->active()
-                    ->whereDate('start_date', '<=', now())
-                    ->whereDate('end_date', '>=', now()))
                 ->latest()
                 ->get(),
         ]);
@@ -32,7 +29,9 @@ class EvaluationController extends Controller
 
     public function show(string $form): View
     {
-        $form = EvaluationForm::query()->findOrFail($form);
+        $form = EvaluationForm::query()
+            ->activeForStudent()
+            ->findOrFail($form);
 
         return view('student.evaluations.show', [
             'form' => $form->load(['evaluationPeriod', 'questions.category']),
@@ -42,10 +41,11 @@ class EvaluationController extends Controller
     public function fill(string $form): View|RedirectResponse
     {
         $form = EvaluationForm::query()
+            ->activeForStudent()
             ->with(['evaluationPeriod', 'questions.category'])
             ->findOrFail($form);
 
-        if (! $form->isFillable(auth()->user()->student)) {
+        if (! $form->canBeFilledBy(auth()->user()->student)) {
             return redirect()->route('student.evaluations.index')
                 ->with('error', 'Form evaluasi tidak dapat diisi.');
         }

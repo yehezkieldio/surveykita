@@ -42,16 +42,22 @@ class SubmitEvaluationRequest extends FormRequest
                     return;
                 }
 
-                if (! $form->is_active) {
-                    $validator->errors()->add('form', 'Form evaluasi sedang tidak aktif.');
-                }
+                if (! $form->canBeFilledBy($student)) {
+                    if (! $form->is_active) {
+                        $validator->errors()->add('form', 'Form evaluasi sedang tidak aktif.');
+                    }
 
-                if (! $form->evaluationPeriod?->isCurrentlyOpen()) {
-                    $validator->errors()->add('form', 'Periode evaluasi tidak aktif atau sudah di luar jadwal.');
-                }
+                    if (! $form->evaluationPeriod?->isCurrentlyOpen()) {
+                        $validator->errors()->add('form', 'Periode evaluasi tidak aktif atau sudah di luar jadwal.');
+                    }
 
-                if ($form->responses()->whereBelongsTo($student)->exists()) {
-                    $validator->errors()->add('form', 'Anda sudah mengisi form evaluasi ini.');
+                    if ($form->responses()->whereBelongsTo($student)->exists()) {
+                        $validator->errors()->add('form', 'Anda sudah mengisi form evaluasi ini.');
+                    }
+
+                    if ($validator->errors()->isEmpty()) {
+                        $validator->errors()->add('form', 'Form evaluasi tidak dapat diisi saat ini.');
+                    }
                 }
 
                 $answers = collect($this->input('answers', []));

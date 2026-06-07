@@ -100,13 +100,11 @@ test('inactive form inactive period and expired period cannot be submitted', fun
     $user = completeStudentUser();
 
     $this->actingAs($user)->from(route('student.evaluations.index'))->get(route('student.evaluations.fill', $form))
-        ->assertRedirect(route('student.evaluations.index'))
-        ->assertSessionHas('error');
+        ->assertNotFound();
 
     $this->actingAs($user)->from(route('student.evaluations.index'))->post(route('student.evaluations.submit', $form), [
         'answers' => $form->questions->pluck('id')->mapWithKeys(fn (int $id): array => [$id => 4])->all(),
-    ])->assertRedirect(route('student.evaluations.index'))
-        ->assertSessionHasErrors('form');
+    ])->assertNotFound();
 })->with([
     'inactive form' => fn () => evaluationFormFixture([], ['is_active' => false]),
     'inactive period' => fn () => evaluationFormFixture(['is_active' => false]),

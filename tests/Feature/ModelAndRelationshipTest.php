@@ -98,9 +98,9 @@ test('evaluation periods and forms expose active and fillable helpers', function
     expect(EvaluationPeriod::active()->count())->toBe(2)
         ->and($openPeriod->isCurrentlyOpen())->toBeTrue()
         ->and($closedPeriod->isCurrentlyOpen())->toBeFalse()
-        ->and($activeForm->isFillable())->toBeTrue()
-        ->and($inactiveForm->isFillable())->toBeFalse()
-        ->and($expiredForm->isFillable())->toBeFalse()
+        ->and($activeForm->canBeFilledBy())->toBeTrue()
+        ->and($inactiveForm->canBeFilledBy())->toBeFalse()
+        ->and($expiredForm->canBeFilledBy())->toBeFalse()
         ->and($activeForm->evaluationPeriod->is($openPeriod))->toBeTrue();
 });
 
@@ -176,5 +176,5 @@ test('response graph connects forms questions categories students and answers', 
         ->and($response->answers()->first()->is($answer))->toBeTrue()
         ->and($answer->response->is($response))->toBeTrue()
         ->and($answer->question->is($question))->toBeTrue()
-        ->and($form->isFillable($student))->toBeFalse();
+        ->and($form->canBeFilledBy($student))->toBeFalse();
 });

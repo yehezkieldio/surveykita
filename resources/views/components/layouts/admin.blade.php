@@ -1,7 +1,13 @@
 @props(['title' => null, 'heading' => null, 'eyebrow' => null])
 
 @push('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/2.3.5/js/dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+@endpush
+
+@push('head')
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.min.css">
 @endpush
 
 <x-layouts.app :title="$title ?? $heading">

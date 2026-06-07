@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,13 +27,19 @@ class EvaluationForm extends Model
         ];
     }
 
-    public function isFillable($key = null): bool
+    /**
+     * @param  Builder<EvaluationForm>  $query
+     */
+    public function scopeActiveForStudent(Builder $query): void
     {
-        if (is_string($key)) {
-            return parent::isFillable($key);
-        }
+        $query->where('is_active', true)
+            ->whereHas('evaluationPeriod', fn ($query) => $query->active()
+                ->whereDate('start_date', '<=', now())
+                ->whereDate('end_date', '>=', now()));
+    }
 
-        $student = $key instanceof Student ? $key : null;
+    public function canBeFilledBy(?Student $student = null): bool
+    {
         $period = $this->relationLoaded('evaluationPeriod')
             ? $this->evaluationPeriod
             : $this->evaluationPeriod()->first();

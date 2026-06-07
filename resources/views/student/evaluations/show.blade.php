@@ -32,7 +32,7 @@
             </x-ui.card>
 
             <div class="flex flex-col sm:flex-row gap-4">
-                @if ($form->isFillable(Auth::user()->student))
+                @if ($form->canBeFilledBy(Auth::user()->student))
                     <x-ui.button href="{{ route('student.evaluations.fill', $form) }}" variant="teal" class="flex-1 sm:flex-none">
                         Mulai Isi Evaluasi
                     </x-ui.button>

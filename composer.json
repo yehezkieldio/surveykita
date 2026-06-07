@@ -1,11 +1,14 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "surveykita/surveykita",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "SurveyKita - Portal Evaluasi Mahasiswa & Penjaminan Mutu Akademik.",
     "keywords": [
-        "laravel",
-        "framework"
+        "survey",
+        "evaluasi",
+        "mahasiswa",
+        "penjaminan-mutu",
+        "laravel"
     ],
     "license": "MIT",
     "require": {
