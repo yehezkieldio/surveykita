@@ -9,51 +9,66 @@
     </x-slot:actions>
 
     <div class="space-y-6">
-        <table id="categories-table" class="w-full">
-            <thead>
-                <tr>
-                    <th>Nama Kategori</th>
-                    <th>Slug</th>
-                    <th>Jumlah Pertanyaan</th>
-                    <th class="text-right">Aksi</th>
-                </tr>
-            </thead>
-        </table>
+        <section class="sk-table-panel">
+            <div class="sk-table-panel-copy">
+                <h2 class="sk-table-panel-title">Taksonomi pertanyaan</h2>
+                <p class="sk-table-panel-body">
+                    Susun kategori dan distribusi pertanyaan dalam satu daftar yang konsisten, tanpa perbedaan ukuran teks atau gaya kolom.
+                </p>
+            </div>
+
+            <table id="categories-table" class="w-full">
+                <thead>
+                    <tr>
+                        <th>Nama Kategori</th>
+                        <th>Slug</th>
+                        <th>Jumlah Pertanyaan</th>
+                        <th class="text-right">Aksi</th>
+                    </tr>
+                </thead>
+            </table>
+        </section>
     </div>
 
     @push('scripts')
         <script>
             $(function() {
-                $('#categories-table').DataTable({
-                    processing: true,
-                    serverSide: true,
+                window.adminTables.create('#categories-table', {
                     ajax: "{{ route('admin.categories.data') }}",
                     columns: [
-                        { 
-                            data: 'name', 
-                            name: 'name', 
-                            className: 'font-semibold text-zinc-950',
+                        {
+                            data: 'name',
+                            name: 'name',
                             render: function(data, type, row) {
-                                return `<div>${data}</div><div class="text-[10px] text-zinc-400 max-w-xs truncate">${row.description || ''}</div>`;
+                                return window.adminTables.stack(data, row.description || '', 'sk-cell-title', 'sk-cell-support');
                             }
                         },
-                        { data: 'slug', name: 'slug', className: 'font-mono text-xs text-zinc-400 uppercase tracking-tight' },
-                        { data: 'questions_count', name: 'questions_count', className: 'text-sm font-bold text-zinc-950' },
-                        { 
-                            data: 'actions', 
-                            name: 'actions', 
-                            orderable: false, 
+                        {
+                            data: 'slug',
+                            name: 'slug',
+                            render: function(data) {
+                                return `<span class="sk-cell-muted">${window.adminTables.escape(data)}</span>`;
+                            }
+                        },
+                        {
+                            data: 'questions_count',
+                            name: 'questions_count',
+                            render: function(data) {
+                                return `<span class="sk-cell-number">${window.adminTables.escape(data)}</span>`;
+                            }
+                        },
+                        {
+                            data: 'actions',
+                            name: 'actions',
+                            orderable: false,
                             searchable: false,
                             className: 'text-right'
                         }
                     ],
                     language: {
-                        search: "",
-                        searchPlaceholder: "Cari kategori...",
-                        lengthMenu: "_MENU_",
-                        info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ kategori",
+                        searchPlaceholder: 'Cari kategori atau slug...',
+                        info: 'Menampilkan _START_ sampai _END_ dari _TOTAL_ kategori',
                     },
-                    pageLength: 25,
                     order: [[0, 'asc']]
                 });
             });

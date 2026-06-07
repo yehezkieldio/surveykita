@@ -9,62 +9,75 @@
     </x-slot:actions>
 
     <div class="space-y-6">
-        {{-- Table Section --}}
-        <table id="students-table" class="w-full">
-            <thead>
-                <tr>
-                    <th>Mahasiswa</th>
-                    <th>NIM</th>
-                    <th>Kelas</th>
-                    <th>Prodi</th>
-                    <th class="text-right">Aksi</th>
-                </tr>
-            </thead>
-        </table>
+        <section class="sk-table-panel">
+            <div class="sk-table-panel-copy">
+                <h2 class="sk-table-panel-title">Daftar mahasiswa aktif</h2>
+                <p class="sk-table-panel-body">
+                    Rapikan identitas mahasiswa dalam satu tabel yang mudah dipindai, dari nama, NIM, kelas, sampai program studi.
+                </p>
+            </div>
+
+            <table id="students-table" class="w-full">
+                <thead>
+                    <tr>
+                        <th>Mahasiswa</th>
+                        <th>NIM</th>
+                        <th>Kelas</th>
+                        <th>Prodi</th>
+                        <th class="text-right">Aksi</th>
+                    </tr>
+                </thead>
+            </table>
+        </section>
     </div>
 
     @push('scripts')
         <script>
             $(function() {
-                $('#students-table').DataTable({
-                    processing: true,
-                    serverSide: true,
+                window.adminTables.create('#students-table', {
                     ajax: "{{ route('admin.students.data') }}",
                     columns: [
-                        { 
-                            data: 'name', 
-                            name: 'name', 
-                            className: 'font-semibold text-zinc-950',
+                        {
+                            data: 'name',
+                            name: 'name',
                             render: function(data, type, row) {
-                                return `<div>${data}</div><div class="text-[10px] text-zinc-400 font-mono uppercase tracking-tight">${row.email}</div>`;
+                                return window.adminTables.stack(data, row.email);
                             }
                         },
-                        { data: 'nim', name: 'nim', className: 'font-mono text-xs text-zinc-500 uppercase tracking-widest' },
-                        { data: 'class_name', name: 'class_name', className: 'text-sm text-zinc-600' },
-                        { data: 'study_program', name: 'study_program', className: 'text-sm text-zinc-600' },
-                        { 
-                            data: 'actions', 
-                            name: 'actions', 
-                            orderable: false, 
+                        {
+                            data: 'nim',
+                            name: 'nim',
+                            render: function(data) {
+                                return `<span class="sk-cell-code">${window.adminTables.escape(data)}</span>`;
+                            }
+                        },
+                        {
+                            data: 'class_name',
+                            name: 'class_name',
+                            render: function(data) {
+                                return `<span class="sk-cell-muted">${window.adminTables.escape(data)}</span>`;
+                            }
+                        },
+                        {
+                            data: 'study_program',
+                            name: 'study_program',
+                            render: function(data) {
+                                return `<span class="sk-cell-muted">${window.adminTables.escape(data)}</span>`;
+                            }
+                        },
+                        {
+                            data: 'actions',
+                            name: 'actions',
+                            orderable: false,
                             searchable: false,
                             className: 'text-right'
                         }
                     ],
                     language: {
-                        search: "",
-                        searchPlaceholder: "Cari mahasiswa...",
-                        lengthMenu: "_MENU_",
-                        info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ mahasiswa",
-                        paginate: {
-                            previous: "Sebelumnya",
-                            next: "Berikutnya"
-                        }
+                        searchPlaceholder: 'Cari nama, NIM, kelas, atau prodi...',
+                        info: 'Menampilkan _START_ sampai _END_ dari _TOTAL_ mahasiswa',
                     },
-                    pageLength: 25,
-                    order: [[0, 'asc']],
-                    drawCallback: function() {
-                        // Apply specific cell adjustments if needed
-                    }
+                    order: [[0, 'asc']]
                 });
             });
         </script>

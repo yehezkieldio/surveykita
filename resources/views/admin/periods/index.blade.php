@@ -9,60 +9,76 @@
     </x-slot:actions>
 
     <div class="space-y-6">
-        <table id="periods-table" class="w-full">
-            <thead>
-                <tr>
-                    <th>Nama Periode</th>
-                    <th>Jadwal</th>
-                    <th>Status</th>
-                    <th>Form</th>
-                    <th class="text-right">Aksi</th>
-                </tr>
-            </thead>
-        </table>
+        <section class="sk-table-panel">
+            <div class="sk-table-panel-copy">
+                <h2 class="sk-table-panel-title">Siklus evaluasi</h2>
+                <p class="sk-table-panel-body">
+                    Kelola nama periode, rentang jadwal, dan aktivasi form dengan tampilan yang tetap ringkas meski judul periodenya panjang.
+                </p>
+            </div>
+
+            <table id="periods-table" class="w-full">
+                <thead>
+                    <tr>
+                        <th>Nama Periode</th>
+                        <th>Jadwal</th>
+                        <th>Status</th>
+                        <th>Form</th>
+                        <th class="text-right">Aksi</th>
+                    </tr>
+                </thead>
+            </table>
+        </section>
     </div>
 
     @push('scripts')
         <script>
             $(function() {
-                $('#periods-table').DataTable({
-                    processing: true,
-                    serverSide: true,
+                window.adminTables.create('#periods-table', {
                     ajax: "{{ route('admin.periods.data') }}",
                     columns: [
-                        { data: 'name', name: 'name', className: 'font-semibold text-zinc-950' },
-                        { 
-                            data: 'start_date', 
+                        {
+                            data: 'name',
+                            name: 'name',
+                            render: function(data) {
+                                return window.adminTables.stack(data, 'Periode evaluasi', 'sk-cell-title sk-cell-title-compact', 'sk-cell-support');
+                            }
+                        },
+                        {
+                            data: 'start_date',
                             name: 'start_date',
                             render: function(data, type, row) {
-                                return `<div class="text-xs font-medium text-zinc-500">${data} — ${row.end_date}</div>`;
+                                return window.adminTables.stack(data, row.end_date, 'sk-cell-title', 'sk-cell-support');
                             }
                         },
-                        { 
-                            data: 'is_active', 
+                        {
+                            data: 'is_active',
                             name: 'is_active',
                             render: function(data) {
-                                return data 
-                                    ? '<span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-teal-600"><span class="h-1.5 w-1.5 rounded-full bg-teal-500"></span> Aktif</span>'
-                                    : '<span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-zinc-400"><span class="h-1.5 w-1.5 rounded-full bg-zinc-300"></span> Nonaktif</span>';
+                                return data
+                                    ? window.adminTables.badge('Aktif', 'success')
+                                    : window.adminTables.badge('Nonaktif', 'neutral');
                             }
                         },
-                        { data: 'evaluation_forms_count', name: 'evaluation_forms_count', className: 'text-sm font-bold text-zinc-950' },
-                        { 
-                            data: 'actions', 
-                            name: 'actions', 
-                            orderable: false, 
+                        {
+                            data: 'evaluation_forms_count',
+                            name: 'evaluation_forms_count',
+                            render: function(data) {
+                                return `<span class="sk-cell-number">${window.adminTables.escape(data)}</span>`;
+                            }
+                        },
+                        {
+                            data: 'actions',
+                            name: 'actions',
+                            orderable: false,
                             searchable: false,
                             className: 'text-right'
                         }
                     ],
                     language: {
-                        search: "",
-                        searchPlaceholder: "Cari periode...",
-                        lengthMenu: "_MENU_",
-                        info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ periode",
+                        searchPlaceholder: 'Cari periode evaluasi...',
+                        info: 'Menampilkan _START_ sampai _END_ dari _TOTAL_ periode',
                     },
-                    pageLength: 25,
                     order: [[1, 'desc']]
                 });
             });

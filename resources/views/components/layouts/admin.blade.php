@@ -7,6 +7,77 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 @endpush
 
+@push('scripts')
+    <script>
+        window.adminTables = {
+            escape(value) {
+                return $('<div>').text(value ?? '').html();
+            },
+            stack(primary, secondary = '', primaryClass = 'sk-cell-title', secondaryClass = 'sk-cell-support') {
+                const safePrimary = this.escape(primary);
+                const safeSecondary = this.escape(secondary);
+
+                return `
+                    <div class="sk-cell-stack">
+                        <div class="${primaryClass}">${safePrimary}</div>
+                        ${safeSecondary ? `<div class="${secondaryClass}">${safeSecondary}</div>` : ''}
+                    </div>
+                `;
+            },
+            badge(label, tone = 'neutral') {
+                const tones = {
+                    neutral: 'sk-table-badge sk-table-badge-neutral',
+                    info: 'sk-table-badge sk-table-badge-info',
+                    success: 'sk-table-badge sk-table-badge-success',
+                    warning: 'sk-table-badge sk-table-badge-warning',
+                };
+
+                return `<span class="${tones[tone] ?? tones.neutral}">${this.escape(label)}</span>`;
+            },
+            create(selector, options) {
+                return $(selector).DataTable($.extend(true, {
+                    processing: true,
+                    serverSide: true,
+                    pageLength: 25,
+                    autoWidth: false,
+                    searchDelay: 350,
+                    language: {
+                        search: '',
+                        lengthMenu: '_MENU_',
+                        zeroRecords: 'Tidak ada data yang cocok dengan pencarian ini.',
+                        emptyTable: 'Belum ada data untuk ditampilkan.',
+                        infoEmpty: 'Belum ada data untuk ditampilkan.',
+                        paginate: {
+                            previous: 'Sebelumnya',
+                            next: 'Berikutnya',
+                        },
+                    },
+                }, options));
+            },
+            mountFilters(table, selector) {
+                const filterBar = document.querySelector(selector);
+
+                if (!filterBar) {
+                    return;
+                }
+
+                const topRow = table.table().container().querySelector('.dt-layout-row:first-child .dt-layout-cell:first-child');
+
+                if (!topRow) {
+                    filterBar.classList.remove('hidden');
+                    filterBar.classList.add('flex');
+
+                    return;
+                }
+
+                filterBar.classList.remove('hidden');
+                filterBar.classList.add('flex');
+                topRow.prepend(filterBar);
+            },
+        };
+    </script>
+@endpush
+
 <x-layouts.app :title="$title ?? $heading">
     <div class="flex min-h-full">
         {{-- Sidebar --}}

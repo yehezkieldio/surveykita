@@ -119,6 +119,99 @@
     .sk-meta-value {
         @apply mt-2 text-sm font-semibold leading-6 text-zinc-950;
     }
+
+    .sk-table-panel {
+        @apply border border-zinc-200 bg-white;
+    }
+
+    .sk-table-panel-copy {
+        @apply flex flex-col gap-2 border-b border-zinc-200 px-5 py-5 sm:px-6;
+    }
+
+    .sk-table-panel-title {
+        @apply text-base font-semibold tracking-tight text-zinc-950;
+    }
+
+    .sk-table-panel-body {
+        @apply max-w-3xl text-sm leading-6 text-zinc-600;
+    }
+
+    .sk-table-inline-filters {
+        @apply hidden w-full flex-col gap-3 border-b border-zinc-200 bg-zinc-50 px-5 py-4 sm:px-6 lg:flex-row lg:items-end lg:justify-between;
+    }
+
+    .sk-table-filter-group {
+        @apply grid gap-2;
+    }
+
+    .sk-table-filter-label {
+        @apply text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-zinc-500;
+    }
+
+    .sk-table-filter-hint {
+        @apply text-sm leading-6 text-zinc-500;
+    }
+
+    .sk-table-select {
+        @apply h-11 min-w-56 border-zinc-300 bg-white px-3 pr-10 text-sm font-medium text-zinc-800 focus:border-zinc-950;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2371717a' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        background-position: right 0.75rem center;
+        background-repeat: no-repeat;
+        background-size: 1.25rem 1.25rem;
+    }
+
+    .sk-cell-stack {
+        @apply grid gap-1;
+    }
+
+    .sk-cell-title {
+        @apply text-sm font-semibold leading-6 text-zinc-950;
+    }
+
+    .sk-cell-title-compact {
+        @apply text-[0.95rem] leading-6;
+    }
+
+    .sk-cell-support {
+        @apply text-sm leading-6 text-zinc-500;
+    }
+
+    .sk-cell-muted {
+        @apply text-sm leading-6 text-zinc-600;
+    }
+
+    .sk-cell-code {
+        @apply text-sm font-medium tracking-[0.04em] text-zinc-700;
+    }
+
+    .sk-cell-number {
+        @apply text-sm font-semibold tabular-nums text-zinc-950;
+    }
+
+    .sk-cell-order {
+        @apply text-sm font-medium tabular-nums text-zinc-600;
+    }
+
+    .sk-table-badge {
+        @apply inline-flex items-center border px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.14em];
+    }
+
+    .sk-table-badge-neutral {
+        @apply border-zinc-200 bg-zinc-100 text-zinc-700;
+    }
+
+    .sk-table-badge-info {
+        @apply border-[#cfe7f6] bg-[#E1F3FE] text-[#1F6C9F];
+    }
+
+    .sk-table-badge-success {
+        @apply border-[#d6e4d4] bg-[#EDF3EC] text-[#346538];
+    }
+
+    .sk-table-badge-warning {
+        @apply border-[#f2e3bd] bg-[#FBF3DB] text-[#956400];
+    }
 }
 
 @layer utilities {
@@ -149,66 +242,83 @@
 }
 
 @layer components {
-    /* DataTables Core Overrides */
     .dt-container {
-        @apply flex flex-col gap-0 text-sm text-zinc-950 bg-white border border-zinc-200 shadow-sm overflow-hidden;
+        @apply flex flex-col gap-0 text-sm text-zinc-950;
     }
 
-    /* Top Layout Area (Search & Length) */
     .dt-container .dt-layout-row:first-child {
-        @apply flex flex-col gap-4 border-b border-zinc-200 bg-zinc-50/50 p-4 sm:flex-row sm:items-center sm:justify-between;
+        @apply flex flex-col gap-3 border-b border-zinc-200 bg-zinc-50 px-5 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between;
     }
 
-    /* Bottom Layout Area (Info & Pagination) */
     .dt-container .dt-layout-row:last-child {
-        @apply flex flex-col gap-4 border-t border-zinc-200 bg-zinc-50 p-4 sm:flex-row sm:items-center sm:justify-between;
+        @apply flex flex-col gap-4 border-t border-zinc-200 bg-zinc-50 px-5 py-4 text-sm sm:px-6 lg:flex-row lg:items-center lg:justify-between;
     }
 
-    /* Search Input Styling */
-    .dt-container .dt-search {
-        @apply flex items-center gap-2;
+    .dt-container .dt-layout-cell {
+        @apply !m-0;
     }
-    
+
+    .dt-container .dt-layout-row:first-child .dt-layout-cell {
+        @apply flex flex-wrap items-center gap-3;
+    }
+
+    .dt-container .dt-search {
+        @apply ml-auto flex w-full items-center justify-end gap-3 lg:w-auto;
+    }
+
+    .dt-container .dt-search label {
+        @apply sr-only;
+    }
+
     .dt-container .dt-search input {
-        @apply !w-64 !border-zinc-300 bg-white px-3 py-1.5 text-xs font-medium placeholder:text-zinc-400 focus:!border-teal-600 focus:!ring-0 outline-none transition-all;
+        @apply h-11 !w-full min-w-0 border-zinc-300 bg-white px-4 text-sm font-medium text-zinc-800 placeholder:text-zinc-400 focus:!border-zinc-950 focus:!ring-0 sm:!w-80;
         border-radius: 0 !important;
     }
 
-    /* Length Select Styling */
+    .dt-container .dt-length {
+        @apply flex items-center gap-3;
+    }
+
+    .dt-container .dt-length label {
+        @apply flex items-center gap-3 text-sm font-medium text-zinc-500;
+    }
+
     .dt-container .dt-length select {
-        @apply !border-zinc-300 bg-white px-8 py-1.5 text-xs font-bold focus:!border-teal-600 focus:!ring-0 outline-none transition-all;
+        @apply h-11 min-w-20 border-zinc-300 bg-white px-4 pr-10 text-sm font-medium text-zinc-800 focus:!border-zinc-950 focus:!ring-0;
         border-radius: 0 !important;
         appearance: none;
         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2371717a' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-        background-position: right 0.5rem center;
+        background-position: right 0.75rem center;
         background-repeat: no-repeat;
-        background-size: 1.5em 1.5em;
+        background-size: 1.25rem 1.25rem;
     }
 
-    /* Table Structure */
     .dt-container table.dataTable {
         @apply !m-0 !w-full border-collapse !border-0;
     }
 
     .dt-container table.dataTable thead th {
-        @apply !border-b border-zinc-200 bg-zinc-50 px-4 py-3 text-left text-[10px] font-bold uppercase tracking-widest text-zinc-500 !whitespace-nowrap;
+        @apply !border-b border-zinc-200 bg-zinc-50 px-5 py-3.5 text-left text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-zinc-500 !whitespace-nowrap;
     }
 
     .dt-container table.dataTable tbody td {
-        @apply !border-b border-zinc-100 px-4 py-4 align-middle text-sm text-zinc-700;
+        @apply !border-b border-zinc-100 px-5 py-4 align-top text-sm leading-6 text-zinc-700;
+    }
+
+    .dt-container table.dataTable tbody tr:last-child td {
+        @apply !border-b-0;
     }
 
     .dt-container table.dataTable tbody tr:hover td {
-        @apply bg-zinc-50/80;
+        @apply bg-zinc-50;
     }
 
-    /* Pagination Styling */
     .dt-container .dt-paging {
-        @apply flex items-center;
+        @apply flex flex-wrap items-center;
     }
 
     .dt-container .dt-paging .dt-paging-button {
-        @apply !m-0 !border !border-zinc-200 bg-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-zinc-500 transition-all hover:!bg-zinc-50 hover:!text-zinc-950 !shadow-none;
+        @apply !m-0 !border !border-zinc-200 bg-white px-3 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-zinc-500 transition-all hover:!bg-zinc-50 hover:!text-zinc-950 !shadow-none;
         border-radius: 0 !important;
         margin-left: -1px !important;
     }
@@ -221,13 +331,11 @@
         @apply !bg-zinc-50 !text-zinc-300 pointer-events-none;
     }
 
-    /* Info Area */
     .dt-container .dt-info {
-        @apply text-[10px] font-bold uppercase tracking-widest text-zinc-400;
+        @apply text-sm leading-6 text-zinc-500;
     }
 
-    /* Processing Indicator */
     .dt-container .dt-processing {
-        @apply !bg-zinc-950/5 text-zinc-950 font-bold uppercase tracking-widest text-[10px] backdrop-blur-[1px];
+        @apply !bg-zinc-950/5 px-4 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-zinc-950 backdrop-blur-[1px];
     }
 }

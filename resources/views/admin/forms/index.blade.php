@@ -9,92 +9,116 @@
     </x-slot:actions>
 
     <div class="space-y-6">
-        {{-- Filters area --}}
-        <div class="flex flex-wrap items-center gap-4 bg-white border border-zinc-200 p-4 shadow-sm">
-            <div class="flex flex-col gap-1">
-                <label class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Filter Periode</label>
-                <select id="period-filter" class="!w-64 !border-zinc-300 bg-white px-3 py-1.5 text-xs font-bold focus:!border-teal-600 focus:!ring-0 outline-none transition-all">
-                    <option value="">Semua Periode</option>
-                    @foreach(\App\Models\EvaluationPeriod::orderBy('start_date', 'desc')->get() as $period)
-                        <option value="{{ $period->id }}">{{ $period->name }}</option>
-                    @endforeach
-                </select>
+        <section class="sk-table-panel">
+            <div class="sk-table-panel-copy">
+                <h2 class="sk-table-panel-title">Instrumen per periode</h2>
+                <p class="sk-table-panel-body">
+                    Lacak form evaluasi berdasarkan periode, target, jumlah soal, dan respons tanpa membuat kontrol tabel terasa terpisah dari halaman.
+                </p>
             </div>
-        </div>
 
-        <table id="forms-table" class="w-full">
-            <thead>
-                <tr>
-                    <th>Judul Instrumen</th>
-                    <th>Periode</th>
-                    <th>Target</th>
-                    <th>Soal</th>
-                    <th>Respons</th>
-                    <th>Status</th>
-                    <th class="text-right">Aksi</th>
-                </tr>
-            </thead>
-        </table>
+            <div id="forms-toolbar" class="sk-table-inline-filters">
+                <div class="sk-table-filter-group">
+                    <label for="period-filter" class="sk-table-filter-label">Filter periode</label>
+                    <select id="period-filter" class="sk-table-select">
+                        <option value="">Semua periode</option>
+                        @foreach(\App\Models\EvaluationPeriod::orderBy('start_date', 'desc')->get() as $period)
+                            <option value="{{ $period->id }}">{{ $period->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <p class="sk-table-filter-hint">
+                    Gunakan filter ketika Anda ingin fokus pada satu siklus evaluasi tanpa mengubah pencarian global.
+                </p>
+            </div>
+
+            <table id="forms-table" class="w-full">
+                <thead>
+                    <tr>
+                        <th>Judul Instrumen</th>
+                        <th>Periode</th>
+                        <th>Target</th>
+                        <th>Soal</th>
+                        <th>Respons</th>
+                        <th>Status</th>
+                        <th class="text-right">Aksi</th>
+                    </tr>
+                </thead>
+            </table>
+        </section>
     </div>
 
     @push('scripts')
         <script>
             $(function() {
-                let table = $('#forms-table').DataTable({
-                    processing: true,
-                    serverSide: true,
+                const table = window.adminTables.create('#forms-table', {
                     ajax: {
                         url: "{{ route('admin.forms.data') }}",
-                        data: function (d) {
+                        data: function(d) {
                             d.period_id = $('#period-filter').val();
                         }
                     },
                     columns: [
-                        { 
-                            data: 'title', 
-                            name: 'title', 
-                            className: 'font-semibold text-zinc-950 min-w-[200px]',
+                        {
+                            data: 'title',
+                            name: 'title',
                             render: function(data, type, row) {
-                                return `<div>${data}</div><div class="text-[10px] text-zinc-400 max-w-[200px] truncate">${row.description || ''}</div>`;
+                                return window.adminTables.stack(data, row.description || '', 'sk-cell-title', 'sk-cell-support');
                             }
                         },
-                        { data: 'period_name', name: 'evaluationPeriod.name', className: 'text-sm text-zinc-600' },
-                        { 
-                            data: 'target_type', 
-                            name: 'target_type', 
-                            className: 'text-[10px] font-bold text-zinc-500 uppercase tracking-tighter',
+                        {
+                            data: 'period_name',
+                            name: 'evaluationPeriod.name',
                             render: function(data) {
-                                return data === 'student' ? 'Mahasiswa' : data;
+                                return `<span class="sk-cell-muted">${window.adminTables.escape(data)}</span>`;
                             }
                         },
-                        { data: 'questions_count', name: 'questions_count', className: 'text-sm font-bold text-zinc-950' },
-                        { data: 'responses_count', name: 'responses_count', className: 'text-sm font-bold text-teal-600' },
-                        { 
-                            data: 'is_active', 
+                        {
+                            data: 'target_type',
+                            name: 'target_type',
+                            render: function(data) {
+                                return window.adminTables.badge(data === 'student' ? 'Mahasiswa' : data, 'info');
+                            }
+                        },
+                        {
+                            data: 'questions_count',
+                            name: 'questions_count',
+                            render: function(data) {
+                                return `<span class="sk-cell-number">${window.adminTables.escape(data)}</span>`;
+                            }
+                        },
+                        {
+                            data: 'responses_count',
+                            name: 'responses_count',
+                            render: function(data) {
+                                return `<span class="sk-cell-number">${window.adminTables.escape(data)}</span>`;
+                            }
+                        },
+                        {
+                            data: 'is_active',
                             name: 'is_active',
                             render: function(data) {
-                                return data 
-                                    ? '<span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-teal-600">Aktif</span>'
-                                    : '<span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-zinc-400">Draf</span>';
+                                return data
+                                    ? window.adminTables.badge('Aktif', 'success')
+                                    : window.adminTables.badge('Draf', 'warning');
                             }
                         },
-                        { 
-                            data: 'actions', 
-                            name: 'actions', 
-                            orderable: false, 
+                        {
+                            data: 'actions',
+                            name: 'actions',
+                            orderable: false,
                             searchable: false,
                             className: 'text-right'
                         }
                     ],
                     language: {
-                        search: "",
-                        searchPlaceholder: "Cari instrumen...",
-                        lengthMenu: "_MENU_",
-                        info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ instrumen",
+                        searchPlaceholder: 'Cari judul, periode, atau target form...',
+                        info: 'Menampilkan _START_ sampai _END_ dari _TOTAL_ instrumen',
                     },
-                    pageLength: 25,
                     order: [[1, 'desc']]
                 });
+
+                window.adminTables.mountFilters(table, '#forms-toolbar');
 
                 $('#period-filter').on('change', function() {
                     table.draw();

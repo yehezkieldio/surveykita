@@ -31,9 +31,10 @@ class QuestionController extends Controller
         }
 
         return DataTables::eloquent($query)
+            ->addColumn('text', fn (Question $question): string => $question->question_text)
             ->addColumn('form_title', fn (Question $question): string => $question->evaluationForm->title)
             ->addColumn('category_name', fn (Question $question): string => $question->category->name)
-            ->addColumn('actions', fn (Question $question): string => 
+            ->addColumn('actions', fn (Question $question): string =>
                 view('admin.questions.partials.actions', ['question' => $question])->render()
             )
             ->rawColumns(['actions'])
