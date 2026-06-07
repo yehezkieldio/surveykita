@@ -16,60 +16,64 @@
         </div>
     </x-slot:actions>
 
-    {{-- Summary Metrics --}}
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-5 mb-8">
-        <x-ui.card no-padding class="p-6">
-            <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Total Responden</p>
-            <div class="mt-2 flex items-baseline gap-1">
-                <span class="text-3xl font-bold tracking-tight text-zinc-950">{{ number_format($result['total_respondents']) }}</span>
-                <span class="text-xs font-medium text-zinc-500">Mahasiswa</span>
-            </div>
-        </x-ui.card>
+    {{-- Summary Metrics - Split into 2 and 3 --}}
+    <div class="space-y-6 mb-12">
+        <div class="grid gap-6 sm:grid-cols-2">
+            <x-ui.card no-padding class="p-6">
+                <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Total Responden</p>
+                <div class="mt-2 flex items-baseline gap-1">
+                    <span class="text-3xl font-bold tracking-tight text-zinc-950">{{ number_format($result['total_respondents']) }}</span>
+                    <span class="text-xs font-medium text-zinc-500">Mahasiswa</span>
+                </div>
+            </x-ui.card>
 
-        <x-ui.card no-padding class="p-6">
-            <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Total Jawaban</p>
-            <div class="mt-2 flex items-baseline gap-1">
-                <span class="text-3xl font-bold tracking-tight text-zinc-950">{{ number_format($result['total_answers']) }}</span>
-                <span class="text-xs font-medium text-zinc-500">Butir</span>
-            </div>
-        </x-ui.card>
+            <x-ui.card no-padding class="p-6">
+                <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Total Jawaban</p>
+                <div class="mt-2 flex items-baseline gap-1">
+                    <span class="text-3xl font-bold tracking-tight text-zinc-950">{{ number_format($result['total_answers']) }}</span>
+                    <span class="text-xs font-medium text-zinc-500">Butir</span>
+                </div>
+            </x-ui.card>
+        </div>
 
-        <x-ui.card no-padding class="p-6">
-            <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Rata-rata Skor</p>
-            <div class="mt-2 flex items-baseline gap-1">
-                <span class="text-3xl font-bold tracking-tight text-zinc-950">{{ number_format($result['average_score'], 2) }}</span>
-                <span class="text-xs font-medium text-zinc-500">/ 5.00</span>
-            </div>
-        </x-ui.card>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <x-ui.card no-padding class="p-6">
+                <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Rata-rata Skor</p>
+                <div class="mt-2 flex items-baseline gap-1">
+                    <span class="text-3xl font-bold tracking-tight text-zinc-950">{{ number_format($result['average_score'], 2) }}</span>
+                    <span class="text-xs font-medium text-zinc-500">/ 5.00</span>
+                </div>
+            </x-ui.card>
 
-        <x-ui.card no-padding class="p-6">
-            <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Persentase Kepuasan</p>
-            <div class="mt-2 flex items-baseline gap-1">
-                <span class="text-3xl font-bold tracking-tight text-teal-600">{{ number_format($result['satisfaction_percentage'], 1) }}%</span>
-            </div>
-        </x-ui.card>
+            <x-ui.card no-padding class="p-6">
+                <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Persentase Kepuasan</p>
+                <div class="mt-2 flex items-baseline gap-1">
+                    <span class="text-3xl font-bold tracking-tight text-teal-600">{{ number_format($result['satisfaction_percentage'], 1) }}%</span>
+                </div>
+            </x-ui.card>
 
-        <x-ui.card no-padding class="p-6">
-            <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Kategori Kepuasan</p>
-            <div class="mt-2 flex items-center">
-                @if($result['is_empty'])
-                    <x-ui.badge variant="zinc">BELUM ADA DATA</x-ui.badge>
-                @else
-                    @php
-                        $badgeVariant = match(true) {
-                            $result['satisfaction_percentage'] >= 80 => 'teal',
-                            $result['satisfaction_percentage'] >= 60 => 'yellow',
-                            default => 'red',
-                        };
-                    @endphp
-                    <x-ui.badge :variant="$badgeVariant" class="text-sm px-3 py-1">{{ $result['satisfaction_category'] }}</x-ui.badge>
-                @endif
-            </div>
-        </x-ui.card>
+            <x-ui.card no-padding class="p-6">
+                <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Kategori Kepuasan</p>
+                <div class="mt-2 flex items-center">
+                    @if($result['is_empty'])
+                        <x-ui.badge variant="zinc">BELUM ADA DATA</x-ui.badge>
+                    @else
+                        @php
+                            $badgeVariant = match(true) {
+                                $result['satisfaction_percentage'] >= 80 => 'teal',
+                                $result['satisfaction_percentage'] >= 60 => 'yellow',
+                                default => 'red',
+                            };
+                        @endphp
+                        <x-ui.badge :variant="$badgeVariant" class="text-sm px-3 py-1">{{ $result['satisfaction_category'] }}</x-ui.badge>
+                    @endif
+                </div>
+            </x-ui.card>
+        </div>
     </div>
 
     {{-- Filter & Detail Content --}}
-    <div class="grid gap-8 lg:grid-cols-[1fr_24rem]">
+    <div class="grid gap-8 lg:grid-cols-[1fr_20rem] xl:grid-cols-[1fr_24rem]">
         <div class="space-y-12">
             {{-- Charts --}}
             <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">

@@ -8,17 +8,29 @@ use App\Http\Requests\Admin\UpdateEvaluationPeriodRequest;
 use App\Models\EvaluationPeriod;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
+use Yajra\DataTables\Facades\DataTables;
 
 class EvaluationPeriodController extends Controller
 {
     public function index(): View
     {
-        return view('admin.periods.index', [
-            'periods' => EvaluationPeriod::query()
+        return view('admin.periods.index');
+    }
+
+    public function data(): JsonResponse
+    {
+        return DataTables::eloquent(
+            EvaluationPeriod::query()
                 ->withCount('evaluationForms')
-                ->latest()
-                ->paginate(10),
-        ]);
+        )
+            ->editColumn('start_date', fn (EvaluationPeriod $period): string => $period->start_date->translatedFormat('d M Y'))
+            ->editColumn('end_date', fn (EvaluationPeriod $period): string => $period->end_date->translatedFormat('d M Y'))
+            ->addColumn('actions', fn (EvaluationPeriod $period): string => 
+                view('admin.periods.partials.actions', ['period' => $period])->render()
+            )
+            ->rawColumns(['actions'])
+            ->toJson();
     }
 
     public function create(): View

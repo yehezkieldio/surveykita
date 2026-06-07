@@ -11,18 +11,35 @@ use App\Models\QuestionCategory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
+use Yajra\DataTables\Facades\DataTables;
 
 class QuestionController extends Controller
 {
     public function index(): View
     {
-        return view('admin.questions.index', [
-            'questions' => Question::query()
-                ->with(['evaluationForm', 'category'])
-                ->orderByDesc('id')
-                ->paginate(10),
-        ]);
+        return view('admin.questions.index');
     }
+
+    public function data(): JsonResponse
+    {
+        $query = Question::query()
+            ->with(['evaluationForm', 'category']);
+
+        if (request()->filled('evaluation_form_id')) {
+            $query->where('evaluation_form_id', request('evaluation_form_id'));
+        }
+
+        return DataTables::eloquent($query)
+            ->addColumn('form_title', fn (Question $question): string => $question->evaluationForm->title)
+            ->addColumn('category_name', fn (Question $question): string => $question->category->name)
+            ->addColumn('actions', fn (Question $question): string => 
+                view('admin.questions.partials.actions', ['question' => $question])->render()
+            )
+            ->rawColumns(['actions'])
+            ->toJson();
+    }
+
 
     public function create(): View
     {

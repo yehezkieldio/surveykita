@@ -70,17 +70,18 @@
                 <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">Saran & Masukan</h2>
             </div>
             
-            <x-ui.card>
-                <div class="space-y-1.5">
-                    <label for="suggestion" class="text-xs font-bold uppercase tracking-wider text-zinc-500">Saran untuk Program Studi / Institusi (Opsional)</label>
+            <div class="space-y-4">
+                <div class="relative">
+                    <label for="suggestion" class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 absolute -top-2 left-3 bg-zinc-50 px-2">Saran & Masukan (Opsional)</label>
                     <textarea id="suggestion" 
                               name="suggestion" 
-                              rows="5" 
-                              placeholder="Tuliskan saran atau masukan Anda di sini..."
-                              class="block w-full border-zinc-300 bg-white px-3 py-2 text-sm focus:border-zinc-950 focus:ring-0">{{ old('suggestion') }}</textarea>
-                    <x-ui.error name="suggestion" />
+                              rows="6" 
+                              placeholder="Tuliskan masukan konstruktif Anda untuk membantu kami meningkatkan kualitas layanan..."
+                              class="block w-full border-zinc-200 bg-white px-4 py-4 text-sm focus:border-teal-600 focus:ring-4 focus:ring-teal-500/5 transition-all outline-none resize-none">{{ old('suggestion') }}</textarea>
                 </div>
-            </x-ui.card>
+                <p class="text-[10px] text-zinc-400">Masukan Anda akan sangat berharga bagi pengembangan institusi di masa mendatang.</p>
+                <x-ui.error name="suggestion" />
+            </div>
 
             <div class="mt-12 flex items-center justify-between gap-6 border-t border-zinc-200 pt-8">
                 <div class="hidden sm:block">

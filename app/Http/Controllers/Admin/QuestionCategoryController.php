@@ -8,17 +8,29 @@ use App\Http\Requests\Admin\UpdateQuestionCategoryRequest;
 use App\Models\QuestionCategory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Str;
+use Yajra\DataTables\Facades\DataTables;
 
 class QuestionCategoryController extends Controller
 {
     public function index(): View
     {
-        return view('admin.categories.index', [
-            'categories' => QuestionCategory::query()
+        return view('admin.categories.index');
+    }
+
+    public function data(): JsonResponse
+    {
+        return DataTables::eloquent(
+            QuestionCategory::query()
                 ->withCount('questions')
-                ->latest()
-                ->paginate(10),
-        ]);
+        )
+            ->addColumn('slug', fn (QuestionCategory $category): string => Str::slug($category->name, '_'))
+            ->addColumn('actions', fn (QuestionCategory $category): string => 
+                view('admin.categories.partials.actions', ['category' => $category])->render()
+            )
+            ->rawColumns(['actions'])
+            ->toJson();
     }
 
     public function create(): View

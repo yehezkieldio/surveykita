@@ -82,15 +82,32 @@ class ResultChartService
         array $data,
         string $color,
     ): Chart {
-        $chart = (new Chart)
-            ->setType('bar')
-            ->setTitle($title)
+        $chart = new Chart;
+        $chart->setType('bar')
             ->setHeight(320)
+            ->setTitle($title)
+            ->setSubtitle(' ')
             ->setColors([$color])
             ->setDataset($seriesName, 'bar', $data)
+            ->setXaxis([
+                'categories' => $labels,
+                'labels' => [
+                    'rotate' => -45,
+                    'trim' => true,
+                    'maxHeight' => 100,
+                    'style' => ['fontSize' => '10px', 'fontWeight' => 600, 'colors' => '#71717a'],
+                ],
+            ])
+            ->setYaxis([
+                'min' => 0,
+                'labels' => [
+                    'style' => ['fontSize' => '10px', 'fontWeight' => 500, 'colors' => '#71717a'],
+                    'maxWidth' => 100,
+                ],
+            ])
             ->setOption([
                 'dataLabels' => ['enabled' => false],
-                'grid' => ['borderColor' => '#e4e4e7'],
+                'grid' => ['borderColor' => '#e4e4e7', 'strokeDashArray' => 4],
                 'noData' => ['text' => 'Belum ada data'],
                 'plotOptions' => [
                     'bar' => [
@@ -98,11 +115,12 @@ class ResultChartService
                         'columnWidth' => '48%',
                     ],
                 ],
-                'xaxis' => ['categories' => $labels],
-                'yaxis' => ['min' => 0],
+                'chart' => [
+                    'id' => $id,
+                    'toolbar' => ['show' => false],
+                    'fontFamily' => 'inherit',
+                ],
             ]);
-
-        $chart->id = $id;
 
         return $chart;
     }

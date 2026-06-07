@@ -4,7 +4,7 @@
 
         <div class="space-y-1.5">
             <label for="email" class="text-xs font-bold uppercase tracking-wider text-zinc-500">Email</label>
-            <input id="email" name="email" type="email" value="{{ old('email') }}" required autofocus placeholder="nama@institusi.ac.id">
+            <input id="email" name="email" type="email" value="{{ old('email') }}" required autofocus placeholder="nama@institusi.ac.id" autocomplete="off">
             <x-ui.error name="email" />
         </div>
 
@@ -12,7 +12,7 @@
             <div class="flex items-center justify-between">
                 <label for="password" class="text-xs font-bold uppercase tracking-wider text-zinc-500">Kata Sandi</label>
             </div>
-            <input id="password" name="password" type="password" required placeholder="••••••••">
+            <input id="password" name="password" type="password" required placeholder="••••••••" autocomplete="new-password">
             <x-ui.error name="password" />
         </div>
 

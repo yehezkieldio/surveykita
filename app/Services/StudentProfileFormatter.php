@@ -64,13 +64,13 @@ class StudentProfileFormatter
         $normalized = preg_replace('/'.preg_quote((string) $parsedNim['enrollment_year'], '/').'/', '', $normalized, 1) ?? $normalized;
         $normalized = preg_replace('/'.preg_quote(substr((string) $parsedNim['enrollment_year'], -2), '/').'/', '', $normalized, 1) ?? $normalized;
         $normalized = preg_replace('/'.preg_quote((string) $semester, '/').'/', '', $normalized, 1) ?? $normalized;
+        
+        // Remove 'B' if it was already there to avoid double B
+        $normalized = Str::after($normalized, 'B');
+        
         $suffix = preg_replace('/[^A-Z]/', '', $normalized) ?: 'A';
 
-        if (strlen($suffix) === 1) {
-            return $program.$semester.$suffix;
-        }
-
-        return $program.substr($suffix, 0, -1).$semester.substr($suffix, -1);
+        return $program . 'B' . $semester . $suffix;
     }
 
     public function semesterForAdmissionYear(int $admissionYear): int

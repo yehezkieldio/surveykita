@@ -9,18 +9,33 @@ use App\Models\EvaluationForm;
 use App\Models\EvaluationPeriod;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
+use Yajra\DataTables\Facades\DataTables;
 
 class EvaluationFormController extends Controller
 {
     public function index(): View
     {
-        return view('admin.forms.index', [
-            'forms' => EvaluationForm::query()
-                ->with('evaluationPeriod')
-                ->withCount(['questions', 'responses'])
-                ->latest()
-                ->paginate(10),
-        ]);
+        return view('admin.forms.index');
+    }
+
+    public function data(): JsonResponse
+    {
+        $query = EvaluationForm::query()
+            ->with('evaluationPeriod')
+            ->withCount(['questions', 'responses']);
+
+        if (request()->filled('period_id')) {
+            $query->where('evaluation_period_id', request('period_id'));
+        }
+
+        return DataTables::eloquent($query)
+            ->addColumn('period_name', fn (EvaluationForm $form): string => $form->evaluationPeriod->name)
+            ->addColumn('actions', fn (EvaluationForm $form): string => 
+                view('admin.forms.partials.actions', ['form' => $form])->render()
+            )
+            ->rawColumns(['actions'])
+            ->toJson();
     }
 
     public function create(): View

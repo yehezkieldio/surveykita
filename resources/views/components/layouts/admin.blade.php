@@ -1,22 +1,22 @@
 @props(['title' => null, 'heading' => null, 'eyebrow' => null])
 
-@push('scripts')
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/2.3.5/js/dataTables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-@endpush
-
 @push('head')
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 @endpush
 
 <x-layouts.app :title="$title ?? $heading">
     <div class="flex min-h-full">
         {{-- Sidebar --}}
-        <aside class="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-72 lg:flex-col lg:border-r lg:border-zinc-200 lg:bg-zinc-950 lg:text-white">
+        <aside class="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-72 lg:flex-col lg:border-r lg:border-zinc-800 lg:bg-zinc-950 lg:text-white">
             <div class="flex grow flex-col gap-y-8 overflow-y-auto px-6 py-8">
                 <div class="flex h-8 shrink-0 items-center">
-                    <a href="{{ route('admin.dashboard') }}" class="font-display text-xl font-bold tracking-tight text-white">SurveyKita</a>
+                    <a href="{{ route('admin.dashboard') }}" class="font-display text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                        <div class="h-6 w-6 bg-teal-500"></div>
+                        SurveyKita
+                    </a>
                 </div>
 
                 <div class="flex flex-col gap-y-1">
@@ -29,7 +29,7 @@
                                     href="{{ route('admin.dashboard') }}" 
                                     :active="request()->routeIs('admin.dashboard')" 
                                     icon="house"
-                                    class="{{ request()->routeIs('admin.dashboard') ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:bg-zinc-800 hover:text-white' }}"
+                                    class="{{ request()->routeIs('admin.dashboard') ? 'bg-zinc-900 text-teal-400 border-l-2 border-teal-500' : 'text-zinc-400 hover:bg-white/5 hover:text-white border-l-2 border-transparent' }} rounded-none pl-3"
                                 >
                                     Dashboard
                                 </x-ui.nav-link>
@@ -39,7 +39,7 @@
                                     href="{{ route('admin.students.index') }}" 
                                     :active="request()->routeIs('admin.students.*')" 
                                     icon="users"
-                                    class="{{ request()->routeIs('admin.students.*') ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:bg-zinc-800 hover:text-white' }}"
+                                    class="{{ request()->routeIs('admin.students.*') ? 'bg-zinc-900 text-teal-400 border-l-2 border-teal-500' : 'text-zinc-400 hover:bg-white/5 hover:text-white border-l-2 border-transparent' }} rounded-none pl-3"
                                 >
                                     Mahasiswa
                                 </x-ui.nav-link>
@@ -49,7 +49,7 @@
                                     href="{{ route('admin.periods.index') }}" 
                                     :active="request()->routeIs('admin.periods.*')" 
                                     icon="calendar"
-                                    class="{{ request()->routeIs('admin.periods.*') ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:bg-zinc-800 hover:text-white' }}"
+                                    class="{{ request()->routeIs('admin.periods.*') ? 'bg-zinc-900 text-teal-400 border-l-2 border-teal-500' : 'text-zinc-400 hover:bg-white/5 hover:text-white border-l-2 border-transparent' }} rounded-none pl-3"
                                 >
                                     Periode
                                 </x-ui.nav-link>
@@ -59,7 +59,7 @@
                                     href="{{ route('admin.forms.index') }}" 
                                     :active="request()->routeIs('admin.forms.*')" 
                                     icon="rectangle-stack"
-                                    class="{{ request()->routeIs('admin.forms.*') ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:bg-zinc-800 hover:text-white' }}"
+                                    class="{{ request()->routeIs('admin.forms.*') ? 'bg-zinc-900 text-teal-400 border-l-2 border-teal-500' : 'text-zinc-400 hover:bg-white/5 hover:text-white border-l-2 border-transparent' }} rounded-none pl-3"
                                 >
                                     Form Evaluasi
                                 </x-ui.nav-link>
@@ -69,7 +69,7 @@
                                     href="{{ route('admin.categories.index') }}" 
                                     :active="request()->routeIs('admin.categories.*')" 
                                     icon="tag"
-                                    class="{{ request()->routeIs('admin.categories.*') ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:bg-zinc-800 hover:text-white' }}"
+                                    class="{{ request()->routeIs('admin.categories.*') ? 'bg-zinc-900 text-teal-400 border-l-2 border-teal-500' : 'text-zinc-400 hover:bg-white/5 hover:text-white border-l-2 border-transparent' }} rounded-none pl-3"
                                 >
                                     Kategori
                                 </x-ui.nav-link>
@@ -79,7 +79,7 @@
                                     href="{{ route('admin.questions.index') }}" 
                                     :active="request()->routeIs('admin.questions.*')" 
                                     icon="question-mark-circle"
-                                    class="{{ request()->routeIs('admin.questions.*') ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:bg-zinc-800 hover:text-white' }}"
+                                    class="{{ request()->routeIs('admin.questions.*') ? 'bg-zinc-900 text-teal-400 border-l-2 border-teal-500' : 'text-zinc-400 hover:bg-white/5 hover:text-white border-l-2 border-transparent' }} rounded-none pl-3"
                                 >
                                     Pertanyaan
                                 </x-ui.nav-link>
@@ -89,7 +89,7 @@
                                     href="{{ route('admin.results.index') }}" 
                                     :active="request()->routeIs('admin.results.*')" 
                                     icon="presentation-chart-bar"
-                                    class="{{ request()->routeIs('admin.results.*') ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:bg-zinc-800 hover:text-white' }}"
+                                    class="{{ request()->routeIs('admin.results.*') ? 'bg-zinc-900 text-teal-400 border-l-2 border-teal-500' : 'text-zinc-400 hover:bg-white/5 hover:text-white border-l-2 border-transparent' }} rounded-none pl-3"
                                 >
                                     Hasil Evaluasi
                                 </x-ui.nav-link>
@@ -130,8 +130,8 @@
         </div>
 
         {{-- Main Content --}}
-        <main class="lg:pl-72 flex-1">
-            <div class="px-4 py-8 sm:px-6 lg:px-12 max-w-[1600px] mx-auto">
+        <main class="lg:pl-72 flex-1 w-0">
+            <div class="px-4 py-8 sm:px-6 lg:px-12 max-w-full mx-auto overflow-hidden">
                 <header class="mb-10 animate-reveal">
                     @if($eyebrow)
                         <p class="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">{{ $eyebrow }}</p>

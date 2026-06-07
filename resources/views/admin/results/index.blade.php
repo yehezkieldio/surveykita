@@ -76,21 +76,21 @@
                         $result = $row['result'];
                     @endphp
                     <tr class="hover:bg-zinc-50/50 transition-colors">
-                        <td class="px-6 py-4">
+                        <td class="px-4 py-4 min-w-[200px] whitespace-normal">
                             <div class="text-sm font-bold text-zinc-950">{{ $form->title }}</div>
                             <div class="text-[10px] text-zinc-400 uppercase tracking-tighter">{{ $form->evaluationPeriod->name }}</div>
                         </td>
-                        <td class="whitespace-nowrap px-6 py-4 text-sm font-semibold text-zinc-950">
+                        <td class="whitespace-nowrap px-4 py-4 text-sm font-semibold text-zinc-950">
                             {{ number_format($result['total_respondents']) }}
                             <span class="text-[10px] font-normal text-zinc-400">mhs</span>
                         </td>
-                        <td class="whitespace-nowrap px-6 py-4 text-sm font-bold text-zinc-950">
+                        <td class="whitespace-nowrap px-4 py-4 text-sm font-bold text-zinc-950">
                             {{ number_format($result['average_score'], 2) }}
                         </td>
-                        <td class="whitespace-nowrap px-6 py-4 text-sm font-bold text-teal-600">
+                        <td class="whitespace-nowrap px-4 py-4 text-sm font-bold text-teal-600">
                             {{ number_format($result['satisfaction_percentage'], 1) }}%
                         </td>
-                        <td class="whitespace-nowrap px-6 py-4">
+                        <td class="whitespace-nowrap px-4 py-4">
                             @if($result['is_empty'])
                                 <x-ui.badge variant="zinc">BELUM ADA DATA</x-ui.badge>
                             @else
@@ -104,10 +104,22 @@
                                 <x-ui.badge :variant="$badgeVariant">{{ $result['satisfaction_category'] }}</x-ui.badge>
                             @endif
                         </td>
-                        <td class="whitespace-nowrap px-6 py-4 text-right">
-                            <x-ui.button href="{{ route('admin.results.show', $form) }}" variant="ghost" size="sm">
-                                Detail Laporan
-                            </x-ui.button>
+                        <td class="whitespace-nowrap px-4 py-4 text-right">
+                            <div class="flex justify-end gap-2">
+                                <x-ui.button href="{{ route('admin.results.export.excel', $form) }}" variant="ghost" size="sm">
+                                    <svg class="h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                    </svg>
+                                </x-ui.button>
+                                <x-ui.button href="{{ route('admin.results.export.pdf', $form) }}" variant="ghost" size="sm">
+                                    <svg class="h-4 w-4 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                    </svg>
+                                </x-ui.button>
+                                <x-ui.button href="{{ route('admin.results.show', $form) }}" variant="secondary" size="sm">
+                                    Detail
+                                </x-ui.button>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

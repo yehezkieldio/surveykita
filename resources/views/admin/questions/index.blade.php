@@ -1,45 +1,86 @@
-<x-layouts.admin heading="Pertanyaan Evaluasi" eyebrow="Bank Soal">
+<x-layouts.admin heading="Butir Pertanyaan" eyebrow="Database Instrumen">
     <x-slot:actions>
         <x-ui.button href="{{ route('admin.questions.create') }}" variant="teal" size="sm">
+            <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
             Tambah Pertanyaan
         </x-ui.button>
     </x-slot:actions>
 
-    @if($questions->isEmpty())
-        <x-ui.empty-state title="Belum ada pertanyaan" description="Buat pertanyaan evaluasi dan hubungkan ke formulir yang tersedia." />
-    @else
-        <div class="space-y-6">
-            <x-ui.table :headers="['Formulir', 'Kategori', 'No', 'Teks Pertanyaan', 'Wajib', 'Aksi']">
-                @foreach ($questions as $question)
-                    <tr class="hover:bg-zinc-50/50 transition-colors">
-                        <td class="px-6 py-4 text-xs font-semibold text-zinc-600 max-w-[150px] truncate">{{ $question->evaluationForm->title }}</td>
-                        <td class="whitespace-nowrap px-6 py-4 text-xs font-medium text-zinc-500">{{ $question->category->name }}</td>
-                        <td class="whitespace-nowrap px-6 py-4 font-mono text-xs font-bold text-zinc-400">{{ $question->sort_order }}</td>
-                        <td class="px-6 py-4 text-sm text-zinc-950 max-w-md truncate">{{ $question->question_text }}</td>
-                        <td class="whitespace-nowrap px-6 py-4 text-sm">
-                            <x-ui.badge :variant="$question->is_required ? 'teal' : 'zinc'">
-                                {{ $question->is_required ? 'Wajib' : 'Opsional' }}
-                            </x-ui.badge>
-                        </td>
-                        <td class="whitespace-nowrap px-6 py-4 text-right">
-                            <div class="flex justify-end gap-2">
-                                <x-ui.button href="{{ route('admin.questions.edit', $question) }}" variant="secondary" size="sm">Edit</x-ui.button>
-                                <form action="{{ route('admin.questions.destroy', $question) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pertanyaan ini?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <x-ui.button variant="danger" size="sm" :disabled="$question->responseAnswers()->exists()">
-                                        Hapus
-                                    </x-ui.button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            </x-ui.table>
-
-            <div class="mt-8">
-                {{ $questions->links() }}
+    <div class="space-y-6">
+        {{-- Filters area --}}
+        <div class="flex flex-wrap items-center gap-4 bg-white border border-zinc-200 p-4 shadow-sm">
+            <div class="flex flex-col gap-1">
+                <label class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Filter Instrumen</label>
+                <select id="form-filter" class="!w-64 !border-zinc-300 bg-white px-3 py-1.5 text-xs font-bold focus:!border-teal-600 focus:!ring-0 outline-none transition-all">
+                    <option value="">Semua Instrumen</option>
+                    @foreach(\App\Models\EvaluationForm::orderBy('title')->get() as $form)
+                        <option value="{{ $form->id }}">{{ $form->title }} ({{ $form->evaluationPeriod->name }})</option>
+                    @endforeach
+                </select>
             </div>
         </div>
-    @endif
+
+        <table id="questions-table" class="w-full">
+            <thead>
+                <tr>
+                    <th>Teks Pertanyaan</th>
+                    <th>Instrumen</th>
+                    <th>Kategori</th>
+                    <th>Urutan</th>
+                    <th class="text-right">Aksi</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    @push('scripts')
+        <script>
+            $(function() {
+                let table = $('#questions-table').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: {
+                        url: "{{ route('admin.questions.data') }}",
+                        data: function (d) {
+                            d.evaluation_form_id = $('#form-filter').val();
+                        }
+                    },
+                    columns: [
+                        { 
+                            data: 'text', 
+                            name: 'text', 
+                            className: 'font-medium text-zinc-950 max-w-md',
+                            render: function(data) {
+                                return `<div class="whitespace-normal leading-relaxed">${data}</div>`;
+                            }
+                        },
+                        { data: 'form_title', name: 'evaluationForm.title', className: 'text-xs text-zinc-500' },
+                        { data: 'category_name', name: 'category.name', className: 'text-xs font-bold uppercase tracking-tight text-zinc-400' },
+                        { data: 'sort_order', name: 'sort_order', className: 'text-sm font-mono text-zinc-400' },
+                        { 
+                            data: 'actions', 
+                            name: 'actions', 
+                            orderable: false, 
+                            searchable: false,
+                            className: 'text-right'
+                        }
+                    ],
+                    language: {
+                        search: "",
+                        searchPlaceholder: "Cari pertanyaan...",
+                        lengthMenu: "_MENU_",
+                        info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ pertanyaan",
+                    },
+                    pageLength: 25,
+                    order: [[1, 'asc'], [3, 'asc']]
+                });
+
+                $('#form-filter').on('change', function() {
+                    table.draw();
+                });
+            });
+        </script>
+    @endpush
 </x-layouts.admin>

@@ -14,18 +14,35 @@ use App\Http\Controllers\Student\ProfileController;
 use App\Http\Controllers\Student\SubmissionController;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/login')->name('home');
+Route::get('/', function () {
+    if (Auth::check()) {
+        return Auth::user()->role === 'admin'
+            ? redirect()->route('admin.dashboard')
+            : redirect()->route('student.dashboard');
+    }
+
+    return redirect()->route('login');
+})->name('home');
 
 Route::middleware(['auth', 'role:admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function (): void {
         Route::get('/dashboard', AdminDashboardController::class)->name('dashboard');
+        
         Route::get('/students/data', [StudentController::class, 'data'])->name('students.data');
         Route::resource('students', StudentController::class);
+        
+        Route::get('/periods/data', [EvaluationPeriodController::class, 'data'])->name('periods.data');
         Route::resource('periods', EvaluationPeriodController::class);
+        
+        Route::get('/forms/data', [EvaluationFormController::class, 'data'])->name('forms.data');
         Route::resource('forms', EvaluationFormController::class);
+        
+        Route::get('/categories/data', [QuestionCategoryController::class, 'data'])->name('categories.data');
         Route::resource('categories', QuestionCategoryController::class)->except('show');
+        
+        Route::get('/questions/data', [QuestionController::class, 'data'])->name('questions.data');
         Route::resource('questions', QuestionController::class)->except('show');
 
         Route::get('/results', [ResultController::class, 'index'])->name('results.index');
