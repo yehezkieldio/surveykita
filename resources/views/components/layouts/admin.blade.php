@@ -25,32 +25,62 @@
                                 </x-ui.nav-link>
                             </li>
                             <li>
-                                <x-ui.nav-link href="{{ route('admin.students.index') }}" class="opacity-40 pointer-events-none text-zinc-400" icon="users">
+                                <x-ui.nav-link 
+                                    href="{{ route('admin.students.index') }}" 
+                                    :active="request()->routeIs('admin.students.*')" 
+                                    icon="users"
+                                    class="{{ request()->routeIs('admin.students.*') ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:bg-zinc-800 hover:text-white' }}"
+                                >
                                     Mahasiswa
                                 </x-ui.nav-link>
                             </li>
                             <li>
-                                <x-ui.nav-link href="{{ route('admin.periods.index') }}" class="opacity-40 pointer-events-none text-zinc-400" icon="calendar">
+                                <x-ui.nav-link 
+                                    href="{{ route('admin.periods.index') }}" 
+                                    :active="request()->routeIs('admin.periods.*')" 
+                                    icon="calendar"
+                                    class="{{ request()->routeIs('admin.periods.*') ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:bg-zinc-800 hover:text-white' }}"
+                                >
                                     Periode
                                 </x-ui.nav-link>
                             </li>
                             <li>
-                                <x-ui.nav-link href="{{ route('admin.forms.index') }}" class="opacity-40 pointer-events-none text-zinc-400" icon="clipboard-document-list">
+                                <x-ui.nav-link 
+                                    href="{{ route('admin.forms.index') }}" 
+                                    :active="request()->routeIs('admin.forms.*')" 
+                                    icon="rectangle-stack"
+                                    class="{{ request()->routeIs('admin.forms.*') ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:bg-zinc-800 hover:text-white' }}"
+                                >
                                     Form Evaluasi
                                 </x-ui.nav-link>
                             </li>
                             <li>
-                                <x-ui.nav-link href="{{ route('admin.categories.index') }}" class="opacity-40 pointer-events-none text-zinc-400" icon="tag">
+                                <x-ui.nav-link 
+                                    href="{{ route('admin.categories.index') }}" 
+                                    :active="request()->routeIs('admin.categories.*')" 
+                                    icon="tag"
+                                    class="{{ request()->routeIs('admin.categories.*') ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:bg-zinc-800 hover:text-white' }}"
+                                >
                                     Kategori
                                 </x-ui.nav-link>
                             </li>
                             <li>
-                                <x-ui.nav-link href="{{ route('admin.questions.index') }}" class="opacity-40 pointer-events-none text-zinc-400" icon="question-mark-circle">
+                                <x-ui.nav-link 
+                                    href="{{ route('admin.questions.index') }}" 
+                                    :active="request()->routeIs('admin.questions.*')" 
+                                    icon="question-mark-circle"
+                                    class="{{ request()->routeIs('admin.questions.*') ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:bg-zinc-800 hover:text-white' }}"
+                                >
                                     Pertanyaan
                                 </x-ui.nav-link>
                             </li>
                             <li>
-                                <x-ui.nav-link href="{{ route('admin.results.index') }}" class="opacity-40 pointer-events-none text-zinc-400" icon="presentation-chart-bar">
+                                <x-ui.nav-link 
+                                    href="{{ route('admin.results.index') }}" 
+                                    :active="request()->routeIs('admin.results.*')" 
+                                    icon="presentation-chart-bar"
+                                    class="{{ request()->routeIs('admin.results.*') ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:bg-zinc-800 hover:text-white' }} opacity-40 pointer-events-none"
+                                >
                                     Hasil Evaluasi
                                 </x-ui.nav-link>
                             </li>

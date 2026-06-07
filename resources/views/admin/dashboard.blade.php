@@ -7,7 +7,7 @@
                     {{ $activePeriodCount > 0 ? 'Sistem Aktif' : 'Periode Tertutup' }}
                 </p>
             </div>
-            <x-ui.button href="{{ route('admin.periods.index') }}" variant="secondary" class="opacity-50 cursor-not-allowed" size="sm">
+            <x-ui.button href="{{ route('admin.periods.index') }}" variant="secondary" size="sm">
                 Kelola Periode
             </x-ui.button>
             <x-ui.button href="{{ route('admin.results.index') }}" variant="teal" class="opacity-50 cursor-not-allowed" size="sm">

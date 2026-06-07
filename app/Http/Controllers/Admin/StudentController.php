@@ -9,32 +9,21 @@ use App\Models\Student;
 use App\Models\User;
 use App\Services\NimParser;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Yajra\DataTables\Facades\DataTables;
 
 class StudentController extends Controller
 {
     public function index(): View
     {
-        return view('admin.students.index');
-    }
-
-    public function data(): JsonResponse
-    {
-        return DataTables::eloquent(
-            Student::query()
+        return view('admin.students.index', [
+            'students' => Student::query()
                 ->with('user')
                 ->withCount('responses')
-                ->select('students.*')
-        )
-            ->addColumn('email', fn (Student $student): string => $student->user?->email ?? '-')
-            ->addColumn('responses_count_display', fn (Student $student): int => (int) ($student->responses_count ?? 0))
-            ->addColumn('actions', fn (Student $student): string => view('admin.students.partials.actions', ['student' => $student])->render())
-            ->rawColumns(['actions'])
-            ->toJson();
+                ->latest()
+                ->paginate(10),
+        ]);
     }
 
     public function create(): View

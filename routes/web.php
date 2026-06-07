@@ -21,7 +21,6 @@ Route::middleware(['auth', 'role:admin'])
     ->name('admin.')
     ->group(function (): void {
         Route::get('/dashboard', AdminDashboardController::class)->name('dashboard');
-        Route::get('/students/data', [StudentController::class, 'data'])->name('students.data');
         Route::resource('students', StudentController::class);
         Route::resource('periods', EvaluationPeriodController::class);
         Route::resource('forms', EvaluationFormController::class);
