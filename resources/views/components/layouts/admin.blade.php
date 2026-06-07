@@ -164,6 +164,18 @@
                                     Hasil Evaluasi
                                 </x-ui.nav-link>
                             </li>
+
+                            <li class="mt-auto pt-8">
+                                <p class="mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">Pengaturan</p>
+                                <x-ui.nav-link
+                                    href="{{ route('admin.profile.edit') }}"
+                                    :active="request()->routeIs('admin.profile.*')"
+                                    icon="user"
+                                    class="{{ request()->routeIs('admin.profile.*') ? 'bg-zinc-900 text-teal-400 border-l-2 border-teal-500' : 'text-zinc-400 hover:bg-white/5 hover:text-white border-l-2 border-transparent' }} rounded-none pl-3"
+                                >
+                                    Profil Saya
+                                </x-ui.nav-link>
+                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -189,7 +201,7 @@
         </aside>
 
         {{-- Mobile Header --}}
-        <div class="sticky top-0 z-40 flex items-center gap-x-6 bg-zinc-950 px-4 py-4 shadow-sm sm:px-6 lg:hidden">
+        <div class="sticky top-0 z-40 flex items-center gap-x-6 bg-zinc-950 px-4 py-4 sm:px-6 lg:hidden border-b border-zinc-800">
             <div class="flex-1 font-display text-lg font-bold tracking-tight text-white">SurveyKita <span class="text-[10px] font-mono text-zinc-500 ml-2">ADMIN</span></div>
             <form method="POST" action="{{ route('logout') }}" class="contents">
                 @csrf

@@ -1,11 +1,15 @@
 <x-layouts.admin heading="Butir Pertanyaan" eyebrow="Database Instrumen">
     <x-slot:actions>
-        <x-ui.button href="{{ route('admin.questions.create') }}" variant="teal" size="sm">
-            <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-            Tambah Pertanyaan
-        </x-ui.button>
+        <div class="flex flex-wrap items-center gap-2">
+            <x-ui.button id="questions-export-excel" href="{{ route('admin.questions.export.excel') }}" variant="secondary" size="sm">Export Excel</x-ui.button>
+            <x-ui.button id="questions-export-pdf" href="{{ route('admin.questions.export.pdf') }}" variant="secondary" size="sm">Export PDF</x-ui.button>
+            <x-ui.button href="{{ route('admin.questions.create') }}" variant="teal" size="sm">
+                <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+                Tambah Pertanyaan
+            </x-ui.button>
+        </div>
     </x-slot:actions>
 
     <div class="space-y-6">
@@ -49,6 +53,24 @@
     @push('scripts')
         <script>
             $(function() {
+                const syncExportLinks = function() {
+                    const formId = $('#form-filter').val();
+                    const pairs = [
+                        ['#questions-export-excel', "{{ route('admin.questions.export.excel') }}"],
+                        ['#questions-export-pdf', "{{ route('admin.questions.export.pdf') }}"],
+                    ];
+
+                    pairs.forEach(function([selector, base]) {
+                        const url = new URL(base, window.location.origin);
+
+                        if (formId) {
+                            url.searchParams.set('evaluation_form_id', formId);
+                        }
+
+                        $(selector).attr('href', url.toString());
+                    });
+                };
+
                 const table = window.adminTables.create('#questions-table', {
                     ajax: {
                         url: "{{ route('admin.questions.data') }}",
@@ -101,8 +123,10 @@
                 });
 
                 window.adminTables.mountFilters(table, '#questions-toolbar');
+                syncExportLinks();
 
                 $('#form-filter').on('change', function() {
+                    syncExportLinks();
                     table.draw();
                 });
             });

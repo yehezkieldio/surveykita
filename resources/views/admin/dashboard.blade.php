@@ -76,7 +76,7 @@
             @else
                 <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     @foreach($activeForms as $form)
-                        <div class="flex flex-col justify-between p-6 border border-zinc-200 bg-white group hover:border-zinc-300 transition-all shadow-sm">
+                        <div class="flex flex-col justify-between p-6 border border-zinc-200 bg-white group hover:border-zinc-300 transition-all">
                             <div class="mb-4">
                                 <x-ui.badge variant="teal" class="mb-2">AKTIF</x-ui.badge>
                                 <p class="text-[10px] font-mono text-zinc-400 uppercase tracking-tighter mb-2 mt-1">{{ $form->evaluationPeriod->name }}</p>

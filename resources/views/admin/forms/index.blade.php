@@ -1,11 +1,15 @@
 <x-layouts.admin heading="Instrumen Evaluasi" eyebrow="Pengaturan Formulir">
     <x-slot:actions>
-        <x-ui.button href="{{ route('admin.forms.create') }}" variant="teal" size="sm">
-            <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-            Buat Instrumen Baru
-        </x-ui.button>
+        <div class="flex flex-wrap items-center gap-2">
+            <x-ui.button id="forms-export-excel" href="{{ route('admin.forms.export.excel') }}" variant="secondary" size="sm">Export Excel</x-ui.button>
+            <x-ui.button id="forms-export-pdf" href="{{ route('admin.forms.export.pdf') }}" variant="secondary" size="sm">Export PDF</x-ui.button>
+            <x-ui.button href="{{ route('admin.forms.create') }}" variant="teal" size="sm">
+                <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+                Buat Instrumen Baru
+            </x-ui.button>
+        </div>
     </x-slot:actions>
 
     <div class="space-y-6">
@@ -51,6 +55,24 @@
     @push('scripts')
         <script>
             $(function() {
+                const syncExportLinks = function() {
+                    const periodId = $('#period-filter').val();
+                    const pairs = [
+                        ['#forms-export-excel', "{{ route('admin.forms.export.excel') }}"],
+                        ['#forms-export-pdf', "{{ route('admin.forms.export.pdf') }}"],
+                    ];
+
+                    pairs.forEach(function([selector, base]) {
+                        const url = new URL(base, window.location.origin);
+
+                        if (periodId) {
+                            url.searchParams.set('period_id', periodId);
+                        }
+
+                        $(selector).attr('href', url.toString());
+                    });
+                };
+
                 const table = window.adminTables.create('#forms-table', {
                     ajax: {
                         url: "{{ route('admin.forms.data') }}",
@@ -119,8 +141,10 @@
                 });
 
                 window.adminTables.mountFilters(table, '#forms-toolbar');
+                syncExportLinks();
 
                 $('#period-filter').on('change', function() {
+                    syncExportLinks();
                     table.draw();
                 });
             });

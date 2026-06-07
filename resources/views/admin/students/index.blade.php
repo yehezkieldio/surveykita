@@ -1,11 +1,15 @@
 <x-layouts.admin heading="Manajemen Mahasiswa" eyebrow="Database Akademik">
     <x-slot:actions>
-        <x-ui.button href="{{ route('admin.students.create') }}" variant="teal" size="sm">
-            <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-            Tambah Mahasiswa
-        </x-ui.button>
+        <div class="flex flex-wrap items-center gap-2">
+            <x-ui.button href="{{ route('admin.students.export.excel') }}" variant="secondary" size="sm">Export Excel</x-ui.button>
+            <x-ui.button href="{{ route('admin.students.export.pdf') }}" variant="secondary" size="sm">Export PDF</x-ui.button>
+            <x-ui.button href="{{ route('admin.students.create') }}" variant="teal" size="sm">
+                <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+                Tambah Mahasiswa
+            </x-ui.button>
+        </div>
     </x-slot:actions>
 
     <div class="space-y-6">

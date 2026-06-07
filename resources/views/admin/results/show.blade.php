@@ -155,8 +155,8 @@
                                 <span class="text-zinc-500">Skor {{ $score }} ({{ $labels[$score] }})</span>
                                 <span class="text-zinc-950">{{ $count }}</span>
                             </div>
-                            <div class="h-2 w-full bg-zinc-100 rounded-full overflow-hidden">
-                                <div class="h-full bg-teal-500 rounded-full" style="width: {{ $width }}%"></div>
+                            <div class="h-1.5 w-full bg-transparent overflow-hidden border border-zinc-100">
+                                <div class="h-full bg-teal-500 transition-all" style="width: {{ $width }}%"></div>
                             </div>
                         </div>
                     @endforeach
