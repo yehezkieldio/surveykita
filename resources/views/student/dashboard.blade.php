@@ -22,7 +22,7 @@
                 <span class="text-4xl font-bold tracking-tight text-zinc-950">{{ $activeFormCount }}</span>
                 <span class="text-sm font-medium text-zinc-500">Formulir</span>
             </div>
-            <p class="mt-1 text-xs text-zinc-500">Tersedia untuk diisi sekarang</p>
+            <p class="mt-1 text-xs text-zinc-500">Tersedia untuk diisi saat ini</p>
         </x-ui.card>
 
         <x-ui.card class="relative overflow-hidden group">

@@ -17,12 +17,20 @@
     </x-slot:actions>
 
     {{-- Summary Metrics --}}
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-5 mb-8">
         <x-ui.card no-padding class="p-6">
             <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Total Responden</p>
             <div class="mt-2 flex items-baseline gap-1">
                 <span class="text-3xl font-bold tracking-tight text-zinc-950">{{ number_format($result['total_respondents']) }}</span>
                 <span class="text-xs font-medium text-zinc-500">Mahasiswa</span>
+            </div>
+        </x-ui.card>
+
+        <x-ui.card no-padding class="p-6">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Total Jawaban</p>
+            <div class="mt-2 flex items-baseline gap-1">
+                <span class="text-3xl font-bold tracking-tight text-zinc-950">{{ number_format($result['total_answers']) }}</span>
+                <span class="text-xs font-medium text-zinc-500">Butir</span>
             </div>
         </x-ui.card>
 

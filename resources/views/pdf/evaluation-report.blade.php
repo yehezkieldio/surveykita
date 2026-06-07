@@ -56,6 +56,10 @@
                 <span class="summary-label">Total Responden</span>
             </td>
             <td class="summary-box">
+                <span class="summary-value">{{ number_format($result['total_answers']) }}</span>
+                <span class="summary-label">Total Jawaban</span>
+            </td>
+            <td class="summary-box">
                 <span class="summary-value">{{ number_format($result['average_score'], 2) }}</span>
                 <span class="summary-label">Rata-rata Skor</span>
             </td>
@@ -63,11 +67,39 @@
                 <span class="summary-value">{{ number_format($result['satisfaction_percentage'], 1) }}%</span>
                 <span class="summary-label">Persentase Kepuasan</span>
             </td>
-            <td class="summary-box">
+        </tr>
+        <tr>
+            <td colspan="4" class="summary-box">
                 <span class="summary-value">{{ $result['satisfaction_category'] }}</span>
-                <span class="summary-label">Kategori</span>
+                <span class="summary-label">Kategori Kepuasan Akhir</span>
             </td>
         </tr>
+    </table>
+
+    <div class="section-title">Distribusi Skor Likert</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Skor</th>
+                <th>Label</th>
+                <th>Jumlah Jawaban</th>
+                <th>Persentase</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (array_reverse($result['likert_distribution'], true) as $score => $count)
+                @php
+                    $percentage = $result['total_answers'] > 0 ? ($count / $result['total_answers']) * 100 : 0;
+                    $labels = [1 => 'Sangat Tidak Puas', 2 => 'Tidak Puas', 3 => 'Cukup Puas', 4 => 'Puas', 5 => 'Sangat Puas'];
+                @endphp
+                <tr>
+                    <td style="text-align: center; font-weight: bold;">{{ $score }}</td>
+                    <td>{{ $labels[$score] }}</td>
+                    <td style="text-align: right;">{{ number_format($count) }}</td>
+                    <td style="text-align: right;">{{ number_format($percentage, 1) }}%</td>
+                </tr>
+            @endforeach
+        </tbody>
     </table>
 
     <div class="section-title">Rekapitulasi Kategori</div>

@@ -45,7 +45,7 @@
         </form>
     </x-ui.card>
 
-    @if(empty($rows))
+    @if($rows->isEmpty())
         <x-ui.empty-state title="Belum ada data evaluasi" description="Data hasil evaluasi akan muncul di sini setelah ada respons masuk pada periode aktif." />
     @else
         {{-- 3. Chart Section --}}
