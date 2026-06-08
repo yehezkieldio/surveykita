@@ -11,7 +11,7 @@
     @else
         <div class="space-y-6">
             {{-- Desktop Table --}}
-            <div class="hidden sm:block overflow-hidden border border-zinc-200 bg-white">
+            <div class="hidden overflow-hidden border border-zinc-200 bg-white md:block">
                 <table class="min-w-full divide-y divide-zinc-200">
                     <thead class="bg-zinc-50">
                         <tr>
@@ -44,18 +44,18 @@
             </div>
 
             {{-- Mobile Cards --}}
-            <div class="sm:hidden space-y-4">
+            <div class="space-y-4 md:hidden">
                 @foreach ($responses as $response)
-                    <x-ui.card class="relative">
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="space-y-1">
+                    <x-ui.card class="relative p-5 sm:p-6">
+                        <div class="mb-4 flex items-start justify-between gap-4">
+                            <div class="min-w-0 space-y-1">
                                 <p class="text-xs font-bold uppercase tracking-widest text-zinc-400">
                                     {{ $response->evaluationForm->evaluationPeriod->name }}
                                 </p>
-                                <h4 class="font-bold text-zinc-950">{{ $response->evaluationForm->title }}</h4>
+                                <h4 class="text-base font-bold text-zinc-950">{{ $response->evaluationForm->title }}</h4>
                             </div>
                         </div>
-                        <div class="flex items-center justify-between pt-4 border-t border-zinc-100">
+                        <div class="flex items-center justify-between border-t border-zinc-100 pt-4">
                             <span class="text-xs text-zinc-500">{{ $response->submitted_at->translatedFormat('d M Y, H:i') }}</span>
                             <a href="{{ route('student.submissions.success', $response) }}" class="text-xs font-bold text-teal-600 uppercase tracking-widest">Detail</a>
                         </div>

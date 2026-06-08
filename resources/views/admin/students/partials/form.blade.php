@@ -1,4 +1,4 @@
-<div class="space-y-6">
+<div class="space-y-5 sm:space-y-6">
     <div class="space-y-1.5">
         <label for="name" class="text-xs font-bold uppercase tracking-wider text-zinc-500">Nama Lengkap</label>
         <input id="name" name="name" type="text" value="{{ old('name', ($student ?? null)?->name ?? ($student ?? null)?->user?->name) }}" required autofocus placeholder="Contoh: Ahmad Fauzi">

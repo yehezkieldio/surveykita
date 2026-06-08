@@ -1,23 +1,23 @@
 <x-layouts.admin heading="{{ $student->name }}" eyebrow="{{ $student->nim }}">
     <x-slot:actions>
-        <div class="flex items-center justify-end gap-2 flex-wrap sm:flex-nowrap">
-            <x-ui.button href="{{ route('admin.students.index') }}" variant="ghost" size="sm">
+        <div class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-end sm:gap-2 sm:flex-nowrap">
+            <x-ui.button href="{{ route('admin.students.index') }}" variant="ghost" size="sm" class="w-full sm:w-auto">
                 Kembali
             </x-ui.button>
-            <x-ui.button href="{{ route('admin.students.edit', $student) }}" variant="secondary" size="sm">
+            <x-ui.button href="{{ route('admin.students.edit', $student) }}" variant="secondary" size="sm" class="w-full sm:w-auto">
                 Edit Mahasiswa
             </x-ui.button>
-            <form action="{{ route('admin.students.destroy', $student) }}" method="POST" class="inline-flex shrink-0" onsubmit="return confirm('Apakah Anda yakin ingin menghapus mahasiswa ini?');">
+            <form action="{{ route('admin.students.destroy', $student) }}" method="POST" class="inline-flex w-full shrink-0 sm:w-auto" onsubmit="return confirm('Apakah Anda yakin ingin menghapus mahasiswa ini?');">
                 @csrf
                 @method('DELETE')
-                <x-ui.button variant="danger" size="sm">
+                <x-ui.button variant="danger" size="sm" class="w-full sm:w-auto">
                     Hapus
                 </x-ui.button>
             </form>
         </div>
     </x-slot:actions>
 
-    <div class="grid gap-8 xl:grid-cols-12">
+    <div class="grid gap-6 xl:grid-cols-12 xl:gap-8">
         <section class="min-w-0 xl:col-span-8">
             <x-ui.card no-padding class="h-full overflow-hidden">
                 <div class="grid sm:grid-cols-2">
@@ -69,7 +69,7 @@
         </aside>
 
         <section class="min-w-0 xl:col-span-12">
-            <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
                 <div>
                     <h3 class="text-sm font-bold uppercase tracking-[0.18em] text-zinc-400">Riwayat Respons</h3>
                     <p class="mt-1 text-sm leading-6 text-zinc-500">Daftar formulir yang pernah diisi mahasiswa beserta periode dan waktu pengirimannya.</p>
@@ -80,15 +80,34 @@
             @if($student->responses->isEmpty())
                 <x-ui.empty-state title="Belum ada respons" description="Mahasiswa ini belum pernah mengisi formulir evaluasi apapun." />
             @else
-                <x-ui.table :headers="['Formulir', 'Periode', 'Tanggal Kirim']">
+                <div class="space-y-4 md:hidden">
                     @foreach ($student->responses as $response)
-                        <tr>
-                            <td class="min-w-[22rem] px-5 py-5 text-sm font-semibold leading-7 text-zinc-950 whitespace-normal">{{ $response->evaluationForm->title }}</td>
-                            <td class="px-5 py-5 text-sm leading-7 text-zinc-600 whitespace-normal">{{ $response->evaluationForm->evaluationPeriod->name }}</td>
-                            <td class="whitespace-nowrap px-5 py-5 text-sm leading-7 text-zinc-600">{{ $response->submitted_at->translatedFormat('d M Y, H:i') }}</td>
-                        </tr>
+                        <x-ui.card class="p-5">
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="text-sm font-semibold leading-6 text-zinc-950">{{ $response->evaluationForm->title }}</p>
+                                    <p class="mt-1 text-xs text-zinc-500">{{ $response->evaluationForm->evaluationPeriod->name }}</p>
+                                </div>
+                                <div class="border-t border-zinc-100 pt-4">
+                                    <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-zinc-400">Tanggal Kirim</p>
+                                    <p class="mt-1 text-sm text-zinc-600">{{ $response->submitted_at->translatedFormat('d M Y, H:i') }}</p>
+                                </div>
+                            </div>
+                        </x-ui.card>
                     @endforeach
-                </x-ui.table>
+                </div>
+
+                <div class="hidden md:block">
+                    <x-ui.table :headers="['Formulir', 'Periode', 'Tanggal Kirim']">
+                        @foreach ($student->responses as $response)
+                            <tr>
+                                <td class="min-w-[22rem] whitespace-normal px-5 py-5 text-sm font-semibold leading-7 text-zinc-950">{{ $response->evaluationForm->title }}</td>
+                                <td class="whitespace-normal px-5 py-5 text-sm leading-7 text-zinc-600">{{ $response->evaluationForm->evaluationPeriod->name }}</td>
+                                <td class="whitespace-nowrap px-5 py-5 text-sm leading-7 text-zinc-600">{{ $response->submitted_at->translatedFormat('d M Y, H:i') }}</td>
+                            </tr>
+                        @endforeach
+                    </x-ui.table>
+                </div>
             @endif
         </section>
     </div>
