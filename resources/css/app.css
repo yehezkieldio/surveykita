@@ -174,35 +174,35 @@
     }
 
     .sk-cell-title {
-        @apply text-sm font-semibold leading-6 text-zinc-950;
+        @apply text-[0.82rem] font-semibold leading-5 text-zinc-950;
     }
 
     .sk-cell-title-compact {
-        @apply text-[0.95rem] leading-6;
+        @apply text-[0.76rem] leading-5;
     }
 
     .sk-cell-support {
-        @apply text-sm leading-6 text-zinc-500;
+        @apply text-[0.78rem] leading-5 text-zinc-500;
     }
 
     .sk-cell-muted {
-        @apply text-sm leading-6 text-zinc-600;
+        @apply text-[0.78rem] leading-5 text-zinc-600;
     }
 
     .sk-cell-code {
-        @apply text-sm font-medium tracking-[0.04em] text-zinc-700;
+        @apply text-[0.78rem] font-medium tracking-[0.04em] text-zinc-700;
     }
 
     .sk-cell-number {
-        @apply text-sm font-semibold tabular-nums text-zinc-950;
+        @apply text-[0.8rem] font-semibold tabular-nums text-zinc-950;
     }
 
     .sk-cell-order {
-        @apply text-sm font-medium tabular-nums text-zinc-600;
+        @apply text-[0.78rem] font-medium tabular-nums text-zinc-600;
     }
 
     .sk-table-badge {
-        @apply inline-flex items-center border px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.14em];
+        @apply inline-flex items-center border px-2 py-0.5 text-[0.64rem] font-semibold uppercase tracking-[0.12em];
     }
 
     .sk-table-badge-neutral {

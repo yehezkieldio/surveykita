@@ -81,7 +81,7 @@
                             data: 'text',
                             name: 'question_text',
                             render: function(data) {
-                                return `<div class="max-w-3xl whitespace-normal text-sm leading-6 text-zinc-800">${window.adminTables.escape(data)}</div>`;
+                                return `<div class="max-w-3xl whitespace-normal text-[0.8rem] leading-5 text-zinc-800">${window.adminTables.escape(data)}</div>`;
                             }
                         },
                         {
