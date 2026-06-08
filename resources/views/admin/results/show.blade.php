@@ -1,16 +1,16 @@
 <x-layouts.admin :heading="$form->title" eyebrow="Hasil Evaluasi">
     <x-slot:actions>
-        <div class="flex items-center justify-end gap-2 flex-wrap sm:flex-nowrap">
-            <x-ui.button href="{{ route('admin.results.index') }}" variant="ghost" size="sm">
+        <div class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-end sm:gap-2 sm:flex-nowrap">
+            <x-ui.button href="{{ route('admin.results.index') }}" variant="ghost" size="sm" class="w-full sm:w-auto">
                 Kembali
             </x-ui.button>
-            <x-ui.button href="{{ route('admin.results.export.excel', $form) }}" variant="secondary" size="sm">
+            <x-ui.button href="{{ route('admin.results.export.excel', $form) }}" variant="secondary" size="sm" class="w-full sm:w-auto">
                 <svg class="mr-2 h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                 </svg>
                 Excel
             </x-ui.button>
-            <x-ui.button href="{{ route('admin.results.export.pdf', $form) }}" variant="secondary" size="sm">
+            <x-ui.button href="{{ route('admin.results.export.pdf', $form) }}" variant="secondary" size="sm" class="w-full sm:w-auto">
                 <svg class="mr-2 h-4 w-4 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                 </svg>
@@ -33,7 +33,7 @@
             ->first();
     @endphp
 
-    <div class="grid gap-8 xl:grid-cols-12">
+    <div class="grid gap-6 xl:grid-cols-12 xl:gap-8">
         <section class="min-w-0 xl:col-span-8">
             <x-ui.card no-padding class="h-full overflow-hidden">
                 <div class="border-b border-zinc-100 p-6 xl:p-7">
@@ -85,8 +85,8 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <x-ui.button variant="teal" class="flex-1">Terapkan</x-ui.button>
+                        <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+                            <x-ui.button variant="teal" class="w-full sm:flex-1">Terapkan</x-ui.button>
                             <a href="{{ route('admin.results.show', $form) }}" class="text-xs font-semibold text-zinc-500 transition-colors hover:text-zinc-950">Reset</a>
                         </div>
                     </form>
@@ -109,31 +109,31 @@
 
         <section class="min-w-0 xl:col-span-12">
             <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-                <x-ui.card no-padding class="overflow-hidden p-6">
+                <x-ui.card no-padding class="overflow-hidden p-5 sm:p-6">
                     <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-400">Total Responden</p>
                     <div class="mt-3 flex items-end justify-between gap-4">
-                        <span class="text-3xl font-bold tracking-tight text-zinc-950">{{ number_format($result['total_respondents']) }}</span>
+                        <span class="text-2xl font-bold tracking-tight text-zinc-950 sm:text-3xl">{{ number_format($result['total_respondents']) }}</span>
                         <span class="text-xs font-medium text-zinc-500">mahasiswa</span>
                     </div>
                 </x-ui.card>
-                <x-ui.card no-padding class="overflow-hidden p-6">
+                <x-ui.card no-padding class="overflow-hidden p-5 sm:p-6">
                     <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-400">Total Jawaban</p>
                     <div class="mt-3 flex items-end justify-between gap-4">
-                        <span class="text-3xl font-bold tracking-tight text-zinc-950">{{ number_format($result['total_answers']) }}</span>
+                        <span class="text-2xl font-bold tracking-tight text-zinc-950 sm:text-3xl">{{ number_format($result['total_answers']) }}</span>
                         <span class="text-xs font-medium text-zinc-500">butir</span>
                     </div>
                 </x-ui.card>
-                <x-ui.card no-padding class="overflow-hidden p-6">
+                <x-ui.card no-padding class="overflow-hidden p-5 sm:p-6">
                     <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-400">Rata-rata Skor</p>
                     <div class="mt-3 flex items-end justify-between gap-4">
-                        <span class="text-3xl font-bold tracking-tight text-zinc-950">{{ number_format($result['average_score'], 2) }}</span>
+                        <span class="text-2xl font-bold tracking-tight text-zinc-950 sm:text-3xl">{{ number_format($result['average_score'], 2) }}</span>
                         <span class="text-xs font-medium text-zinc-500">dari 5.00</span>
                     </div>
                 </x-ui.card>
-                <x-ui.card no-padding class="overflow-hidden p-6">
+                <x-ui.card no-padding class="overflow-hidden p-5 sm:p-6">
                     <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-400">Persentase Kepuasan</p>
                     <div class="mt-3 flex items-end justify-between gap-4">
-                        <span class="text-3xl font-bold tracking-tight {{ $result['is_empty'] ? 'text-zinc-950' : 'text-teal-600' }}">{{ number_format($result['satisfaction_percentage'], 1) }}%</span>
+                        <span class="text-2xl font-bold tracking-tight {{ $result['is_empty'] ? 'text-zinc-950' : 'text-teal-600' }} sm:text-3xl">{{ number_format($result['satisfaction_percentage'], 1) }}%</span>
                         <x-ui.badge :variant="$satisfactionBadgeVariant">{{ $result['is_empty'] ? 'BELUM ADA DATA' : 'TERBACA' }}</x-ui.badge>
                     </div>
                 </x-ui.card>
@@ -141,7 +141,7 @@
         </section>
 
         <section class="min-w-0 xl:col-span-12">
-            <div class="grid gap-8 xl:grid-cols-2">
+            <div class="grid gap-6 xl:grid-cols-2 xl:gap-8">
                 <x-ui.chart-panel 
                     heading="Rerata per Kategori"
                     description="Perbandingan skor rata-rata untuk setiap kategori pertanyaan dalam formulir ini."
@@ -161,7 +161,7 @@
                     <h3 class="text-sm font-bold uppercase tracking-[0.18em] text-zinc-400">Rekapitulasi Kategori</h3>
                     <p class="mt-1 text-sm leading-6 text-zinc-500">Analisis kategori dibuat penuh agar pola kekuatan dan kelemahan instrumen tidak tersembunyi di kolom sempit.</p>
                 </div>
-                <div class="flex flex-wrap items-center gap-2 lg:justify-end">
+                <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center lg:justify-end">
                     <x-ui.badge variant="zinc">{{ count($result['average_score_per_category']) }} Kategori</x-ui.badge>
                     @if($result['category_filter'])
                         <x-ui.badge variant="teal">{{ $result['category_filter']['name'] }}</x-ui.badge>
@@ -172,7 +172,7 @@
             @if(empty($result['average_score_per_category']))
                 <x-ui.empty-state title="Belum ada rekap kategori" description="Tidak ada kategori yang dapat dihitung untuk formulir atau filter yang sedang dipilih." />
             @else
-                <x-ui.table :headers="['Kategori', 'Total Jawaban', 'Rata-rata', 'Persentase', 'Status']">
+                <div class="space-y-4 md:hidden">
                     @foreach ($result['average_score_per_category'] as $categoryRow)
                         @php
                             $rowBadgeVariant = match (true) {
@@ -182,17 +182,56 @@
                                 default => 'red',
                             };
                         @endphp
-                        <tr>
-                            <td class="px-5 py-5 align-top text-sm font-semibold leading-7 text-zinc-950 whitespace-normal">{{ $categoryRow['category'] }}</td>
-                            <td class="whitespace-nowrap px-5 py-5 align-top text-right text-sm text-zinc-600">{{ number_format($categoryRow['total_answers']) }}</td>
-                            <td class="whitespace-nowrap px-5 py-5 align-top text-right text-sm font-bold text-zinc-950">{{ number_format($categoryRow['average_score'], 2) }}</td>
-                            <td class="whitespace-nowrap px-5 py-5 align-top text-right text-sm font-bold {{ $categoryRow['total_answers'] === 0 ? 'text-zinc-500' : 'text-teal-600' }}">{{ number_format($categoryRow['satisfaction_percentage'], 1) }}%</td>
-                            <td class="whitespace-nowrap px-5 py-5 align-top">
-                                <x-ui.badge :variant="$rowBadgeVariant">{{ $categoryRow['satisfaction_category'] }}</x-ui.badge>
-                            </td>
-                        </tr>
+                        <x-ui.card class="p-5">
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="text-sm font-semibold text-zinc-950">{{ $categoryRow['category'] }}</p>
+                                </div>
+                                <div class="grid grid-cols-2 gap-3 border-t border-zinc-100 pt-4">
+                                    <div>
+                                        <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-zinc-400">Jawaban</p>
+                                        <p class="mt-1 text-sm text-zinc-600">{{ number_format($categoryRow['total_answers']) }}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-zinc-400">Rata-rata</p>
+                                        <p class="mt-1 text-sm font-bold text-zinc-950">{{ number_format($categoryRow['average_score'], 2) }}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-zinc-400">Persentase</p>
+                                        <p class="mt-1 text-sm font-bold {{ $categoryRow['total_answers'] === 0 ? 'text-zinc-500' : 'text-teal-600' }}">{{ number_format($categoryRow['satisfaction_percentage'], 1) }}%</p>
+                                    </div>
+                                    <div class="flex items-end">
+                                        <x-ui.badge :variant="$rowBadgeVariant">{{ $categoryRow['satisfaction_category'] }}</x-ui.badge>
+                                    </div>
+                                </div>
+                            </div>
+                        </x-ui.card>
                     @endforeach
-                </x-ui.table>
+                </div>
+
+                <div class="hidden md:block">
+                    <x-ui.table :headers="['Kategori', 'Total Jawaban', 'Rata-rata', 'Persentase', 'Status']">
+                        @foreach ($result['average_score_per_category'] as $categoryRow)
+                            @php
+                                $rowBadgeVariant = match (true) {
+                                    $categoryRow['total_answers'] === 0 => 'zinc',
+                                    $categoryRow['satisfaction_percentage'] >= 80 => 'teal',
+                                    $categoryRow['satisfaction_percentage'] >= 60 => 'yellow',
+                                    default => 'red',
+                                };
+                            @endphp
+                            <tr>
+                                <td class="whitespace-normal px-5 py-5 align-top text-sm font-semibold leading-7 text-zinc-950">{{ $categoryRow['category'] }}</td>
+                                <td class="whitespace-nowrap px-5 py-5 align-top text-right text-sm text-zinc-600">{{ number_format($categoryRow['total_answers']) }}</td>
+                                <td class="whitespace-nowrap px-5 py-5 align-top text-right text-sm font-bold text-zinc-950">{{ number_format($categoryRow['average_score'], 2) }}</td>
+                                <td class="whitespace-nowrap px-5 py-5 align-top text-right text-sm font-bold {{ $categoryRow['total_answers'] === 0 ? 'text-zinc-500' : 'text-teal-600' }}">{{ number_format($categoryRow['satisfaction_percentage'], 1) }}%</td>
+                                <td class="whitespace-nowrap px-5 py-5 align-top">
+                                    <x-ui.badge :variant="$rowBadgeVariant">{{ $categoryRow['satisfaction_category'] }}</x-ui.badge>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </x-ui.table>
+                </div>
             @endif
         </section>
 
@@ -202,7 +241,7 @@
                     <h3 class="text-sm font-bold uppercase tracking-[0.18em] text-zinc-400">Analisis Butir Pertanyaan</h3>
                     <p class="mt-1 text-sm leading-6 text-zinc-500">Butir pertanyaan diprioritaskan sebagai bidang penuh karena di sinilah admin membaca mutu instrumen secara konkret, bukan sekadar total angka.</p>
                 </div>
-                <div class="flex flex-wrap items-center gap-2 lg:justify-end">
+                <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center lg:justify-end">
                     <x-ui.badge variant="zinc">{{ count($result['average_score_per_question']) }} Butir</x-ui.badge>
                     @if($topQuestion)
                         <x-ui.badge variant="teal">Tertinggi {{ number_format($topQuestion['average_score'], 2) }}</x-ui.badge>
@@ -213,17 +252,46 @@
             @if(empty($result['average_score_per_question']))
                 <x-ui.empty-state title="Belum ada analisis pertanyaan" description="Tidak ada butir pertanyaan yang dapat dihitung untuk formulir atau filter yang dipilih." />
             @else
-                <x-ui.table :headers="['Pertanyaan', 'Kategori', 'Jawaban', 'Rata-rata', 'Kepuasan']">
+                <div class="space-y-4 md:hidden">
                     @foreach ($result['average_score_per_question'] as $questionRow)
-                        <tr>
-                            <td class="min-w-[28rem] px-5 py-5 align-top text-sm leading-7 text-zinc-950 whitespace-normal">{{ $questionRow['question_text'] }}</td>
-                            <td class="whitespace-nowrap px-5 py-5 align-top text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">{{ $questionRow['category'] }}</td>
-                            <td class="whitespace-nowrap px-5 py-5 align-top text-right text-sm text-zinc-600">{{ number_format($questionRow['total_answers']) }}</td>
-                            <td class="whitespace-nowrap px-5 py-5 align-top text-right text-sm font-bold text-zinc-950">{{ number_format($questionRow['average_score'], 2) }}</td>
-                            <td class="whitespace-nowrap px-5 py-5 align-top text-right text-sm font-bold {{ $questionRow['total_answers'] === 0 ? 'text-zinc-500' : 'text-teal-600' }}">{{ number_format($questionRow['satisfaction_percentage'], 1) }}%</td>
-                        </tr>
+                        <x-ui.card class="p-5">
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="text-sm leading-6 text-zinc-950">{{ $questionRow['question_text'] }}</p>
+                                    <p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-500">{{ $questionRow['category'] }}</p>
+                                </div>
+                                <div class="grid grid-cols-3 gap-3 border-t border-zinc-100 pt-4">
+                                    <div>
+                                        <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-zinc-400">Jawaban</p>
+                                        <p class="mt-1 text-sm text-zinc-600">{{ number_format($questionRow['total_answers']) }}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-zinc-400">Rata-rata</p>
+                                        <p class="mt-1 text-sm font-bold text-zinc-950">{{ number_format($questionRow['average_score'], 2) }}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-zinc-400">Kepuasan</p>
+                                        <p class="mt-1 text-sm font-bold {{ $questionRow['total_answers'] === 0 ? 'text-zinc-500' : 'text-teal-600' }}">{{ number_format($questionRow['satisfaction_percentage'], 1) }}%</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </x-ui.card>
                     @endforeach
-                </x-ui.table>
+                </div>
+
+                <div class="hidden md:block">
+                    <x-ui.table :headers="['Pertanyaan', 'Kategori', 'Jawaban', 'Rata-rata', 'Kepuasan']">
+                        @foreach ($result['average_score_per_question'] as $questionRow)
+                            <tr>
+                                <td class="min-w-[28rem] whitespace-normal px-5 py-5 align-top text-sm leading-7 text-zinc-950">{{ $questionRow['question_text'] }}</td>
+                                <td class="whitespace-nowrap px-5 py-5 align-top text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">{{ $questionRow['category'] }}</td>
+                                <td class="whitespace-nowrap px-5 py-5 align-top text-right text-sm text-zinc-600">{{ number_format($questionRow['total_answers']) }}</td>
+                                <td class="whitespace-nowrap px-5 py-5 align-top text-right text-sm font-bold text-zinc-950">{{ number_format($questionRow['average_score'], 2) }}</td>
+                                <td class="whitespace-nowrap px-5 py-5 align-top text-right text-sm font-bold {{ $questionRow['total_answers'] === 0 ? 'text-zinc-500' : 'text-teal-600' }}">{{ number_format($questionRow['satisfaction_percentage'], 1) }}%</td>
+                            </tr>
+                        @endforeach
+                    </x-ui.table>
+                </div>
             @endif
         </section>
 
@@ -233,7 +301,7 @@
                     <h3 class="text-sm font-bold uppercase tracking-[0.18em] text-zinc-400">Saran dan Masukan</h3>
                     <p class="mt-1 text-sm leading-6 text-zinc-500">Masukan tertulis dipisahkan dari tabel analitik agar admin bisa membaca nada respons tanpa kehilangan konteks kuantitatif di atasnya.</p>
                 </div>
-                <div class="flex flex-wrap items-center gap-2 lg:justify-end">
+                <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center lg:justify-end">
                     <x-ui.badge variant="zinc">{{ count($result['suggestions']) }} Masukan</x-ui.badge>
                 </div>
             </div>
