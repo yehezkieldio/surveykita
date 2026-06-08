@@ -129,7 +129,7 @@
     }
 
     .sk-table-panel {
-        @apply border border-zinc-200 bg-white;
+        @apply overflow-x-auto border border-zinc-200 bg-white;
     }
 
     .sk-table-panel-copy {
@@ -255,7 +255,7 @@
     }
 
     .dt-container .dt-layout-row:first-child {
-        @apply grid gap-0 border-b border-zinc-200 bg-white lg:grid-cols-[auto_1fr_auto] lg:items-stretch;
+        @apply grid gap-3 border-b border-zinc-200 bg-white px-5 py-4 sm:px-6 lg:grid-cols-[auto_1fr_auto] lg:items-stretch lg:gap-0 lg:px-0 lg:py-0;
     }
 
     .dt-container .dt-layout-row:first-child .dt-layout-cell:first-child {
@@ -267,7 +267,7 @@
     }
 
     .dt-container .dt-layout-row:first-child .dt-layout-cell {
-        @apply px-0 py-4;
+        @apply px-0 py-0 lg:py-4;
     }
 
     .dt-container .dt-layout-row:first-child .dt-layout-cell:first-child,
@@ -276,15 +276,15 @@
     }
 
     .dt-container .dt-layout-row:first-child .dt-layout-cell:last-child .dt-search {
-        @apply flex w-full items-end gap-2 lg:w-auto;
+        @apply flex w-full flex-col items-stretch gap-2 sm:flex-row sm:items-end lg:w-auto;
     }
 
     .dt-container .dt-layout-row:first-child .dt-layout-cell:last-child .dt-input {
-        @apply h-11 w-full min-w-0 border-zinc-300 bg-white px-3 text-sm font-medium text-zinc-800 focus:border-zinc-300 focus:ring-0 lg:w-80;
+        @apply h-11 w-full min-w-0 border-zinc-300 bg-white px-3 text-sm font-medium text-zinc-800 focus:border-zinc-300 focus:ring-0 sm:w-full lg:w-80;
     }
 
     .dt-container .dt-layout-row:first-child .dt-length {
-        @apply flex items-end gap-2 whitespace-nowrap;
+        @apply flex w-full items-end gap-2 whitespace-nowrap sm:w-auto;
     }
 
     .dt-container .dt-layout-row:first-child .dt-length label,
@@ -297,11 +297,11 @@
     }
 
     .sk-table-inline-filters-cell {
-        @apply justify-self-stretch px-5 sm:px-6 lg:justify-self-start;
+        @apply justify-self-stretch px-0 lg:justify-self-start;
     }
 
     .sk-table-inline-filters-cell .sk-table-select {
-        @apply min-w-48;
+        @apply min-w-0 w-full sm:min-w-48;
     }
 
     .sk-table-inline-filters-cell .sk-table-filter-label {
@@ -334,11 +334,11 @@
     }
 
     .dt-container .dt-length {
-        @apply flex items-center gap-3;
+        @apply flex w-full items-center gap-3 sm:w-auto;
     }
 
     .dt-container .dt-length label {
-        @apply flex items-center gap-3 text-sm font-medium text-zinc-500;
+        @apply flex w-full items-center justify-between gap-3 text-sm font-medium text-zinc-500 sm:w-auto sm:justify-start;
     }
 
     .dt-container .dt-length select {
@@ -363,6 +363,10 @@
         @apply !border-b border-zinc-100 px-5 py-4 align-top text-sm leading-6 text-zinc-700;
     }
 
+    .dt-container table.dataTable tbody td:last-child {
+        @apply min-w-36;
+    }
+
     .dt-container table.dataTable tbody tr:last-child td {
         @apply !border-b-0;
     }
@@ -372,7 +376,7 @@
     }
 
     .dt-container .dt-paging {
-        @apply flex flex-wrap items-center;
+        @apply flex w-full flex-wrap items-center gap-2 overflow-x-auto;
     }
 
     .dt-container .dt-paging .dt-paging-button {

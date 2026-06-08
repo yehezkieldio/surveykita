@@ -1,23 +1,23 @@
 <x-layouts.admin heading="{{ $period->name }}" eyebrow="Detail Periode">
     <x-slot:actions>
-        <div class="flex items-center justify-end gap-2 flex-wrap sm:flex-nowrap">
-            <x-ui.button href="{{ route('admin.periods.index') }}" variant="ghost" size="sm">
+        <div class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-end sm:gap-2 sm:flex-nowrap">
+            <x-ui.button href="{{ route('admin.periods.index') }}" variant="ghost" size="sm" class="w-full sm:w-auto">
                 Kembali
             </x-ui.button>
-            <x-ui.button href="{{ route('admin.periods.edit', $period) }}" variant="secondary" size="sm">
+            <x-ui.button href="{{ route('admin.periods.edit', $period) }}" variant="secondary" size="sm" class="w-full sm:w-auto">
                 Edit Periode
             </x-ui.button>
-            <form action="{{ route('admin.periods.destroy', $period) }}" method="POST" class="inline-flex shrink-0" onsubmit="return confirm('Apakah Anda yakin ingin menghapus periode ini?');">
+            <form action="{{ route('admin.periods.destroy', $period) }}" method="POST" class="inline-flex w-full shrink-0 sm:w-auto" onsubmit="return confirm('Apakah Anda yakin ingin menghapus periode ini?');">
                 @csrf
                 @method('DELETE')
-                <x-ui.button variant="danger" size="sm">
+                <x-ui.button variant="danger" size="sm" class="w-full sm:w-auto">
                     Hapus
                 </x-ui.button>
             </form>
         </div>
     </x-slot:actions>
 
-    <div class="grid gap-8 xl:grid-cols-12">
+    <div class="grid gap-6 xl:grid-cols-12 xl:gap-8">
         <section class="min-w-0 xl:col-span-8">
             <x-ui.card no-padding class="h-full overflow-hidden">
                 <div class="grid gap-0 sm:grid-cols-2">
@@ -82,9 +82,9 @@
                     <h3 class="text-sm font-bold uppercase tracking-[0.18em] text-zinc-400">Formulir Dalam Periode</h3>
                     <p class="mt-1 text-sm leading-6 text-zinc-500">Seluruh instrumen evaluasi yang tercatat pada periode ini ditampilkan dalam satu bidang penuh agar relasi periode ke formulir terbaca cepat.</p>
                 </div>
-                <div class="flex flex-wrap items-center gap-2 lg:justify-end">
+                <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center lg:justify-end">
                     <x-ui.badge variant="zinc">{{ $period->evaluation_forms_count }} Formulir</x-ui.badge>
-                    <x-ui.button href="{{ route('admin.forms.create', ['evaluation_period_id' => $period->id]) }}" variant="teal" size="sm">
+                    <x-ui.button href="{{ route('admin.forms.create', ['evaluation_period_id' => $period->id]) }}" variant="teal" size="sm" class="w-full sm:w-auto">
                         Tambah Formulir
                     </x-ui.button>
                 </div>
@@ -93,31 +93,53 @@
             @if($period->evaluationForms->isEmpty())
                 <x-ui.empty-state title="Belum ada formulir" description="Periode ini belum memiliki instrumen formulir evaluasi." />
             @else
-                <x-ui.table :headers="['Judul Formulir', 'Target', 'Status', 'Soal', 'Aksi']">
+                <div class="space-y-4 md:hidden">
                     @foreach ($period->evaluationForms as $form)
-                        <tr>
-                            <td class="min-w-[22rem] px-5 py-5 align-top text-sm font-semibold leading-7 text-zinc-950 whitespace-normal">
-                                {{ $form->title }}
-                            </td>
-                            <td class="px-5 py-5 align-top text-sm leading-7 text-zinc-600 whitespace-normal">
-                                {{ $form->target_type }}
-                            </td>
-                            <td class="whitespace-nowrap px-5 py-5 align-top text-sm">
-                                <x-ui.badge :variant="$form->is_active ? 'teal' : 'zinc'">
-                                    {{ $form->is_active ? 'Aktif' : 'Nonaktif' }}
-                                </x-ui.badge>
-                            </td>
-                            <td class="whitespace-nowrap px-5 py-5 align-top text-right text-sm font-bold text-zinc-950">
-                                {{ $form->questions_count }}
-                            </td>
-                            <td class="whitespace-nowrap px-5 py-5 text-right align-top">
-                                <x-ui.button href="{{ route('admin.forms.show', $form) }}" variant="ghost" size="sm">
-                                    Detail
-                                </x-ui.button>
-                            </td>
-                        </tr>
+                        <x-ui.card class="p-5">
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="text-sm font-semibold leading-6 text-zinc-950">{{ $form->title }}</p>
+                                    <p class="mt-1 text-xs text-zinc-500">{{ $form->target_type }}</p>
+                                </div>
+                                <div class="flex items-center justify-between gap-4 border-t border-zinc-100 pt-4">
+                                    <x-ui.badge :variant="$form->is_active ? 'teal' : 'zinc'">
+                                        {{ $form->is_active ? 'Aktif' : 'Nonaktif' }}
+                                    </x-ui.badge>
+                                    <span class="text-sm font-bold text-zinc-950">{{ $form->questions_count }} soal</span>
+                                </div>
+                                <x-ui.button href="{{ route('admin.forms.show', $form) }}" variant="ghost" size="sm" class="w-full">Detail</x-ui.button>
+                            </div>
+                        </x-ui.card>
                     @endforeach
-                </x-ui.table>
+                </div>
+
+                <div class="hidden md:block">
+                    <x-ui.table :headers="['Judul Formulir', 'Target', 'Status', 'Soal', 'Aksi']">
+                        @foreach ($period->evaluationForms as $form)
+                            <tr>
+                                <td class="min-w-[22rem] whitespace-normal px-5 py-5 align-top text-sm font-semibold leading-7 text-zinc-950">
+                                    {{ $form->title }}
+                                </td>
+                                <td class="whitespace-normal px-5 py-5 align-top text-sm leading-7 text-zinc-600">
+                                    {{ $form->target_type }}
+                                </td>
+                                <td class="whitespace-nowrap px-5 py-5 align-top text-sm">
+                                    <x-ui.badge :variant="$form->is_active ? 'teal' : 'zinc'">
+                                        {{ $form->is_active ? 'Aktif' : 'Nonaktif' }}
+                                    </x-ui.badge>
+                                </td>
+                                <td class="whitespace-nowrap px-5 py-5 align-top text-right text-sm font-bold text-zinc-950">
+                                    {{ $form->questions_count }}
+                                </td>
+                                <td class="whitespace-nowrap px-5 py-5 align-top text-right">
+                                    <x-ui.button href="{{ route('admin.forms.show', $form) }}" variant="ghost" size="sm">
+                                        Detail
+                                    </x-ui.button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </x-ui.table>
+                </div>
             @endif
         </section>
     </div>

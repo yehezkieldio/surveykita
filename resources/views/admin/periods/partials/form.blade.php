@@ -1,4 +1,4 @@
-<div class="space-y-6">
+<div class="space-y-5 sm:space-y-6">
     <div class="space-y-1.5">
         <label for="name" class="text-xs font-bold uppercase tracking-wider text-zinc-500">Nama Periode</label>
         <input id="name" name="name" type="text" value="{{ old('name', ($period ?? null)?->name) }}" required autofocus placeholder="Contoh: Genap 2025/2026">
@@ -37,10 +37,10 @@
         </div>
     </div>
 
-    <div class="flex items-center">
+    <div class="flex items-start">
         <input type="hidden" name="is_active" value="0">
         <input id="is_active" name="is_active" type="checkbox" value="1" {{ old('is_active', ($period ?? null)?->is_active) ? 'checked' : '' }}>
-        <label for="is_active" class="ml-3 text-sm font-medium text-zinc-950 text-xs font-bold uppercase tracking-wider">Aktifkan Periode Ini</label>
+        <label for="is_active" class="ml-3 text-xs font-bold uppercase tracking-wider text-zinc-950">Aktifkan Periode Ini</label>
     </div>
     <x-ui.error name="is_active" />
 </div>

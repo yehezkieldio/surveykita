@@ -1,4 +1,4 @@
-<div class="space-y-6">
+<div class="space-y-5 sm:space-y-6">
     <div class="space-y-1.5">
         <label for="evaluation_period_id" class="text-xs font-bold uppercase tracking-wider text-zinc-500">Periode Evaluasi</label>
         <select id="evaluation_period_id" name="evaluation_period_id" required autofocus>
@@ -36,10 +36,10 @@
         <x-ui.error name="target_type" />
     </div>
 
-    <div class="flex items-center">
+    <div class="flex items-start">
         <input type="hidden" name="is_active" value="0">
         <input id="is_active" name="is_active" type="checkbox" value="1" {{ old('is_active', ($form ?? null)?->is_active ?? true) ? 'checked' : '' }}>
-        <label for="is_active" class="ml-3 text-sm font-medium text-zinc-950 text-xs font-bold uppercase tracking-wider">Aktifkan Formulir Ini</label>
+        <label for="is_active" class="ml-3 text-xs font-bold uppercase tracking-wider text-zinc-950">Aktifkan Formulir Ini</label>
     </div>
     <x-ui.error name="is_active" />
 </div>
