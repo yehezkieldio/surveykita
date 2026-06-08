@@ -25,7 +25,7 @@
                                              $lowerHeader === 'form';
                             @endphp
                             <th scope="col" @class([
-                                'px-4 py-3 text-xs font-bold uppercase tracking-widest text-zinc-500 whitespace-nowrap',
+                                'px-3 py-3 text-xs font-bold uppercase tracking-widest text-zinc-500 whitespace-nowrap sm:px-4',
                                 'text-right' => $isNumeric,
                                 'text-left' => !$isNumeric,
                             ])>

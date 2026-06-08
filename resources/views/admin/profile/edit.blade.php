@@ -7,7 +7,7 @@
         @endif
 
         <x-ui.card title="Informasi Profil" description="Perbarui informasi profil dan alamat email akun Anda.">
-            <form action="{{ route('admin.profile.update') }}" method="POST" class="space-y-6">
+            <form action="{{ route('admin.profile.update') }}" method="POST" class="space-y-5 sm:space-y-6">
                 @csrf
                 @method('PUT')
 
@@ -25,7 +25,7 @@
                     <x-ui.error name="email" />
                 </div>
 
-                <div class="pt-6 border-t border-zinc-100">
+                <div class="border-t border-zinc-100 pt-6">
                     <h3 class="text-sm font-semibold text-zinc-950">Perbarui Kata Sandi</h3>
                     <p class="mt-1 text-xs text-zinc-500">Pastikan akun Anda menggunakan kata sandi yang panjang dan acak untuk tetap aman.</p>
                 </div>
@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="flex justify-end pt-2">
-                    <x-ui.button type="submit">
+                    <x-ui.button type="submit" class="w-full sm:w-auto">
                         Simpan Perubahan
                     </x-ui.button>
                 </div>
