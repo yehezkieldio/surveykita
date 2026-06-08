@@ -35,6 +35,7 @@ class ProfileController extends Controller
             'enrollment_year' => $parsed['enrollment_year'],
             'sequence_number' => $parsed['sequence_number'],
             'class_name' => $formatter->className($request->validated('class_name'), $parsed),
+            'class_name_confirmed' => true,
         ])->save();
 
         $user->update(['name' => $request->validated('name')]);

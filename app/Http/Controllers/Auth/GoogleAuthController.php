@@ -77,6 +77,7 @@ class GoogleAuthController extends Controller
 
                 if ($parsed) {
                     $student = $user->student ?: new Student(['user_id' => $user->id]);
+                    $guessedClassName = $formatter->guessedClassName($parsed);
 
                     $student->fill([
                         'nim' => $parsed['nim'],
@@ -85,7 +86,10 @@ class GoogleAuthController extends Controller
                         'study_program' => $parsed['study_program'],
                         'enrollment_year' => $parsed['enrollment_year'],
                         'sequence_number' => $parsed['sequence_number'],
-                        'class_name' => $student->class_name ?: $formatter->className('B', $parsed),
+                        'class_name' => $student->class_name ?: $guessedClassName,
+                        'class_name_confirmed' => $student->exists
+                            ? (bool) $student->class_name_confirmed
+                            : false,
                     ])->save();
 
                     $user->setRelation('student', $student);

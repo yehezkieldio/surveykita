@@ -8,6 +8,13 @@
                 @csrf
                 @method('PUT')
 
+                @if($student && ! $student->class_name_confirmed && filled($student->class_name))
+                    <div class="border border-amber-200 bg-amber-50 px-4 py-4 text-sm leading-6 text-amber-900">
+                        Kelas diperkirakan otomatis dari NIM sebagai <span class="font-semibold">{{ $student->class_name }}</span>.
+                        Periksa dan ubah huruf kelas jika perlu, lalu simpan profil untuk melanjutkan.
+                    </div>
+                @endif
+
                 <div class="space-y-1.5">
                     <label for="name" class="text-xs font-bold uppercase tracking-wider text-zinc-500">Nama Lengkap</label>
                     <input id="name" name="name" type="text" value="{{ old('name', $student?->name ?? Auth::user()->name) }}" required autofocus placeholder="Contoh: Ahmad Fauzi">
@@ -23,7 +30,7 @@
 
                     <div class="space-y-1.5">
                         <label for="class_name" class="text-xs font-bold uppercase tracking-wider text-zinc-500">Kelas</label>
-                        <input id="class_name" name="class_name" type="text" value="{{ old('class_name', $student?->class_name) }}" required placeholder="Contoh: TI-2A">
+                        <input id="class_name" name="class_name" type="text" value="{{ old('class_name', $student?->class_name) }}" required placeholder="Contoh: IFB6A">
                         <x-ui.error name="class_name" />
                     </div>
                 </div>

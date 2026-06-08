@@ -57,20 +57,29 @@ class StudentProfileFormatter
      */
     public function className(string $className, array $parsedNim): string
     {
-        $program = self::PROGRAM_ABBREVIATIONS[$parsedNim['program_code']] ?? $parsedNim['program_code'];
+        $program = $this->programAbbreviation($parsedNim['program_code']);
         $semester = $this->semesterForAdmissionYear($parsedNim['enrollment_year']);
         $normalized = Str::upper(preg_replace('/[^A-Za-z0-9]/', '', $className) ?? '');
         $normalized = Str::after($normalized, $program);
         $normalized = preg_replace('/'.preg_quote((string) $parsedNim['enrollment_year'], '/').'/', '', $normalized, 1) ?? $normalized;
         $normalized = preg_replace('/'.preg_quote(substr((string) $parsedNim['enrollment_year'], -2), '/').'/', '', $normalized, 1) ?? $normalized;
         $normalized = preg_replace('/'.preg_quote((string) $semester, '/').'/', '', $normalized, 1) ?? $normalized;
-        
-        // Remove 'B' if it was already there to avoid double B
         $normalized = Str::after($normalized, 'B');
-        
+
         $suffix = preg_replace('/[^A-Z]/', '', $normalized) ?: 'A';
 
-        return $program . 'B' . $semester . $suffix;
+        return $program.'B'.$semester.$suffix;
+    }
+
+    /**
+     * @param  array{nim: string, enrollment_year: int, program_code: string, study_program: string, sequence_number: string}  $parsedNim
+     */
+    public function guessedClassName(array $parsedNim): string
+    {
+        return $this->programAbbreviation($parsedNim['program_code'])
+            .'B'
+            .$this->semesterForAdmissionYear($parsedNim['enrollment_year'])
+            .'A';
     }
 
     public function semesterForAdmissionYear(int $admissionYear): int
@@ -79,5 +88,10 @@ class StudentProfileFormatter
         $semester = (($today->year - $admissionYear) * 2) + ($today->month >= 8 ? 1 : 0);
 
         return max(1, $semester);
+    }
+
+    private function programAbbreviation(string $programCode): string
+    {
+        return self::PROGRAM_ABBREVIATIONS[$programCode] ?? $programCode;
     }
 }

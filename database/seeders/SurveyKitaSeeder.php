@@ -39,7 +39,7 @@ class SurveyKitaSeeder extends Seeder
             $parsed = $parser->parse($data['nim']);
 
             $user = User::query()->updateOrCreate(
-                ['email' => $data['nim'] . '@students.universitasmulia.ac.id'],
+                ['email' => $data['nim'].'@students.universitasmulia.ac.id'],
                 [
                     'name' => $data['name'],
                     'role' => 'mahasiswa',
@@ -58,6 +58,7 @@ class SurveyKitaSeeder extends Seeder
                     'enrollment_year' => $parsed['enrollment_year'],
                     'sequence_number' => $parsed['sequence_number'],
                     'class_name' => $data['class_name'],
+                    'class_name_confirmed' => true,
                 ],
             );
         });
@@ -90,7 +91,7 @@ class SurveyKitaSeeder extends Seeder
             'fasilitas' => ['name' => 'Fasilitas', 'description' => 'Evaluasi fasilitas pendukung kegiatan akademik.'],
             'administrasi' => ['name' => 'Administrasi', 'description' => 'Evaluasi layanan administrasi akademik.'],
             'kepuasan_umum' => ['name' => 'Kepuasan Umum', 'description' => 'Evaluasi kepuasan umum mahasiswa.'],
-        ])->mapWithKeys(fn(array $category, string $key): array => [
+        ])->mapWithKeys(fn (array $category, string $key): array => [
             $key => QuestionCategory::query()->updateOrCreate(
                 ['name' => $category['name']],
                 ['description' => $category['description']],

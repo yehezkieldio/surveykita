@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
     'enrollment_year',
     'sequence_number',
     'class_name',
+    'class_name_confirmed',
 ])]
 class Student extends Model
 {
@@ -26,6 +27,7 @@ class Student extends Model
     {
         return [
             'enrollment_year' => 'integer',
+            'class_name_confirmed' => 'boolean',
         ];
     }
 
@@ -37,7 +39,8 @@ class Student extends Model
             && filled($this->study_program)
             && filled($this->enrollment_year)
             && filled($this->sequence_number)
-            && filled($this->class_name);
+            && filled($this->class_name)
+            && $this->class_name_confirmed;
     }
 
     /**

@@ -65,6 +65,7 @@ class StudentController extends Controller
                 'enrollment_year' => $parsed['enrollment_year'],
                 'sequence_number' => $parsed['sequence_number'],
                 'class_name' => $request->validated('class_name'),
+                'class_name_confirmed' => true,
             ]);
         });
 
@@ -109,6 +110,7 @@ class StudentController extends Controller
                 'enrollment_year' => $parsed['enrollment_year'],
                 'sequence_number' => $parsed['sequence_number'],
                 'class_name' => $request->validated('class_name'),
+                'class_name_confirmed' => true,
             ]);
         });
 

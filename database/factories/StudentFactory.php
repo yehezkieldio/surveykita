@@ -33,6 +33,7 @@ class StudentFactory extends Factory
             'enrollment_year' => $parsed['enrollment_year'],
             'sequence_number' => $parsed['sequence_number'],
             'class_name' => fake()->randomElement(['A', 'B', 'C']).'-'.$parsed['enrollment_year'],
+            'class_name_confirmed' => true,
         ];
     }
 }
