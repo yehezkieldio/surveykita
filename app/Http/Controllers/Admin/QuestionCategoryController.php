@@ -30,7 +30,10 @@ class QuestionCategoryController extends Controller
                 view('admin.categories.partials.actions', ['category' => $category])->render()
             )
             ->rawColumns(['actions'])
-            ->toJson();
+            ->toJson()
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', '0');
     }
 
     public function create(): View
@@ -44,6 +47,15 @@ class QuestionCategoryController extends Controller
 
         return redirect()->route('admin.categories.index')
             ->with('success', 'Kategori pertanyaan berhasil dibuat.');
+    }
+
+    public function show(QuestionCategory $category): View
+    {
+        return view('admin.categories.show', [
+            'category' => $category->load([
+                'questions.evaluationForm.evaluationPeriod',
+            ])->loadCount('questions'),
+        ]);
     }
 
     public function edit(QuestionCategory $category): View

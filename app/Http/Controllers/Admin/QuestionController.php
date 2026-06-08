@@ -38,7 +38,10 @@ class QuestionController extends Controller
                 view('admin.questions.partials.actions', ['question' => $question])->render()
             )
             ->rawColumns(['actions'])
-            ->toJson();
+            ->toJson()
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', '0');
     }
 
 
@@ -53,6 +56,16 @@ class QuestionController extends Controller
 
         return redirect()->route('admin.questions.index')
             ->with('success', 'Pertanyaan evaluasi berhasil dibuat.');
+    }
+
+    public function show(Question $question): View
+    {
+        return view('admin.questions.show', [
+            'question' => $question->load([
+                'evaluationForm.evaluationPeriod',
+                'category',
+            ])->loadCount('responseAnswers'),
+        ]);
     }
 
     public function edit(Question $question): View

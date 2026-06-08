@@ -5,26 +5,27 @@
             <div class="max-w-md mx-auto">
                 <a href="/" class="font-display text-3xl font-bold tracking-tight">SurveyKita</a>
                 <p class="mt-8 text-lg text-zinc-400">
-                    Portal Evaluasi & Penjaminan Mutu. Suara Anda membantu kami membangun pengalaman akademik yang lebih baik.
+                    Suara Anda membantu kami membangun pengalaman akademik yang lebih baik.
                 </p>
                 <div class="mt-12 space-y-6">
                     <div class="flex items-start gap-4">
                         <div class="flex-shrink-0 w-6 h-6 rounded-full border border-zinc-700 flex items-center justify-center text-xs font-mono text-zinc-500">01</div>
                         <div>
-                            <h3 class="text-sm font-semibold">Mudah & Cepat</h3>
-                            <p class="mt-1 text-sm text-zinc-500">Proses pengisian dan pengelolaan evaluasi dirancang untuk kenyamanan pengguna.</p>
+                            <h3 class="text-sm font-semibold">Aspirasi Berdampak</h3>
+                            <p class="mt-1 text-sm text-zinc-500">Setiap masukan yang Anda berikan menjadi fondasi utama dalam pengambilan kebijakan dan peningkatan fasilitas kampus.</p>
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
                         <div class="flex-shrink-0 w-6 h-6 rounded-full border border-zinc-700 flex items-center justify-center text-xs font-mono text-zinc-500">02</div>
                         <div>
-                            <h3 class="text-sm font-semibold">Tercatat & Aman</h3>
-                            <p class="mt-1 text-sm text-zinc-500">Identitas Anda tercatat untuk validitas data dan dikelola secara profesional.</p>
+                            <h3 class="text-sm font-semibold">Berkelanjutan & Terarah</h3>
+                            <p class="mt-1 text-sm text-zinc-500">Hasil evaluasi diolah secara berkala untuk menciptakan lingkungan akademik yang adaptif dan terus berkembang.</p>
                         </div>
                     </div>
+
                 </div>
                 <div class="mt-24 pt-8 border-t border-zinc-800">
-                    <p class="text-xs text-zinc-600 font-mono tracking-widest uppercase">&copy; {{ date('Y') }} SurveyKita Team</p>
+                    <p class="text-xs text-zinc-600 font-mono tracking-widest uppercase">&copy; {{ date('Y') }} Kelompok Tiga</p>
                 </div>
             </div>
         </div>

@@ -145,7 +145,7 @@
     }
 
     .sk-table-inline-filters {
-        @apply hidden w-full flex-col gap-3 border-b border-zinc-200 bg-zinc-50 px-5 py-4 sm:px-6 lg:flex-row lg:items-end lg:justify-between;
+        @apply hidden flex-col gap-2 lg:flex-row lg:items-end;
     }
 
     .sk-table-filter-group {
@@ -255,7 +255,57 @@
     }
 
     .dt-container .dt-layout-row:first-child {
-        @apply flex flex-col gap-3 border-b border-zinc-200 bg-zinc-50 px-5 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between;
+        @apply grid gap-0 border-b border-zinc-200 bg-white lg:grid-cols-[auto_1fr_auto] lg:items-stretch;
+    }
+
+    .dt-container .dt-layout-row:first-child .dt-layout-cell:first-child {
+        @apply justify-self-start;
+    }
+
+    .dt-container .dt-layout-row:first-child .dt-layout-cell:last-child {
+        @apply justify-self-stretch lg:justify-self-end;
+    }
+
+    .dt-container .dt-layout-row:first-child .dt-layout-cell {
+        @apply px-0 py-4;
+    }
+
+    .dt-container .dt-layout-row:first-child .dt-layout-cell:first-child,
+    .dt-container .dt-layout-row:first-child .dt-layout-cell:last-child {
+        @apply px-0;
+    }
+
+    .dt-container .dt-layout-row:first-child .dt-layout-cell:last-child .dt-search {
+        @apply flex w-full items-end gap-2 lg:w-auto;
+    }
+
+    .dt-container .dt-layout-row:first-child .dt-layout-cell:last-child .dt-input {
+        @apply h-11 w-full min-w-0 border-zinc-300 bg-white px-3 text-sm font-medium text-zinc-800 focus:border-zinc-300 focus:ring-0 lg:w-80;
+    }
+
+    .dt-container .dt-layout-row:first-child .dt-length {
+        @apply flex items-end gap-2 whitespace-nowrap;
+    }
+
+    .dt-container .dt-layout-row:first-child .dt-length label,
+    .dt-container .dt-layout-row:first-child .dt-search label {
+        @apply m-0;
+    }
+
+    .dt-container .dt-layout-row:first-child .dt-length select {
+        @apply h-11 border-zinc-300 bg-white px-3 pr-9 text-sm font-medium text-zinc-800 focus:border-zinc-300 focus:ring-0;
+    }
+
+    .sk-table-inline-filters-cell {
+        @apply justify-self-stretch px-5 sm:px-6 lg:justify-self-start;
+    }
+
+    .sk-table-inline-filters-cell .sk-table-select {
+        @apply min-w-48;
+    }
+
+    .sk-table-inline-filters-cell .sk-table-filter-label {
+        @apply hidden;
     }
 
     .dt-container .dt-layout-row:last-child {

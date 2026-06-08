@@ -34,13 +34,43 @@
 
                 return `<span class="${tones[tone] ?? tones.neutral}">${this.escape(label)}</span>`;
             },
+            normalizeAjax(ajax) {
+                if (!ajax) {
+                    return ajax;
+                }
+
+                if (typeof ajax === 'string') {
+                    return {
+                        url: ajax,
+                        cache: false,
+                    };
+                }
+
+                return {
+                    cache: false,
+                    ...ajax,
+                };
+            },
             create(selector, options) {
+                const resolvedOptions = $.extend(true, {}, options);
+
+                if (resolvedOptions.ajax) {
+                    resolvedOptions.ajax = this.normalizeAjax(resolvedOptions.ajax);
+                }
+
                 return $(selector).DataTable($.extend(true, {
                     processing: true,
                     serverSide: true,
                     pageLength: 25,
+                    lengthMenu: [10, 25, 50, 100],
                     autoWidth: false,
                     searchDelay: 350,
+                    layout: {
+                        topStart: 'pageLength',
+                        topEnd: 'search',
+                        bottomStart: 'info',
+                        bottomEnd: 'paging',
+                    },
                     language: {
                         search: '',
                         lengthMenu: '_MENU_',
@@ -52,7 +82,7 @@
                             next: 'Berikutnya',
                         },
                     },
-                }, options));
+                }, resolvedOptions));
             },
             mountFilters(table, selector) {
                 const filterBar = document.querySelector(selector);
@@ -61,7 +91,8 @@
                     return;
                 }
 
-                const topRow = table.table().container().querySelector('.dt-layout-row:first-child .dt-layout-cell:first-child');
+                const topRow = table.table().container().querySelector('.dt-layout-row:first-child');
+                const searchCell = topRow?.querySelector('.dt-layout-cell:last-child');
 
                 if (!topRow) {
                     filterBar.classList.remove('hidden');
@@ -71,8 +102,15 @@
                 }
 
                 filterBar.classList.remove('hidden');
-                filterBar.classList.add('flex');
-                topRow.prepend(filterBar);
+                filterBar.classList.add('flex', 'dt-layout-cell', 'sk-table-inline-filters-cell');
+
+                if (searchCell) {
+                    topRow.insertBefore(filterBar, searchCell);
+
+                    return;
+                }
+
+                topRow.append(filterBar);
             },
         };
     </script>

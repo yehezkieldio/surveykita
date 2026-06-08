@@ -53,12 +53,12 @@ Route::middleware(['auth', 'role:admin'])
         Route::get('/categories/data', [QuestionCategoryController::class, 'data'])->name('categories.data');
         Route::get('/categories/export/excel', [TableExportController::class, 'categoriesExcel'])->name('categories.export.excel');
         Route::get('/categories/export/pdf', [TableExportController::class, 'categoriesPdf'])->name('categories.export.pdf');
-        Route::resource('categories', QuestionCategoryController::class)->except('show');
+        Route::resource('categories', QuestionCategoryController::class);
         
         Route::get('/questions/data', [QuestionController::class, 'data'])->name('questions.data');
         Route::get('/questions/export/excel', [TableExportController::class, 'questionsExcel'])->name('questions.export.excel');
         Route::get('/questions/export/pdf', [TableExportController::class, 'questionsPdf'])->name('questions.export.pdf');
-        Route::resource('questions', QuestionController::class)->except('show');
+        Route::resource('questions', QuestionController::class);
 
         Route::get('/results', [ResultController::class, 'index'])->name('results.index');
         Route::get('/results/{form}', [ResultController::class, 'show'])->name('results.show');

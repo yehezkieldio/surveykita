@@ -35,7 +35,10 @@ class EvaluationFormController extends Controller
                 view('admin.forms.partials.actions', ['form' => $form])->render()
             )
             ->rawColumns(['actions'])
-            ->toJson();
+            ->toJson()
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', '0');
     }
 
     public function create(): View

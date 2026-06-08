@@ -32,7 +32,10 @@ class StudentController extends Controller
             ->addColumn('email', fn (Student $student): string => $student->user?->email ?? '-')
             ->addColumn('actions', fn (Student $student): string => view('admin.students.partials.actions', ['student' => $student])->render())
             ->rawColumns(['actions'])
-            ->toJson();
+            ->toJson()
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', '0');
     }
 
     public function create(): View
