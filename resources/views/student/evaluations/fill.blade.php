@@ -41,13 +41,13 @@
                                         5 => 'Sangat Puas'
                                     ] as $value => $label)
                                         <label class="group relative flex cursor-pointer flex-col items-center gap-2">
-                                            <input type="radio" 
-                                                   name="answers[{{ $question->id }}]" 
-                                                   value="{{ $value }}" 
+                                            <input type="radio"
+                                                   name="answers[{{ $question->id }}]"
+                                                   value="{{ $value }}"
                                                    class="peer sr-only"
                                                    @required($question->is_required)
                                                    @checked(old("answers.{$question->id}") == $value)>
-                                            
+
                                             <div class="flex h-12 w-full items-center justify-center border border-zinc-200 bg-white transition-all group-hover:border-zinc-400 peer-checked:border-teal-600 peer-checked:bg-teal-50 peer-checked:text-teal-700">
                                                 <span class="text-sm font-bold">{{ $value }}</span>
                                             </div>
@@ -69,17 +69,15 @@
             <div class="mb-6">
                 <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">Saran & Masukan</h2>
             </div>
-            
+
             <div class="space-y-4">
                 <div class="relative">
-                    <label for="suggestion" class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 absolute -top-2 left-3 bg-zinc-50 px-2">Saran & Masukan (Opsional)</label>
-                    <textarea id="suggestion" 
-                              name="suggestion" 
-                              rows="6" 
+                    <textarea id="suggestion"
+                              name="suggestion"
+                              rows="6"
                               placeholder="Tuliskan masukan konstruktif Anda untuk membantu kami meningkatkan kualitas layanan..."
                               class="block w-full border-zinc-200 bg-white px-4 py-4 text-sm focus:border-teal-600 focus:ring-4 focus:ring-teal-500/5 transition-all outline-none resize-none">{{ old('suggestion') }}</textarea>
                 </div>
-                <p class="text-[10px] text-zinc-400">Masukan Anda akan sangat berharga bagi pengembangan institusi di masa mendatang.</p>
                 <x-ui.error name="suggestion" />
             </div>
 

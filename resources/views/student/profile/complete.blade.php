@@ -1,8 +1,9 @@
-<x-layouts.student 
-    :heading="Auth::user()->hasCompleteStudentProfile() ? 'Profil Mahasiswa' : 'Lengkapi Profil'" 
+<x-layouts.student
+    :heading="Auth::user()->hasCompleteStudentProfile() ? 'Profil Mahasiswa' : 'Lengkapi Profil'"
     :eyebrow="Auth::user()->hasCompleteStudentProfile() ? 'Identitas Akademik' : 'Langkah Awal'"
+    :sidebar="! $isOnboarding"
 >
-    <div class="max-w-3xl mx-auto">
+    <div class="max-w-3xl">
         <x-ui.card>
             <form method="POST" action="{{ route('student.profile.update') }}" class="space-y-6">
                 @csrf
@@ -23,7 +24,7 @@
 
                 <div class="grid gap-6 sm:grid-cols-2">
                     <div class="space-y-1.5">
-                        <label for="nim" class="text-xs font-bold uppercase tracking-wider text-zinc-500">NIM (7 Digit)</label>
+                        <label for="nim" class="text-xs font-bold uppercase tracking-wider text-zinc-500">NIM</label>
                         <input id="nim" name="nim" type="text" value="{{ old('nim', $student?->nim) }}" required placeholder="Contoh: 2101001">
                         <x-ui.error name="nim" />
                     </div>

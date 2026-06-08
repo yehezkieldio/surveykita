@@ -15,8 +15,11 @@ class ProfileController extends Controller
 {
     public function edit(): View
     {
+        $user = Auth::user();
+
         return view('student.profile.complete', [
-            'student' => Auth::user()?->student,
+            'student' => $user?->student,
+            'isOnboarding' => ! ($user?->hasCompleteStudentProfile() ?? false),
         ]);
     }
 
