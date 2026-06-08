@@ -86,11 +86,6 @@ class QuestionController extends Controller
 
     public function destroy(Question $question): RedirectResponse
     {
-        if ($question->responseAnswers()->exists()) {
-            return redirect()->route('admin.questions.index')
-                ->with('error', 'Pertanyaan tidak dapat dihapus karena sudah memiliki jawaban evaluasi.');
-        }
-
         $question->delete();
 
         return redirect()->route('admin.questions.index')

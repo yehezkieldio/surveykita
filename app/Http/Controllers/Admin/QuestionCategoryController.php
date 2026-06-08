@@ -73,11 +73,6 @@ class QuestionCategoryController extends Controller
 
     public function destroy(QuestionCategory $category): RedirectResponse
     {
-        if ($category->questions()->exists()) {
-            return redirect()->route('admin.categories.index')
-                ->with('error', 'Kategori tidak dapat dihapus karena masih digunakan oleh pertanyaan.');
-        }
-
         $category->delete();
 
         return redirect()->route('admin.categories.index')

@@ -10,7 +10,7 @@
             <form action="{{ route('admin.periods.destroy', $period) }}" method="POST" class="inline-flex shrink-0" onsubmit="return confirm('Apakah Anda yakin ingin menghapus periode ini?');">
                 @csrf
                 @method('DELETE')
-                <x-ui.button variant="danger" size="sm" :disabled="$period->evaluation_forms_count > 0">
+                <x-ui.button variant="danger" size="sm">
                     Hapus
                 </x-ui.button>
             </form>

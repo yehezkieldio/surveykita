@@ -71,11 +71,6 @@ class EvaluationPeriodController extends Controller
 
     public function destroy(EvaluationPeriod $period): RedirectResponse
     {
-        if ($period->evaluationForms()->exists()) {
-            return redirect()->route('admin.periods.index')
-                ->with('error', 'Periode tidak dapat dihapus karena masih memiliki form evaluasi.');
-        }
-
         $period->delete();
 
         return redirect()->route('admin.periods.index')

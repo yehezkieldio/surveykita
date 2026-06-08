@@ -81,11 +81,6 @@ class EvaluationFormController extends Controller
 
     public function destroy(EvaluationForm $form): RedirectResponse
     {
-        if ($form->responses()->exists() || $form->questions()->exists()) {
-            return redirect()->route('admin.forms.index')
-                ->with('error', 'Form tidak dapat dihapus karena masih memiliki pertanyaan atau respons.');
-        }
-
         $form->delete();
 
         return redirect()->route('admin.forms.index')

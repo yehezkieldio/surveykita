@@ -118,11 +118,6 @@ class StudentController extends Controller
 
     public function destroy(Student $student): RedirectResponse
     {
-        if ($student->responses()->exists()) {
-            return redirect()->route('admin.students.index')
-                ->with('error', 'Mahasiswa tidak dapat dihapus karena sudah memiliki respons evaluasi.');
-        }
-
         DB::transaction(function () use ($student): void {
             $user = $student->user;
             $student->delete();

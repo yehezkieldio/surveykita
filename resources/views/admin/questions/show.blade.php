@@ -10,7 +10,7 @@
             <form action="{{ route('admin.questions.destroy', $question) }}" method="POST" class="inline-flex shrink-0" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pertanyaan ini?');">
                 @csrf
                 @method('DELETE')
-                <x-ui.button variant="danger" size="sm" :disabled="$question->response_answers_count > 0">
+                <x-ui.button variant="danger" size="sm">
                     Hapus
                 </x-ui.button>
             </form>

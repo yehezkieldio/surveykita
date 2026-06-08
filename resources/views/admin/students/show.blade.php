@@ -1,16 +1,16 @@
 <x-layouts.admin heading="{{ $student->name }}" eyebrow="{{ $student->nim }}">
     <x-slot:actions>
-        <div class="flex flex-wrap items-center gap-2">
+        <div class="flex items-center justify-end gap-2 flex-wrap sm:flex-nowrap">
             <x-ui.button href="{{ route('admin.students.index') }}" variant="ghost" size="sm">
                 Kembali
             </x-ui.button>
             <x-ui.button href="{{ route('admin.students.edit', $student) }}" variant="secondary" size="sm">
                 Edit Mahasiswa
             </x-ui.button>
-            <form action="{{ route('admin.students.destroy', $student) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus mahasiswa ini?');">
+            <form action="{{ route('admin.students.destroy', $student) }}" method="POST" class="inline-flex shrink-0" onsubmit="return confirm('Apakah Anda yakin ingin menghapus mahasiswa ini?');">
                 @csrf
                 @method('DELETE')
-                <x-ui.button variant="danger" size="sm" :disabled="$student->responses()->exists()">
+                <x-ui.button variant="danger" size="sm">
                     Hapus
                 </x-ui.button>
             </form>

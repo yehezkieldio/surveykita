@@ -14,6 +14,7 @@ use App\Http\Controllers\Student\DashboardController as StudentDashboardControll
 use App\Http\Controllers\Student\EvaluationController;
 use App\Http\Controllers\Student\ProfileController;
 use App\Http\Controllers\Student\SubmissionController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,7 +32,7 @@ Route::middleware(['auth', 'role:admin'])
     ->name('admin.')
     ->group(function (): void {
         Route::get('/dashboard', AdminDashboardController::class)->name('dashboard');
-        
+
         Route::get('/profile', [AdminProfileController::class, 'edit'])->name('profile.edit');
         Route::put('/profile', [AdminProfileController::class, 'update'])->name('profile.update');
 
@@ -39,22 +40,22 @@ Route::middleware(['auth', 'role:admin'])
         Route::get('/students/export/excel', [TableExportController::class, 'studentsExcel'])->name('students.export.excel');
         Route::get('/students/export/pdf', [TableExportController::class, 'studentsPdf'])->name('students.export.pdf');
         Route::resource('students', StudentController::class);
-        
+
         Route::get('/periods/data', [EvaluationPeriodController::class, 'data'])->name('periods.data');
         Route::get('/periods/export/excel', [TableExportController::class, 'periodsExcel'])->name('periods.export.excel');
         Route::get('/periods/export/pdf', [TableExportController::class, 'periodsPdf'])->name('periods.export.pdf');
         Route::resource('periods', EvaluationPeriodController::class);
-        
+
         Route::get('/forms/data', [EvaluationFormController::class, 'data'])->name('forms.data');
         Route::get('/forms/export/excel', [TableExportController::class, 'formsExcel'])->name('forms.export.excel');
         Route::get('/forms/export/pdf', [TableExportController::class, 'formsPdf'])->name('forms.export.pdf');
         Route::resource('forms', EvaluationFormController::class);
-        
+
         Route::get('/categories/data', [QuestionCategoryController::class, 'data'])->name('categories.data');
         Route::get('/categories/export/excel', [TableExportController::class, 'categoriesExcel'])->name('categories.export.excel');
         Route::get('/categories/export/pdf', [TableExportController::class, 'categoriesPdf'])->name('categories.export.pdf');
         Route::resource('categories', QuestionCategoryController::class);
-        
+
         Route::get('/questions/data', [QuestionController::class, 'data'])->name('questions.data');
         Route::get('/questions/export/excel', [TableExportController::class, 'questionsExcel'])->name('questions.export.excel');
         Route::get('/questions/export/pdf', [TableExportController::class, 'questionsPdf'])->name('questions.export.pdf');

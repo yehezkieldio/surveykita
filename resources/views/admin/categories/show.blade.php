@@ -10,7 +10,7 @@
             <form action="{{ route('admin.categories.destroy', $category) }}" method="POST" class="inline-flex shrink-0" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');">
                 @csrf
                 @method('DELETE')
-                <x-ui.button variant="danger" size="sm" :disabled="$category->questions_count > 0">
+                <x-ui.button variant="danger" size="sm">
                     Hapus
                 </x-ui.button>
             </form>
@@ -53,7 +53,7 @@
                     <div class="flex items-center justify-between gap-4">
                         <span class="text-xs font-medium text-zinc-500">Status Hapus</span>
                         <x-ui.badge :variant="$category->questions_count > 0 ? 'zinc' : 'teal'">
-                            {{ $category->questions_count > 0 ? 'TERKUNCI' : 'AMAN' }}
+                            {{ $category->questions_count > 0 ? 'BERISI' : 'KOSONG' }}
                         </x-ui.badge>
                     </div>
                 </div>
