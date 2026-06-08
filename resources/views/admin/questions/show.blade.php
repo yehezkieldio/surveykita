@@ -1,23 +1,23 @@
 <x-layouts.admin heading="Detail Pertanyaan" eyebrow="Instrumen Evaluasi">
     <x-slot:actions>
-        <div class="flex items-center justify-end gap-2 flex-wrap sm:flex-nowrap">
-            <x-ui.button href="{{ route('admin.questions.index') }}" variant="ghost" size="sm">
+        <div class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-end sm:gap-2 sm:flex-nowrap">
+            <x-ui.button href="{{ route('admin.questions.index') }}" variant="ghost" size="sm" class="w-full sm:w-auto">
                 Kembali
             </x-ui.button>
-            <x-ui.button href="{{ route('admin.questions.edit', $question) }}" variant="secondary" size="sm">
+            <x-ui.button href="{{ route('admin.questions.edit', $question) }}" variant="secondary" size="sm" class="w-full sm:w-auto">
                 Edit Pertanyaan
             </x-ui.button>
-            <form action="{{ route('admin.questions.destroy', $question) }}" method="POST" class="inline-flex shrink-0" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pertanyaan ini?');">
+            <form action="{{ route('admin.questions.destroy', $question) }}" method="POST" class="inline-flex w-full shrink-0 sm:w-auto" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pertanyaan ini?');">
                 @csrf
                 @method('DELETE')
-                <x-ui.button variant="danger" size="sm">
+                <x-ui.button variant="danger" size="sm" class="w-full sm:w-auto">
                     Hapus
                 </x-ui.button>
             </form>
         </div>
     </x-slot:actions>
 
-    <div class="grid gap-8 xl:grid-cols-12">
+    <div class="grid gap-6 xl:grid-cols-12 xl:gap-8">
         <section class="min-w-0 xl:col-span-8">
             <x-ui.card no-padding class="h-full overflow-hidden">
                 <div class="border-b border-zinc-100 p-6 xl:p-7">
@@ -77,11 +77,11 @@
                     </div>
                     <div class="p-6 xl:p-7">
                         <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-400">Navigasi Lanjutan</p>
-                        <div class="mt-3 flex flex-wrap gap-2">
-                            <x-ui.button href="{{ route('admin.forms.show', $question->evaluationForm) }}" variant="ghost" size="sm">
+                        <div class="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+                            <x-ui.button href="{{ route('admin.forms.show', $question->evaluationForm) }}" variant="ghost" size="sm" class="w-full sm:w-auto">
                                 Detail Formulir
                             </x-ui.button>
-                            <x-ui.button href="{{ route('admin.categories.show', $question->category) }}" variant="ghost" size="sm">
+                            <x-ui.button href="{{ route('admin.categories.show', $question->category) }}" variant="ghost" size="sm" class="w-full sm:w-auto">
                                 Detail Kategori
                             </x-ui.button>
                         </div>

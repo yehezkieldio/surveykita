@@ -1,4 +1,4 @@
-<div class="space-y-6">
+<div class="space-y-5 sm:space-y-6">
     <div class="space-y-1.5">
         <label for="evaluation_form_id" class="text-xs font-bold uppercase tracking-wider text-zinc-500">Formulir Evaluasi</label>
         <select id="evaluation_form_id" name="evaluation_form_id" required autofocus>
@@ -38,11 +38,11 @@
             <x-ui.error name="sort_order" />
         </div>
 
-        <div class="flex items-end pb-2.5">
-            <div class="flex items-center">
+        <div class="flex items-start sm:items-end sm:pb-2.5">
+            <div class="flex items-start">
                 <input type="hidden" name="is_required" value="0">
                 <input id="is_required" name="is_required" type="checkbox" value="1" {{ old('is_required', ($question ?? null)?->is_required ?? true) ? 'checked' : '' }}>
-                <label for="is_required" class="ml-3 text-sm font-medium text-zinc-950 text-xs font-bold uppercase tracking-wider">Wajib Diisi</label>
+                <label for="is_required" class="ml-3 text-xs font-bold uppercase tracking-wider text-zinc-950">Wajib Diisi</label>
             </div>
         </div>
     </div>
