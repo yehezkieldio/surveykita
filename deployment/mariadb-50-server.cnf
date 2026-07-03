@@ -1,0 +1,13 @@
+[mysqld]
+pid-file                = /run/mysqld/mysqld.pid
+basedir                 = /usr
+bind-address            = 127.0.0.1
+expire_logs_days        = 10
+character-set-server    = utf8mb4
+collation-server        = utf8mb4_general_ci
+
+[embedded]
+
+[mariadb]
+
+[mariadb-10.11]

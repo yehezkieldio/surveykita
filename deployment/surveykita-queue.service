@@ -1,0 +1,16 @@
+[Unit]
+Description=SurveyKita Laravel Queue Worker
+After=network.target mariadb.service
+Requires=mariadb.service
+
+[Service]
+Type=simple
+User=azureuser
+Group=www-data
+WorkingDirectory=/var/www/surveykita
+ExecStart=/usr/bin/php /var/www/surveykita/artisan queue:work database --sleep=3 --tries=3 --timeout=90 --max-time=3600
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

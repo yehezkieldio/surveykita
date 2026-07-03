@@ -1,0 +1,20 @@
+[Unit]
+Description=SurveyKita Laravel Octane FrankenPHP
+After=network.target mariadb.service
+Requires=mariadb.service
+
+[Service]
+Type=simple
+User=azureuser
+Group=www-data
+WorkingDirectory=/var/www/surveykita
+Environment=APP_ENV=production
+ExecStart=/usr/bin/php /var/www/surveykita/artisan octane:start --server=frankenphp --host=127.0.0.1 --port=8000 --admin-port=2020 --workers=2 --max-requests=500
+ExecReload=/usr/bin/php /var/www/surveykita/artisan octane:reload --server=frankenphp
+Restart=always
+RestartSec=5
+KillSignal=SIGTERM
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target

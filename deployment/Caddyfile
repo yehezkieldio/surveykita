@@ -1,0 +1,13 @@
+{
+	email yehezkieldio35@gmail.com
+	acme_ca https://acme-v02.api.letsencrypt.org/directory
+}
+
+tiga.yehezkiedio.my.id {
+	encode zstd gzip
+	reverse_proxy 127.0.0.1:8000
+}
+
+:80 {
+	reverse_proxy 127.0.0.1:8000
+}
